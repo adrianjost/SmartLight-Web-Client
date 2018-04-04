@@ -3,16 +3,13 @@
     <div class="item-wrapper">
       <div v-for="obj in groups.concat(lamps)"
            class="item acrylic"
-          @click="control(obj)">
+           @click="colorPicker(obj.id, (obj.current||{}).color)">
         <div class="item-content">
           <i class="material-icons">{{obj.icon}}</i><br/>
           Name: {{obj.name}} <br/>
           Color: {{(obj.current||{}).color}} <br/>
-          <button @click="deleteLamp(obj.id)">
+          <button @click.stop="deleteLamp(obj.id)">
             <i class="material-icons">delete</i>
-          </button>
-          <button @click="colorPicker(obj.id, (obj.current||{}).color)">
-            <i class="material-icons">color_lens</i>
           </button>
         </div>
       </div>
@@ -72,7 +69,7 @@ export default {
            if(!snapVal){return false;}
            vm.lamps = vm.ObjectToList(snapVal.lamps);
            vm.groups = vm.ObjectToList(snapVal.groups);
-           console.log(vm.lamps, vm.groups);
+           //console.log(vm.lamps, vm.groups);
          })
        }
     });
@@ -83,7 +80,6 @@ export default {
       this.$emit("show");
     },
     addLamp(lampData) {
-      console.log("newLamp", lampData);
       const id = lampData.id;
       delete lampData.id;
       var dbRef = firebase.database().ref("users/"+this.userInfo.userId+"/lamps");
@@ -111,10 +107,6 @@ export default {
         .catch(function(error) {
           console.log("Remove failed: " + error.message)
         });
-    },
-    control(lamp){
-      lamp = JSON.parse(JSON.stringify(lamp));
-      console.log(lamp);
     },
     ObjectToList(object){
       let list = [];
