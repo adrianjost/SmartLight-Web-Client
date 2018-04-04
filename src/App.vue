@@ -4,7 +4,7 @@
       <toolbar :userInfo="user" />
       <router-view></router-view>
     </main>
-    <auth v-else/>
+    <auth v-show="!user"/>
   </div>
 </template>
 
