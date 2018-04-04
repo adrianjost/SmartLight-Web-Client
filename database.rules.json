@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        // grants write access to the owner of this user account
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
+      }
+    }
+  }
+}
