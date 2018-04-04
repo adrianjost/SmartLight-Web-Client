@@ -1,5 +1,5 @@
 <template>
-  <div class="toolbar acrylic">
+  <div class="toolbar">
     <div class="title">SmartLight <span>🔥 Firebase 🔥</span></div>
     <div class="user" @click="logOut">
       <span class="username">{{userInfo.displayName}}</span>
@@ -29,14 +29,14 @@ export default {
     vertical-align: middle;
     display: flex;
     justify-content: space-between;
-    &:after{
-      background-color: rgba(205, 220, 57, .6);
-    }
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+    box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
     .title{
       font-size: 2rem;
       span{
         font-size: 1rem;
-        color: #999;
+        color: #ccc;
         @media screen and (max-width: 450px) {
           display: none
         }
@@ -48,7 +48,7 @@ export default {
         font-size: 1.25rem;
         line-height: 2rem;
         vertical-align: middle;
-        text-shadow: 1px 1px 5px rgba(255,255,255,.75);
+        text-shadow: 1px 1px 5px rgba(0,0,0,.75);
         @media screen and (max-width: 340px) {
           display: none
         }

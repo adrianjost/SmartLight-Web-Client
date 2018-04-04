@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     updateUser(user){
-      console.log("new userdata", user);
       if(user) {
         localStorage.setItem("user", JSON.stringify(user));
         this.user = user;
@@ -71,7 +70,7 @@ export default {
     top: 0;
     left: 0;
     z-index: -1;
-    background: url(https://unsplash.com/photos/wN-B-dZ3x2w/download) center center / cover no-repeat;
+    background: url(https://unsplash.com/photos/4Y_f_LvAu3U/download) center center / cover no-repeat;
     //background: url(https://source.unsplash.com/collection/1484854/daily) center center / cover no-repeat;
   }
 

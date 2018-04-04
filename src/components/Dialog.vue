@@ -49,9 +49,9 @@
     transform: translate(-50%, -50%);
     max-width: 90vw;
     max-height: 90vh;
+    border-radius: 2px;
     overflow: auto;
     background-color: #f6f6f6;
-    cursor: initial;
     box-shadow: 5px 5px 10px rgba(0,0,0,.5);
   }
 </style>

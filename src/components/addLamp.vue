@@ -76,7 +76,7 @@ import iconPicker from './iconPicker.vue'
       display: block;
       margin: 4px;
     }
-    input{
+    input, select{
       width: 70vw;
       max-width: 300px;
     }

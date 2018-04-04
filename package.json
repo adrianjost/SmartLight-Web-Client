@@ -1,6 +1,6 @@
 {
   "name": "firebase-smart-light",
-  "version": "1.0.0",
+  "version": "0.1.3",
   "description": "A Firebase Hosted SmartLight Client",
   "author": "adrianjost <homepage@hackedit.de>",
   "private": true,
@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@jaames/iro": "^3.4.1",
+    "ajv": "^6.0.0",
+    "brain.js": "^1.1.2",
     "firebase": "^3.7.5",
     "firebaseui": "^1.0.1",
     "vue": "^2.5.2",

@@ -2,12 +2,14 @@
   <div>
     <div class="item-wrapper">
       <div v-for="obj in groups.concat(lamps)"
-           class="item acrylic"
+           class="item acrylic medium"
            @click="colorPicker(obj.id, (obj.current||{}).color)">
         <div class="item-content">
-          <i class="material-icons">{{obj.icon}}</i><br/>
-          Name: {{obj.name}} <br/>
-          Color: {{(obj.current||{}).color}} <br/>
+          <i class="icon material-icons"
+             :style="'background-color: '+((obj.current||{}).color||'#fff')+'; color:'+textColor(((obj.current||{}).color||'#ffffff'))">
+            {{obj.icon}}
+          </i><br/>
+          {{obj.name}}<br/>
           <button @click.stop="editLamp(obj.id)">
             <i class="material-icons">edit</i>
           </button>
@@ -16,17 +18,13 @@
           </button>
         </div>
       </div>
-      <div @click="add" class="item acrylic">
+      <div @click="add" class="item acrylic medium">
         <div class="item-content">
           <i class="material-icons">add</i>
         </div>
       </div>
       <add-modal @newLamp="addLamp"/>
       <select-color-modal @newColor="newColor"/>
-    </div>
-    <div class="user-content-wrapper acrylic">
-      <h1>Signup succeeded</h1>
-      <pre>{{userInfo.user}}</pre>
     </div>
   </div>
 </template>
@@ -37,7 +35,7 @@ const addModal = () => import(/* webpackChunkName: "addModal" */ './addLamp.vue'
 const selectColorModal = () => import(/* webpackChunkName: "selectColorModal" */ './colorModal.vue');
 
 import hub from "./hub.js";
-
+import textColor from "./textColor.js";
 
 export default {
   components: {
@@ -45,7 +43,7 @@ export default {
     addModal,
     selectColorModal
   },
-  mixins: [hub],
+  mixins: [hub, textColor],
   data(){
      return {
        lamps: [],
@@ -57,7 +55,6 @@ export default {
      let vm = this;
      firebase.auth().onAuthStateChanged(function(user) {
        if (user) {
-         console.log("user",user);
          let userInfo = {};
          userInfo.user = user;
          userInfo.name = user.displayName;
@@ -66,7 +63,7 @@ export default {
          userInfo.userId = user.uid;
          vm.userInfo = userInfo;
 
-         var dbRef = firebase.database().ref("users/"+userInfo.userId);
+         let dbRef = firebase.database().ref("users/"+userInfo.userId);
          dbRef.on('value', snap => {
            const snapVal = snap.val();
            if(!snapVal){return false;}
@@ -79,26 +76,25 @@ export default {
   },
   methods: {
     add() {
-      console.log("addLamp");
       this.$emit("show");
     },
     addLamp(lampData) {
       const id = lampData.id;
       delete lampData.id;
-      var dbRef = firebase.database().ref("users/"+this.userInfo.userId+"/lamps");
+      let dbRef = firebase.database().ref("users/"+this.userInfo.userId+"/lamps");
       dbRef.child(id).set(lampData)
         .then(function() {
           console.log('Synchronization succeeded');
         })
         .catch(function(error) {
-          console.log('Synchronization failed');
+          console.error('Synchronization failed');
         });
     },
     colorPicker(id, color){
       this.$emit("show-color-picker", id, color);
     },
     newColor(id, value){
-      var adaNameRef = firebase.database().ref("users/"+this.userInfo.userId+"/lamps/"+id+"/current");
+      let adaNameRef = firebase.database().ref("users/"+this.userInfo.userId+"/lamps/"+id+"/current");
       adaNameRef.update({ color: value });
     },
     deleteLamp(id){
@@ -168,6 +164,14 @@ export default {
         transform: translate(-50%, -50%);
         word-break: break-all;
         word-break: break-word;
+        text-align: center;
+        color: #555;
+        .icon{
+          padding: 16px;
+          border-radius: 50%;
+          margin-bottom: 16px;
+          box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+        }
       }
     }
   }

@@ -32,7 +32,6 @@
       }
     },
     created() {
-      console.log(this.iroConfig);
       this.$parent.$on('show-color-picker', this.show);
       this.$parent.$on('hide', this.hide);
     },
@@ -45,8 +44,9 @@
         this.$emit("newColor", this.id, JSON.parse(JSON.stringify(this.color)));
       },
       show (id, color) {
+        console.log(color);
         this.id = id;
-        this.color = color || "#FFFFFFF";
+        this.color = color || "#ffffff";
         this.$refs.colordialog.open();
       },
       hide () {
