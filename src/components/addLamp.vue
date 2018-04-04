@@ -1,28 +1,33 @@
 <template>
-  <modal name="hello-world">
-    <input type="string" placeholder="id" v-model="data.id"/>
-    <input type="string" placeholder="Name" v-model="data.name"/>
-    <input type="string" placeholder="Name" v-model="data.ip"/>
-    <input type="string" placeholder="Name" v-model="data.hostname"/>
-    <select v-model="data.colorMode">
-      <option value="switch">switch</option>
-      <option value="single">single color</option>
-      <option value="dual">dual color</option>
-      <option value="RGB">RGB</option>
-    </select>
-    <icon-picker v-model="data.icon"></icon-picker>
-    <button @click="hide" >CLOSE</button>
-    <button @click="addLamp" >ADD</button>
-  </modal>
+  <a11y-dialog ref="adddialog">
+    <div class="dialog-content">
+      <input type="string" placeholder="id" v-model="data.id"/>
+      <input type="string" placeholder="Name" v-model="data.name"/>
+      <input type="string" placeholder="Name" v-model="data.ip"/>
+      <input type="string" placeholder="Name" v-model="data.hostname"/>
+      <select v-model="data.colorMode">
+        <option value="switch">switch</option>
+        <option value="single">single color</option>
+        <option value="dual">dual color</option>
+        <option value="RGB">RGB</option>
+      </select>
+      <icon-picker v-model="data.icon"/>
+    </div>
+    <div class="dialog-footer">
+      <button @click="hide" >CANCLE</button>
+      <button @click="addLamp" >ADD</button>
+    </div>
+  </a11y-dialog>
 </template>
 
 <script>
-  import firebase from 'firebase'
-  import iconPicker from './iconPicker.vue'
+import a11yDialog from './Dialog.vue'
+import iconPicker from './iconPicker.vue'
 
   export default {
     name: "add_lamp_modal",
     components: {
+      a11yDialog,
       iconPicker
     },
     data(){
@@ -48,11 +53,11 @@
         this.$emit("newLamp", JSON.parse(JSON.stringify(this.data)));
         this.hide();
       },
-      show () {
-        this.$modal.show('hello-world');
+      show (  ) {
+        this.$refs.adddialog.open();
       },
       hide () {
-        this.$modal.hide('hello-world');
+        this.$refs.adddialog.close();
       }
     },
     watch:{
@@ -64,8 +69,39 @@
   };
 </script>
 <style lang="scss" scoped>
-  .v--modal *{
-    margin: 8px auto;
-    display: block;
+  .dialog-content{
+    padding: 16px;
+    text-align: center;
+    * {
+      display: block;
+      margin: 4px;
+    }
+    input{
+      width: 70vw;
+      max-width: 300px;
+    }
+  }
+  .dialog-footer{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    a, button{
+      display: block;
+      flex-basis: 0;
+      flex-grow: 1;
+      max-width: 100%;
+      padding: 16px;
+      outline: none;
+      background: none;
+      border: none;
+      border-top: 1px solid #999;
+      border-right: 1px solid #999;
+      &:last-of-type{
+        border-right: none;
+      }
+      &:hover{
+        background: #ccc;
+      }
+    }
   }
 </style>

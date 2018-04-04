@@ -36,7 +36,10 @@ export default {
       font-size: 2rem;
       span{
         font-size: 1rem;
-        text-color: #999;
+        color: #999;
+        @media screen and (max-width: 450px) {
+          display: none
+        }
       }
     }
     .user{
@@ -46,6 +49,9 @@ export default {
         line-height: 2rem;
         vertical-align: middle;
         text-shadow: 1px 1px 5px rgba(255,255,255,.75);
+        @media screen and (max-width: 340px) {
+          display: none
+        }
       }
       .avatar{
         margin-left: 8px;

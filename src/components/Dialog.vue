@@ -31,7 +31,7 @@
 
 <style scoped>
   .dialog-container{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
@@ -43,7 +43,7 @@
     display: none;
   }
   .dialog{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

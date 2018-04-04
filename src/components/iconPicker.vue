@@ -56,8 +56,6 @@ export default {
 
   #icons {
     background: #f1f1f1;
-    width: 375px;
-    height: 200px;
     overflow: auto;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);;
     display: none;

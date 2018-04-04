@@ -46,6 +46,7 @@ export default {
     margin: 0;
     padding: 0;
     width: 100vw;
+    min-width: 250px;
     min-height: 100vh;
     font: 400 16px/16px sans-serif;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;

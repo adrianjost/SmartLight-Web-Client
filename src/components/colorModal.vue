@@ -1,5 +1,5 @@
 <template>
-  <a11y-dialog id="modal" name="color-picker" ref="colordialog">
+  <a11y-dialog ref="colordialog">
     <div class="dialog-content">
       <iro v-model="color" :config="iroConfig"/>
     </div>
@@ -11,7 +11,6 @@
 </template>
 
 <script>
-  import firebase from 'firebase'
   import iro from './iro.vue'
   import a11yDialog from './Dialog.vue'
 
@@ -74,7 +73,7 @@
       flex-basis: 0;
       flex-grow: 1;
       max-width: 100%;
-      padding: 8px;
+      padding: 16px;
       outline: none;
       background: none;
       border: none;

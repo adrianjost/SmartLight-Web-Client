@@ -8,6 +8,9 @@
           <i class="material-icons">{{obj.icon}}</i><br/>
           Name: {{obj.name}} <br/>
           Color: {{(obj.current||{}).color}} <br/>
+          <button @click.stop="editLamp(obj.id)">
+            <i class="material-icons">edit</i>
+          </button>
           <button @click.stop="deleteLamp(obj.id)">
             <i class="material-icons">delete</i>
           </button>
@@ -30,8 +33,8 @@
 
 <script>
 import firebase from 'firebase'
-import addModal from "./addLamp.vue";
-import selectColorModal from "./colorModal.vue";
+const addModal = () => import(/* webpackChunkName: "addModal" */ './addLamp.vue');
+const selectColorModal = () => import(/* webpackChunkName: "selectColorModal" */ './colorModal.vue');
 
 import hub from "./hub.js";
 
@@ -108,6 +111,9 @@ export default {
           console.log("Remove failed: " + error.message)
         });
     },
+    editLamp(id){
+      console.log("edit lamp")
+    },
     ObjectToList(object){
       let list = [];
       for (let key in object){
@@ -135,6 +141,10 @@ export default {
       border-radius: 8px;
       width: calc(100% - 16px);
       padding-bottom: calc(100% - 16px);
+      @media screen and (min-width: 300px) {
+        width: calc(50% - 16px);
+        padding-bottom: calc(50% - 16px);
+      }
       @media screen and (min-width: 600px) {
         width: calc(100% / 3 - 16px);
         padding-bottom: calc(100% / 3 - 16px);
