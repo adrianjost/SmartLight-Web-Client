@@ -1,7 +1,7 @@
 <template>
   <div class="toolbar">
     <div class="title">SmartLight <span>🔥 Firebase 🔥</span></div>
-    <div class="user" @click="logOut">
+    <div class="user" @click="logOut" v-if="userInfo">
       <span class="username">{{userInfo.displayName}}</span>
       <img class="avatar" :src="userInfo.photoURL">
     </div>

@@ -21,7 +21,7 @@ export default {
   },
   data(){
     return {
-      user: {"Hi":"Ho"}
+      user: undefined
     }
   },
   created(){

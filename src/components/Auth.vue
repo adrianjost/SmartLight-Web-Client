@@ -8,20 +8,19 @@
 
 <script>
 import firebase from 'firebase';
-import firebaseui from 'firebaseui'
-import {config} from '../helpers/firebaseConfig';
+import firebaseui from 'firebaseui';
 
 export default {
   name: 'auth',
   mounted() {
-    var uiConfig = {
+    let uiConfig = {
       /* signInSuccessUrl: this.$route.path, */
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID
         ]
       };
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    let ui = new firebaseui.auth.AuthUI(firebase.auth());
     ui.start('#firebaseui-auth-container', uiConfig);
     },
 }

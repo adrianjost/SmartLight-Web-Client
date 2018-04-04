@@ -14,7 +14,7 @@ network.train([
 export default {
   methods: {
     textColor(backgroundHexColor){
-      if(backgroundHexColor.length !== 7){return "black";}
+      if(backgroundHexColor.length !== 7){return "black"; }
       const rgb = getRgb(backgroundHexColor);
       const result = brain.likely(rgb, network);
       return (result === "dark") ? "white" : "black";
