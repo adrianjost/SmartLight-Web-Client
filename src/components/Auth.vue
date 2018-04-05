@@ -17,7 +17,8 @@ export default {
       /* signInSuccessUrl: this.$route.path, */
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.GithubAuthProvider.PROVIDER_ID
         ]
       };
     let ui = new firebaseui.auth.AuthUI(firebase.auth());

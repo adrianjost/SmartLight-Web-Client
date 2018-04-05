@@ -10,10 +10,10 @@
             {{obj.icon}}
           </i><br/>
           {{obj.name}}<br/>
-          <button @click.stop="editLamp(obj.id)">
+          <button v-show="edit" @click.stop="editLamp(obj.id)">
             <i class="material-icons">edit</i>
           </button>
-          <button @click.stop="deleteLamp(obj.id)">
+          <button v-show="edit" @click.stop="deleteLamp(obj.id)">
             <i class="material-icons">delete</i>
           </button>
         </div>
@@ -26,6 +26,7 @@
       <add-modal @newLamp="addLamp"/>
       <select-color-modal @newColor="newColor"/>
     </div>
+    <button class="edit-button" @click="edit = !edit"><i class="material-icons">{{edit?"close":"edit"}}</i></button>
   </div>
 </template>
 
@@ -49,6 +50,7 @@ export default {
        lamps: [],
        groups: [],
        userInfo: {},
+       edit: false,
      }
    },
    created() {
@@ -180,4 +182,18 @@ export default {
     padding: 32px;
     border-radius: 16px;
   }
+.edit-button{
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  opacity: .5;
+  color: #fff;
+  &:hover{
+    opacity: 1;
+  }
+}
 </style>

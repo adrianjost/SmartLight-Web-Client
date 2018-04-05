@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog-container" :aria-hidden="hidden" @click.self="close">
+  <div class="dialog-container" :aria-hidden="!active" @click.self="close" @keydown.esc="close">
     <div class="dialog">
       <!-- Content from the parent gets rendered here. -->
       <slot/>
@@ -10,20 +10,10 @@
 <script>
   export default {
     name: "a11y-dialog",
-    data(){
-      return {
-        hidden: true
-      }
-    },
+    props: ['active'],
     methods: {
-      open(){
-        this.hidden = false
-      },
       close(){
-        this.hidden = true
-      },
-      toggle(){
-        this.hidden = !this.hidden
+        this.$emit("update:active", false);
       }
     }
   }

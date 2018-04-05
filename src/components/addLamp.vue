@@ -1,5 +1,5 @@
 <template>
-  <a11y-dialog ref="adddialog">
+  <a11y-dialog :active.sync="modalVisible">
     <div class="dialog-content">
       <input type="string" placeholder="id" v-model="data.id"/>
       <input type="string" placeholder="Name" v-model="data.name"/>
@@ -39,7 +39,8 @@ import iconPicker from './iconPicker.vue'
           hostname: "SmartLight-005",
           name: "TV",
           colorMode: "RGB"
-        }
+        },
+        modalVisible: false,
       }
     },
     created() {
@@ -53,11 +54,11 @@ import iconPicker from './iconPicker.vue'
         this.$emit("newLamp", JSON.parse(JSON.stringify(this.data)));
         this.hide();
       },
-      show (  ) {
-        this.$refs.adddialog.open();
+      show () {
+        this.modalVisible = true;
       },
       hide () {
-        this.$refs.adddialog.close();
+        this.modalVisible = false;
       }
     },
     watch:{

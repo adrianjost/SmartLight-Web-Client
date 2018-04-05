@@ -1,5 +1,5 @@
 <template>
-  <a11y-dialog ref="colordialog">
+  <a11y-dialog :active.sync="modalVisible">
     <div class="dialog-content">
       <iro v-model="color" :config="iroConfig"/>
     </div>
@@ -28,7 +28,8 @@
           height: 350,
           sliderMargin: 16,
           markerRadius: 10
-        }
+        },
+        modalVisible: false,
       }
     },
     created() {
@@ -44,13 +45,12 @@
         this.$emit("newColor", this.id, JSON.parse(JSON.stringify(this.color)));
       },
       show (id, color) {
-        console.log(color);
         this.id = id;
         this.color = color || "#ffffff";
-        this.$refs.colordialog.open();
+        this.modalVisible = true;
       },
       hide () {
-        this.$refs.colordialog.close();
+        this.modalVisible = false;
       }
     },
     watch:{
