@@ -1,7 +1,7 @@
-/*
-const namedColors = require('color-name-list'); // english - may fork
-exports.list = namedColors;
-*/
+
+const namedColors = require('color-name-list'); // english - may fork and translate
+//exports.list = namedColors;
+
 
 exports.list = [
   {"name":"rot", "hex":"#ff0000"},
@@ -12,4 +12,4 @@ exports.list = [
   {"name":"türkis", "hex":"#00ffff"},
   {"name":"pink", "hex":"#ff00ff"},
   {"name":"gelb", "hex":"#ffff00"}
-];
+].concat(namedColors);
