@@ -40,7 +40,7 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss">
   body{
     margin: 0;
     padding: 0;
@@ -51,6 +51,9 @@ export default {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     background-color: #eee;
+    * {
+      line-height: 1em;
+    }
   }
   *{
     box-sizing: border-box;
@@ -70,8 +73,8 @@ export default {
     top: 0;
     left: 0;
     z-index: -1;
-    background: url(https://unsplash.com/photos/4Y_f_LvAu3U/download) center center / cover no-repeat;
-    //background: url(https://source.unsplash.com/collection/1484854/daily) center center / cover no-repeat;
+    background: #555 url(https://unsplash.com/photos/4Y_f_LvAu3U/download) center center / cover no-repeat;
+    //background: #555 url(https://source.unsplash.com/collection/1484854/daily) center center / cover no-repeat;
   }
 
   /* Fluent Design Acrilic by https://codepen.io/ErickPetru/pen/eRzBgJ?editors=1100 */

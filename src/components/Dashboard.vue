@@ -3,7 +3,7 @@
     <div class="item-wrapper">
       <div v-for="obj in groups.concat(lamps)"
            class="item acrylic medium"
-           @click="colorPicker(obj.id, (obj.current||{}).color)">
+           @click="colorPicker(obj, (obj.current||{}).color)">
         <div class="item-content">
           <i class="icon material-icons"
              :style="'background-color: '+((obj.current||{}).color||'#fff')+'; color:'+textColor(((obj.current||{}).color||'#ffffff'))">
@@ -92,8 +92,8 @@ export default {
           console.error('Synchronization failed');
         });
     },
-    colorPicker(id, color){
-      this.$emit("show-color-picker", id, color);
+    colorPicker(data, color){
+      this.$emit("show-color-picker", data, color);
     },
     newColor(id, value){
       let adaNameRef = firebase.database().ref("users/"+this.userInfo.userId+"/lamps/"+id+"/current");

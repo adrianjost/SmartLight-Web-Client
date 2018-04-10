@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog-container" :aria-hidden="!active" @click.self="close" @keydown.esc="close">
+  <div class="dialog-container" :aria-hidden="!active" @mousedown.self="close" @keydown.esc="close">
     <div class="dialog">
       <!-- Content from the parent gets rendered here. -->
       <slot/>

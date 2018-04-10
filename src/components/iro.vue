@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     init(){
-      if(!this.config){return}
+      if(!this.config || this.config === {}){return}
       if(!this.value || this.value.length > 7){ this.value = "#ffffff"}
       let config = this.config;
       config.color = this.value;
@@ -27,7 +27,7 @@ export default {
   },
   watch: {
     value: function(to){
-      if(colorPicker && to.length <= 7){
+      if(colorPicker && colorPicker.color && to.length <= 7){
         colorPicker.color.hexString = to;
       }
     },

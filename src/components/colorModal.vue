@@ -4,8 +4,8 @@
       <iro v-model="color" :config="iroConfig"/>
     </div>
     <div class="dialog-footer">
-      <button @click="hide" >CLOSE</button>
-      <!--<button @click="apply" >OKAY</button>-->
+      <button @click="close" >CLOSE</button>
+      <button @click="apply" >OKAY</button>
     </div>
   </a11y-dialog>
 </template>
@@ -13,15 +13,17 @@
 <script>
   import iro from './iro.vue'
   import a11yDialog from './Dialog.vue'
+  import localApi from './localAPI.js'
 
   export default {
     components: {
       iro,
       a11yDialog
     },
+    mixins: [localApi],
     data(){
       return {
-        id: undefined,
+        obj: {},
         color: "FA00AA",
         iroConfig: {
           width: Math.min(window.innerWidth * 0.8, 300),
@@ -41,21 +43,34 @@
         this.emit();
         this.hide();
       },
-      emit(){
-        this.$emit("newColor", this.id, JSON.parse(JSON.stringify(this.color)));
+      close(){
+        if(!this.obj.current){return;}
+        // reset to old color
+        this.send(this.obj.hostname, this.hex2rgb(this.obj.current.color));
+        this.hide();
       },
-      show (id, color) {
-        this.id = id;
+      show (obj, color) {
+        this.obj = obj;
         this.color = color || "#ffffff";
         this.modalVisible = true;
       },
       hide () {
+        this.closeConnection(this.obj.hostname);
+        this.obj = {};
         this.modalVisible = false;
+      },
+      emit(){
+        this.$emit("newColor", this.obj.id, JSON.parse(JSON.stringify(this.color)));
       }
     },
     watch:{
       "color": function(){
-        this.emit()
+        this.send(this.obj.hostname, this.hex2rgb(this.color));
+      },
+      "modalVisible": function(to){
+        if(!to){
+          this.close();
+        }
       }
     }
   };
