@@ -3,14 +3,14 @@
     "users": {
       "$uid": {
         // grants write access to the owner of this user account
-        ".read": "$uid === auth.uid",
+        ".read": "$uid === auth.uid || auth.uid === 'assistant-api'",
         ".write": "$uid === auth.uid",
         "secret": {
           // access to authenticate with the ifttt api
-          ".read": "auth.uid === 'assistant-api'",
-          ".write": "auth.uid === 'assistant-api'"
+          ".read": "auth.uid === 'assistant-api'"
         },
         "lamps": {
+          ".indexOn": "name",
           "$lampId": {
             "current": {
               // write access for ifttt api
