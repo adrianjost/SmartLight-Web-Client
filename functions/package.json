@@ -2,7 +2,7 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "dev": "firebase serve --only functions,hosting",
+    "dev": "firebase serve --only functions",
     "lint": "eslint . --fix",
     "serve": "firebase serve --only functions",
     "shell": "firebase experimental:functions:shell",
