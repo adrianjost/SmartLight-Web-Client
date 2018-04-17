@@ -57,6 +57,8 @@ function test() {
   testRequest("von Bett grün");
   testRequest("vom Bett rot");
   testRequest("im Bett orange");
+  testRequest("am Bett lila");
+  testRequest("an Bett lila");
   testRequest("vom Bett lila");
   testRequest("von unserm Bett blau");
   testRequest("vom unserem Bett türkis");

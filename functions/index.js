@@ -49,7 +49,7 @@ function extractLampAndColor(req) {
     str = str.replace(/\s+/g,' ');
     const querys = [
       {exp: /^([\S]+)\s([\S]+)$/g, lamp: 1, color: 2},
-      {exp: /^i[nm]?\s([\S]+)\s([\S]+)$/g, lamp: 1, color: 2},
+      {exp: /^(?:a|i)[nm]?\s([\S]+)\s([\S]+)$/g, lamp: 1, color: 2},
       {exp: /^meine[nm]?\s([\S]+)\s([\S]+)$/g, lamp: 1, color: 2},
       {exp: /^(?:vo(?:[nm]?))?(?:\sunser(?:e?[nm])?)?\s([\S]+)\s([\S]+)$/g, lamp: 1, color: 2},
       {exp: /^([\S]+)\si(?:m|[mn]\sunser(?:e?[nm])?)?\s([\S]+)$/g, lamp: 2, color: 1}

@@ -6,10 +6,11 @@
            @click="colorPicker(obj, (obj.current||{}).color)">
         <div class="item-content">
           <i class="icon material-icons"
-             :style="'background-color: '+((obj.current||{}).color||'#fff')+'; color:'+textColor(((obj.current||{}).color||'#ffffff'))">
+            v-show="!edit"
+            :style="'background-color: '+((obj.current||{}).color||'#fff')+'; color:'+textColor(((obj.current||{}).color||'#ffffff'))">
             {{obj.icon}}
           </i><br/>
-          {{obj.name}}<br/>
+          <span v-bind:class="{ edit: edit }">{{obj.name}}</span><br/>
           <button v-show="edit" @click.stop="editLamp(obj.id)">
             <i class="material-icons">edit</i>
           </button>
@@ -126,7 +127,7 @@ export default {
 </script>
 <style lang="scss" scoped>
   .item-wrapper{
-    padding: 16px;
+    padding: 8px;
     font-size: 0;
     line-height: 0;
     // 600px, 900px, 1200px, and 1800px
@@ -167,12 +168,36 @@ export default {
         word-break: break-all;
         word-break: break-word;
         text-align: center;
+        white-space: nowrap;
         color: #555;
         .icon{
           padding: 16px;
           border-radius: 50%;
           margin-bottom: 16px;
           box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+        }
+        span{
+          font-size: 1rem;
+          line-height: 100%;
+          &.edit{
+            font-size: 1.5rem;
+            color: #333;
+          }
+        }
+        button{
+          background: transparent;
+          border: none;
+          padding: 0;
+          margin: 0;
+          i{
+            padding: 16px;
+            text-shadow: 0 0 5px rgba(0,0,0,.2);
+            transition: all .2s ease-in-out;
+          }
+          &:hover i{
+            text-shadow: 2px 4px 5px rgba(0,0,0,.5);
+            transform: translate(-2px, -4px);
+          }
         }
       }
     }
