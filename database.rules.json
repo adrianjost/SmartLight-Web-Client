@@ -1,7 +1,7 @@
 {
   "rules": {
     "users": {
-      "$uid": {
+      "$ouid": {
         // grants write access to the owner of this user account
         ".read": "$ouid === auth.uid || auth.uid === 'assistant-api'",
         ".write": "$ouid === auth.uid",
