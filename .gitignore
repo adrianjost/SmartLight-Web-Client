@@ -14,3 +14,4 @@ yarn-error.log*
 
 functions/serviceAccountKey.json
 *.log
+.vscode/settings.json

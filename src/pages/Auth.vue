@@ -12,6 +12,9 @@ import firebaseui from 'firebaseui';
 
 export default {
   name: 'auth',
+  created(){
+    firebase.auth().onAuthStateChanged(this.updateUser);
+  },
   mounted() {
     let uiConfig = {
       /* signInSuccessUrl: this.$route.path, */
@@ -23,7 +26,16 @@ export default {
       };
     let ui = new firebaseui.auth.AuthUI(firebase.auth());
     ui.start('#firebaseui-auth-container', uiConfig);
-    },
+  },
+  methods: {
+    updateUser(user){
+      if(user) {
+        this.$store.commit("login",user);
+      } else {
+        this.$store.commit("logout");
+      }
+    }
+  },
 }
 </script>
 

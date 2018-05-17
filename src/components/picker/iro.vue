@@ -1,5 +1,5 @@
 <template>
-  <div class="iro-container"></div>
+  <div :id="'iro-'+id"></div>
 </template>
 
 <script>
@@ -9,17 +9,28 @@ var colorPicker;
 export default {
   name: "iro-color-picker",
   props: ['value', 'config'],
+  data () {
+    return {
+      id: this._uid,
+    }
+  },
   mounted(){
-    this.init()
+    this.init();
   },
   methods: {
     init(){
       if(!this.config || this.config === {}){return}
-      if(!this.value || this.value.length > 7){ this.value = "#ffffff"}
       let config = this.config;
-      config.color = this.value;
-      colorPicker = new iro.ColorPicker(".iro-container", config);
+
+      if(!this.value || this.value.length > 7){ config.color = "#ffffff"}
+      else if(this.value.length === 6){ config.color = '#'+this.value}
+      else{config.color = this.value;}
+      
+      colorPicker = new iro.ColorPicker('#iro-'+this.id, config);
       colorPicker.on("color:change", this.emitColor)
+    },
+    updateConfig(){
+      // TODO - watch for config changes and apply them
     },
     emitColor(color){
       this.$emit('input', color.hexString);
@@ -32,7 +43,7 @@ export default {
       }
     },
     config: function(){
-      this.init()
+      this.updateConfig()
     }
   }
 }

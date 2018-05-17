@@ -1,7 +1,7 @@
 export default {
   methods: {
     textColor(backgroundHexColor){
-      if(backgroundHexColor.length !== 7){return "black"; }
+      if(!backgroundHexColor || backgroundHexColor.length !== 7){return "black"; }
       const rgb = getRgb(backgroundHexColor);
       return (Math.sqrt(Math.pow(rgb.r,2)*0.299 + Math.pow(rgb.g,2)*0.587 + Math.pow(rgb.b,2)*0.114) > 186)?"black":"white";
     }

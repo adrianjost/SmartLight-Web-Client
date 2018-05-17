@@ -1,10 +1,12 @@
 <template>
-  <div class="dialog-container" :aria-hidden="!active" @mousedown.self="close" @keydown.esc="close">
-    <div class="dialog">
-      <!-- Content from the parent gets rendered here. -->
-      <slot/>
+  <portal to="dialog-container" v-if="active">
+    <div class="dialog-container" :aria-hidden="!active" @mousedown.self="close" @keydown.esc="close">
+      <div class="dialog">
+        <!-- Content from the parent gets rendered here. -->
+        <slot/>
+      </div>
     </div>
-  </div>
+  </portal>
 </template>
 
 <script>
@@ -26,10 +28,10 @@
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: 999;
+    z-index: 999999;
     background-color: rgba(0,0,0,.5);
   }
-  .dialog-container[aria-hidden='true'] {
+  .dialog-container[aria-hidden='true']{
     display: none;
   }
   .dialog{

@@ -1,9 +1,9 @@
 <template>
   <div class="toolbar">
     <div class="title">SmartLight <span>🔥 Firebase 🔥</span></div>
-    <div class="user" @click="logOut" v-if="userInfo">
-      <span class="username">{{userInfo.displayName}}</span>
-      <img class="avatar" :src="userInfo.photoURL">
+    <div class="user" @click="logOut" v-if="user">
+      <span class="username">{{user.displayName}}</span>
+      <img class="avatar" :src="user.photoURL">
     </div>
   </div>
 </template>
@@ -12,12 +12,12 @@
 import firebase from 'firebase'
 export default {
   name: "toolbar",
-  props: ['userInfo'],
   methods: {
     logOut() {
       firebase.auth().signOut();
+      this.$store.commit("logout");
     },
-  }
+  },
 }
 </script>
 

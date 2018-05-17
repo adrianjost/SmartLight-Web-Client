@@ -1,17 +1,18 @@
 <template>
   <div id="app" class="wrapper">
     <main v-if="user">
-      <toolbar :userInfo="user" />
+      <toolbar/>
       <router-view></router-view>
     </main>
     <auth v-show="!user"/>
+    <portal-target name="dialog-container" />>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
-import auth from "./components/Auth.vue";
-import toolbar from "./components/Toolbar.vue";
+import auth from "@/pages/Auth.vue";
+import toolbar from "@/components/Toolbar.vue";
 
 export default {
   name: 'app',
@@ -19,25 +20,6 @@ export default {
     auth,
     toolbar
   },
-  data(){
-    return {
-      user: undefined
-    }
-  },
-  created(){
-    firebase.auth().onAuthStateChanged(this.updateUser);
-  },
-  methods: {
-    updateUser(user){
-      if(user) {
-        localStorage.setItem("user", JSON.stringify(user));
-        this.user = user;
-      } else {
-        localStorage.removeItem("user");
-        this.user = undefined;
-      }
-    }
-  }
 }
 </script>
 <style lang="scss">
@@ -73,7 +55,8 @@ export default {
     top: 0;
     left: 0;
     z-index: -1;
-    background: #555 url(https://unsplash.com/photos/4Y_f_LvAu3U/download) center center / cover no-repeat;
+    background: #555;
+    //background: #555 url(https://unsplash.com/photos/4Y_f_LvAu3U/download) center center / cover no-repeat;
     //background: #555 url(https://source.unsplash.com/collection/1484854/daily) center center / cover no-repeat;
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <a11y-dialog :active.sync="modalVisible">
+  <a11y-dialog :active.sync="activeProxy">
     <div class="dialog-content">
       <iro v-model="color" :config="iroConfig"/>
     </div>
@@ -11,9 +11,9 @@
 </template>
 
 <script>
-  import iro from './iro.vue'
-  import a11yDialog from './Dialog.vue'
-  import localApi from './localAPI.js'
+  import iro from '@/components/picker/iro.vue'
+  import a11yDialog from '@/components/modals/Dialog.vue'
+  import localApi from '@/mixins/localAPI.js'
 
   export default {
     components: {
@@ -21,9 +21,9 @@
       a11yDialog
     },
     mixins: [localApi],
+    props: ['active', 'obj'],
     data(){
       return {
-        obj: {},
         color: "FA00AA",
         iroConfig: {
           width: Math.min(window.innerWidth * 0.8, 300),
@@ -31,12 +31,8 @@
           sliderMargin: 16,
           markerRadius: 10
         },
-        modalVisible: false,
+        activeProxy: false,
       }
-    },
-    created() {
-      this.$parent.$on('show-color-picker', this.show);
-      this.$parent.$on('hide', this.hide);
     },
     methods: {
       apply () {
@@ -44,33 +40,34 @@
         this.hide();
       },
       close(){
-        if(!this.obj.current){return;}
         // reset to old color
         this.send(this.obj.hostname, this.hex2rgb(this.obj.current.color));
         this.hide();
       },
-      show (obj, color) {
-        this.obj = obj;
-        this.color = color || "#ffffff";
-        this.modalVisible = true;
-      },
       hide () {
         this.closeConnection(this.obj.hostname);
-        this.obj = {};
-        this.modalVisible = false;
+        this.activeProxy = false;
       },
       emit(){
-        this.$emit("newColor", this.obj.id, JSON.parse(JSON.stringify(this.color)));
+        let newObj = JSON.parse(JSON.stringify(this.obj));
+        if(!newObj.current){newObj.current = {};}
+        newObj.current.color = this.color;
+        this.$emit("update:obj", newObj);
+        this.$emit("newColor", newObj.current.color);
       }
     },
     watch:{
       "color": function(){
         this.send(this.obj.hostname, this.hex2rgb(this.color));
       },
-      "modalVisible": function(to){
-        if(!to){
-          this.close();
+      "active": function(to){
+        this.activeProxy = to;
+      },
+      "activeProxy": function(to){
+        if(to === false){
+          this.color = this.obj.current.color;
         }
+        this.$emit("update:active", to);
       }
     }
   };

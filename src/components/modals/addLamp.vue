@@ -1,5 +1,5 @@
 <template>
-  <a11y-dialog :active.sync="modalVisible">
+  <a11y-dialog :active.sync="activeProxy">
     <div class="dialog-content">
       <input type="string" placeholder="id" v-model="data.id"/>
       <input type="string" placeholder="Name" v-model="data.name"/>
@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import a11yDialog from './Dialog.vue'
-import iconPicker from './iconPicker.vue'
+import a11yDialog from '@/components/modals/Dialog.vue'
+import iconPicker from '@/components/picker/iconPicker.vue'
 
   export default {
     name: "add_lamp_modal",
@@ -30,41 +30,40 @@ import iconPicker from './iconPicker.vue'
       a11yDialog,
       iconPicker
     },
+    props: ['active'],
     data(){
       return {
         data: {
           id: "00",
           ip: "SmartLight-005",
-          icon: "lightbulb_outline",
           hostname: "SmartLight-005",
+          icon: "lightbulb_outline",
           name: "TV",
           colorMode: "RGB"
         },
-        modalVisible: false,
+        activeProxy: false,
       }
-    },
-    created() {
-      this.$parent.$on('show', this.show);
-      this.$parent.$on('hide', this.hide);
     },
     methods: {
       addLamp() {
         this.data.name += ("-" + this.data.id);
-        console.log("add", this.data);
         this.$emit("newLamp", JSON.parse(JSON.stringify(this.data)));
         this.hide();
       },
-      show () {
-        this.modalVisible = true;
-      },
       hide () {
-        this.modalVisible = false;
+        this.activeProxy = false;
       }
     },
     watch:{
       "data.id": function(to){
         this.data.ip = "SmartLight-"+to;
         this.data.hostname = "SmartLight-"+to;
+      },
+      "active": function(to){
+        this.activeProxy = to;
+      },
+      "activeProxy": function(to){
+        this.$emit("update:active", to);
       }
     }
   };
