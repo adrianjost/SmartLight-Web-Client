@@ -24,6 +24,7 @@ module.exports = {
     bundleAnalyzerReport: process.env.npm_config_report
   },
   dev: {
+    devtool: 'source-map',
     env: require('./dev.env'),
     port: 8080,
     autoOpenBrowser: true,

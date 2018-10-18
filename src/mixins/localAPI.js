@@ -35,6 +35,10 @@ export default {
           // console.log("connected! send message:",message);
           connection.send("J"+JSON.stringify(message));
         };
+        connection.onerror = function (e) {
+          // connection to lamp failed -> ignore
+          // TODO: show non disruptive hint for the user
+        };
       }
     },
     closeConnection(url){
