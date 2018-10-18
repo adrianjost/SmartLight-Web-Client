@@ -5,7 +5,7 @@
       <router-view></router-view>
     </main>
     <auth v-show="!user"/>
-    <portal-target name="dialog-container" />>
+    <portal-target name="dialog-container" />
   </div>
 </template>
 

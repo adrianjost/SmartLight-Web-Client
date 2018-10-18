@@ -30,7 +30,7 @@ export default {
   methods: {
     updateUser(user){
       if(user) {
-        this.$store.commit("login",user);
+        this.$store.commit("login", user);
       } else {
         this.$store.commit("logout");
       }

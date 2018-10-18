@@ -15,17 +15,17 @@
             <i class="material-icons">delete</i>
           </button>
         </div>
-        <select-color-modal :active.sync="controlModalVisible" :obj.sync="value" @newColor="newColor"/>
+        <control-modal :active.sync="controlModalVisible" :obj.sync="value" @newColor="newColor"/>
   </div>
 </template>
 
 <script>
-const selectColorModal = () => import(/* webpackChunkName: "selectColorModal" */ '@/components/modals/colorModal.vue');
+const controlModal = () => import(/* webpackChunkName: "controlModal" */ '@/components/modals/controlModal.vue');
 import firebase from 'firebase'
 import textColor from "@/mixins/textColor.js";
 export default {
   components: {
-    selectColorModal
+    controlModal
   },
   mixins: [textColor],
   props: ['value', 'edit'],
@@ -58,6 +58,9 @@ export default {
         }
         const current = this.value.current
         if(current.color){
+          if(current.color. length === 3 || current.color. length === 6){
+            return '#'+current.color;
+          }
           return current.color || '#000';
         }
         // TODO - extract color of mode

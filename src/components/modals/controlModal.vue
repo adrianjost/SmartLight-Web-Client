@@ -1,8 +1,17 @@
 <template>
   <a11y-dialog :active.sync="activeProxy">
-    <div class="dialog-content">
-      <iro v-model="color" :config="iroConfig"/>
-    </div>
+    <header class="dialog-title">
+      Control {{obj.name}}
+    </header>
+    <tabs :options="{ useUrlFragment: false }" class="dialog-content">
+      <tab name="color">
+          <iro v-model="color" :config="iroConfig"/>
+      </tab>
+      <tab name="music">
+          <music v-model="color"/>
+      </tab>
+    </tabs>
+      
     <div class="dialog-footer">
       <button @click="close" >CLOSE</button>
       <button @click="apply" >OKAY</button>
@@ -11,22 +20,27 @@
 </template>
 
 <script>
+  import Vue from 'vue';
+  import Tabs from 'vue-tabs-component';
+  Vue.use(Tabs);
   import iro from '@/components/picker/iro.vue'
+  import music from '@/components/picker/music-visualizer.vue'
   import a11yDialog from '@/components/modals/Dialog.vue'
   import localApi from '@/mixins/localAPI.js'
 
   export default {
     components: {
+      a11yDialog,
       iro,
-      a11yDialog
+      music,
     },
     mixins: [localApi],
     props: ['active', 'obj'],
     data(){
       return {
-        color: "FA00AA",
+        color: "#FA00AA",
         iroConfig: {
-          width: Math.min(window.innerWidth * 0.8, 300),
+          width: 280,//Math.min(window.innerWidth * 0.8, 300),
           height: 350,
           sliderMargin: 16,
           markerRadius: 10
@@ -72,14 +86,24 @@
     }
   };
 </script>
+
 <style lang="scss" scoped>
-  .dialog-content{
+  .dialog-title{ 
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.3rem;
+    background: #E65100;
     padding: 16px;
+  }
+  .dialog-content{
+    width: 312px;
+    min-height: 420x;
+    background-color: #ddd;
   }
   .dialog-footer{
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     a, button{
       display: block;
       flex-basis: 0;
@@ -98,5 +122,46 @@
         background: #ccc;
       }
     }
+  }
+</style>
+
+<style lang="scss">
+  ul.tabs-component-tabs{
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #E65100;
+    li.tabs-component-tab{
+      display: block;
+      flex-basis: 0;
+      flex-grow: 1;
+      max-width: 100%;
+      background: transparent;
+      border: none;
+      text-align: center;
+      a{
+        display: inline-block;
+        width: 100%;
+        padding: 16px;
+        color: #fff;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      &.is-active{
+          border-bottom: 4px solid #fff;
+        }
+      &:last-of-type{
+        border-right: none;
+      }
+      &:hover{
+        background-color: #b64000;
+      }
+    }
+  }
+  .tabs-component-panels{
+    padding: 16px;
   }
 </style>

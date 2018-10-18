@@ -103,7 +103,7 @@ export default {
       width: calc(50% - 16px);
       padding-bottom: calc(50% - 16px);
     }
-    @media screen and (min-width: 600px) {
+    @media screen and (max-width: 600px) {
       width: calc(100% / 3 - 16px);
       padding-bottom: calc(100% / 3 - 16px);
     }

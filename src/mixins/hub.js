@@ -4,12 +4,10 @@ import localAPI from './localAPI.js'
 export default {
   mixins: [localAPI],
   data(){
-    return {
-      userId: JSON.parse(localStorage.getItem("user")).uid,
-    }
+    return {}
   },
   created() {
-    let dbLampRef = firebase.database().ref("users/"+this.userId+"/lamps");
+    let dbLampRef = firebase.database().ref("users/"+this.user.uid+"/lamps");
     dbLampRef.on('child_changed', this.lampListener);
   },
   methods: {
