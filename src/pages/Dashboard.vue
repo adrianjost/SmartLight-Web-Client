@@ -6,9 +6,10 @@
         :key="obj.id"
         :value="obj"
         :edit="edit"
-        class="item acrylic medium" />
+        class="item" />
+
       <div 
-        class="item acrylic medium" 
+        class="item" 
         id="add" 
         v-show="!edit"
         @click="add">
@@ -88,7 +89,9 @@ export default {
   line-height: 0;
   // 600px, 900px, 1200px, and 1800px
   .item{
-    overflow: visible;
+    border: 1px solid #999;
+    background-color: #fffd;
+    box-shadow: 4px 4px 10px #0004;
     font-size: 16px;
     line-height: 16px;
     position: relative;
@@ -99,25 +102,11 @@ export default {
     }
     width: calc(100% - 16px);
     padding-bottom: calc(100% - 16px);
-    @media screen and (min-width: 300px) {
-      width: calc(50% - 16px);
-      padding-bottom: calc(50% - 16px);
-    }
-    @media screen and (max-width: 600px) {
-      width: calc(100% / 3 - 16px);
-      padding-bottom: calc(100% / 3 - 16px);
-    }
-    @media screen and (min-width: 900px) {
-      width: calc(25% - 16px);
-      padding-bottom: calc(25% - 16px);
-    }
-    @media screen and (min-width: 1200px) {
-      width: calc(20% - 16px);
-      padding-bottom: calc(20% - 16px);
-    }
-    @media screen and (min-width: 1800px) {
-      width: calc(100% / 6 - 16px);
-      padding-bottom: calc(100% / 6 - 16px);
+    @for $i from 1 through 20{
+      @media screen and (min-width: #{300 * $i}px) {
+        width: calc(100% / #{$i + 1} - 16px);
+        padding-bottom: calc(100% / #{$i + 1} - 16px);
+      }
     }
     &#add{
       i.icon{

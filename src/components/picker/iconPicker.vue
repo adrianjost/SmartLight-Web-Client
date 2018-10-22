@@ -1,13 +1,18 @@
 <template>
-  <div>
+  <div class="icon-picker">
     <!-- list of icons taken from https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/codepoints-->
     <div id="selected-icon-container">
       <i class="material-icons" id="selected-icon">{{selection}}</i>
     </div>
     <div id="icons">
-      <i class="material-icons"
+      <i :class="{'material-icons': true, selected: selection==icon}"
         v-for="icon in iconList"
-        @click="iconSelected(icon)">{{icon}}</i>
+        :key="icon"
+        @click="iconSelected(icon)"
+        @keyup.space="iconSelected(icon)"
+        :tabindex="selection == icon ? '-1' : '0'">
+          {{icon}}
+        </i>
     </div>
   </div>
 </template>
@@ -32,47 +37,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #selected-icon-container {
-    display: inline-block;
-    i {
-      font-size: 64px;
-      margin: 5px;
-      background: #ccc;
-      border-radius: 4px;
-      padding: 5px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);;
-      transition: background 0.2s ease;
-      cursor: pointer;
-    }
-    &:hover {
-      i {
-        background: #af0;
-      }
-      &+#icons {
-        display: block;
-      }
-    }
-  }
+@import "../../helpers/colors";
 
-  #icons {
-    background: #f1f1f1;
-    overflow: auto;
+#selected-icon-container {
+  display: inline-block;
+  i {
+    font-size: 3.5em;
+    margin: 5px;
+    color: $color-text-light;
+    background: $color-primary;
+    border-radius: 4px;
+    padding: 5px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);;
-    display: none;
-    &:hover {
-      display: block;
-    }
-    i {
-      display: inline-block;
-      margin: 5px;
-      background: #ccc;
-      border-radius: 4px;
-      padding: 5px;
-      transition: background 0.2s ease;
-      cursor: pointer;
-      &:hover {
-        background: #af0;
-      }
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+#icons i {
+  font-size: 2em;
+  display: inline-block;
+  margin: 5px;
+  background: #ccc;
+  color: $color-text-dark;
+  border-radius: 4px;
+  padding: 5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  outline: none;
+  &.selected{
+    opacity: .3;
+    cursor: default;
+  }
+  &:not(.selected){
+    &:hover, &:focus{
+      color: $color-text-light;
+      background: $color-secondary;
+      box-shadow: 2px 2px 8px #0009;
+      transform: translate(-2px, -2px);
     }
   }
+}
+
 </style>

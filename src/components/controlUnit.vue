@@ -81,13 +81,14 @@ export default {
     white-space: nowrap;
     color: #555;
     .icon{
-        padding: 16px;
+        padding: .75em;
         border-radius: 50%;
-        margin-bottom: 16px;
+        margin-bottom: .75em;
         box-shadow: 2px 2px 5px rgba(0,0,0,.5);
     }
     span{
         font-size: 1rem;
+        font-weight: 700;
         line-height: 100%;
         &.edit{
         font-size: 1.5rem;

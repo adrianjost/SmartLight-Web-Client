@@ -1,6 +1,6 @@
 <template>
   <portal to="dialog-container" v-if="active">
-    <div class="dialog-container" :aria-hidden="!active" @mousedown.self="close" @keydown.esc="close">
+    <div class="dialog-container" :aria-hidden="!active" @mousedown.self="close" @keyup.esc="close">
       <div class="dialog">
         <!-- Content from the parent gets rendered here. -->
         <slot/>
@@ -14,6 +14,9 @@
     name: "a11y-dialog",
     props: ['active'],
     methods: {
+      open(){
+        this.$emit("update:active", true);
+      },
       close(){
         this.$emit("update:active", false);
       }
@@ -41,9 +44,9 @@
     transform: translate(-50%, -50%);
     max-width: 90vw;
     max-height: 90vh;
-    border-radius: 2px;
+    border-radius: 4px;
     overflow: auto;
-    background-color: #f6f6f6;
+    background-color: #fff;
     box-shadow: 5px 5px 10px rgba(0,0,0,.5);
   }
 </style>

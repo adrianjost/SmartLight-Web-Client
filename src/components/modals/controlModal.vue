@@ -1,7 +1,7 @@
 <template>
   <a11y-dialog :active.sync="activeProxy">
     <header class="dialog-title">
-      Control {{obj.name}}
+      {{obj.name}}
     </header>
     <tabs :options="{ useUrlFragment: false }" class="dialog-content">
       <tab name="color">
@@ -13,8 +13,8 @@
     </tabs>
       
     <div class="dialog-footer">
-      <button @click="close" >CLOSE</button>
-      <button @click="apply" >OKAY</button>
+      <button @click="close" @keyup.space="close">CANCEL</button>
+      <button class="primary" :style="{'background-color': color, color: textColor(color)}" @click="apply" @keyup.space="apply" >APPLY</button>
     </div>
   </a11y-dialog>
 </template>
@@ -27,6 +27,7 @@
   import music from '@/components/picker/music-visualizer.vue'
   import a11yDialog from '@/components/modals/Dialog.vue'
   import localApi from '@/mixins/localAPI.js'
+  import textColor from "@/mixins/textColor.js";
 
   export default {
     components: {
@@ -34,7 +35,7 @@
       iro,
       music,
     },
-    mixins: [localApi],
+    mixins: [textColor, localApi],
     props: ['active', 'obj'],
     data(){
       return {
@@ -63,11 +64,8 @@
         this.activeProxy = false;
       },
       emit(){
-        let newObj = JSON.parse(JSON.stringify(this.obj));
-        if(!newObj.current){newObj.current = {};}
-        newObj.current.color = this.color;
-        this.$emit("update:obj", newObj);
-        this.$emit("newColor", newObj.current.color);
+        this.$emit("update:obj.current", {color: this.color});
+        this.$emit("newColor", this.color);
       }
     },
     watch:{
@@ -88,44 +86,16 @@
 </script>
 
 <style lang="scss" scoped>
-  .dialog-title{ 
-    color: #fff;
-    font-weight: 500;
-    font-size: 1.3rem;
-    background: #E65100;
-    padding: 16px;
-  }
-  .dialog-content{
+@import "../../helpers/base";
+.dialog-content{
     width: 312px;
-    min-height: 420x;
-    background-color: #ddd;
-  }
-  .dialog-footer{
-    width: 100%;
-    display: flex;
-    flex-wrap: nowrap;
-    a, button{
-      display: block;
-      flex-basis: 0;
-      flex-grow: 1;
-      max-width: 100%;
-      padding: 16px;
-      outline: none;
-      background: none;
-      border: none;
-      border-top: 1px solid #999;
-      border-right: 1px solid #999;
-      &:last-of-type{
-        border-right: none;
-      }
-      &:hover{
-        background: #ccc;
-      }
-    }
-  }
+    //min-height: 420px;
+    //background-color: #ddd;
+}
 </style>
 
 <style lang="scss">
+@import "../../helpers/colors";
   ul.tabs-component-tabs{
     width: 100%;
     display: flex;
@@ -133,7 +103,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    background: #E65100;
+    color: $color-text-dark;
     li.tabs-component-tab{
       display: block;
       flex-basis: 0;
@@ -146,18 +116,18 @@
         display: inline-block;
         width: 100%;
         padding: 16px;
-        color: #fff;
+        color: $color-text-dark;
         text-decoration: none;
         text-transform: uppercase;
       }
       &.is-active{
-          border-bottom: 4px solid #fff;
-        }
+        border-bottom: 4px solid $color-primary;
+      }
       &:last-of-type{
         border-right: none;
       }
       &:hover{
-        background-color: #b64000;
+        background-color: #eee;
       }
     }
   }

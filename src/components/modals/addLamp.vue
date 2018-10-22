@@ -1,10 +1,13 @@
 <template>
   <a11y-dialog :active.sync="activeProxy">
+    <header class="dialog-title">
+      Add Lamp
+    </header>
     <div class="dialog-content">
-      <input type="string" placeholder="id" v-model="data.id"/>
-      <input type="string" placeholder="Name" v-model="data.name"/>
-      <input type="string" placeholder="Name" v-model="data.ip"/>
-      <input type="string" placeholder="Name" v-model="data.hostname"/>
+      <input type="text" placeholder="id" v-model="data.id"/>
+      <input type="text" placeholder="name (Home)" v-model="data.name"/>
+      <input type="text" placeholder="ip (192.168.2.xxx)" v-model="data.ip"/>
+      <input type="text" placeholder="hostname (SmartLight-[id])" v-model="data.hostname"/>
       <select v-model="data.colorMode">
         <option value="switch">switch</option>
         <option value="single">single color</option>
@@ -14,8 +17,8 @@
       <icon-picker v-model="data.icon"/>
     </div>
     <div class="dialog-footer">
-      <button @click="hide" >CANCLE</button>
-      <button @click="addLamp" >ADD</button>
+      <button @click="hide" @keyup.space="hide">CANCLE</button>
+      <button class="primary" @click="addLamp" @keyup.space="addLamp" >ADD</button>
     </div>
   </a11y-dialog>
 </template>
@@ -34,11 +37,11 @@ import iconPicker from '@/components/picker/iconPicker.vue'
     data(){
       return {
         data: {
-          id: "00",
-          ip: "SmartLight-005",
-          hostname: "SmartLight-005",
+          id: "",
+          name: "",
+          ip: "",
+          hostname: "",
           icon: "lightbulb_outline",
-          name: "TV",
           colorMode: "RGB"
         },
         activeProxy: false,
@@ -46,7 +49,6 @@ import iconPicker from '@/components/picker/iconPicker.vue'
     },
     methods: {
       addLamp() {
-        this.data.name += ("-" + this.data.id);
         this.$emit("newLamp", JSON.parse(JSON.stringify(this.data)));
         this.hide();
       },
@@ -55,10 +57,6 @@ import iconPicker from '@/components/picker/iconPicker.vue'
       }
     },
     watch:{
-      "data.id": function(to){
-        this.data.ip = "SmartLight-"+to;
-        this.data.hostname = "SmartLight-"+to;
-      },
       "active": function(to){
         this.activeProxy = to;
       },
@@ -69,39 +67,17 @@ import iconPicker from '@/components/picker/iconPicker.vue'
   };
 </script>
 <style lang="scss" scoped>
+@import "../../helpers/base";
   .dialog-content{
     padding: 16px;
     text-align: center;
-    * {
-      display: block;
-      margin: 4px;
-    }
     input, select{
       width: 70vw;
       max-width: 300px;
     }
   }
   .dialog-footer{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    a, button{
-      display: block;
-      flex-basis: 0;
-      flex-grow: 1;
-      max-width: 100%;
-      padding: 16px;
-      outline: none;
-      background: none;
-      border: none;
-      border-top: 1px solid #999;
-      border-right: 1px solid #999;
-      &:last-of-type{
-        border-right: none;
-      }
-      &:hover{
-        background: #ccc;
-      }
-    }
+    padding: 16px;
+    text-align: right;
   }
 </style>

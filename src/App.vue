@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="wrapper">
+  <div id="app" class="wrapper" :style="{'--background-image': 'url('+backgroundurl+')'}">
     <main v-if="user">
       <toolbar/>
       <router-view></router-view>
@@ -20,6 +20,14 @@ export default {
     auth,
     toolbar
   },
+  data(){
+    return {
+      backgroundurl: ''
+    };
+  },
+  mounted(){
+    this.backgroundurl = `https://source.unsplash.com/${window.screen.width}x${window.screen.height}/?Light`;
+  }
 }
 </script>
 <style lang="scss">
@@ -55,13 +63,15 @@ export default {
     top: 0;
     left: 0;
     z-index: -1;
-    background: #555;
-    //background: #555 url(https://unsplash.com/photos/4Y_f_LvAu3U/download) center center / cover no-repeat;
-    //background: #555 url(https://source.unsplash.com/collection/1484854/daily) center center / cover no-repeat;
+    background-color: #555;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: var(--background-image);
   }
 
   /* Fluent Design Acrilic by https://codepen.io/ErickPetru/pen/eRzBgJ?editors=1100 */
-  .acrylic {
+  /*.acrylic {
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -105,6 +115,6 @@ export default {
 
   .acrylic.medium-high::after {
     background-color: rgba(255, 255, 255, 0.6);
-  }
+  }*/
 
 </style>

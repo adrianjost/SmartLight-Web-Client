@@ -1,10 +1,9 @@
 <template>
   <div>
-    <p class="startButton" @click="request">
-      click here to start <br/>
-      Sadly thats an browser security feature
-    </p>
-    <div class="colordot" @click="stop" :style="'background-color:'+value"></div>
+    <div class="current-color" :style="'background-color:'+value">
+      <span v-if="!active" @click="request">PLAY</span>
+      <span v-else @click="stop">STOP</span>
+    </div>
   </div>
 </template>
 
@@ -16,6 +15,7 @@ export default {
     return {
       active: false,
       analyser: undefined,
+      prevValue: 0,
     }
   },
   beforeDestroy(){
@@ -33,19 +33,16 @@ export default {
       this.analyser = audioContext.createAnalyser();
       audioStream.connect(this.analyser);
       this.analyser.fftSize = Math.pow(2,6);
-      console.log("STARTED SOUND VISUALIZER");
       this.loop();
     },
     stop(){
       this.active = false;
-      console.log("STOPPED SOUND VISUALIZER");
     },
     rainbow(n) {
         // make it a hex color = * 16777215
         //n = Math.floor((n/255) * 16777215);
         //return '#'+n.toString(16);
-        const rgb = this.hslToRgb(((n*0.5)+130)%255, 1, 0.3)
-        console.log(n,rgb);
+        const rgb = this.hslToRgb(((n*0.5)+130)%255, 1, 0.5)
         return this.rgb2hex(rgb[0],rgb[1],rgb[2]);
 
         //return this.rgb2hex(n,0,0);
@@ -87,15 +84,26 @@ export default {
       }
       const frequencyArray = new Uint8Array(this.analyser.frequencyBinCount);
       this.analyser.getByteFrequencyData(frequencyArray);
-      this.$emit("input", this.rainbow(frequencyArray[0]));
+      if(Math.abs(this.prevValue - frequencyArray[0]) > 20){
+        this.prevValue = frequencyArray[0];
+        this.$emit("input", this.rainbow(frequencyArray[0]));
+      }
     }
   },
 }
 </script>
-<style>
-.colordot{
-  width: 80%;
-  padding-bottom: 100%;
-  border-radius: 50%;
+<style lang="scss" scoped>
+@import "../../helpers/colors";
+.current-color{
+  width: 100%;
+  text-align: center;
+  color: $color-text-light;
+  border-radius: 4px;
+  span{
+    display: inline-block;
+    //padding: 16px 8px;
+    width: 100%;
+    padding: calc(50% - 8px) 0;
+  }
 }
 </style>
