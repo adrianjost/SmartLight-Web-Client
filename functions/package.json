@@ -1,6 +1,9 @@
 {
   "name": "functions",
   "description": "Cloud Functions for Firebase",
+  "engines": {
+    "node": "8"
+  },
   "scripts": {
     "dev": "firebase serve --only functions",
     "lint": "eslint . --fix",
@@ -14,7 +17,7 @@
     "color-name-list": "^3.10.0",
     "express": "^4.16.3",
     "firebase-admin": "~5.10.0",
-    "firebase-functions": "^1.0.1",
+    "firebase-functions": "^2.0.5",
     "jwt-decode": "^2.2.0"
   },
   "devDependencies": {

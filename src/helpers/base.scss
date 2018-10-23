@@ -50,6 +50,15 @@ input{
     }
 }
 
+.card{
+    border: 1px solid #999;
+    background-color: #fffd;
+    box-shadow: 4px 4px 10px #0004;
+    font-size: 16px;
+    line-height: 16px;
+    border-radius: 4px;
+}
+
 .dialog-title{ 
     color: $color-text-dark;
     font-weight: 500;

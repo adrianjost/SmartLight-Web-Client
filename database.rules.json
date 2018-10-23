@@ -20,6 +20,17 @@
             }
           }
         },
+        "groups": {
+          ".read":  "data.parent().child('sharedWith').child(auth.uid).val().contains('r')",
+          ".write": "data.parent().child('sharedWith').child(auth.uid).val().contains('w')",
+          ".indexOn": "name",
+          "$groupId": {
+            "current": {
+              // write access for ifttt api
+              ".write": "auth.uid === 'assistant-api'"
+            }
+          }
+        },
         "sharedWith": {
           "$uid":{
             ".read":  "$uid === auth.uid"

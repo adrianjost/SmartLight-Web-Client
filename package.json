@@ -1,13 +1,14 @@
 {
   "name": "firebase-smart-light",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A Firebase Hosted SmartLight Client",
   "author": "adrianjost <homepage@hackedit.de>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "deploy": "node build/build.js && firebase deploy --only hosting"
   },
   "dependencies": {
     "@jaames/iro": "^3.4.1",

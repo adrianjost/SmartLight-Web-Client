@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="content-wrapper acrylic">
+  <div class="content-wrapper card">
     <h1>Welcome to SmartLight</h1>
     <p>Sign in to continue</p>
     <div id="firebaseui-auth-container"></div>
@@ -41,6 +41,7 @@ export default {
 
 <style lang="scss" scoped>
   @import "~firebaseui/dist/firebaseui.css";
+  @import "../helpers/base";
   .content-wrapper{
     position: absolute;
     top: 50%;

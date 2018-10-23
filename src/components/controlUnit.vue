@@ -1,5 +1,5 @@
 <template>
-  <div class="item"
+  <div class="item card"
     @click="controlModalVisible = true">
       <div class="item-content">
           <i class="icon material-icons"
@@ -69,6 +69,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../helpers/base";
 .item{
   .item-content{
     position: absolute;

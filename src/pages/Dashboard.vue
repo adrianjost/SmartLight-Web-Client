@@ -9,7 +9,7 @@
         class="item" />
 
       <div 
-        class="item" 
+        class="item card" 
         id="add" 
         v-show="!edit"
         @click="add">
@@ -83,23 +83,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../helpers/base";
 .item-wrapper{
   padding: 8px;
   font-size: 0;
   line-height: 0;
   // 600px, 900px, 1200px, and 1800px
   .item{
-    border: 1px solid #999;
-    background-color: #fffd;
-    box-shadow: 4px 4px 10px #0004;
-    font-size: 16px;
-    line-height: 16px;
     position: relative;
     display: inline-block;
     margin: 8px;
-    &, &:before, &:after{
-      border-radius: 8px;
-    }
     width: calc(100% - 16px);
     padding-bottom: calc(100% - 16px);
     @for $i from 1 through 20{
