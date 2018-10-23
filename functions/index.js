@@ -198,7 +198,12 @@ exports.api = firebaseFunctions.https.onRequest(app);
 // !!! SECURITY ROLES AREN'T APPLIED HERE !!!
 const adminDB = firebaseFunctions.database
 exports.copyToLast = adminDB.ref(`users/{uid}/lamps/{lampId}/current`).onUpdate(async (change, context) => {
-  const before = change.before.val();
+  return null;
+  // TODO auth error
+  /**
+   * @firebase/database: FIREBASE WARNING: Provided authentication credentials for the app named "__admin__" are invalid. This usually indicates your app was not initialized correctly. Make sure the "credential" property provided to initializeApp() is authorized to access the specified "databaseURL" and is from the correct project. 
+   */
+  /*const before = change.before.val();
   const after = change.after.val();
   if(before === after){
     // prevent loops
@@ -210,4 +215,5 @@ exports.copyToLast = adminDB.ref(`users/{uid}/lamps/{lampId}/current`).onUpdate(
   let updates = {};
   updates[`users/${context.params.uid}/lamps/${context.params.lampId}/last`] = updatedStatus;
   return change.after.ref.update(updates);
+  */
 });
