@@ -59,30 +59,21 @@ function authenticateUser(req){
   }));
 }
 
-function extractObjectAndColor(req) {
-  //console.log("#3");
-  // get lampName and requestes Color from String
-  return new Promise(((resolve, reject) => {
-    let str = req.body.textString.replace(/bitte/g, "").replace(/mache[n]?/g, "").trim();
-    str = str.replace(/\s+/g,' ');
-    const querys = [
-      {exp: /^([\S]+)\s([\S]+)$/g, object: 1, color: 2},
-      {exp: /^(?:a|i)[nm]?\s([\S]+)\s([\S]+)$/g, object: 1, color: 2},
-      {exp: /^meine[nm]?\s([\S]+)\s([\S]+)$/g, object: 1, color: 2},
-      {exp: /^(?:vo(?:[nm]?))?(?:\sunser(?:e?[nm])?)?\s([\S]+)\s([\S]+)$/g, object: 1, color: 2},
-      {exp: /^([\S]+)\si(?:m|[mn]\sunser(?:e?[nm])?)?\s([\S]+)$/g, object: 2, color: 1}
-    ];
 
-    for (var i = 0; i < querys.length; i++) {
-      const query = querys[i];
-      const match = query.exp.exec(str);
-      if(match){
-        req.body.objectName = match[query.object]
-        req.body.colorName = match[query.color]
-        return resolve(req)
-      }
+function extractObject(req) {
+  //console.log("#3");
+  return new Promise(((resolve, reject) => {
+    let sanitisedString = req.body.textString.replace(/bitte/g, "").replace(/mache[n]?/g, "").trim();
+
+    const query = /(?:vor?[nm]|[ai][nm]|zum){1} (?:i[nm] )?(?:(?:unsere?|meine)[nm]? )?(\S*)/gi;
+    const match = query.exec(sanitisedString);
+
+    if(!match){
+      return reject(new Error(JSON.stringify({code: 404, message:"can't decode object"})));
+    }else{
+      req.body.objectName = match[1];
+      return resolve(req)
     }
-    return reject(new Error(JSON.stringify({code: 404, message:"can't decode color and/or object"})));
   }));
 }
 
@@ -116,19 +107,24 @@ function getObjectPathByName(req) {
 }
 
 async function getCurrentObjectColor(req){
- req.result.currentColor = (await db.ref( req.result.objectPath + "/current/color").once("value")).val();
- return req;
+  //console.log("#5.1")
+  req.result.currentColor = (await db.ref( req.result.objectPath + "/current/color").once("value")).val();
+  return req;
 }
 
-function getColorByName(req) {
-  // TODO: implement lighten/darken (keywords: "heller"/"dunkler") of currentColor
-  //console.log("#5");
-  // get lampId by Name
+function getNewColor(req) {
+  //console.log("#5.2");
   return new Promise(((resolve, reject) => {
     // translate color (directly)
-    const newColor = namedColors.list.find(color => color.name.toUpperCase() === req.body.colorName.toUpperCase());
+    const newColor = namedColors.list.find(color => req.body.textString.toUpperCase().includes(color.name.toUpperCase()));
     if (newColor) {
-      req.result.newHexColor =  newColor.hex;
+      if(typeof newColor.value === "string"){
+        req.result.newHexColor =  newColor.value;
+      }
+      if(typeof newColor.value === "function"){
+        console.log(req.result.currentColor, "=>", newColor.value(req.result.currentColor, req.body.textString));
+        req.result.newHexColor = newColor.value(req.result.currentColor, req.body.textString);
+      }
       return resolve(req)
     }
 
@@ -165,10 +161,10 @@ app.post('/set', (req, res) => {
   req.result = {}; // storage for promise results
   //console.log("#1");
   return authenticateUser(req)
-  .then( extractObjectAndColor )
+  .then( extractObject )
   .then( getObjectPathByName )
   .then( getCurrentObjectColor )
-  .then( getColorByName )
+  .then( getNewColor )
   .then( applyNewColor )
   .then( (req) => {
     res.json({
