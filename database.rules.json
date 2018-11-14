@@ -5,16 +5,16 @@
         // grants write access to the owner of this user account
         ".read": "$ouid === auth.uid || auth.uid === 'assistant-api'",
         ".write": "$ouid === auth.uid",
-        "secret": {
-          // access to authenticate with the ifttt api
-          ".read": "auth.uid === 'assistant-api'"
-        },
         "lamps": {
           ".read":  "data.parent().child('sharedWith').child(auth.uid).val().contains('r')",
           ".write": "data.parent().child('sharedWith').child(auth.uid).val().contains('w')",
           ".indexOn": "name",
           "$lampId": {
             "current": {
+              // write access for ifttt api
+              ".write": "auth.uid === 'assistant-api'"
+            },
+            "last": {
               // write access for ifttt api
               ".write": "auth.uid === 'assistant-api'"
             }
