@@ -36,26 +36,26 @@ function extractPercentage(string){
     return parseInt(matches[1]);
   }
   if(string.includes("etwas")){
-    return 10;
+    return 30;
   }
   if(string.includes("viel")){
-    return 50;
-  }
-  if(string.includes("doppelt")){
     return 100;
   }
-  if(string.includes("halb")){
-    return -50;
+  if(string.includes("doppelt")){
+    return 150;
   }
-  return 30;
+  if(string.includes("halb")){
+    return -150;
+  }
+  return 75;
 }
 
 function lighten(currentColor, requestString){
-  return LightenDarkenColor(currentColor, extractPercentage(requestString)*2.5);
+  return LightenDarkenColor(currentColor, extractPercentage(requestString));
 }
 
 function darken(currentColor, requestString){
-  return LightenDarkenColor(currentColor, -extractPercentage(requestString)*2.5);
+  return LightenDarkenColor(currentColor, -extractPercentage(requestString));
 }
 
 
