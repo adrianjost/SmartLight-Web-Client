@@ -122,7 +122,6 @@ function getNewColor(req) {
         req.result.newHexColor =  newColor.value;
       }
       if(typeof newColor.value === "function"){
-        console.log(req.result.currentColor, "=>", newColor.value(req.result.currentColor, req.body.textString));
         req.result.newHexColor = newColor.value(req.result.currentColor, req.body.textString);
       }
       return resolve(req)
