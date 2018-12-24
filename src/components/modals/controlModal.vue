@@ -27,7 +27,6 @@
   import music from '@/components/picker/music-visualizer.vue'
   import a11yDialog from '@/components/modals/Dialog.vue'
   import localApi from '@/mixins/localAPI.js'
-  import textColor from "@/mixins/textColor.js";
 
   export default {
     components: {
@@ -35,7 +34,7 @@
       iro,
       music,
     },
-    mixins: [textColor, localApi],
+    mixins: [localApi],
     props: ['active', 'obj'],
     data(){
       return {
@@ -56,7 +55,7 @@
       },
       close(){
         // reset to old color
-        this.send(this.obj.hostname, this.hex2rgb(this.obj.current.color));
+        this.sendHexColor(this.obj.hostname, this.obj.current.color);
         this.hide();
       },
       hide () {
@@ -70,7 +69,8 @@
     },
     watch:{
       "color": function(){
-        this.send(this.obj.hostname, this.hex2rgb(this.color));
+        //this.sendHexColor(this.obj.hostname, this.color);
+        this.sendHexColor(this.obj.ip, this.color);
       },
       "active": function(to){
         this.activeProxy = to;

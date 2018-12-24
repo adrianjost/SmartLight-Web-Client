@@ -1,41 +1,61 @@
+import textColor from "@/mixins/textColor.js";
+
 export default {
   data(){
     return {
       connections: {}
     }
   },
+  mixins: [textColor],
   methods: {
-    textColor(backgroundHexColor){
-      const rgb = this.hex2rgb(backgroundHexColor);
-      return (Math.sqrt(Math.pow(rgb.r,2)*0.299 + Math.pow(rgb.g,2)*0.587 + Math.pow(rgb.b,2)*0.114) > 186)?"black":"white";
-    },
-    hex2rgb(hexColor){
-      // remove leading #
-      if(hexColor.length === 7 || hexColor.length === 4){ hexColor = hexColor.substr(1)}
-      // convert 3 digit to 6 digit color
-      if(hexColor.length === 3){ hexColor = hexColor[0]+hexColor[0]+hexColor[1]+hexColor[1]+hexColor[2]+hexColor[2]}
-      const bigint = parseInt(hexColor, 16);
-      const r = (bigint >> 16) & 255;
-      const g = (bigint >> 8) & 255;
-      const b = bigint & 255;
-      return {"r":r,"g":g,"b":b}
+    _send(connection, message){
+      // gradient testing
+      /*message = {
+        gradient: {
+          colors: [
+            {
+              r: 255,
+              g: 0,
+              b: 0
+            },
+            {
+              r: 0,
+              g: 0,
+              b: 255
+            },
+            {
+              r: 0,
+              g: 255,
+              b: 0
+            },
+            {
+              r: 255,
+              g: 0,
+              b: 0
+            }
+          ],
+          transitionTimes: [0, 3, 4, 10],
+          loop: true
+        }
+      }*/
+      connection.send(JSON.stringify(message));
     },
     send(url, message){
       if(this.connections[url] && this.connections[url].readyState === 1) {
         //console.log("already connected! send message:",message);
-        this.connections[url].send("J" + JSON.stringify(message));
+        this._send( this.connections[url], message)
       } else {
         let connection = this.connections[url];
         if(!connection || this.connections[url].readyState >= 2){
           //console.log("connecting to",'ws://' + url + ':80...');
           connection = this.connections[url] = new WebSocket('ws://' + url + ':80');
         }
-        connection.onopen = function (e) {
+        connection.onopen = (e) => {
           // wait for etablished connection then send message
           // console.log("connected! send message:",message);
-          connection.send("J"+JSON.stringify(message));
+          this._send(connection, message)
         };
-        connection.onerror = function (e) {
+        connection.onerror = (e) => {
           // connection to lamp failed -> ignore
           // TODO: show non disruptive hint for the user
         };
@@ -50,7 +70,7 @@ export default {
     },
     sendHexColor(url, hexColor) {
       const newColor = this.hex2rgb(hexColor);
-      this.send(url, newColor)
+      this.send(url, {color: newColor})
     },
     sendMode(url, mode) {
       this.send(url, mode)
