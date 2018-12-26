@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="content-wrapper card">
+  <div class="wrapper_centered card">
     <h1>Welcome to SmartLight</h1>
     <p>Sign in to continue</p>
     <div id="firebaseui-auth-container"></div>
@@ -16,23 +16,23 @@ export default {
     firebase.auth().onAuthStateChanged(this.updateUser);
   },
   mounted() {
-    let uiConfig = {
-      /* signInSuccessUrl: this.$route.path, */
+    const uiConfig = {
+      signInSuccessUrl: this.$route.path,
       signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GithubAuthProvider.PROVIDER_ID
         ]
       };
-    let ui = new firebaseui.auth.AuthUI(firebase.auth());
+    const ui = new firebaseui.auth.AuthUI(firebase.auth());
     ui.start('#firebaseui-auth-container', uiConfig);
   },
   methods: {
     updateUser(user){
       if(user) {
-        this.$store.commit("login", user);
+        this.$store.dispatch("user/login", user);
       } else {
-        this.$store.commit("logout");
+        this.$store.dispatch("user/logout");
       }
     }
   },
@@ -42,7 +42,7 @@ export default {
 <style lang="scss" scoped>
   @import "~firebaseui/dist/firebaseui.css";
   @import "../helpers/base";
-  .content-wrapper{
+  .wrapper_centered{
     position: absolute;
     top: 50%;
     left: 50%;

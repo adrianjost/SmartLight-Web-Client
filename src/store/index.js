@@ -1,29 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
+
+import user from './user';
+import lamps from './lamps';
 
 Vue.use(Vuex)
 
-let mixin = {
-  computed: {
-    user: function() {
-    return this.$store.state.user;
-    }
-  },
-}
-Vue.mixin(mixin);
-
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
-  state: {
-    user: undefined
-  },
-  mutations: {
-    logout(state) {
-      state.user = undefined;
-    },
-    login(state, user) {
-      state.user = user;
-    },
+  modules: {
+    user,
+    lamps
   }
-})
+});

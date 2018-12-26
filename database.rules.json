@@ -1,41 +1,43 @@
 {
   "rules": {
+    // api is allowed to do anything, cause it handles authorization & permission management itself.
+    ".read": "auth.uid === 'assistant-api'",
+    ".write": "auth.uid === 'assistant-api'",
     "users": {
-      "$ouid": {
-        // grants write access to the owner of this user account
-        ".read": "$ouid === auth.uid || auth.uid === 'assistant-api'",
-        ".write": "$ouid === auth.uid",
-        "lamps": {
-          ".read":  "data.parent().child('sharedWith').child(auth.uid).val().contains('r')",
-          ".write": "data.parent().child('sharedWith').child(auth.uid).val().contains('w')",
-          ".indexOn": "name",
-          "$lampId": {
-            "current": {
-              // write access for ifttt api
-              ".write": "auth.uid === 'assistant-api'"
-            },
-            "last": {
-              // write access for ifttt api
-              ".write": "auth.uid === 'assistant-api'"
-            }
-          }
-        },
-        "groups": {
-          ".read":  "data.parent().child('sharedWith').child(auth.uid).val().contains('r')",
-          ".write": "data.parent().child('sharedWith').child(auth.uid).val().contains('w')",
-          ".indexOn": "name",
-          "$groupId": {
-            "current": {
-              // write access for ifttt api
-              ".write": "auth.uid === 'assistant-api'"
-            }
-          }
-        },
-        "sharedWith": {
-          "$uid":{
-            ".read":  "$uid === auth.uid"
+      "$userId": {
+        ".read": "$userId === auth.uid",
+        ".write": "$userId === auth.uid"
+      }
+    },
+    "lamps": {
+      "$lampId": {
+        ".read": "data.child('creatorId').val() === auth.uid",
+        ".write": "!data.exists() || data.child('creatorId').val() === auth.uid",
+        ".validate": "newData.child('creatorId').val() === auth.uid",
+        "state" : {
+          "color": {
+            ".validate": "newData.val().matches(/^#[A-Fa-f0-9]{6}$/)"
           }
         }
+      }
+    },
+    "groups": {
+      "$groupId": {
+        ".read": "data.child('creatorId').val() === auth.uid",
+        ".write": "!data.exists() || data.child('creatorId').val() === auth.uid",
+        ".validate": "newData.child('creatorId').val() === auth.uid",
+        "state" : {
+          "color": {
+            ".validate": "newData.val().matches(/^#[A-Fa-f0-9]{6}$/)"
+          }
+        }
+      }
+    },
+    "gradients": {
+      "$gradientId": {
+        ".read": "data.child('creatorId').val() === auth.uid",
+        ".write": "!data.exists() || data.child('creatorId').val() === auth.uid",
+        ".validate": "newData.child('creatorId').val() === auth.uid"
       }
     }
   }

@@ -14,8 +14,7 @@ export default {
   name: "toolbar",
   methods: {
     logOut() {
-      firebase.auth().signOut();
-      this.$store.commit("logout");
+      this.$store.dispatch("logout");
     },
   },
 }
