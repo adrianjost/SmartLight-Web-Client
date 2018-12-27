@@ -4,7 +4,6 @@ import VueRouter from 'vue-router'
 import firebase from 'firebase'
 import VueFire from 'vuefire'
 import router from './router'
-import {config} from './helpers/firebaseConfig'
 import PortalVue from 'portal-vue'
 import store from './store'
 
@@ -14,9 +13,6 @@ Vue.use(PortalVue);
 
 new Vue({
   router,
-  created() {
-    firebase.initializeApp(config);
-  },
   el: '#app',
   store,
   render: h => h(App)

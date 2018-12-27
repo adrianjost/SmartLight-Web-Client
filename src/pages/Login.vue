@@ -41,7 +41,6 @@ export default {
 
 <style lang="scss" scoped>
   @import "~firebaseui/dist/firebaseui.css";
-  @import "../helpers/base";
   .wrapper_centered{
     position: absolute;
     top: 50%;

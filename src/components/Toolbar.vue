@@ -1,7 +1,7 @@
 <template>
   <div class="toolbar">
     <div class="title">SmartLight <span>🔥 Firebase 🔥</span></div>
-    <div class="user" @click="logOut" v-if="user">
+    <div class="user" @click="logOut" v-if="isAuthenticated">
       <span class="username">{{user.displayName}}</span>
       <img class="avatar" :src="user.photoURL">
     </div>
@@ -9,14 +9,21 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 export default {
   name: "toolbar",
   methods: {
     logOut() {
-      this.$store.dispatch("logout");
+      this.$store.dispatch("user/logout");
     },
   },
+  computed: {
+    user () {
+      return this.$store.getters["user/get"];
+    },
+    isAuthenticated () {
+      return this.$store.getters["user/isAuthenticated"];
+    }
+  }
 }
 </script>
 

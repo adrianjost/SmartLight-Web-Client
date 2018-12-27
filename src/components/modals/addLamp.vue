@@ -67,7 +67,6 @@ import iconPicker from '@/components/picker/iconPicker.vue'
   };
 </script>
 <style lang="scss" scoped>
-@import "../../helpers/base";
   .dialog-content{
     padding: 16px;
     text-align: center;

@@ -86,7 +86,6 @@
 </script>
 
 <style lang="scss" scoped>
-@import "../../helpers/base";
 .dialog-content{
     width: 312px;
     //min-height: 420px;
@@ -95,7 +94,7 @@
 </style>
 
 <style lang="scss">
-@import "../../helpers/colors";
+  @import "../../helpers/colors";
   ul.tabs-component-tabs{
     width: 100%;
     display: flex;

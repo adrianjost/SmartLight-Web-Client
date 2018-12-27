@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="wrapper" :style="{'--background-image': 'url('+backgroundurl+')'}">
     <main>
-      <toolbar v-if="user"/>
+      <toolbar v-if="isAuthenticated"/>
       <router-view></router-view>
     </main>
     <portal-target name="dialog-container" />
@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import firebase from 'firebase'
 import toolbar from "@/components/Toolbar.vue";
 
 export default {
@@ -25,28 +24,22 @@ export default {
   mounted(){
     //this.backgroundurl = `https://source.unsplash.com/${window.screen.width}x${window.screen.height}/?Light`;
   },
+  watch: {
+    isAuthenticated: function(to, from){
+      if(to){
+        this.$router.push('/');
+      }
+    }
+  },
   computed: {
-    user () {
-      return this.$store.getters["user/get"];
+    isAuthenticated () {
+      return this.$store.getters["user/isAuthenticated"];
     }
   }
 }
 </script>
-<style>
-  body{
-    margin: 0;
-    padding: 0;
-    min-width: 250px;
-    width: 100%;
-    min-height: 100vh;
-    font: 400 16px/16px sans-serif;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    background-color: #333;
-  }
-  *{
-    box-sizing: border-box;
-  }
+<style lang="scss">
+  @import "./helpers/base";
 </style>
 <style scoped>
   .wrapper, .wrapper:after{

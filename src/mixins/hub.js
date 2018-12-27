@@ -1,4 +1,3 @@
-import firebase from 'firebase'
 import localAPI from './localAPI.js'
 
 export default {
@@ -7,8 +6,9 @@ export default {
     return {}
   },
   created() {
-    let dbLampRef = firebase.database().ref("users/"+this.user.uid+"/lamps");
-    dbLampRef.on('child_changed', this.lampListener);
+    // TODO move this to an vuex state watch handler
+    //let dbLampRef = firebase.database().ref("users/"+this.user.uid+"/lamps");
+    //dbLampRef.on('child_changed', this.lampListener);
   },
   methods: {
     lampListener(snap){
@@ -17,8 +17,32 @@ export default {
       if(snapVal.current.color){
         this.sendHexColor(snapVal.hostname, snapVal.current.color);
       } else if(snapVal.current.mode){
-        this.sendMode(snapVal.hostname, snapVal.current.mode);
+        this.sendGradient(snapVal.hostname, snapVal.current.mode);
       }
     },
+    updateLamps(to, from){
+      to.forEach(lamp => {
+        if(!lamp.state){
+          lamp.state = {};
+        }
+        if(lamp.state.color){
+          this.sendHexColor(lamp.hostname, lamp.state.color);
+        } else if(lamp.state.gradient){
+          this.sendGradient(lamp.hostname, lamp.state.gradient);
+        }
+      });
+    }
   },
+  computed: {
+    lamps () {
+      return this.$store.getters["lamps/list"];
+    }
+  },
+  /*
+  watch: {
+    lamps: {
+      handler: this.updateLamps,
+      deep: true
+    }
+  }*/
 };

@@ -6,29 +6,27 @@ const plugins = [
 ];
 
 const state = {
-  user: undefined
+  userInfo: undefined
 };
 
 const getters = {
-  get: (state) => { return (state.user === {})? false : state.user; },
-  getLampIds: (state) => { return (state.user || {}).lamps},
-  getGroupIds: (state) => { return (state.user || {}).groups},
+  isAuthenticated: (state) => { return !!state.userInfo},
+  get: (state) => { return state.userInfo; },
 };
 
 const mutations = {
   logout(state) {
-    state.user = {};
+    state.userInfo = undefined;
   },
   login(state, user) {
-    state.user = user;
+    state.userInfo = user;
   },
 };
 
 const actions = {
   async logout(context) {
     try {
-      const result = await firebase.auth().signOut();
-      console.log(result);
+      await firebase.auth().signOut();
       context.commit('logout');
     } catch(error){
       console.error(error);

@@ -72,8 +72,9 @@ export default {
       const newColor = this.hex2rgb(hexColor);
       this.send(url, {color: newColor})
     },
-    sendMode(url, mode) {
-      this.send(url, mode)
+    sendGradient(url, gradient) {
+      gradient.colors = gradient.colors.map(hexColor => this.hex2rgb(hexColor));
+      this.send(url, gradient)
     },
     sendScene(url, scene) {
       this.send(url, scene)

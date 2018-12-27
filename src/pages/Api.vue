@@ -56,6 +56,11 @@ export default {
         this.user = {};
       }
     }
+  },
+  computed: {
+    user () {
+      return this.$store.getters["user/get"];
+    }
   }
 }
 </script>

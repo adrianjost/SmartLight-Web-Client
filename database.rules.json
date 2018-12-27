@@ -10,7 +10,9 @@
       }
     },
     "lamps": {
-      "$lampId": {
+      ".read": "auth.uid != null && query.orderByChild == 'creatorId' && query.equalTo == auth.uid", // restrict access to creator
+      ".indexOn": "creatorId",
+      "$index": {
         ".read": "data.child('creatorId').val() === auth.uid",
         ".write": "!data.exists() || data.child('creatorId').val() === auth.uid",
         ".validate": "newData.child('creatorId').val() === auth.uid",

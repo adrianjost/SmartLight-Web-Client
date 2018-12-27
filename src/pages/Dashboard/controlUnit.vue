@@ -1,62 +1,26 @@
 <template>
-  <div class="item card"
-    @click="controlModalVisible = true">
+  <router-link :to="'/control/'+object.id" class="item card">
       <div class="item-content">
           <i class="icon material-icons"
-            v-show="!edit"
             :style="'background-color: '+getCurrentColor()+'; color:'+textColor(getCurrentColor())">
-            {{value.icon}}
-          </i><br/>
-          <span v-bind:class="{ edit: edit }">{{value.name}}</span><br/>
-          <button v-show="edit" @click.stop="editLamp(value.id)">
-            <i class="material-icons">edit</i>
-          </button>
-          <button v-show="edit" @click.stop="deleteLamp(value.id)">
-            <i class="material-icons">delete</i>
-          </button>
+            {{object.icon}}
+          </i>
         </div>
-        <control-modal :active.sync="controlModalVisible" :obj.sync="value" @newColor="newColor"/>
-  </div>
+  </router-link>
 </template>
 
 <script>
-const controlModal = () => import(/* webpackChunkName: "controlModal" */ '@/components/modals/controlModal.vue');
-import firebase from 'firebase'
 import textColor from "@/mixins/textColor.js";
+
 export default {
-  components: {
-    controlModal
-  },
   mixins: [textColor],
-  props: ['value', 'edit'],
-  data(){
-    return {
-      controlModalVisible: false,
-    }
-  },  
+  props: ['object'],
   methods: {
-    editLamp(id){
-      console.log("edit lamp")
-    },
-    deleteLamp(id){
-      const lampRef = firebase.database().ref("users/"+this.user.uid+"/lamps/"+id);
-      lampRef.remove()
-        .then(function() {
-          console.log("Remove succeeded.")
-        })
-        .catch(function(error) {
-          console.log("Remove failed: " + error.message)
-        });
-    },
-    newColor(value){
-      let adaNameRef = firebase.database().ref("users/"+this.user.uid+"/lamps/"+this.value.id+"/current");
-      adaNameRef.update({ color: value });
-    },
     getCurrentColor(){
-        if(!this.value || !this.value.current){
+        if(!this.object || !this.object.state){
           return
         }
-        const current = this.value.current
+        const current = this.object.state || {};
         if(current.color){
           if(current.color. length === 3 || current.color. length === 6){
             return '#'+current.color;
@@ -69,7 +33,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../helpers/base";
 .item{
   .item-content{
     position: absolute;
