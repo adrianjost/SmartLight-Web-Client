@@ -1,9 +1,4 @@
 import firebase from 'firebase';
-import createPersistedState from 'vuex-persistedstate';
-
-const plugins = [
-  createPersistedState()
-];
 
 const state = {
   userInfo: undefined
@@ -31,15 +26,11 @@ const actions = {
     } catch(error){
       console.error(error);
     }
-  },
-  login(context, user) {
-    context.commit('login', user);
-  },
+  }
 };
 
 export default {
   namespaced: true,
-  plugins,
   state,
   getters,
   mutations,

@@ -9,11 +9,12 @@
 <script>
 import firebase from 'firebase';
 import firebaseui from 'firebaseui';
+let loginUi;
 
 export default {
   name: 'auth',
   created(){
-    firebase.auth().onAuthStateChanged(this.updateUser);
+    loginUi = new firebaseui.auth.AuthUI(firebase.auth());
   },
   mounted() {
     const uiConfig = {
@@ -22,20 +23,10 @@ export default {
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         firebase.auth.EmailAuthProvider.PROVIDER_ID,
         firebase.auth.GithubAuthProvider.PROVIDER_ID
-        ]
-      };
-    const ui = new firebaseui.auth.AuthUI(firebase.auth());
-    ui.start('#firebaseui-auth-container', uiConfig);
-  },
-  methods: {
-    updateUser(user){
-      if(user) {
-        this.$store.dispatch("user/login", user);
-      } else {
-        this.$store.dispatch("user/logout");
-      }
-    }
-  },
+      ]
+    };
+    loginUi.start('#firebaseui-auth-container', uiConfig);
+  }
 }
 </script>
 

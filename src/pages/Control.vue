@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <header class="dialog-title">
+  <div class="wrapper card">
+    <h2>
       {{obj.name}}
-    </header>
+    </h2>
     <tabs :options="{ useUrlFragment: false }" class="dialog-content">
       <tab name="color">
           <iro v-model="color" :config="iroConfig"/>
       </tab>
-      <tab name="music">
+      <tab v-if="false" name="music">
           <music v-model="color"/>
       </tab>
     </tabs>
       
     <div class="dialog-footer">
-      <button @click="close" @keyup.space="close">CANCEL</button>
+      <router-link to="/" replace>CANCEL</router-link>
       <button class="primary" :style="{'background-color': color, color: textColor(color)}" @click="apply" @keyup.space="apply" >APPLY</button>
     </div>
   </div>
@@ -48,7 +48,7 @@
     },
     methods: {
       apply () {
-        this.closeConnection();
+        this.closeConnection(this.obj.hostname);
         this.updateValues();
         this.$router.push("/");
       },
@@ -57,9 +57,6 @@
         this.sendHexColor(this.obj.hostname, this.obj.current.color);
         this.closeConnection();
         this.$router.push("/");
-      },
-      closeConnection () {
-        this.closeConnection(this.obj.hostname);
       },
       updateValues(){
         // TODO: update color
@@ -72,10 +69,27 @@
         //this.sendHexColor(this.obj.hostname, this.color);
         this.sendHexColor(this.obj.ip, this.color);
       },
+    },
+    computed: {
+      obj () {
+        return this.$store.getters["lamps/get"](this.$route.params.id) || {};
+      },
     }
   };
 </script>
 
 <style scoped>
-
+  .wrapper{
+    /*
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #333;
+    text-align: center;
+    white-space: nowrap;
+    padding: 32px;
+    border-radius: 8px;
+    */
+  }
 </style>

@@ -11,7 +11,7 @@ syncMapping = [
 */
 
 import firebase from 'firebase'
-import {config} from '../helpers/firebaseConfig'
+import {config} from '@/helpers/firebaseConfig'
 
 firebase.initializeApp(config);
 const fireDB = firebase.database();
@@ -63,13 +63,14 @@ export default function firebaseSync(syncMapping) {
 
     syncMapping.forEach(connection => {
       // Firebase --> Vuex
-      if(connection.direction == "both" || connection.direction == "down"){
+      if(connection.direction !== "up"){
         setupDownstream(connection, store);
       }
       // Vuex --> Firebase
-      if(connection.direction == "both" || connection.direction == "up"){
+      if(connection.direction !== "down"){
         setupUpstream(connection, store);
       }
     });
+
   }
 }

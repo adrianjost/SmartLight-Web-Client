@@ -2,10 +2,12 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex)
 
+import createPersistedState from 'vuex-persistedstate';
+import firebaseSync from './plugins/firebaseSync';
+import firebaseAuth from './plugins/firebaseAuth';
+
 import user from './user';
 import lamps from './lamps';
-
-import firebaseSync from './firebaseSync';
 
 const config = [
   { // DB Lamps => Vuex Lamps
@@ -21,7 +23,9 @@ const config = [
 
 export default new Vuex.Store({
   plugins: [
-    firebaseSync(config)
+    createPersistedState(),
+    firebaseSync(config),
+    firebaseAuth()
   ],
   modules: {
     user,

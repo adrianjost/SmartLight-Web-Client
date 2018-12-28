@@ -41,7 +41,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .item-wrapper{
-  padding: 8px;
+  margin: -8px;
   font-size: 0;
   line-height: 0;
   // 600px, 900px, 1200px, and 1800px
@@ -51,7 +51,7 @@ export default {
     margin: 8px;
     width: calc(100% - 16px);
     padding-bottom: calc(100% - 16px);
-    @for $i from 1 through 20{
+    @for $i from 1 through 3{
       @media screen and (min-width: #{300 * $i}px) {
         width: calc(100% / #{$i + 1} - 16px);
         padding-bottom: calc(100% / #{$i + 1} - 16px);

@@ -1,9 +1,3 @@
-import createPersistedState from 'vuex-persistedstate';
-
-const plugins = [
-  createPersistedState()
-];
-
 const state = {
   lamps: []
 };
@@ -14,8 +8,8 @@ const getters = {
       return lamp && !!lamp.id;
     });
   },
-  get: (state, lampId) => {
-    return state.lamps[lampId];
+  get: (state) => (lampId) => {
+    return state.lamps.filter((lamp) => { return lamp.id === lampId})[0];
   },
 };
 
@@ -37,7 +31,6 @@ const actions = {
 
 export default {
   namespaced: true,
-  plugins,
   state,
   getters,
   mutations,
