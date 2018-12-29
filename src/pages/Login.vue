@@ -1,9 +1,9 @@
-<template lang="html">
-  <div class="wrapper_centered card">
-    <h1>Welcome to SmartLight</h1>
-    <p>Sign in to continue</p>
+<template>
+  <section class="text-center">
+    <h1 class="header">Welcome</h1>
+    <h2 class="subheader">Sign in to continue</h2>
     <div id="firebaseui-auth-container"></div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -32,15 +32,10 @@ export default {
 
 <style lang="scss" scoped>
   @import "~firebaseui/dist/firebaseui.css";
-  .wrapper_centered{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #333;
-    text-align: center;
-    white-space: nowrap;
-    padding: 32px;
-    border-radius: 8px;
+  .header{
+    font-size: 56px;
+  }
+  .subheader{
+    font-size: 24px;
   }
 </style>

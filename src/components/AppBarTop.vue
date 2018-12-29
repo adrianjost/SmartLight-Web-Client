@@ -1,0 +1,184 @@
+<template>
+  <header class="bar">
+    <div class="container">
+
+      <!-- BACK BUTTON -->
+      <router-link v-if="back_action.to"
+        :to="back_action.to" class="navigation_back" v-ripple>
+        <i class="material-icons">{{back_action.icon}}</i>
+        <img :src="back_action.src" class="avatar">
+      </router-link>
+
+      <div v-else
+        @click="sendEvent(back_action.event)" class="navigation_back" v-ripple>
+        <i class="material-icons">{{back_action.icon}}</i>
+        <img :src="back_action.src" class="avatar">
+      </div>
+
+
+      <!-- PAGE TITLE -->
+      <h6 @click="sendEvent(title.event)" class="page_title">
+        {{title.text}}
+      </h6>
+
+      <!-- ACTIONS -->
+      <button v-for="action in actions"
+        :key="action.event + action.icon"
+        @click="sendEvent(action.event)"
+        class="action" v-ripple
+      >
+        <i class="material-icons">{{action.icon}}</i>
+      </button>
+
+      <!-- USER AVATAR -->
+      <img v-if="user_avatar.src"
+        @click="sendEvent(user_avatar.event)"
+        :src="user_avatar.src" class="avatar">
+
+    </div>
+  </header>
+</template>
+
+<script>
+
+/*
+EXAMPLE CONFIG
+
+back_action: {
+  icon: "arrow_back",
+  src: "https://ui-avatars.com/api/?background=0D8ABC&color=fff&size=40&name=TV",
+  to: "/",  // you have to decide wheather you wan't a router-link or an event triggered
+  // event: "back"
+},
+title: {
+  text: "Page Title"
+},
+actions: [
+  {
+    icon: "power_off",
+    event: "power_off"
+  },
+  {
+    icon: "delete",
+    event: "delete"
+  }
+],
+user_avatar: {
+  src: "http://i.pravatar.cc/48?img=60",
+  event: "logout"
+},
+*/
+export default {
+  name: "AppBarTop",
+  props: {
+    back_action: {
+      type: Object,
+      default: function () {
+        return {};
+      },
+      validator: function (value) {
+        return value.icon || value.src
+      }
+    },
+    title: {
+      type: Object,
+      default: function () {
+        return {
+          text: ""
+        };
+      },
+      required: true,
+      validator: function (value) {
+        return value.text;
+      }
+    },
+    actions: {
+      type: Array,
+      default: [],
+      validator: function (value) {
+        return value.every((action) => {
+          return action.icon && action.event;
+        });
+      }
+    },
+    user_avatar: {
+      type: Object,
+      default: function () {
+        return {};
+      },
+      validator: function (value) {
+        return value.src;
+      }
+    }
+  },
+  methods: {
+    sendEvent(eventName){
+      if(eventName){
+        this.$emit('action', eventName);
+      }
+    },
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.bar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 56px;
+  width: 100%;
+
+  background: var(--color-overlay);
+  user-select: none;
+}
+.container{
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 8px;
+}
+
+a{
+  color: var(--color-text-active);
+}
+.navigation_back{
+  margin-right: 24px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+}
+.page_title{
+  flex: 1;
+  font-size: 20px;
+  line-height: 20px;
+  margin: 0;
+  padding: 8px 0;
+  font-weight: 500;
+}
+
+.avatar{
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  margin: 0 12px;
+
+  &:last-of-type{
+    margin-right: 0;
+  }
+}
+
+.action{
+  color: var(--color-text-active);
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  padding: 8px;
+  margin: 0 4px;
+  cursor: pointer;
+  &:last-of-type{
+    margin-right: 0;
+  }
+}
+</style>

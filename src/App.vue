@@ -1,25 +1,87 @@
 <template>
-  <div id="app" class="background" :style="{'--background-image': 'url('+backgroundurl+')'}">
-    <toolbar v-if="isAuthenticated"/>
-    <main class="content-wrapper">
+  <div id="app">
+    <app-bar-top
+      v-if="appBarTop.visible"
+      :back_action="appBarTop.back_action"
+      :title="appBarTop.title"
+      :actions="appBarTop.actions"
+      :user_avatar="appBarTop.user_avatar"
+      @action="handleAction"
+    />
+    <main class="container">
       <router-view ></router-view>
     </main>
-    <portal-target name="dialog-container" />
+    <bottom-navigation
+      v-if="bottomNav.visible"
+      :fab="bottomNav.fab"
+      :actions="bottomNav.actions"
+      @action="handleAction"
+    />
   </div>
 </template>
 
 <script>
-import toolbar from "@/components/Toolbar.vue";
+import BottomNavigation from '@/components/BottomNavigation.vue'
+import AppBarTop from '@/components/AppBarTop.vue'
 
 export default {
   name: 'app',
   components: {
-    toolbar
+    AppBarTop,
+    BottomNavigation
   },
   data(){
     return {
-      backgroundurl: ''
-    };
+      appBarTop: {
+        visible: true,
+        back_action: {
+          icon: "arrow_back",
+          src: "https://ui-avatars.com/api/?background=0D8ABC&color=fff&size=40&name=TV",
+          to: "/",
+          event: "back"
+        },
+        title: {
+          text: "Page Title"
+        },
+        actions: [
+          {
+            icon: "power_off",
+            event: "power_off"
+          },
+          {
+            icon: "delete",
+            event: "delete"
+          }
+        ],
+        user_avatar: {
+          src: "http://i.pravatar.cc/48?img=60",
+          event: "logout"
+        },
+      },
+      bottomNav: {
+        visible: true,
+        fab: {
+          icon: "add",
+          event: "add",
+          actions: [
+
+          ],
+        },
+        actions: [
+          {
+            icon: "settings_remote",
+            name: "Control",
+            to: "/control",
+            active: true
+          },
+          {
+            icon: "settings",
+            name: "Settings",
+            to: "/settings"
+          },
+        ]
+      }
+    }
   },
   methods: {
     redirectOnAuthStateChange(isAuthenticated) {
@@ -33,17 +95,23 @@ export default {
           },
         });
       }
+    },
+    handleAction(event){
+      console.log("parent event:", event);
     }
   },
   created() {
     this.redirectOnAuthStateChange(this.isAuthenticated);
   },
-  mounted(){
-    //this.backgroundurl = `https://source.unsplash.com/${window.screen.width}x${window.screen.height}/?Light`;
-  },
   watch: {
     isAuthenticated: function(to, from){
       this.redirectOnAuthStateChange(to);
+    },
+    '$route': function(to){
+      this.bottomNav.actions = this.bottomNav.actions.map((action) => {
+        action.active = to.path.includes(action.to);
+        return action;
+      })
     }
   },
   computed: {
@@ -54,36 +122,5 @@ export default {
 }
 </script>
 <style lang="scss">
-  @import "./helpers/base";
-</style>
-<style scoped>
-  #app{
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-  }
-  .background{
-    position: relative;
-  }
-  .background:after{
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: var(--background-image);
-  }
-  .content-wrapper{
-    padding: 8px;
-    margin: 16px auto;
-    max-width: 750px;
-  }
+  @import "./styles/base";
 </style>

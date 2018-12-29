@@ -24,7 +24,7 @@ const config = [
 export default new Vuex.Store({
   plugins: [
     createPersistedState(),
-    firebaseSync(config),
+    //firebaseSync(config),
     firebaseAuth()
   ],
   modules: {
