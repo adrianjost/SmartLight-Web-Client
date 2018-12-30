@@ -1,19 +1,19 @@
 <template>
-  <h1>/settings</h1>
+  <router-view></router-view>
 </template>
 
 <script>
-import { UIStateLoggedIn } from '@/helpers/ui-states.js';
+import { UIStateDefault } from '@/helpers/ui-states.js';
 
   export default {
     created(){
       this.$store.commit("ui/set", {
         component: "appBarTop",
-        payload: UIStateLoggedIn.appBarTop(this.user)
+        payload: UIStateDefault.appBarTop({user: this.user, title:"Settings"})
       });
       this.$store.commit("ui/set", {
         component: "bottomNav",
-        payload: UIStateLoggedIn.bottomNav(1)
+        payload: UIStateDefault.bottomNav(1)
       });
     },
     computed: {

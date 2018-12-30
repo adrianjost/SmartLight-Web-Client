@@ -1,5 +1,5 @@
-const loggedin = {
-  appBarTop: (user) => {
+const defaultState = {
+  appBarTop: ({user, title}) => {
     const user_avatar = {
       user_avatar: {
         src: user.photoURL,
@@ -19,7 +19,7 @@ const loggedin = {
     return {
       visible: true,
       title: {
-        text: "Control"
+        text: title
       },
       ...logoutButton
     }
@@ -52,6 +52,29 @@ const loggedin = {
   },
 }
 
+const nestedDefaultState = {
+  appBarTop: (title) => {
+    return {
+      visible: true,
+      back_action: {
+        icon: "arrow_back"
+      },
+      title: {
+        text: title
+      },
+    }
+  },
+  bottomNav: (activeIndex) => {
+    return Object.assign(defaultState.bottomNav(activeIndex), {
+      fab: {
+        icon: "check",
+        event: "check"
+      },
+    })
+  },
+}
+
 export {
-  loggedin as UIStateLoggedIn
+  defaultState as UIStateDefault,
+  nestedDefaultState as UIStateNestedDefault
 }

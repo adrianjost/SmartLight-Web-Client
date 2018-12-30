@@ -24,9 +24,6 @@
 import BottomNavigation from '@/components/BottomNavigation.vue'
 import AppBarTop from '@/components/AppBarTop.vue'
 
-import { EventBus } from '@/helpers/event-bus.js';
-
-
 export default {
   name: 'app',
   components: {
@@ -35,13 +32,16 @@ export default {
   },
   methods: {
     handleAction(event){
-      EventBus.$emit(event);
+      this.$eventHub.$emit(event);
     }
   },
   created() {
-    EventBus.$on('logout', () => {
+    this.$eventHub.$on('logout', () => {
       this.$store.dispatch("user/logout");
     });
+  },
+  beforeDestroy(){
+    this.$eventHub.$off("logout");
   },
   computed: {
     appBarTopState () {

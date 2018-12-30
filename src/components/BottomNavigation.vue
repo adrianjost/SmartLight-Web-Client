@@ -1,7 +1,7 @@
 <template>
   <nav class="bar">
 
-    <div class="fab-wrapper">
+    <div class="fab-wrapper" @click="sendEvent(fab.event)">
       <fab class="fab" :icon="fab.icon"/>
     </div>
 
@@ -38,14 +38,14 @@
 </template>
 
 <script>
-import fab from '@/components/fab.vue'
+import fabComponent from '@/components/fab.vue'
 // TODO: fork vue-fab and allow positioning & text-color
 //import fab from 'vue-fab'
 
 export default {
   name:"BottomNavigation",
   components: {
-    fab
+    fab: fabComponent
   },
   props: {
     fab: {
@@ -54,7 +54,13 @@ export default {
         return {};
       },
       validator: function (value) {
-        return value.icon && (value.event || value.to || value.actions.length > 0);
+        const isAction = value.event || value.to
+        const actionsList = value.actions || [];
+        const validActions = actionsList.every((action) => {
+          return action.icon && (action.event || action.to);
+        })
+        // TODO disallow isAction and actionList at the same time
+        return value.icon && (isAction || (actionsList.length > 0 && validActions));
       }
     },
     actions: {

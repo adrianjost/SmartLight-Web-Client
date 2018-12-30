@@ -7,7 +7,7 @@
         <router-link v-if="back_action.to"
           :to="back_action.to" class="navigation_back" v-ripple>
           <i class="material-icons">{{back_action.icon}}</i>
-          <img v-if="back_action" :src="back_action.src" :alt="back_action.alt" class="avatar">
+          <img v-if="back_action && back_action.src" :src="back_action.src" :alt="back_action.alt" class="avatar">
         </router-link>
 
         <div v-else
@@ -24,13 +24,26 @@
       </h6>
 
       <!-- ACTIONS -->
-      <button v-for="action in actions"
-        :key="action.event + action.icon"
-        @click="sendEvent(action.event)"
-        class="action" v-ripple
-      >
-        <i class="material-icons">{{action.icon}}</i>
-      </button>
+      <template v-for="action in actions">
+        <router-link
+          tag="button"
+          v-if="action.to"
+          :key="action.to + action.icon"
+          :to="action.to"
+          class="action" v-ripple
+        >
+          <i class="material-icons">{{action.icon}}</i>
+        </router-link>
+
+        <button
+          v-if="action.event"
+          :key="action.event + action.icon"
+          @click="sendEvent(action.event)"
+          class="action" v-ripple
+        >
+          <i class="material-icons">{{action.icon}}</i>
+        </button>
+      </template>
 
       <!-- USER AVATAR -->
       <img v-if="user_avatar && user_avatar.src"
@@ -93,7 +106,7 @@ export default {
       default: () => [],
       validator: function (value) {
         return value.every((action) => {
-          return action.icon && action.event;
+          return action.icon && (action.event ||action.to);
         });
       }
     },
@@ -136,10 +149,13 @@ a{
   color: var(--color-text-active);
 }
 .navigation_back{
-  margin-right: 24px;
+  margin-right: 8px;
+  height: 40px;
+  min-width: 40px;
   text-decoration: none;
   display: flex;
   align-items: center;
+  justify-content: center;
   border-radius: 20px;
 }
 .page_title{
@@ -147,7 +163,7 @@ a{
   font-size: 20px;
   line-height: 20px;
   margin: 0;
-  padding: 8px 0;
+  padding: 8px;
   font-weight: 500;
 }
 
