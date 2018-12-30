@@ -33,7 +33,7 @@
       </button>
 
       <!-- USER AVATAR -->
-      <img v-if="user_avatar.src"
+      <img v-if="user_avatar && user_avatar.src"
         @click="sendEvent(user_avatar.event)"
         :src="user_avatar.src" :alt="user_avatar.alt" class="avatar">
 

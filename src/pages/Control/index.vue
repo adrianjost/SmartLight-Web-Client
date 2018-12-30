@@ -3,47 +3,18 @@
 </template>
 
 <script>
+import { UIStateLoggedIn } from '@/helpers/ui-states.js';
+
   export default {
     created(){
+      
       this.$store.commit("ui/set", {
         component: "appBarTop",
-        payload: {
-          visible: true,
-          title: {
-            text: "Control"
-          },
-          user_avatar: {
-            src: this.user.photoURL,
-            alt: "user avatar",
-            event: "logout"
-          },
-        }
+        payload: UIStateLoggedIn.appBarTop(this.user)
       });
       this.$store.commit("ui/set", {
         component: "bottomNav",
-        payload: {
-          visible: true,
-          fab: {
-            icon: "add",
-            event: "add",
-            actions: [
-
-            ],
-          },
-          actions: [
-            {
-              icon: "settings_remote",
-              name: "Control",
-              to: "/control",
-              active: true
-            },
-            {
-              icon: "settings",
-              name: "Settings",
-              to: "/settings"
-            },
-          ]
-        }
+        payload: UIStateLoggedIn.bottomNav(0)
       });
     },
     computed: {

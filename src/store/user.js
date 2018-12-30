@@ -23,10 +23,12 @@ const actions = {
   async logout(context) {
     try {
       await firebase.auth().signOut();
-      vm.$router.push({
+      /* vm.$router.push({
           path: '/login'
         });
+        */
       context.commit('logout');
+      window.location.reload()
     } catch(error){
       console.error(error);
     }
