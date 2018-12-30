@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import vm from '../main'
 
 const state = {
   userInfo: undefined
@@ -22,6 +23,9 @@ const actions = {
   async logout(context) {
     try {
       await firebase.auth().signOut();
+      vm.$router.push({
+          path: '/login'
+        });
       context.commit('logout');
     } catch(error){
       console.error(error);

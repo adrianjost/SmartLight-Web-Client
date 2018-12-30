@@ -13,9 +13,11 @@ Vue.directive('ripple', Ripple);
 
 import store from './store'
 
-new Vue({
+const vm = new Vue({
   router,
   el: '#app',
   store,
   render: h => h(App)
 });
+
+export default vm

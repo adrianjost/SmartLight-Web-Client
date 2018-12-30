@@ -14,9 +14,9 @@
 	--color-text-active: rgb(255, 255, 255);
 	--color-text-inactive: rgba(255, 255, 255, .5);
 	*/
-	--color-text: rgb(200, 200, 200);
+	--color-text: rgb(210, 210, 210);
 	--color-text-active: rgb(255, 255, 255);
-	--color-text-inactive: rgb(150, 150, 150);
+	--color-text-inactive: rgb(170, 170, 170);
 }
 
 body, #app {
@@ -30,7 +30,12 @@ body, #app {
 	width: 100%;
 	max-width: 700px;
 	margin: 0 auto;
-	padding: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.contents{
+  display: contents;
 }
 
 .text-center{

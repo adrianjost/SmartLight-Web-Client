@@ -3,17 +3,19 @@
     <div class="container">
 
       <!-- BACK BUTTON -->
-      <router-link v-if="back_action.to"
-        :to="back_action.to" class="navigation_back" v-ripple>
-        <i class="material-icons">{{back_action.icon}}</i>
-        <img :src="back_action.src" class="avatar">
-      </router-link>
+      <template v-if="back_action">
+        <router-link v-if="back_action.to"
+          :to="back_action.to" class="navigation_back" v-ripple>
+          <i class="material-icons">{{back_action.icon}}</i>
+          <img v-if="back_action" :src="back_action.src" :alt="back_action.alt" class="avatar">
+        </router-link>
 
-      <div v-else
-        @click="sendEvent(back_action.event)" class="navigation_back" v-ripple>
-        <i class="material-icons">{{back_action.icon}}</i>
-        <img :src="back_action.src" class="avatar">
-      </div>
+        <div v-else
+          @click="sendEvent(back_action.event)" class="navigation_back" v-ripple>
+          <i class="material-icons">{{back_action.icon}}</i>
+          <img :src="back_action.src" class="avatar">
+        </div>
+      </template>
 
 
       <!-- PAGE TITLE -->
@@ -33,7 +35,7 @@
       <!-- USER AVATAR -->
       <img v-if="user_avatar.src"
         @click="sendEvent(user_avatar.event)"
-        :src="user_avatar.src" class="avatar">
+        :src="user_avatar.src" :alt="user_avatar.alt" class="avatar">
 
     </div>
   </header>
@@ -73,20 +75,14 @@ export default {
   props: {
     back_action: {
       type: Object,
-      default: function () {
-        return {};
-      },
+      default: () => {},
       validator: function (value) {
-        return value.icon || value.src
+        return value.icon || (value.src && value.alt)
       }
     },
     title: {
       type: Object,
-      default: function () {
-        return {
-          text: ""
-        };
-      },
+      default: () => { text: "" },
       required: true,
       validator: function (value) {
         return value.text;
@@ -94,7 +90,7 @@ export default {
     },
     actions: {
       type: Array,
-      default: [],
+      default: () => [],
       validator: function (value) {
         return value.every((action) => {
           return action.icon && action.event;
@@ -103,11 +99,9 @@ export default {
     },
     user_avatar: {
       type: Object,
-      default: function () {
-        return {};
-      },
+      default: () => {},
       validator: function (value) {
-        return value.src;
+        return value.src && value.alt;
       }
     }
   },

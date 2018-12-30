@@ -1,23 +1,35 @@
 <template>
   <nav class="bar">
+
     <div class="fab-wrapper">
       <fab class="fab" :icon="fab.icon"/>
     </div>
+
     <ul class="container">
       <template v-for="action in actions">
-
-        <router-link v-if="action.to" :to="action.to" :key="action.to + action.icon"
-          tag="li" :class="{'nav-item': true, 'active': action.active}" v-ripple
+        <li
+          class="contents"
+          :key="(action.to || action.event) + action.icon"
         >
-          <i class="material-icons">{{action.icon}}</i>
-          <span v-if="action.name" class="name">{{action.name}}</span>
-        </router-link>
+          <router-link
+            v-if="action.to"
+            :to="action.to"
+            :class="{'nav-item': true, 'active': action.active}"
+            v-ripple
+          >
+            <i class="material-icons">{{action.icon}}</i>
+            <span v-if="action.name" class="name">{{action.name}}</span>
+          </router-link>
 
-        <li v-else @click="sendEvent(action.event)" :key="action.event + action.icon"
-          :class="{'nav-item': true, 'active': action.active}" v-ripple
-        >
-          <i class="material-icons">{{action.icon}}</i>
-          <span v-if="action.name" class="name">{{action.name}}</span>
+          <button
+            v-else
+            @click="sendEvent(action.event)"
+            :class="{'nav-item': true, 'active': action.active}"
+            v-ripple
+          >
+            <i class="material-icons">{{action.icon}}</i>
+            <span v-if="action.name" class="name">{{action.name}}</span>
+          </button>
         </li>
 
       </template>
@@ -49,7 +61,7 @@ export default {
       type: Array,
       default: [],
       validator: function (value) {
-        return value.length === 2
+        return value.length === 2 || value.length === 4
           && value.every(action => {
               return action.icon && (action.to || action.event);
             })
@@ -93,6 +105,7 @@ export default {
   justify-content: space-evenly;
   flex-wrap: nowrap;
 }
+
 .nav-item{
   flex: 1;
 
@@ -110,13 +123,20 @@ export default {
 
   cursor: pointer;
   text-align: center;
+  text-decoration: none;
   color: var(--color-text-inactive);
+  background: transparent;
+  border: 0;
 
   .material-icons{
     width: 100%;
   }
 
-  &.active, &:hover{
+  &:hover{
+    color: var(--color-text);
+  }
+
+  &.active{
     color: var(--color-text-active);
   }
 }

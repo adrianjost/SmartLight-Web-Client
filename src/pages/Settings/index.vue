@@ -1,5 +1,5 @@
 <template>
-  <h1>/control</h1>
+  <h1>/settings</h1>
 </template>
 
 <script>
@@ -10,7 +10,7 @@
         payload: {
           visible: true,
           title: {
-            text: "Control"
+            text: "Settings"
           },
           user_avatar: {
             src: this.user.photoURL,
@@ -34,13 +34,13 @@
             {
               icon: "settings_remote",
               name: "Control",
-              to: "/control",
-              active: true
+              to: "/control"
             },
             {
               icon: "settings",
               name: "Settings",
-              to: "/settings"
+              to: "/settings",
+              active: true
             },
           ]
         }

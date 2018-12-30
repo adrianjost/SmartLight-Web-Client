@@ -8,6 +8,7 @@ import firebaseAuth from './plugins/firebaseAuth';
 
 import user from './user';
 import lamps from './lamps';
+import ui from './ui';
 
 const config = [
   { // DB Lamps => Vuex Lamps
@@ -28,6 +29,7 @@ export default new Vuex.Store({
     firebaseAuth()
   ],
   modules: {
+    ui,
     user,
     lamps
   }

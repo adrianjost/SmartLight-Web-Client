@@ -46,6 +46,26 @@
         },
       }
     },
+    created(){
+      this.$store.commit["ui/set"]({
+        component: "appBarTop",
+        payload: {
+          visible: true,
+          title: {
+            text: "Control"
+          },
+          user_avatar: {
+            src: this.user.photoURL,
+            alt: "user avatar",
+            event: "logout"
+          },
+        }
+      });
+      this.$store.commit["ui/set"]({
+        component: "bottomNav",
+        visible: true
+      });
+    },
     methods: {
       apply () {
         this.closeConnection(this.obj.hostname);
@@ -71,6 +91,9 @@
       },
     },
     computed: {
+      user () {
+        return this.$store.getters["user/get"];
+      },
       obj () {
         return this.$store.getters["lamps/get"](this.$route.params.id) || {};
       },
