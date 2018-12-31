@@ -1,6 +1,12 @@
 # SmartLight Web
 
+**master status:**
+[![Build Status](https://travis-ci.com/adrianjost/SmartLight-Firebase.svg?branch=master)](https://travis-ci.com/adrianjost/SmartLight-Firebase)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e0203f63985c42c191b6e4411bd8f4da)](https://www.codacy.com/app/adrianjost/SmartLight-Firebase?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adrianjost/SmartLight-Firebase&amp;utm_campaign=Badge_Grade)
+
+**V2 status:**
+[![Build Status V2](https://travis-ci.com/adrianjost/SmartLight-Firebase.svg?branch=v2%2Fmain)](https://travis-ci.com/adrianjost/SmartLight-Firebase)
+
 
 This Repository contains the (Web-) UI for SmartLight as well as the Firebase hosted Backend Code.
 
