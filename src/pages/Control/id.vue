@@ -1,27 +1,57 @@
 <template>
-  <div class="tab-nav">
-    <div v-for="tab in tabNames"
-      :key="tab"
-      @click="activeTab = tab"
-      :class="{
-        tab: true,
-        active: (activeTab == tab)
-      }">
-      {{tab}}
+  <section class="control">
+    <div class="tab-nav">
+      <div v-for="tab in tabNames"
+        :key="tab"
+        @click="activeTab = tab"
+        :class="{
+          tab: true,
+          active: (activeTab == tab)
+        }">
+        {{tab}}
+      </div>
     </div>
-  </div>
+    <div v-if="activeTab == 'Color'" >
+      <saved-state-picker
+        :data="[{background:'#f00', id: 0}, {background:'#55a', id: 1}, {background:'#5a9', id: 2}, {background:'#e9a', id: 3}, {background:'#7f0', id: 4},  {background:'#ca3', id: 5}]"
+        event="loadColor"
+        @loadColor="log"
+      />
+      <color-picker
+        class="color-picker"
+        v-model="color"
+        :config="{
+          width: 250,
+          height: 300,
+          sliderMargin: 16,
+          markerRadius: 10
+        }"
+      />
+    </div>
+    <div v-if="activeTab == 'Gradient'" >
+      Gradient
+    </div>
+  </section>
 </template>
 
 <script>
+import savedStatePicker from "@/components/picker/savedStatePicker"
+import colorPicker from "@/components/picker/colorPicker"
+
 import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 import { EventBus } from '@/helpers/event-bus.js';
 
 export default {
   name: "control-detail",
+  components: {
+    savedStatePicker,
+    colorPicker
+  },
   data(){
     return {
       tabNames: ["Color", "Gradient"],
-      activeTab: "Color"
+      activeTab: "Color",
+      color: "#ff5577"
     }
   },
   created(){
@@ -60,6 +90,9 @@ export default {
       // TODO: save new state
       console.log("apply state");
       this.$router.push("/control");
+    },
+    log(data){
+      console.log(data);
     }
   },
   computed: {
@@ -71,6 +104,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.control{
+  text-align: center;
+}
 .tab-nav{
   display: flex;
   margin: 16px auto;
@@ -89,17 +125,9 @@ export default {
     &.active{
       background-color: var(--color-overlay);
     }
-    /*
-    $border-radius: 4px;
-    &:first-of-type{
-      border-top-left-radius: $border-radius;
-      border-bottom-left-radius: $border-radius;
-    }
-    &:last-of-type{
-      border-top-right-radius: $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
-    */
   }
+}
+.color-picker{
+  transform: rotate(-90deg);
 }
 </style>

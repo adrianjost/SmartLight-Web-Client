@@ -1,5 +1,5 @@
 <template>
-  <div :id="'iro-'+id"></div>
+  <div class="color-picker" :id="'iro-'+id"></div>
 </template>
 
 <script>
@@ -25,7 +25,7 @@ export default {
       if(!this.value || this.value.length > 7){ config.color = "#ffffff"}
       else if(this.value.length === 6){ config.color = '#'+this.value}
       else{config.color = this.value;}
-      
+
       colorPicker = new iro.ColorPicker('#iro-'+this.id, config);
       colorPicker.on("color:change", this.emitColor)
     },
@@ -50,5 +50,7 @@ export default {
 </script>
 
 <style scoped>
-
+.color-picker{
+  display: inline-block;
+}
 </style>
