@@ -33,7 +33,7 @@ function extractPercentage(string){
   const percentageExtractRegex = /([0-9]{1,3})(?:%| ?Prozent)/;
   const matches = percentageExtractRegex.exec(string);
   if(matches && matches.length >= 2){
-    return parseInt(matches[1]);
+    return parseInt(matches[1], 10);
   }
   if(string.includes("etwas")){
     return 30;
