@@ -1,6 +1,8 @@
-# firebase-smart-light
+# SmartLight Web
 
-> A Firebase Hosted SmartLight Client
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e0203f63985c42c191b6e4411bd8f4da)](https://www.codacy.com/app/adrianjost/SmartLight-Firebase?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adrianjost/SmartLight-Firebase&amp;utm_campaign=Badge_Grade)
+
+This Repository contains the (Web-) UI for SmartLight as well as the Firebase hosted Backend Code.
 
 ## Build Setup
 
