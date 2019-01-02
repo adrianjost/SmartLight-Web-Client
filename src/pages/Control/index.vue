@@ -29,8 +29,6 @@ export default {
       component: "bottomNav",
       payload: UIStateDefault.bottomNav(0)
     });
-
-    console.log(this.lamps);
   },
   computed: {
     lamps() {

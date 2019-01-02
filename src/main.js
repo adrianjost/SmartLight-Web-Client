@@ -3,8 +3,12 @@ import App from './App.vue'
 
 Vue.prototype.$eventHub = new Vue(); // Global event bus
 
-//import PortalVue from 'portal-vue'
-//Vue.use(PortalVue);
+import Toasted from 'vue-toasted';
+Vue.use(Toasted, {
+  duration: 5000,
+  position: "bottom-left",
+  "fullWidth": true,
+})
 
 import VueRouter from 'vue-router'
 import router from './router'

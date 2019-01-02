@@ -6,9 +6,10 @@ import createPersistedState from 'vuex-persistedstate';
 import firebaseSync from './plugins/firebaseSync';
 import firebaseAuth from './plugins/firebaseAuth';
 
+import ui from './ui';
 import user from './user';
 import lamps from './lamps';
-import ui from './ui';
+import savedStates from './savedStates';
 
 const config = [
   { // DB Lamps => Vuex Lamps
@@ -31,6 +32,7 @@ export default new Vuex.Store({
   modules: {
     ui,
     user,
-    lamps
+    lamps,
+    savedStates
   }
 });

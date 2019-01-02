@@ -11,47 +11,33 @@
         {{tab}}
       </div>
     </div>
-    <div v-if="activeTab == 'Color'" >
-      <saved-state-picker
-        :data="[{background:'#f00', id: 0}, {background:'#55a', id: 1}, {background:'#5a9', id: 2}, {background:'#e9a', id: 3}, {background:'#7f0', id: 4},  {background:'#ca3', id: 5}]"
-        event="loadColor"
-        @loadColor="log"
-      />
-      <color-picker
-        class="color-picker"
-        v-model="color"
-        :config="{
-          width: 250,
-          height: 300,
-          sliderMargin: 16,
-          markerRadius: 10
-        }"
-      />
-    </div>
-    <div v-if="activeTab == 'Gradient'" >
-      Gradient
-    </div>
+    <choose-color
+      v-if="activeTab == 'Color'"
+      :lamp="lamp"
+    />
+    <choose-gradient
+      v-if="activeTab == 'Gradient'"
+      :lamp="lamp"
+    />
   </section>
 </template>
 
 <script>
-import savedStatePicker from "@/components/picker/savedStatePicker"
-import colorPicker from "@/components/picker/colorPicker"
+import chooseColor from "./components/chooseColor"
+import chooseGradient from "./components/chooseGradient"
 
 import { UIStateNestedDefault } from '@/helpers/ui-states.js';
-import { EventBus } from '@/helpers/event-bus.js';
 
 export default {
   name: "control-detail",
   components: {
-    savedStatePicker,
-    colorPicker
+    chooseColor,
+    chooseGradient
   },
   data(){
     return {
       tabNames: ["Color", "Gradient"],
-      activeTab: "Color",
-      color: "#ff5577"
+      activeTab: "Gradient", // TODO switch to "Color"
     }
   },
   created(){
@@ -88,12 +74,8 @@ export default {
   methods: {
     apply(){
       // TODO: save new state
-      console.log("apply state");
       this.$router.push("/control");
     },
-    log(data){
-      console.log(data);
-    }
   },
   computed: {
     lamp () {
@@ -114,6 +96,7 @@ export default {
   border: 1px solid var(--color-border);
   border-radius: 4px;
   font-size: 0;
+  user-select: none;
   .tab{
     flex: 1;
     font-size: 16px;
@@ -127,7 +110,14 @@ export default {
     }
   }
 }
-.color-picker{
-  transform: rotate(-90deg);
+</style>
+<style lang="scss">
+.toast-dot{
+  display: inline-block;
+  vertical-align: bottom;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 4px;
 }
 </style>

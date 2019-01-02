@@ -40,14 +40,17 @@ export default {
       }*/
       connection.send(JSON.stringify(message));
     },
-    send(url, message){
+    send({hostname, ip}, message){
+      const url = hostname || ip;
+      if(!url){
+        return new Error("hostname/ip missing");
+      }
       if(this.connections[url] && this.connections[url].readyState === 1) {
         //console.log("already connected! send message:",message);
         this._send( this.connections[url], message)
       } else {
         let connection = this.connections[url];
         if(!connection || this.connections[url].readyState >= 2){
-          //console.log("connecting to",'ws://' + url + ':80...');
           connection = this.connections[url] = new WebSocket('ws://' + url + ':80');
         }
         connection.onopen = (e) => {
@@ -56,28 +59,43 @@ export default {
           this._send(connection, message)
         };
         connection.onerror = (e) => {
-          // connection to lamp failed -> ignore
-          // TODO: show non disruptive hint for the user
+          if(hostname){ // prevent loops
+            this.closeConnection({hostname});
+            return this.send({ip}, message);
+          }
+
+          this.$toasted.show(`<span class="toast-container">connection to Lamp failed</span>`, {
+            icon: "sync_problem",
+            action : {
+              text : 'CLOSE',
+              onClick : (e, toastObject) => {
+                this.restoreState(deletedColor);
+                toastObject.goAway(0);
+              }
+            },
+          });
+          this.closeConnection({ip});
         };
       }
     },
-    closeConnection(url){
-      const connection = this.connections[url];
-      if(!connection){return;}
+    closeConnection({hostname, ip}){
+      const connectionHostname = this.connections[hostname];
+      const connectionIP = this.connections[ip];
+      const connection = connectionHostname || connectionIP;
+      if(!connection){ return; }
+
       connection.onclose = function () {}; // disable onclose handler first
       connection.close();
-      delete this.connections[url];
+      delete this.connections[hostname];
+      delete this.connections[ip];
     },
-    sendHexColor(url, hexColor) {
+    sendHexColor({hostname, ip}, hexColor) {
       const newColor = this.hex2rgb(hexColor);
-      this.send(url, {color: newColor})
+      this.send({hostname, ip}, {color: newColor})
     },
-    sendGradient(url, gradient) {
+    sendGradient({hostname, ip}, gradient) {
       gradient.colors = gradient.colors.map(hexColor => this.hex2rgb(hexColor));
-      this.send(url, gradient)
+      this.send({hostname, ip}, gradient)
     },
-    sendScene(url, scene) {
-      this.send(url, scene)
-    }
   }
 };

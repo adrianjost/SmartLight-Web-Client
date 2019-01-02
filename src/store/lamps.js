@@ -13,15 +13,20 @@ const getters = {
   },
 };
 
+function getIndex(list, id){
+  return list.findIndex((obj)=>{return obj.id === id});
+}
+
 const mutations = {
+  // TODO fix parameter handling in all mutations
   set(state, { data: {lampId, newData}}) {
-    state.lamps[lampId] = newData;
+    state.lamps[getIndex(state.lamps, lampId)] = newData;
   },
   setList(state, { data }){
     state.lamps = data;
   },
-  setState(state, { data: {lampId, newLampState}}) {
-    state.lamps[lampId].state = newLampState;
+  setState(state, { id, data}) {
+    state.lamps[getIndex(state.lamps, id)].state = data;
   },
 };
 

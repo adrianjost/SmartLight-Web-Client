@@ -35,8 +35,8 @@
         }
       }
     },
-    "gradients": {
-      "$gradientId": {
+    "states": {
+      "$index": {
         ".read": "data.child('creatorId').val() === auth.uid",
         ".write": "!data.exists() || data.child('creatorId').val() === auth.uid",
         ".validate": "newData.child('creatorId').val() === auth.uid"

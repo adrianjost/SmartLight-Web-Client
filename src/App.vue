@@ -55,7 +55,13 @@ export default {
 </script>
 <style lang="scss">
 @import "./styles/base";
-main {
+main.container {
   padding-top: 56px;
+}
+@media screen and (max-width: 600px) {
+  main.container{
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
 </style>

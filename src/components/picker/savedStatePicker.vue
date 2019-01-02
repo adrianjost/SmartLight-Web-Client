@@ -5,12 +5,13 @@
         v-for="state in data"
         :key="state.id"
         :style="{background: state.background}"
-        @click="sendEvent(state.id)"
+        @click="sendEvent(event, state.id)"
+        @contextmenu.prevent="sendEvent(contextEvent, state.id)"
         class="state"
       >
       </li>
 
-      <li class="state add" @click="sendEvent('add')">
+      <li class="state add" @click="sendEvent(addEvent)">
         <i class="material-icons">add</i>
       </li>
     </ul>
@@ -38,11 +39,19 @@ export default {
     event: {
       type: String,
       default: "state-picked"
-    }
+    },
+    addEvent: {
+      type: String,
+      default: "state-add"
+    },
+    contextEvent: {
+      type: String,
+      default: "state-context"
+    },
   },
   methods: {
-    sendEvent(data){
-      this.$emit(this.event, data);
+    sendEvent(event, data){
+      this.$emit(event, data);
     }
   }
 }
@@ -57,7 +66,9 @@ export default {
   max-width: 300px;
   overflow-x: auto;
   white-space: nowrap;
+  text-align: left;
   font-size: 0;
+  user-select: none;
 }
 .state{
   position: relative;
@@ -74,11 +85,14 @@ export default {
   &:last-of-type{
     margin-right: 0;
   }
-  &.add .material-icons{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  &.add {
+    border-width: 2px;
+    .material-icons{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
 </style>

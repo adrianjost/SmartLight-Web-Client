@@ -1,7 +1,7 @@
 <template>
-  <div 
+  <div
     class="control-unit"
-    :style="{ 'background-color': data.current.color }"
+    :style="{ 'background-color': (data.state || {}).color }"
   >
     <router-link class="link" :to="'/control/'+ data.id">
       <i class="material-icons">{{data.icon}}</i>
@@ -31,16 +31,6 @@ export default {
   width: 128px;
   height: 128px;
   border: 1px solid var(--color-border);
-  &:before{
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-radius: 50%;
-    background-color: rgba(255,255,255,.5);
-  }
 }
 .link{
   position: absolute;
