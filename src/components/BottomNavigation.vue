@@ -93,6 +93,7 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
+  z-index: 9999;
 
   background: var(--color-overlay); // fallback
 

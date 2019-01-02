@@ -135,6 +135,7 @@ export default {
   left: 0;
   height: 56px;
   width: 100%;
+  z-index: 9999;
 
   background: var(--color-overlay);
   user-select: none;
