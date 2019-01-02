@@ -18,6 +18,8 @@ import Ripple from 'vue-ripple-directive'
 Vue.directive('ripple', Ripple);
 
 import store from './store'
+import error from "@/mixins/error.js"
+Vue.mixin(error);
 
 const vm = new Vue({
   router,

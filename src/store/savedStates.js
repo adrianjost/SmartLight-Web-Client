@@ -3,8 +3,9 @@ const state = {
     {
       id: "blablagrad",
       type: "gradient",
+      name: "rainbow",
       colors: ["#ff0000", "#0000ff", "#00ff00", "#ff0000"],
-      stops: [0, 30, 40, 100],
+      transitionTimes: [0, 3, 4, 10],
       loop: true
     }
   ]
@@ -24,14 +25,13 @@ const getters = {
   },
   "list-gradients": (state) => {
     return state.states.filter((mode) => {
-      return mode.type === "gradient";
-    }).filter(gradient => { return gradient.colors; })
-    .map(gradient => {
-
+      return mode.type === "gradient" && !!mode.colors;
+    }).map(gradient => {
       // generate background pattern
       gradient.background = "linear-gradient(90deg, "
+      const maxTime = gradient.transitionTimes[gradient.transitionTimes.length - 1];
       gradient.colors.forEach((color, index) => {
-        gradient.background += `${color} ${gradient.stops[index]}%`;
+        gradient.background += `${color} ${gradient.transitionTimes[index] / maxTime * 100}%`;
         if(index < gradient.colors.length - 1){
           gradient.background += ", "
         }

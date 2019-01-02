@@ -27,7 +27,7 @@ export default {
       else{config.color = this.value;}
 
       colorPicker = new iro.ColorPicker('#iro-'+this.id, config);
-      colorPicker.on("color:change", this.emitColor)
+      colorPicker.on("color:change", this.emitColor);
     },
     updateConfig(){
       // TODO - watch for config changes and apply them

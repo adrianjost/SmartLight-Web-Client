@@ -8,7 +8,13 @@
       :user_avatar="appBarTopState.user_avatar"
       @action="handleAction"
     />
-    <main class="container">
+    <main
+      class="container"
+      :style="{
+        'padding-top': appBarTopState.visible?'56px':'0',
+        'padding-bottom': bottomNavState.visible?'100px':'0'
+      }"
+    >
       <router-view ></router-view>
     </main>
     <bottom-navigation
@@ -30,15 +36,41 @@ export default {
     AppBarTop,
     BottomNavigation
   },
+  data(){
+    return {
+      showBottomNav: undefined,
+    }
+  },
   methods: {
     handleAction(event){
       this.$eventHub.$emit(event);
+    },
+    resize(event){
+      // hide BottomNav when onscreen keyboard opens (mobile devices)
+      // only tested on android, shouldn't do anything on iOS :(
+      // TODO: fix this hack.
+      if(document.activeElement.tagName == "INPUT"){
+        if(this.showBottomNav === undefined){
+          this.showBottomNav = this.bottomNavState.visible;
+          this.$store.commit("ui/visible", {
+            component: "bottomNav",
+            visible: false
+          });
+        }
+      }else if(this.showBottomNav !== undefined){
+        this.$store.commit("ui/visible", {
+          component: "bottomNav",
+          visible: this.showBottomNav
+        });
+        this.showBottomNav = undefined;
+      }
     }
   },
   created() {
     this.$eventHub.$on('logout', () => {
       this.$store.dispatch("user/logout");
     });
+    window.addEventListener('resize', this.resize);
   },
   beforeDestroy(){
     this.$eventHub.$off("logout");

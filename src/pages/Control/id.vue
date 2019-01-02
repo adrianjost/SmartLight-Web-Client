@@ -69,11 +69,12 @@ export default {
     this.$eventHub.$on('apply', this.apply);
   },
   beforeDestroy(){
-    this.$eventHub.$off('apply');
+    this.$eventHub.$off('apply', this.apply);
   },
   methods: {
     apply(){
       // TODO: save new state
+      console.log("apply :id");
       this.$router.push("/control");
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <div
     class="control-unit"
-    :style="{ 'background-color': (data.state || {}).color }"
+    :style="{ 'background': data.background }"
   >
     <router-link class="link" :to="'/control/'+ data.id">
       <i class="material-icons">{{data.icon}}</i>
@@ -20,6 +20,9 @@ export default {
       }
     },
   },
+  created(){
+    console.log(this.data);
+  }
 }
 </script>
 

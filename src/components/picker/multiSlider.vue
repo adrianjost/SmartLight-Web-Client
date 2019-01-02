@@ -7,15 +7,15 @@
     <GlobalEvents
       @mousemove="move"
       @touchmove="move"
-      @mouseup.prevent="end"
-      @touchend.prevent="end"
+      @mouseup="end"
+      @touchend="end"
     />
     <div class="markers" ref="markers">
       <div
         v-for="(marker, index) in markers"
         :key="index"
         :style="{ left: marker.position + '%', background: marker.color }"
-        :class="{marker: true, active: marker.active}"
+        :class="{ marker: true, active: marker.active }"
         :data-index="index"
         tabindex="0"
       ></div>
@@ -36,8 +36,8 @@ export default {
       type: Array,
       default: function () {
         return [
-          {position: 0, color: "#0f419f"},
-          {position: 100, color: "#659fff"}
+          {position: 0, color: "#c8ff00"},
+          {position: 100, color: "#ff00bb"}
         ]
       },
       validator: function (value) {
@@ -56,6 +56,7 @@ export default {
   },
   created(){
     this.importGradient(this.gradient);
+    this.$emit("update:gradient", this.markers);
   },
   mounted(){
     const boundingBox = this.$refs.markers.getBoundingClientRect();
@@ -63,28 +64,19 @@ export default {
     this.$options.animation.maxX = boundingBox.right;
   },
   methods: {
-    emit(){
-      this.$emit("update:gradient", this.markers.map((marker) => { return {
-        position: marker.position,
-        color: marker.color
-      }}));
-    },
     importGradient(to){
-      this.markers = to.map(marker => {
-        if( marker.position == 0 || marker.position == 100 ){ marker.fixed = true; }
-        return marker;
-      })
+      if(to.length == 0){ return }
+      to.sort((a, b) => { return a.position - b.position; })
+      to[0].fixed = true;
+      to[to.length - 1].fixed = true;
+
+      this.markers = to
       if(!this.hasActiveMarker()){
         this.makeActive(0);
       }
     },
     updateColor(color){
-      this.markers = this.markers.map((marker) => {
-        if(marker.active){
-          marker.color = color;
-        }
-        return marker;
-      })
+      this.markers[this.activeIndex].color = color;
     },
     hasActiveMarker(){
       return this.markers.some((marker) => { return marker.active});
@@ -92,11 +84,14 @@ export default {
     makeActive(index){
       this.markers = this.markers.map((marker, markerIndex) => {
         marker.active = index == markerIndex;
+        if(marker.active){
+          this.$emit("update:color", marker.color);
+        }
         return marker;
-      })
+      });
     },
     cleanupMarkers(){
-      const activePosition = (this.markers.find((marker) => { return marker.active}) || {} ).position;
+      const activePosition = this.markers[this.activeIndex].position;
 
       this.markers = this.markers
         .sort((a, b) => { return a.position - b.position; })
@@ -104,8 +99,10 @@ export default {
 
       if(!this.hasActiveMarker()){
         const newActiveIndex = this.markers.findIndex((marker) => { return marker.position == activePosition });
-        this.markers[newActiveIndex || 0].active = true;
+        this.makeActive(newActiveIndex || 0)
       }
+
+      this.$emit("update:gradient", this.markers);
     },
     _getEventPosition(event){
       return event.x || event.changedTouches[0].clientX;
@@ -118,27 +115,24 @@ export default {
     },
     addMarker(event){
       if(!event.target.classList.contains("multi-slider")){ return; }
-
-      this.markers = this.markers.map((marker) => {
-        marker.active = false;
-        return marker;
-      })
-      this.markers.push({
+      event.preventDefault();
+      const newMarkerLength = this.markers.push({
         position: this.getRelativeEventPosition(event),
-        color: "#fff",
-        active: true
+        color: this.markers[this.activeIndex].color
       });
+      this.makeActive(newMarkerLength - 1);
       this.cleanupMarkers();
     },
     start(event){
       if(this.$options.animation.index || !event.target.classList.contains("marker")){ return; }
-
+      event.preventDefault();
       const markerIndex = event.target.dataset.index;
       this.makeActive(markerIndex);
       this.$options.animation.index = markerIndex;
       if(this.markers[markerIndex].fixed){ return; }
     },
     move(event){
+      event.preventDefault();
       if(!this.$options.animation.index || this.markers[this.$options.animation.index].fixed || this.$options.animation.animationFrame){ return; }
 
       this.$options.animation.animationFrame = window.requestAnimationFrame(() => {
@@ -150,6 +144,7 @@ export default {
       if(!this.$options.animation.index){
         return this.addMarker(event);
       }
+      event.preventDefault();
       const markerIndex = this.$options.animation.index;
       this.$options.animation.index = undefined;
 
@@ -167,10 +162,14 @@ export default {
       const sortedMarkers = this.markers.slice(0).sort((a, b) => { return a.position - b.position; });
       return `linear-gradient(90deg,${sortedMarkers.map((marker) => { return `${marker.color} ${marker.position}%`}).join(',')})`;
     },
+    activeIndex(){
+      return this.markers.findIndex((marker) => { return marker.active });
+    }
   },
   watch: {
     "gradient": {
-      handler: function(to){
+      handler: function(to, from){
+        if(to === from){ return; }
         this.importGradient(to);
       },
       deep: true

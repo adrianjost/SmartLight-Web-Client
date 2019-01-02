@@ -41,6 +41,7 @@ export default {
       connection.send(JSON.stringify(message));
     },
     send({hostname, ip}, message){
+      // TODO implement timeout
       const url = hostname || ip;
       if(!url){
         return new Error("hostname/ip missing");
@@ -64,16 +65,17 @@ export default {
             return this.send({ip}, message);
           }
 
+          /*
           this.$toasted.show(`<span class="toast-container">connection to Lamp failed</span>`, {
             icon: "sync_problem",
             action : {
               text : 'CLOSE',
               onClick : (e, toastObject) => {
-                this.restoreState(deletedColor);
                 toastObject.goAway(0);
               }
             },
           });
+          */
           this.closeConnection({ip});
         };
       }
@@ -94,6 +96,7 @@ export default {
       this.send({hostname, ip}, {color: newColor})
     },
     sendGradient({hostname, ip}, gradient) {
+      gradient = JSON.parse(JSON.stringify(gradient));
       gradient.colors = gradient.colors.map(hexColor => this.hex2rgb(hexColor));
       this.send({hostname, ip}, gradient)
     },

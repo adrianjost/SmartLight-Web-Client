@@ -1,3 +1,8 @@
+function componentToHex(color) {
+  var hex = color.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
 export default {
   methods: {
     textColor(backgroundHexColor){
@@ -16,5 +21,8 @@ export default {
       const b = bigint & 255;
       return {"r":r,"g":g,"b":b}
     },
+    rgb2hex({ r, g, b }) {
+        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+    }
   },
 };

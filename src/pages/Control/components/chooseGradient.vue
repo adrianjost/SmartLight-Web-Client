@@ -5,12 +5,22 @@
         event="loadGradient"
         @loadGradient="loadGradient"
         addEvent="addGradient"
-        @addGradient="saveState"
+        @addGradient="saveGradient"
         contextEvent="deleteState"
         @deleteState="deleteState"
       />
+
+      <div class="inputs">
+        <input id="gradient-name" class="input" type="text" v-model="name" placeholder="gradient-name">
+        <div class="input inputs duration">
+          <input id="minutes" class="input" type="number" v-model="minutes" placeholder="5"><label for="minutes">min</label>
+          <input id="seconds" class="input" type="number" v-model="seconds" placeholder="0"><label for="seconds">s</label>
+        </div>
+      </div>
+
       <multi-slider
-        :color="currentColor"
+        :color.sync="currentColor"
+        :gradient.sync="relativeGradient"
       />
       <color-picker
         class="color-picker"
@@ -30,8 +40,6 @@ import savedStatePicker from "@/components/picker/savedStatePicker"
 import colorPicker from "@/components/picker/colorPicker"
 import multiSlider from "@/components/picker/multiSlider"
 
-import { EventBus } from '@/helpers/event-bus.js';
-
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js"
 import localAPI from "@/mixins/localAPI.js"
 
@@ -42,47 +50,65 @@ export default {
     colorPicker,
     multiSlider
   },
-  mixins: [undoableStateDelete("colors"), localAPI],
+  mixins: [undoableStateDelete("gradients"), localAPI],
   props: ["lamp"],
   data(){
     return {
       currentColor: "#ffffff",
+      relativeGradient: undefined,
+      name: "",
+      minutes: undefined,
+      seconds: undefined
     }
   },
   created(){
     this.$eventHub.$on('apply', this.apply);
-    /*if((this.lamp.state || {}).gradient){
-      this.currentColor = this.lamp.state.gradient.colors[0];
-    }*/
+    this.loadGradient((this.lamp.state || {}).gradient);
   },
   beforeDestroy(){
-    this.$eventHub.$off('apply');
+    this.$eventHub.$off('apply', this.apply);
     this.closeConnection(this.lamp);
   },
   methods: {
     loadGradient(id){
-      /* // TODO
-      this.currentColor = this.gradients.find((state) => {
-        return state.id === id;
-      });
-      */
-    },
-    saveState(){
-      // TODO prevent saving the last gradient again
-      //if((this.colors[this.colors.length - 1]||{}).color === this.currentColor){ return }
+      let gradient;
+      if(typeof id == "object"){
+        console.log("import object", id);
+        gradient = id;
+      }else{
+        gradient = this.gradients.find(state => state.id === id);
+      }
+      if(!gradient){ return; }
 
-      this.$store.commit("savedStates/add", {
-        data: {
-          type: "gradient",
-          // TODO add data
+      this.name = gradient.name;
+      const duration = gradient.transitionTimes[gradient.transitionTimes.length - 1] / 1000; // / 100 to convert into seconds
+      this.minutes = Math.floor(duration / 60);
+      this.seconds = duration - (this.minutes * 60);
+      this.relativeGradient = gradient.colors.map((color, index) => {
+        return {
+          position: Math.round(gradient.transitionTimes[index] / this.duration / 10), // / 10 to convert into %
+          color: color
         }
-      })
+      });
+    },
+    saveGradient(){
+      if(!this.name || !this.duration){
+        return this.error(`You need to specify a ${this.name?"duration":"name"}!`);
+      }
+      if(this.gradients.some(gradient => gradient.name == this.name)){
+        return this.error("Gradient names must be unqiue.");
+      }
+      this.$store.commit("savedStates/add", {
+        data: this.currentGradient
+      });
     },
     apply(){
+      console.log("apply Gradient", this.currentGradient);
+      this.sendGradient(this.lamp, this.currentGradient);
       this.$store.commit("lamps/setState", {
         id: this.lamp.id,
         data: {
-          gradient: this.currentColor
+          gradient: this.currentGradient
         }
       });
     }
@@ -99,6 +125,34 @@ export default {
     states() {
       return this.$store.getters["savedStates/list"];
     },
+    currentGradient(){
+      if(!this.relativeGradient){ return; }
+      return {
+        type: "gradient",
+        name: this.name || "",
+        colors: this.relativeGradient.map(marker => marker.color) || [],
+        transitionTimes: this.relativeGradient.map(marker => Math.round(marker.position * this.duration * 10)) || [], // * 10 to convert to ms
+        loop: true,
+      }
+    },
+    duration(){
+      return ((this.minutes || 0) * 60) + (this.seconds || 0);
+    }
   }
 }
 </script>
+<style lang="scss" scoped>
+.inputs{
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 0 2px;
+  .input{
+    margin: 0 2px;
+  }
+}
+.duration input{
+  text-align: right;
+}
+</style>

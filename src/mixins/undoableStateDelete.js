@@ -4,8 +4,8 @@ export const undoableStateDelete = (listName) => {
       deleteState(id) {
         const identify = (state)=>{return state.id === id;};
 
-        navigator.vibrate(50);
-        const deletedColor = {
+        window.navigator.vibrate(50);
+        const deletedState = {
           index: this.states.findIndex(identify),
           data: this.states.find(identify)
         }
@@ -15,7 +15,7 @@ export const undoableStateDelete = (listName) => {
           action : {
             text : 'UNDO',
             onClick : (e, toastObject) => {
-              this.restoreState(deletedColor);
+              this.restoreState(deletedState);
               toastObject.goAway(0);
             }
           },

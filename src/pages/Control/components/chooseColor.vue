@@ -26,8 +26,6 @@
 import savedStatePicker from "@/components/picker/savedStatePicker"
 import colorPicker from "@/components/picker/colorPicker"
 
-import { EventBus } from '@/helpers/event-bus.js';
-
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js"
 import localAPI from "@/mixins/localAPI.js"
 
@@ -46,12 +44,13 @@ export default {
   },
   created(){
     this.$eventHub.$on('apply', this.apply);
+    this.$on('apply', this.apply);
     if((this.lamp.state || {}).color){
       this.currentColor = this.lamp.state.color;
     }
   },
   beforeDestroy(){
-    this.$eventHub.$off('apply');
+    this.$eventHub.$off('apply', this.apply);
     this.closeConnection(this.lamp);
   },
   methods: {
@@ -62,16 +61,20 @@ export default {
     },
     saveState(){
       // prevent saving the last color again
-      if((this.colors[this.colors.length - 1]||{}).color === this.currentColor){ return }
+      if((this.colors[this.colors.length - 1]||{}).color === this.currentColor){
+        return this.error("Color is already saved.");
+      }
 
       this.$store.commit("savedStates/add", {
         data: {
           type: "color",
           color: this.currentColor
         }
-      })
+      });
     },
     apply(){
+      console.log("apply Color", this.currentColor);
+      this.sendHexColor(this.lamp, this.currentColor);
       this.$store.commit("lamps/setState", {
         id: this.lamp.id,
         data: {

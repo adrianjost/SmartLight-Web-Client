@@ -30,9 +30,31 @@ export default {
       payload: UIStateDefault.bottomNav(0)
     });
   },
+  methods:{
+    addBackground(lamp){
+      if(!lamp.state){return lamp;}
+      if(lamp.state.color){
+        lamp.background = lamp.state.color;
+      }
+      if(lamp.state.gradient){
+        lamp.background = "conic-gradient("
+        const maxTime = lamp.state.gradient.transitionTimes[lamp.state.gradient.transitionTimes.length - 1];
+        lamp.state.gradient.colors.forEach((color, index) => {
+          lamp.background += `${color} ${lamp.state.gradient.transitionTimes[index] / maxTime * 100}%`;
+          if(index < lamp.state.gradient.colors.length - 1){
+            lamp.background += ", "
+          }
+        })
+        lamp.background += `)`
+        console.log(lamp.background);
+        //lamp.background = lamp.state.gradient.colors[0];
+      }
+      return lamp;
+    }
+  },
   computed: {
     lamps() {
-      return this.$store.getters["lamps/list"];
+      return this.$store.getters["lamps/list"].map(lamp => this.addBackground(lamp));
     }
   }
 };
