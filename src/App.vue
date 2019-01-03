@@ -39,7 +39,11 @@ export default {
   data(){
     return {
       showBottomNav: undefined,
+      windowCircumference: 0
     }
+  },
+  mounted(){
+    this.windowCircumference = window.innerWidth + window.innerHeight;
   },
   methods: {
     handleAction(event){
@@ -47,17 +51,16 @@ export default {
     },
     resize(event){
       // hide BottomNav when onscreen keyboard opens (mobile devices)
-      // only tested on android, shouldn't do anything on iOS :(
+      // only tested on android
       // TODO: fix this hack.
-      if(document.activeElement.tagName == "INPUT"){
-        if(this.showBottomNav === undefined){
-          this.showBottomNav = this.bottomNavState.visible;
-          this.$store.commit("ui/visible", {
-            component: "bottomNav",
-            visible: false
-          });
-        }
-      }else if(this.showBottomNav !== undefined){
+      console.log(window.innerWidth + window.innerHeight, window.outerWidth + window.outerHeight);
+      if(document.activeElement.tagName == "INPUT" && this.showBottomNav === undefined){
+        this.showBottomNav = this.bottomNavState.visible;
+        this.$store.commit("ui/visible", {
+          component: "bottomNav",
+          visible: false
+        });
+      }else if(this.showBottomNav !== undefined && (window.innerWidth + window.innerHeight) == this.windowCircumference){
         this.$store.commit("ui/visible", {
           component: "bottomNav",
           visible: this.showBottomNav

@@ -1,4 +1,8 @@
 # SmartLight Web
+[![Active Contributors](https://api.gitential.com/accounts/1294/projects/1473/badges/active-contributors.svg)](https://gitential.com/accounts/1294/projects/1473/share?uuid=923d642f-dd80-4b4e-9d58-cb42f7242231&utm_source=shield&utm_medium=shield&utm_campaign=1473)
+[![Code Volume](https://api.gitential.com/accounts/1294/projects/1473/badges/code-volume.svg)](https://gitential.com/accounts/1294/projects/1473/share?uuid=923d642f-dd80-4b4e-9d58-cb42f7242231&utm_source=shield&utm_medium=shield&utm_campaign=1473)
+[![Coding Hours](https://api.gitential.com/accounts/1294/projects/1473/badges/coding-hours.svg)](https://gitential.com/accounts/1294/projects/1473/share?uuid=923d642f-dd80-4b4e-9d58-cb42f7242231&utm_source=shield&utm_medium=shield&utm_campaign=1473)
+
 **master status:**
 [![Build Status](https://travis-ci.com/adrianjost/SmartLight-Firebase.svg?branch=master)](https://travis-ci.com/adrianjost/SmartLight-Firebase)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e0203f63985c42c191b6e4411bd8f4da)](https://www.codacy.com/app/adrianjost/SmartLight-Firebase?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adrianjost/SmartLight-Firebase&amp;utm_campaign=Badge_Grade)
