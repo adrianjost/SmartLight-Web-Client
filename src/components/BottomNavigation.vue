@@ -102,7 +102,7 @@ export default {
     radial-gradient(circle at top right, transparent $circle-radius, var(--color-overlay) 0) top left,
     radial-gradient(circle at top left, transparent $circle-radius, var(--color-overlay) 0) top right;
 
-  background-size: 50.001% 100%; // the .001% fixes the gap between both gradients (seems like a chrome rendering bug)
+  background-size: 50.01% 100%; // the .01% fixes the gap between both gradients (seems like a chrome rendering bug)
   background-repeat: no-repeat;
 
   user-select: none;

@@ -91,12 +91,6 @@ export default {
 <style lang="scss">
 @import "./styles/base";
 main.container {
-  padding-top: 56px;
-}
-@media screen and (max-width: 600px) {
-  main.container{
-    padding-left: 16px;
-    padding-right: 16px;
-  }
+  padding: 0 16px;
 }
 </style>
