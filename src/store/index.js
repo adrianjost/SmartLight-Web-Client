@@ -19,14 +19,15 @@ const config = [
       .equalTo("IcAd2hRhBoRs5WTORWTTCSaRSvy2");
     },
     mutation: "units/setList",
-    direction: "down"
+    direction: "down",
+    once: true
   }
 ]
 
 export default new Vuex.Store({
   plugins: [
     createPersistedState(),
-    firebaseSync(config),
+    //firebaseSync(config),
     firebaseAuth()
   ],
   modules: {

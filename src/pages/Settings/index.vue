@@ -3,10 +3,12 @@
     <h2>Lamps:</h2>
     <control-unit-list
       :control-units="lamps"
+      add-url="/settings/add/lamp"
     />
     <h2>Groups:</h2>
     <control-unit-list
       :control-units="groups"
+      add-url="/settings/add/group"
     />
   </div>
 </template>
