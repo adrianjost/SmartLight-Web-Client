@@ -19,8 +19,7 @@ const config = [
       .equalTo("IcAd2hRhBoRs5WTORWTTCSaRSvy2");
     },
     mutation: "units/setList",
-    direction: "down",
-    once: true
+    direction: "down"
   }
 ]
 

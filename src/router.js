@@ -3,7 +3,8 @@ import VueRouter from 'vue-router';
 import Login from './pages/Login.vue';
 import ControlOverview from './pages/Control/index.vue';
 import Control from './pages/Control/id.vue';
-import Settings from './pages/Settings/index.vue';
+import SettingsOverview from './pages/Settings/index.vue';
+import Settings from './pages/Settings/id.vue';
 
 import store from './store'
 
@@ -14,7 +15,7 @@ const router = new VueRouter({
     { path: '/control/:id', component: Control },
     { path: '/control', component: ControlOverview },
     { path: '/settings/:id', component: Settings },
-    { path: '/settings', component: Settings },
+    { path: '/settings', component: SettingsOverview },
     { path: '/*', redirect: '/control' },
   ]
 });
