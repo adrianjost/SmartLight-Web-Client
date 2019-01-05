@@ -33,12 +33,12 @@ export default {
       });
     }
   },
+  /*
   computed: {
-    lamps () {
-      return this.$store.getters["lamps/list"];
+    units () {
+      return this.$store.getters["units/list"];
     }
   },
-  /*
   watch: {
     lamps: {
       handler: this.updateLamps,

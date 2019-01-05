@@ -9,7 +9,7 @@
         ".write": "$userId === auth.uid"
       }
     },
-    "lamps": {
+    "units": {
       ".read": "auth.uid != null && query.orderByChild == 'creatorId' && query.equalTo == auth.uid", // restrict access to creator
       ".indexOn": "creatorId",
       "$index": {
@@ -23,19 +23,9 @@
         }
       }
     },
-    "groups": {
-      "$groupId": {
-        ".read": "data.child('creatorId').val() === auth.uid",
-        ".write": "!data.exists() || data.child('creatorId').val() === auth.uid",
-        ".validate": "newData.child('creatorId').val() === auth.uid",
-        "state" : {
-          "color": {
-            ".validate": "newData.val().matches(/^#[A-Fa-f0-9]{6}$/)"
-          }
-        }
-      }
-    },
     "states": {
+      ".read": "auth.uid != null && query.orderByChild == 'creatorId' && query.equalTo == auth.uid", // restrict access to creator
+      ".indexOn": "creatorId",
       "$index": {
         ".read": "data.child('creatorId').val() === auth.uid",
         ".write": "!data.exists() || data.child('creatorId').val() === auth.uid",

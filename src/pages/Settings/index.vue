@@ -1,20 +1,26 @@
 <template>
-<div>
-  <h2>Lamps:</h2>
-  <control-unit-list
-    :control-units="lamps"
-  />
-</div>
+  <div>
+    <h2>Lamps:</h2>
+    <control-unit-list
+      :control-units="lamps"
+    />
+    <h2>Groups:</h2>
+    <control-unit-list
+      :control-units="groups"
+    />
+  </div>
 </template>
 
 <script>
 import controlUnitList from '@/components/controlUnitList.vue';
 import { UIStateDefault } from '@/helpers/ui-states.js';
+import unitBackground from '@/mixins/unitBackground.js';
 
 export default {
   components: {
     controlUnitList
   },
+  mixins: [unitBackground],
   created(){
     this.$store.commit("ui/set", {
       component: "appBarTop",
@@ -30,7 +36,10 @@ export default {
       return this.$store.getters["user/get"];
     },
     lamps() {
-      return this.$store.getters["lamps/list"];
+      return this.$store.getters["units/list-lamps"].map(lamp => this.addBackground(lamp, { linear: true }));
+    },
+    groups() {
+      return this.$store.getters["units/list-groups"].map(group => this.addBackground(group, { linear: true }));
     }
   }
 };

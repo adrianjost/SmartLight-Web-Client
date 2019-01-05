@@ -1,13 +1,20 @@
 const state = {
   states: [
+    /*
     {
-      id: "blablagrad",
+      id: "unique id (unique per user)",
+      type: "color",
+      color: #ff00bb
+    },
+    {
+      id: "unique id (unique per user)",
       type: "gradient",
       name: "rainbow",
       colors: ["#ff0000", "#0000ff", "#00ff00", "#ff0000"],
       transitionTimes: [0, 3, 4, 10],
       loop: true
     }
+    */
   ]
 };
 

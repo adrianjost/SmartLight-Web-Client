@@ -13,11 +13,11 @@
     </div>
     <choose-color
       v-if="activeTab == 'Color'"
-      :lamp="lamp"
+      :lamp="unit"
     />
     <choose-gradient
       v-if="activeTab == 'Gradient'"
-      :lamp="lamp"
+      :lamp="unit"
     />
   </section>
 </template>
@@ -43,7 +43,7 @@ export default {
   created(){
     this.$store.commit("ui/set", {
       component: "appBarTop",
-      payload: Object.assign(UIStateNestedDefault.appBarTop(this.lamp.name), {
+      payload: Object.assign(UIStateNestedDefault.appBarTop(this.unit.name), {
         back_action: {
           to: "/control",
           icon: "arrow_back"
@@ -51,7 +51,7 @@ export default {
         actions: [
           {
             icon: "edit",
-            to: `/settings/${this.lamp.id}`
+            to: `/settings/${this.unit.id}`
           }
         ]
       })
@@ -79,8 +79,8 @@ export default {
     },
   },
   computed: {
-    lamp () {
-      return this.$store.getters["lamps/get"](this.$route.params.id);
+    unit () {
+      return this.$store.getters["units/get"](this.$route.params.id);
     },
   }
 };

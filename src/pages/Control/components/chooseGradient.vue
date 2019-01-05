@@ -51,7 +51,7 @@ export default {
     multiSlider
   },
   mixins: [undoableStateDelete("gradients"), localAPI],
-  props: ["lamp"],
+  props: ["unit"],
   data(){
     return {
       currentColor: "#ffffff",
@@ -63,17 +63,16 @@ export default {
   },
   created(){
     this.$eventHub.$on('apply', this.apply);
-    this.loadGradient((this.lamp.state || {}).gradient);
+    this.loadGradient((this.unit.state || {}).gradient);
   },
   beforeDestroy(){
     this.$eventHub.$off('apply', this.apply);
-    this.closeConnection(this.lamp);
+    this.closeConnection(this.unit);
   },
   methods: {
     loadGradient(id){
       let gradient;
       if(typeof id == "object"){
-        console.log("import object", id);
         gradient = id;
       }else{
         gradient = this.gradients.find(state => state.id === id);
@@ -104,9 +103,9 @@ export default {
     },
     apply(){
       console.log("apply Gradient", this.currentGradient);
-      this.sendGradient(this.lamp, this.currentGradient);
-      this.$store.commit("lamps/setState", {
-        id: this.lamp.id,
+      this.sendGradient(this.unit, this.currentGradient);
+      this.$store.commit("units/setState", {
+        id: this.unit.id,
         data: {
           gradient: this.currentGradient
         }
@@ -115,7 +114,7 @@ export default {
   },
   watch: {
     currentColor: function(to){
-      this.sendHexColor(this.lamp, to);
+      this.sendHexColor(this.unit, to);
     },
   },
   computed: {

@@ -34,7 +34,7 @@ export default {
   // mixins: [ hub ], // TODO: fix hub
   computed: {
     lamps () {
-      return this.$store.getters["lamps/list"];
+      return this.$store.getters["units/list-lamps"];
     },
   }
 };

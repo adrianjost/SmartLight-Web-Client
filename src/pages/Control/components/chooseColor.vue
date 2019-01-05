@@ -36,7 +36,7 @@ export default {
     colorPicker,
   },
   mixins: [undoableStateDelete("colors"), localAPI],
-  props: ["lamp"],
+  props: ["unit"],
   data(){
     return {
       currentColor: "#ffffff",
@@ -45,13 +45,13 @@ export default {
   created(){
     this.$eventHub.$on('apply', this.apply);
     this.$on('apply', this.apply);
-    if((this.lamp.state || {}).color){
-      this.currentColor = this.lamp.state.color;
+    if((this.unit.state || {}).color){
+      this.currentColor = this.unit.state.color;
     }
   },
   beforeDestroy(){
     this.$eventHub.$off('apply', this.apply);
-    this.closeConnection(this.lamp);
+    this.closeConnection(this.unit);
   },
   methods: {
     loadColor(id){
@@ -74,9 +74,9 @@ export default {
     },
     apply(){
       console.log("apply Color", this.currentColor);
-      this.sendHexColor(this.lamp, this.currentColor);
-      this.$store.commit("lamps/setState", {
-        id: this.lamp.id,
+      this.sendHexColor(this.unit, this.currentColor);
+      this.$store.commit("units/setState", {
+        id: this.unit.id,
         data: {
           color: this.currentColor
         }
@@ -85,7 +85,7 @@ export default {
   },
   watch: {
     currentColor: function(to){
-      this.sendHexColor(this.lamp, to);
+      this.sendHexColor(this.unit, to);
     },
   },
   computed: {

@@ -182,7 +182,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$height: 24px;
+$height: 32px;
 $borderWidth: 2px;
 $activeScaleFactor: 1.5;
 
