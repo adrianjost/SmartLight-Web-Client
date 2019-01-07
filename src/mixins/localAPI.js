@@ -10,7 +10,8 @@ export default {
   methods: {
     _send(connection, message){
       // gradient testing
-      /*message = {
+      /*
+      message = {
         gradient: {
           colors: [
             {
@@ -39,10 +40,18 @@ export default {
         }
       }*/
       connection.send(JSON.stringify(message));
+      //connection.send("J"+JSON.stringify(message.color));
     },
     send({hostname, ip}, message){
       // TODO implement timeout
-      const url = hostname || ip;
+      let url;
+      if(this.connections[hostname]){
+        url = hostname;this.connections[hostname]
+      }else if(this.connections[ip]){
+        url = ip;
+      }else{
+        url = hostname || ip;
+      }
       if(!url){
         return new Error("hostname/ip missing");
       }
@@ -98,7 +107,8 @@ export default {
     sendGradient({hostname, ip}, gradient) {
       gradient = JSON.parse(JSON.stringify(gradient));
       gradient.colors = gradient.colors.map(hexColor => this.hex2rgb(hexColor));
-      this.send({hostname, ip}, gradient)
+      gradient.transitionTimes = gradient.transitionTimes.map(time => Math.round(time/1000));
+      this.send({hostname, ip}, {gradient: gradient})
     },
   }
 };

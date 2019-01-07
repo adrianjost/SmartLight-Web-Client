@@ -1,10 +1,10 @@
 <template>
   <div>
     <label>
-      <span :class="{label: true, active: (value && value !== 0) || this.focus}">{{label}}</span>
+      <span :class="{label: true, active: (value && value !== 0)}">{{label}}</span>
       <input
         :type="type"
-        v-model="value"
+        :value="value"
         :placeholder="placeholder"
         @input="update"
         :required="required"
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "input",
+  name: "SLInput",
   props: {
     value: {
       required: true
@@ -26,6 +26,10 @@ export default {
       default: ''
     },
     type: {
+      type: String,
+      default: "text"
+    },
+    placeholder: {
       type: String,
       default: "text"
     },
