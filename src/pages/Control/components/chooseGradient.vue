@@ -102,7 +102,6 @@ export default {
       });
     },
     apply(){
-      console.log("apply Gradient", this.currentGradient);
       this.sendGradient(this.unit, this.currentGradient);
       this.$store.commit("units/setState", {
         id: this.unit.id,
@@ -135,7 +134,7 @@ export default {
       }
     },
     duration(){
-      return ((this.minutes || 0) * 60) + (this.seconds || 0);
+      return parseInt(((this.minutes || 0) * 60) + (this.seconds || 0), 10);
     }
   }
 }

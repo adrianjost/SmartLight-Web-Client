@@ -53,7 +53,6 @@ export default {
       // hide BottomNav when onscreen keyboard opens (mobile devices)
       // only tested on android
       // TODO: fix this hack.
-      console.log(window.innerWidth + window.innerHeight, window.outerWidth + window.outerHeight);
       if(document.activeElement.tagName == "INPUT" && this.showBottomNav === undefined){
         this.showBottomNav = this.bottomNavState.visible;
         this.$store.commit("ui/visible", {

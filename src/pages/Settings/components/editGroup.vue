@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <label for="group-name">Name:</label>
-    <input id="group-name" class="input" type="text" placeholder="name" v-model="value.name">
+  <form>
+    <h2>Edit Group "{{value.name}}"</h2>
+
+    <SLInput label="Name" type="text" placeholder="Kitchen" v-model="value.name" />
+
+    <SLInput label="Tags" type="url" placeholder="Mixer, Oven, ..." v-model="value.tags" hint="seperated by <code>,</code>"/>
 
     <lampPicker
       :lamps="lamps"
@@ -9,13 +12,16 @@
     />
 
     <p>TODO: icon-picker</p>
-  </div>
+  </form>
 </template>
 
 <script>
+import Input from "@/components/picker/input"
 import lampPicker from "@/components/picker/lampPicker.vue"
+
 export default {
   components: {
+    SLInput: Input,
     lampPicker
   },
   props: ["value"],
@@ -28,5 +34,8 @@ export default {
 </script>
 
 <style scoped>
-
+form{
+  max-width: 300px;
+  margin: 0 auto;
+}
 </style>

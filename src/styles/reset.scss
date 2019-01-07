@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6{
 	padding: .4em 0 .25em;
 }
 
-input, select, button{
+input, textarea, select, button{
 	font: inherit;
 }
 
@@ -24,4 +24,8 @@ button{
 	background: transparent;
 	margin: 0;
 	padding: 0;
+}
+
+code{
+	font-style: italic;
 }

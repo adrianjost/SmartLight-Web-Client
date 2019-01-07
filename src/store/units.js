@@ -24,6 +24,7 @@ function getIndex(list, unitId){
 const mutations = {
   // TODO fix parameter handling in all mutations
   set(state, { data: {unitId, newData}}) {
+    if(!unitId || !newData){ return; }
     state.units[getIndex(state.units, unitId)] = newData;
   },
   setList(state, { data }){
@@ -31,6 +32,10 @@ const mutations = {
   },
   setState(state, { id, data}) {
     state.units[getIndex(state.units, id)].state = data;
+  },
+  delete(state, { data: {id}}) {
+    if(!id){ return; }
+    state.units.slice(getIndex(state.units, unitId), 1);
   },
 };
 

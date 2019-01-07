@@ -1,36 +1,34 @@
 <template>
-  <div>
-    <label for="group-name">Name:</label>
-    <input id="group-name" class="input" type="text" placeholder="name" v-model="value.name"><br />
+  <form>
+    <h2>Edit Lamp "{{value.name}}"</h2>
 
-    <label for="group-name">Hostname:</label>
-    <input id="group-name" class="input" type="text" placeholder="name" v-model="value.hostname"><br />
+    <SLInput label="Name" type="text" placeholder="Kitchen" v-model="value.name" />
 
-    <label for="group-name">IP:</label>
-    <input id="group-name" class="input" type="text" placeholder="name" v-model="value.ip"><br />
+    <SLInput label="Hostname" type="text" placeholder="smartlight-kitchen" v-model="value.hostname" />
 
+    <SLInput label="IP" type="url" placeholder="192.168.2.123" v-model="value.ip" />
+
+    <SLInput label="Tags" type="url" placeholder="Mixer, Oven, ..." v-model="value.tags" hint="seperated by <code>,</code>"/>
 
     <p>TODO: icon-picker</p>
-  </div>
+  </form>
 </template>
 
 <script>
-import lampPicker from "@/components/picker/lampPicker.vue"
+
+import Input from "@/components/picker/input"
+
 export default {
   components: {
-    lampPicker
+    SLInput: Input
   },
   props: ["value"],
-  computed: {
-    lamps() {
-      return this.$store.getters["units/list-lamps"];
-    }
-  }
 }
 </script>
 
 <style scoped>
-input:before{
-  content: "\a"
+form{
+  max-width: 300px;
+  margin: 0 auto;
 }
 </style>

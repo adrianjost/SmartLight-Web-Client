@@ -23,12 +23,17 @@ export default {
     editLamp,
     editGroup
   },
+  data(){
+    return {
+      unit: this.$store.getters["units/get"](this.$route.params.id)
+    }
+  },
   created(){
     this.$store.commit("ui/set", {
       component: "appBarTop",
       payload: Object.assign(UIStateNestedDefault.appBarTop(this.unit.name), {
         back_action: {
-          to: "/settings",
+          event: "go-back",
           icon: "arrow_back"
         },
         actions: [
@@ -50,6 +55,7 @@ export default {
     });
 
     this.$eventHub.$on('apply', this.apply);
+    this.$eventHub.$on('go-back', () => { this.$router.go(-1); });
   },
   beforeDestroy(){
     this.$eventHub.$off('apply', this.apply);
@@ -57,14 +63,12 @@ export default {
   methods: {
     apply(){
       // TODO: save new state
-      console.log("apply :id");
-      this.$router.push("/control");
+      this.$store.commit("units/set", { data: {
+        unitId: this.unit.id,
+        newData: this.unit
+      }});
+      this.$router.go(-1);
     },
   },
-  computed: {
-    unit () {
-      return this.$store.getters["units/get"](this.$route.params.id);
-    },
-  }
 };
 </script>

@@ -10,11 +10,12 @@
           <img v-if="back_action && back_action.src" :src="back_action.src" :alt="back_action.alt" class="avatar">
         </router-link>
 
-        <div v-else
-          @click="sendEvent(back_action.event)" class="navigation_back" v-ripple>
+        <button v-if="back_action.event"
+          @click="sendEvent(back_action.event)" class="navigation_back" v-ripple
+        >
           <i class="material-icons">{{back_action.icon}}</i>
-          <img :src="back_action.src" class="avatar">
-        </div>
+          <img v-if="back_action && back_action.src" :src="back_action.src" :alt="back_action.alt" class="avatar">
+        </button>
       </template>
 
 
@@ -146,7 +147,7 @@ export default {
   padding: 8px;
 }
 
-a{
+a, button{
   color: var(--color-text-active);
 }
 .navigation_back{

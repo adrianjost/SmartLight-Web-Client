@@ -67,7 +67,7 @@ export default {
 
   transition: all .2s ease-in-out;
   &:before{
-    transition: all .15s ease-in-out .15s;
+    transition: all .15s ease-in-out 0s;
     content: "check";
     position: absolute;
     display: flex;
@@ -92,12 +92,13 @@ export default {
     white-space: nowrap;
     word-wrap: normal;
     direction: ltr;
-    -webkit-font-feature-settings: 'liga';
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-feature-settings: 'liga'; // sass-lint:disable-line vendorPrefix
+    -webkit-font-smoothing: antialiased; // sass-lint:disable-line vendorPrefix
   }
   &.checked {
     background: var(--color-overlay-i);
     &:before{
+      transition-delay: .15s;
       opacity: 1;
     }
   }

@@ -13,11 +13,11 @@
     </div>
     <choose-color
       v-if="activeTab == 'Color'"
-      :lamp="unit"
+      :unit="unit"
     />
     <choose-gradient
       v-if="activeTab == 'Gradient'"
-      :lamp="unit"
+      :unit="unit"
     />
   </section>
 </template>
@@ -80,7 +80,7 @@ export default {
   },
   computed: {
     unit () {
-      return this.$store.getters["units/get"](this.$route.params.id);
+      return this.$store.getters["units/get"](this.$route.params.id) || {};
     },
   }
 };

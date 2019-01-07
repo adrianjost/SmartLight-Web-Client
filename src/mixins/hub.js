@@ -11,6 +11,7 @@ export default {
     //dbLampRef.on('child_changed', this.lampListener);
   },
   methods: {
+    /*
     lampListener(snap){
       const snapVal = snap.val();
       if(!snapVal){return false;}
@@ -31,7 +32,7 @@ export default {
           this.sendGradient(lamp.hostname, lamp.state.gradient);
         }
       });
-    }
+    }*/
   },
   /*
   computed: {
