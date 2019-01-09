@@ -7,9 +7,6 @@
 [![Build Status](https://travis-ci.com/adrianjost/SmartLight-Firebase.svg?branch=master)](https://travis-ci.com/adrianjost/SmartLight-Firebase)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e0203f63985c42c191b6e4411bd8f4da)](https://www.codacy.com/app/adrianjost/SmartLight-Firebase?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adrianjost/SmartLight-Firebase&amp;utm_campaign=Badge_Grade)
 
-**V2 status:**
-[![Build Status V2](https://travis-ci.com/adrianjost/SmartLight-Firebase.svg?branch=v2%2Fmain)](https://travis-ci.com/adrianjost/SmartLight-Firebase)
-
 This Repository contains the (Web-) UI for SmartLight as well as the Firebase hosted Backend Code.
 
 ## Build Setup
@@ -32,7 +29,6 @@ npm deploy
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-"# SmartLight-Firebase" 
 
 ## Database
 ### Schema
@@ -40,9 +36,8 @@ All Objects that are defined here will be explained in detail below. This is jus
 ```js
 {
   users: {UserObject, ...},
-  lamps: {LampObject, ...},
-  groups: {GroupObject, ...},
-  gradients: {GradientObject, ...},
+  units: {UnitObject ...},
+  states: {StateObject, ...},
 }
 ```
 
@@ -53,45 +48,68 @@ $userId: {
   apiSeret: String,
 }
 ```
+The apiSecret will be used for external API access like used for Google Home integration (via IFTTT).
 
-#### LampObject
+#### Units
+Units are Items that can be controlled. Such Items can eighter be lamps or groups of lamps.
+The base Schema is the following and will be extended for lamps/groups with a couple more key-value pairs.
 
 ```js
-$lampId: {
+$index: {
   ownerId: userId,
   //allowedUsers: [userId, ...],
 
+  type: ENUM["LAMP", "GROUP"],
+
+  id: String,
   name: String,
   icon: String,
-  ip: String,
-  hostname: String,
+
   state: { // only one child at a time allowed
     color: String, // #aabbcc
-    gradient: gradientId
+    gradient: StateObject
   }
 }
 ```
 
-#### GroupObject
-Groups are, like the name hints us, groups of lamps. If you update the current State of a Group, a database-trigger will update all lamps from the group accordingly.
-
+##### extension for lamps
 ```js
-$groupId: {
-  ownerId: userId,
-  //allowedUsers: [userId, ...],
-
-  name: String,
-  icon: String,
-  lamps: [lampId, ...]
+{
+  ...
+  ip: String,
+  hostname: String,
 }
 ```
 
-#### GradientObject
+##### extension for groups
 ```js
-$gradientId: {
+{
+  ...
+  lamps: [LampIds]
+}
+```
+
+#### StateObject
+```js
+$index: {
   ownerId: userId,
   //allowedUsers: [userId, ...],
+  type: ENUM["COLOR", "GRADIENT"]
+}
+```
 
+##### ColorObject
+```js
+{
+  ...,
+  color: String // Hex color with 6 digits + `#` Symbol (e.g. `#ab98cd`)
+}
+```
+
+##### GradientObject
+```js
+{
+  ...,
   colors: [String, ...], // [#aabbcc, ...]
   transitionTimes: [0, 3, 4, 10], // [#aabbcc, ...]
   loop: true
