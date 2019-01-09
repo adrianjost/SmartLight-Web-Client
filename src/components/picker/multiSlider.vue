@@ -59,9 +59,8 @@ export default {
     this.$emit("update:gradient", this.markers);
   },
   mounted(){
-    const boundingBox = this.$refs.markers.getBoundingClientRect();
-    this.$options.animation.minX = boundingBox.left;
-    this.$options.animation.maxX = boundingBox.right;
+    window.addEventListener('resize', this.resize);
+    this.resize();
   },
   methods: {
     importGradient(to){
@@ -91,18 +90,25 @@ export default {
       });
     },
     cleanupMarkers(){
-      const activePosition = this.markers[this.activeIndex].position;
+      // TODO update color of fixed sliders from non fixed at same position
+      let markers = this.markers.sort((a, b) => { return a.position - b.position; });
+      const activeMarker = markers.find(marker => marker.active);
+      // remove duplicate markers at start/end and replace them with currently active one
+      markers = markers.filter((marker) => {
+        return marker.position != activeMarker.position || marker.active
+      });
 
-      this.markers = this.markers
-        .sort((a, b) => { return a.position - b.position; })
-        .filter((marker) => { return !((marker.position == 0 || marker.position == 100) && !marker.fixed); });
+      // first & last marker must be fixed
+      markers[0].fixed = true;
+      markers[markers.length - 1].fixed = true;
 
-      if(!this.hasActiveMarker()){
-        const newActiveIndex = this.markers.findIndex((marker) => { return marker.position == activePosition });
-        this.makeActive(newActiveIndex || 0)
-      }
-
+      this.markers = markers;
       this.$emit("update:gradient", this.markers);
+    },
+    resize(){
+      const boundingBox = this.$refs.markers.getBoundingClientRect();
+      this.$options.animation.minX = boundingBox.left;
+      this.$options.animation.maxX = boundingBox.right;
     },
     _getEventPosition(event){
       return event.x || event.changedTouches[0].clientX;

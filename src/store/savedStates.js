@@ -55,7 +55,7 @@ function getIndex(list, id){
 }
 
 function isIdUnique(list, id){
-  if(!id){ return false};
+  if(!id){ return false };
   return list.every((item) => {
     return item.id !== id;
   })
@@ -63,7 +63,6 @@ function isIdUnique(list, id){
 
 const mutations = {
   add(state, { data, index }) {
-    // TODO inject uid
     while(!isIdUnique(state.states, data.id)){
       data.id = (new Date()).getTime().toString();
     }

@@ -70,7 +70,7 @@ export default {
         };
         connection.onerror = (e) => {
           if(hostname){ // prevent loops
-            this.closeConnection({hostname});
+            this.closeConnection(url);
             return this.send({ip}, message);
           }
 
@@ -85,20 +85,17 @@ export default {
             },
           });
           */
-          this.closeConnection({ip});
+          this.closeConnection(url);
         };
       }
     },
-    closeConnection({hostname, ip}){
-      const connectionHostname = this.connections[hostname];
-      const connectionIP = this.connections[ip];
-      const connection = connectionHostname || connectionIP;
+    closeConnection(url){
+      const connection = this.connections[url];
       if(!connection){ return; }
 
       connection.onclose = function () {}; // disable onclose handler first
       connection.close();
-      delete this.connections[hostname];
-      delete this.connections[ip];
+      delete this.connections[url];
     },
     sendHexColor({hostname, ip}, hexColor) {
       const newColor = this.hex2rgb(hexColor);
@@ -107,7 +104,7 @@ export default {
     sendGradient({hostname, ip}, gradient) {
       gradient = JSON.parse(JSON.stringify(gradient));
       gradient.colors = gradient.colors.map(hexColor => this.hex2rgb(hexColor));
-      gradient.transitionTimes = gradient.transitionTimes.map(time => Math.round(time/1000));
+      gradient.transitionTimes = gradient.transitionTimes;
       this.send({hostname, ip}, {gradient: gradient})
     },
   }

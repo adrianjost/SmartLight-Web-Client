@@ -16,6 +16,7 @@
           <input id="minutes" class="input" type="number" v-model="minutes" placeholder="5"><label for="minutes">min</label>
           <input id="seconds" class="input" type="number" v-model="seconds" placeholder="0"><label for="seconds">s</label>
         </div>
+        <toggle-button v-model="loop" :labels="{checked: 'loop', unchecked: 'loop'}"/>
       </div>
 
       <multi-slider
@@ -39,6 +40,7 @@
 import savedStatePicker from "@/components/picker/savedStatePicker"
 import colorPicker from "@/components/picker/colorPicker"
 import multiSlider from "@/components/picker/multiSlider"
+import ToggleButton from 'vue-js-toggle-button/src/Button.vue'
 
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js"
 import localAPI from "@/mixins/localAPI.js"
@@ -48,7 +50,8 @@ export default {
   components: {
     savedStatePicker,
     colorPicker,
-    multiSlider
+    multiSlider,
+    ToggleButton
   },
   mixins: [undoableStateDelete("gradients"), localAPI],
   props: ["unit"],
@@ -58,7 +61,8 @@ export default {
       relativeGradient: undefined,
       name: "",
       minutes: undefined,
-      seconds: undefined
+      seconds: undefined,
+      loop: true // TODO: add toggle for this option
     }
   },
   created(){
@@ -90,18 +94,33 @@ export default {
         }
       });
     },
+    isGradientUnqiue(gradient){
+      if(!this.name){
+        this.error(`You need to specify a name!`);
+        return false;
+      }
+      if(this.gradients.some(someGradient => someGradient.name == gradient.name)){
+        this.error("Gradient names must be unqiue.");
+        return false;
+      }
+      return true;
+    },
+    isGradientValid(gradient){
+      if(!this.duration){
+        this.error(`You need to specify a duration!`);
+        return false;
+      }
+      return true;
+    },
     saveGradient(){
-      if(!this.name || !this.duration){
-        return this.error(`You need to specify a ${this.name?"duration":"name"}!`);
-      }
-      if(this.gradients.some(gradient => gradient.name == this.name)){
-        return this.error("Gradient names must be unqiue.");
-      }
+      if(!this.isGradientUnqiue(this.currentGradient)){ return; }
+      if(!this.isGradientValid(this.currentGradient)){ return; }
       this.$store.commit("savedStates/add", {
         data: this.currentGradient
       });
     },
     apply(){
+      if(!this.isGradientValid(this.currentGradient)){ return; }
       this.sendGradient(this.unit, this.currentGradient);
       this.$store.commit("units/setState", {
         id: this.unit.id,
@@ -109,6 +128,7 @@ export default {
           gradient: this.currentGradient
         }
       });
+      this.$eventHub.$emit('applied');
     }
   },
   watch: {
@@ -130,7 +150,7 @@ export default {
         name: this.name || "",
         colors: this.relativeGradient.map(marker => marker.color) || [],
         transitionTimes: this.relativeGradient.map(marker => Math.round(marker.position * this.duration * 10)) || [], // * 10 to convert to ms
-        loop: true,
+        loop: this.loop,
       }
     },
     duration(){
@@ -147,6 +167,7 @@ export default {
   margin: 0 auto;
   padding: 0 2px;
   .input{
+    flex: 1;
     margin: 0 2px;
   }
 }

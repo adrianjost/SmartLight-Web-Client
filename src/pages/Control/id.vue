@@ -45,7 +45,7 @@ export default {
       component: "appBarTop",
       payload: Object.assign(UIStateNestedDefault.appBarTop(this.unit.name), {
         back_action: {
-          to: "/control",
+          event: "go-back",
           icon: "arrow_back"
         },
         actions: [
@@ -66,16 +66,17 @@ export default {
       })
     });
 
-    this.$eventHub.$on('apply', this.apply);
+    this.$eventHub.$on('go-back', this.goBack );
+    this.$eventHub.$on('applied', this.goBack );
   },
   beforeDestroy(){
-    this.$eventHub.$off('apply', this.apply);
+    this.$eventHub.$off('go-back', this.goBack);
+    this.$eventHub.$off('applied', this.goBack );
   },
   methods: {
-    apply(){
-      // TODO: save new state
-      console.log("apply :id");
-      this.$router.push("/control");
+    goBack(){
+      console.log("go back");
+      this.$router.go(-1);
     },
   },
   computed: {

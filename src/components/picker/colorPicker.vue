@@ -5,7 +5,6 @@
 <script>
 import iro from "@jaames/iro"
 
-var colorPicker;
 export default {
   name: "iro-color-picker",
   props: ['value', 'config'],
@@ -14,20 +13,17 @@ export default {
       id: this._uid,
     }
   },
+  colorPickerConfig: {},
+  colorPicker: undefined,
   mounted(){
     this.init();
   },
   methods: {
     init(){
       if(!this.config || this.config === {}){return}
-      let config = this.config;
-
-      if(!this.value || this.value.length > 7){ config.color = "#ffffff"}
-      else if(this.value.length === 6){ config.color = '#'+this.value}
-      else{config.color = this.value;}
-
-      colorPicker = new iro.ColorPicker('#iro-'+this.id, config);
-      colorPicker.on("color:change", this.emitColor);
+      this.$options.colorPickerConfig = this.config;
+      this.$options.colorPicker = new iro.ColorPicker('#iro-'+this.id, this.$options.colorPickerConfig);
+      this.$options.colorPicker.on("color:change", this.emitColor);
     },
     updateConfig(){
       // TODO - watch for config changes and apply them
@@ -38,8 +34,12 @@ export default {
   },
   watch: {
     value: function(to){
-      if(colorPicker && colorPicker.color && to.length <= 7){
-        colorPicker.color.hexString = to;
+      if(!to || to.length !== 7){ return; }
+
+      if((this.$options.colorPicker || {}).color){
+        this.$options.colorPicker.color.hexString = to;
+      }else{
+        this.$options.colorPickerConfig.color = to;
       }
     },
     config: function(){

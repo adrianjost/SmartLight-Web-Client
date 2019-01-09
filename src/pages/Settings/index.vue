@@ -38,10 +38,10 @@ export default {
       return this.$store.getters["user/get"];
     },
     lamps() {
-      return this.$store.getters["units/list-lamps"].map(lamp => this.addBackground(lamp, { linear: true }));
+      return this.$store.getters["units/list-lamps"].map(lamp => this.addBackground(lamp));
     },
     groups() {
-      return this.$store.getters["units/list-groups"].map(group => this.addBackground(group, { linear: true }));
+      return this.$store.getters["units/list-groups"].map(group => this.addBackground(group));
     }
   }
 };

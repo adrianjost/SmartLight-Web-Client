@@ -81,6 +81,7 @@ export default {
           color: this.currentColor
         }
       });
+      this.$eventHub.$emit('applied');
     }
   },
   watch: {
