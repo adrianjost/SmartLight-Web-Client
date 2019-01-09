@@ -106,6 +106,7 @@ export default {
       this.$emit("update:gradient", this.markers);
     },
     resize(){
+      if(!this.$refs.markers){ return; }
       const boundingBox = this.$refs.markers.getBoundingClientRect();
       this.$options.animation.minX = boundingBox.left;
       this.$options.animation.maxX = boundingBox.right;

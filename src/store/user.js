@@ -1,5 +1,6 @@
-import firebase from 'firebase';
-import vm from '../main'
+import { firebase } from '@firebase/app';
+import '@firebase/auth';
+//import vm from '../main'
 
 const state = {
   userInfo: undefined

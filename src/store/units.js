@@ -7,10 +7,10 @@ const getters = {
     return state.units;
   },
   "list-lamps": (state) => {
-    return state.units.filter(unit => unit.type === "lamp" );
+    return state.units.filter(unit => unit.type.toUpperCase() === "LAMP" );
   },
   "list-groups": (state) => {
-    return state.units.filter(unit => unit.type === "group" );
+    return state.units.filter(unit => unit.type.toUpperCase() === "GROUP" );
   },
   get: (state) => (unitId) => {
     return state.units.filter(unit => unit.id === unitId)[0];
