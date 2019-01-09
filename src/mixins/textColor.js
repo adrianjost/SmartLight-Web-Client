@@ -1,6 +1,6 @@
 function componentToHex(color) {
   var hex = color.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
+  return hex.length === 1 ? "0" + hex : hex;
 }
 
 export default {
