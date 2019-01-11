@@ -59,45 +59,45 @@ export default {
 
 <style lang="scss" scoped>
 .state-list {
-  max-width: 300px;
-  padding: 8px;
-  margin: 8px auto;
-  overflow-x: auto;
-  font-size: 0;
-  text-align: left;
-  white-space: nowrap;
-  user-select: none;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
+	max-width: 300px;
+	padding: 8px;
+	margin: 8px auto;
+	overflow-x: auto;
+	font-size: 0;
+	text-align: left;
+	white-space: nowrap;
+	user-select: none;
+	border: 1px solid var(--color-border);
+	border-radius: 4px;
 }
 
 .state {
-  position: relative;
-  display: inline-block;
-  padding: 20px;
-  margin: 0 4px;
-  color: var(--color-text-active-i);
-  list-style: none;
-  border: 1px solid var(--color-border);
-  border-radius: 50%;
+	position: relative;
+	display: inline-block;
+	padding: 20px;
+	margin: 0 4px;
+	color: var(--color-text-active-i);
+	list-style: none;
+	border: 1px solid var(--color-border);
+	border-radius: 50%;
 
-  &:first-of-type {
-    margin-left: 0;
-  }
+	&:first-of-type {
+		margin-left: 0;
+	}
 
-  &:last-of-type {
-    margin-right: 0;
-  }
+	&:last-of-type {
+		margin-right: 0;
+	}
 
-  &.add {
-    border-width: 2px;
+	&.add {
+		border-width: 2px;
 
-    .material-icons {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
+		.material-icons {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
 }
 </style>

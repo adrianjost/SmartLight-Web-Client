@@ -42,12 +42,12 @@ export default {
 
 <style lang="scss" scoped>
 .control-units {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .control-unit {
-  margin: 8px;
+	margin: 8px;
 }
 </style>

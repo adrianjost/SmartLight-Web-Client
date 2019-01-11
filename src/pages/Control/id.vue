@@ -89,40 +89,40 @@ export default {
 
 <style lang="scss" scoped>
 .control {
-  text-align: center;
+	text-align: center;
 }
 
 .tab-nav {
-  display: flex;
-  max-width: 250px;
-  margin: 16px auto;
-  font-size: 0;
-  user-select: none;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
+	display: flex;
+	max-width: 250px;
+	margin: 16px auto;
+	font-size: 0;
+	user-select: none;
+	border: 1px solid var(--color-border);
+	border-radius: 4px;
 
-  .tab {
-    display: inline-block;
-    flex: 1;
-    padding: 8px;
-    font-size: 16px;
-    line-height: 16px;
-    text-align: center;
-    cursor: pointer;
+	.tab {
+		display: inline-block;
+		flex: 1;
+		padding: 8px;
+		font-size: 16px;
+		line-height: 16px;
+		text-align: center;
+		cursor: pointer;
 
-    &.active {
-      background-color: var(--color-overlay);
-    }
-  }
+		&.active {
+			background-color: var(--color-overlay);
+		}
+	}
 }
 </style>
 <style lang="scss">
 .toast-dot {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
-  vertical-align: bottom;
-  border-radius: 50%;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 4px;
+	vertical-align: bottom;
+	border-radius: 50%;
 }
 </style>

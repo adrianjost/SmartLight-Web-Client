@@ -131,70 +131,70 @@ export default {
 
 <style lang="scss" scoped>
 .bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  width: 100%;
-  height: 56px;
-  user-select: none;
-  background: var(--color-overlay);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	height: 56px;
+	user-select: none;
+	background: var(--color-overlay);
 }
 
 .container {
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 8px;
+	display: flex;
+	flex-wrap: nowrap;
+	padding: 8px;
 }
 
 a,
 button {
-  color: var(--color-text-active);
+	color: var(--color-text-active);
 }
 
 .navigation_back {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 40px;
-  height: 40px;
-  margin-right: 8px;
-  text-decoration: none;
-  border-radius: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	height: 40px;
+	margin-right: 8px;
+	text-decoration: none;
+	border-radius: 20px;
 }
 
 .page_title {
-  flex: 1;
-  padding: 8px;
-  margin: 0;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
+	flex: 1;
+	padding: 8px;
+	margin: 0;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 20px;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
-  margin: 0 12px;
-  border-radius: 20px;
+	width: 40px;
+	height: 40px;
+	margin: 0 12px;
+	border-radius: 20px;
 
-  &:last-of-type {
-    margin-right: 0;
-  }
+	&:last-of-type {
+		margin-right: 0;
+	}
 }
 
 .action {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
-  margin: 0 4px;
-  color: var(--color-text-active);
-  cursor: pointer;
-  border-radius: 20px;
+	position: relative;
+	width: 40px;
+	height: 40px;
+	padding: 8px;
+	margin: 0 4px;
+	color: var(--color-text-active);
+	cursor: pointer;
+	border-radius: 20px;
 
-  &:last-of-type {
-    margin-right: 0;
-  }
+	&:last-of-type {
+		margin-right: 0;
+	}
 }
 </style>

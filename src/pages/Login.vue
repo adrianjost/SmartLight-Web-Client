@@ -57,18 +57,18 @@ export default {
 @import "~firebaseui/dist/firebaseui.css";
 
 .text-center {
-  text-align: center;
+	text-align: center;
 }
 
 .header {
-  font-size: 56px;
+	font-size: 56px;
 }
 
 .subheader {
-  font-size: 24px;
+	font-size: 24px;
 }
 
 #firebaseui-auth-container {
-  padding: 1em 0;
+	padding: 1em 0;
 }
 </style>

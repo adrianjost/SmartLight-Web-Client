@@ -194,29 +194,29 @@ $borderWidth: 2px;
 $activeScaleFactor: 1.5;
 
 .multi-slider {
-  max-width: 300px;
-  height: $height;
-  padding: 0 ($height / 2);
-  margin: 16px auto;
-  border-radius: $height / 2;
+	max-width: 300px;
+	height: $height;
+	padding: 0 ($height / 2);
+	margin: 16px auto;
+	border-radius: $height / 2;
 }
 
 .markers {
-  position: relative;
+	position: relative;
 }
 
 .marker {
-  position: absolute;
-  top: 0;
-  display: inline-block;
-  padding: ($height / 2) - $borderWidth;
-  margin-left: -($height / 2);
-  border: $borderWidth solid var(--color-border-i);
-  border-radius: 50%;
+	position: absolute;
+	top: 0;
+	display: inline-block;
+	padding: ($height / 2) - $borderWidth;
+	margin-left: -($height / 2);
+	border: $borderWidth solid var(--color-border-i);
+	border-radius: 50%;
 
-  &.active {
-    z-index: 2;
-    box-shadow: 0 0 0 2px var(--color-border), 0 0 0 2px var(--color-border) inset;
-  }
+	&.active {
+		z-index: 2;
+		box-shadow: 0 0 0 2px var(--color-border), 0 0 0 2px var(--color-border) inset;
+	}
 }
 </style>

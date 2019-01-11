@@ -50,59 +50,59 @@ export default {
 
 <style lang="scss" scoped>
 .lamps {
-  padding: 8px;
-  font-size: 0;
-  text-align: left;
-  user-select: none;
+	padding: 8px;
+	font-size: 0;
+	text-align: left;
+	user-select: none;
 }
 
 .lamp {
-  position: relative;
-  display: inline-block;
-  padding: 16px;
-  margin: 0 4px;
-  color: var(--color-text-active-i);
-  list-style: none;
-  border: 1px solid var(--color-border);
-  border-radius: 50%;
-  transition: all 0.2s ease-in-out;
+	position: relative;
+	display: inline-block;
+	padding: 16px;
+	margin: 0 4px;
+	color: var(--color-text-active-i);
+	list-style: none;
+	border: 1px solid var(--color-border);
+	border-radius: 50%;
+	transition: background-color .2s ease-in-out;
 
-  &::before {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 24px;
-    font-family: 'Material Icons'; /* stylelint-disable-line */
-    font-size: 16px;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    color: #fff;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    content: "check";
-    background: #34a853;
-    border-radius: 50%;
-    opacity: 0;
-    transition: all 0.15s ease-in-out 0s;
-    direction: ltr;
-    -webkit-font-feature-settings: 'liga'; // sass-lint:disable-line vendorPrefix
-    -webkit-font-smoothing: antialiased; // sass-lint:disable-line vendorPrefix
-  }
+	&::before {
+		position: absolute;
+		top: -4px;
+		right: -4px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		font-family: "Material Icons"; /* stylelint-disable-line */
+		font-size: 16px;
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1;
+		color: #fff;
+		text-transform: none;
+		letter-spacing: normal;
+		word-wrap: normal;
+		white-space: nowrap;
+		content: "check"; /* stylelint-disable-line */
+		background: #34a853;
+		border-radius: 50%;
+		opacity: 0;
+		transition: opacity .15s ease-in-out 0s;
+		direction: ltr;
+		-webkit-font-feature-settings: "liga";
+		-webkit-font-smoothing: antialiased;
+	}
 
-  &.checked {
-    background: var(--color-overlay-i);
+	&.checked {
+		background-color: var(--color-overlay-i);
 
-    &::before {
-      opacity: 1;
-      transition-delay: 0.15s;
-    }
-  }
+		&::before {
+			opacity: 1;
+			transition-delay: .15s;
+		}
+	}
 }
 </style>

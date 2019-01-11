@@ -51,6 +51,6 @@ export default {
 
 <style scoped>
 .color-picker {
-  display: inline-block;
+	display: inline-block;
 }
 </style>

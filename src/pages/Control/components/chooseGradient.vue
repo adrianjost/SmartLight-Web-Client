@@ -161,19 +161,19 @@ export default {
 </script>
 <style lang="scss" scoped>
 .inputs {
-  display: flex;
-  align-items: center;
-  max-width: 300px;
-  padding: 0 2px;
-  margin: 0 auto;
+	display: flex;
+	align-items: center;
+	max-width: 300px;
+	padding: 0 2px;
+	margin: 0 auto;
 
-  .input {
-    flex: 1;
-    margin: 0 2px;
-  }
+	.input {
+		flex: 1;
+		margin: 0 2px;
+	}
 }
 
 .duration input {
-  text-align: right;
+	text-align: right;
 }
 </style>

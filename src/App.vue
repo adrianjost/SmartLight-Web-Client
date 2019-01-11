@@ -91,6 +91,6 @@ export default {
 @import "./styles/base";
 
 main.container {
-  padding: 0 16px;
+	padding: 0 16px;
 }
 </style>

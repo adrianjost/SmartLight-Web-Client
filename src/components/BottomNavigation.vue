@@ -89,65 +89,66 @@ export default {
 
 <style lang="scss" scoped>
 .bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 9999;
-  width: 100%;
-  user-select: none;
-  background: var(--color-overlay); // fallback
-  background:
-    radial-gradient(circle at top right, transparent $circle-radius, var(--color-overlay) 0) top left,
-    radial-gradient(circle at top left, transparent $circle-radius, var(--color-overlay) 0) top right;
-  background-repeat: no-repeat;
-  background-size: 50.01% 100%; // the .01% fixes the gap between both gradients (seems like a chrome rendering bug)
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 9999;
+	width: 100%;
+	user-select: none;
+	background: var(--color-overlay); // fallback
+	background:
+		radial-gradient(circle at top right, transparent $circle-radius, var(--color-overlay) 0) top left,
+		radial-gradient(circle at top left, transparent $circle-radius, var(--color-overlay) 0) top right;
+	background-repeat: no-repeat;
+	background-size: 50.01% 100%; // the .01% fixes the gap between both gradients (seems like a chrome rendering bug)
 
-  $circle-radius: (56px + 16px) / 2;
+	$circle-radius: (56px + 16px) / 2;
 }
 
 .container {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
 }
 
 .nav-item {
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  min-width: 80px;
-  max-width: 168px;
-  height: 56px;
-  padding: 12px 8px 12px 12px;
-  font-size: 12px;
-  line-height: 12px;
-  color: var(--color-text-inactive);
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  background: transparent;
-  border: 0;
+	display: flex;
+	flex: 1;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	min-width: 80px;
+	max-width: 168px;
+	height: 56px;
+	padding: 12px 8px 12px 12px;
+	font-size: 12px; /* stylelint-disable-line */ /* following material spec */
+	line-height: 12px;
+	color: var(--color-text-inactive);
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
 
-  .material-icons {
-    width: 100%;
-  }
+	.material-icons {
+		width: 100%;
+	}
 
-  &:hover {
-    color: var(--color-text);
-  }
+	&:hover,
+	&:focus {
+		color: var(--color-text);
+	}
 
-  &.active {
-    color: var(--color-text-active);
-  }
+	&.active {
+		color: var(--color-text-active);
+	}
 }
 
 .fab-wrapper {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
+	position: absolute;
+	top: 0;
+	left: 50%;
+	z-index: 99999;
+	transform: translate(-50%, -50%);
 }
 </style>
