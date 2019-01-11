@@ -88,69 +88,65 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bar{
+.bar {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
   z-index: 9999;
-
+  width: 100%;
+  user-select: none;
   background: var(--color-overlay); // fallback
-
-  $circle-radius: (56px + 16px) / 2;
   background:
     radial-gradient(circle at top right, transparent $circle-radius, var(--color-overlay) 0) top left,
     radial-gradient(circle at top left, transparent $circle-radius, var(--color-overlay) 0) top right;
-
-  background-size: 50.01% 100%; // the .01% fixes the gap between both gradients (seems like a chrome rendering bug)
   background-repeat: no-repeat;
+  background-size: 50.01% 100%; // the .01% fixes the gap between both gradients (seems like a chrome rendering bug)
 
-  user-select: none;
+  $circle-radius: (56px + 16px) / 2;
 }
-.container{
+
+.container {
   display: flex;
-  justify-content: space-evenly;
   flex-wrap: nowrap;
+  justify-content: space-evenly;
 }
 
-.nav-item{
-  flex: 1;
-
+.nav-item {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex: 1;
   flex-wrap: wrap;
-
+  align-items: center;
+  justify-content: center;
   min-width: 80px;
   max-width: 168px;
   height: 56px;
+  padding: 12px 8px 12px 12px;
   font-size: 12px;
   line-height: 12px;
-  padding: 12px 8px 12px 12px;
-
-  cursor: pointer;
+  color: var(--color-text-inactive);
   text-align: center;
   text-decoration: none;
-  color: var(--color-text-inactive);
+  cursor: pointer;
   background: transparent;
   border: 0;
 
-  .material-icons{
+  .material-icons {
     width: 100%;
   }
 
-  &:hover{
+  &:hover {
     color: var(--color-text);
   }
 
-  &.active{
+  &.active {
     color: var(--color-text-active);
   }
 }
-.fab-wrapper{
+
+.fab-wrapper {
   position: absolute;
-  left: 50%;
   top: 0;
+  left: 50%;
   z-index: 99999;
   transform: translate(-50%, -50%);
 }

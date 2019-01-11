@@ -130,66 +130,70 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bar{
+.bar {
   position: fixed;
   top: 0;
   left: 0;
-  height: 56px;
-  width: 100%;
   z-index: 9999;
-
-  background: var(--color-overlay);
+  width: 100%;
+  height: 56px;
   user-select: none;
+  background: var(--color-overlay);
 }
-.container{
+
+.container {
   display: flex;
   flex-wrap: nowrap;
   padding: 8px;
 }
 
-a, button{
+a,
+button {
   color: var(--color-text-active);
 }
-.navigation_back{
-  margin-right: 8px;
-  height: 40px;
-  min-width: 40px;
-  text-decoration: none;
+
+.navigation_back {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  text-decoration: none;
   border-radius: 20px;
-}
-.page_title{
-  flex: 1;
-  font-size: 20px;
-  line-height: 20px;
-  margin: 0;
-  padding: 8px;
-  font-weight: 500;
 }
 
-.avatar{
-  border-radius: 20px;
+.page_title {
+  flex: 1;
+  padding: 8px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.avatar {
   width: 40px;
   height: 40px;
   margin: 0 12px;
+  border-radius: 20px;
 
-  &:last-of-type{
+  &:last-of-type {
     margin-right: 0;
   }
 }
 
-.action{
-  color: var(--color-text-active);
+.action {
   position: relative;
   width: 40px;
   height: 40px;
-  border-radius: 20px;
   padding: 8px;
   margin: 0 4px;
+  color: var(--color-text-active);
   cursor: pointer;
-  &:last-of-type{
+  border-radius: 20px;
+
+  &:last-of-type {
     margin-right: 0;
   }
 }

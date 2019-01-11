@@ -1,64 +1,65 @@
 @import "./reset";
 
 :root {
-	--color-background: #333;
-	/*
+  --color-background: #333;
+
+  /*
 	--color-border: rgba(0, 0, 0, .5);
 	--color-overlay: rgba(0, 0, 0, .5);
 	*/
-	--color-border: rgb(25, 25, 25);
-	--color-overlay: rgb(25, 25, 25);
+  --color-border: rgb(25, 25, 25);
+  --color-overlay: rgb(25, 25, 25);
+  --color-border-i: rgb(230, 230, 230);
+  --color-overlay-i: rgb(230, 230, 230);
 
-	--color-border-i: rgb(230, 230, 230);
-	--color-overlay-i: rgb(230, 230, 230);
-
-	/*
+  /*
 	--color-text: rgba(255, 255, 255, .75);
 	--color-text-active: rgb(255, 255, 255);
 	--color-text-inactive: rgba(255, 255, 255, .5);
 	*/
-	--color-text: rgb(210, 210, 210);
-	--color-text-active: rgb(255, 255, 255);
-	--color-text-inactive: rgb(170, 170, 170);
-
-	--color-text-i: rgb(45, 45, 45);
-	--color-text-active-i: rgb(0, 0, 0);
-	--color-text-inactive-i: rgb(95, 95, 95);
+  --color-text: rgb(210, 210, 210);
+  --color-text-active: rgb(255, 255, 255);
+  --color-text-inactive: rgb(170, 170, 170);
+  --color-text-i: rgb(45, 45, 45);
+  --color-text-active-i: rgb(0, 0, 0);
+  --color-text-inactive-i: rgb(95, 95, 95);
 }
 
-body, #app {
-	width: 100%;
-	min-height: 100vh;
-	background-color: var(--color-background);
-	color: var(--color-text);
+body,
+ #app {
+  width: 100%;
+  min-height: 100vh;
+  color: var(--color-text);
+  background-color: var(--color-background);
 }
 
-.container{
-	width: 100%;
-	max-width: 700px;
-	margin: 0 auto;
-	padding-left: 0;
-	padding-right: 0;
+.container {
+  width: 100%;
+  max-width: 700px;
+  padding-right: 0;
+  padding-left: 0;
+  margin: 0 auto;
 }
 
-.contents{
+.contents {
   display: contents;
 }
 
-.toasted-container{
-	bottom: 92px !important;
-	max-width: 250px;
-	.toast-container{
-		flex: 1;
-	}
+.toasted-container {
+  bottom: 92px !important;
+  max-width: 250px;
+
+  .toast-container {
+    flex: 1;
+  }
 }
 
-input:not([type="checkbox"]):not([type="radio"]){
-	width: 100%;
-	max-width: 300px;
-	color: var(--color-text);
-	border: none;
-	border-bottom: 1px solid var(--color-border);
-	padding: 4px;
-	background: transparent;
+input:not([type="checkbox"]):not([type="radio"]) {
+  width: 100%;
+  max-width: 300px;
+  padding: 4px;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
 }

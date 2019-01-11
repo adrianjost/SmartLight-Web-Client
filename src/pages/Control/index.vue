@@ -41,12 +41,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.control-units{
+.control-units {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-.control-unit{
+
+.control-unit {
   margin: 8px;
 }
 </style>

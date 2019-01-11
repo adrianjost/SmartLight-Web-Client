@@ -52,42 +52,43 @@ export default {
 <style lang="scss" scoped>
 $input-padding-left: 12px;
 
-label{
+label {
+  position: relative;
   display: block;
+  margin: 1em 0 0.75em;
+  clear: both;
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  margin: 1em 0 .75em;
-  clear: both;
-  position: relative;
 }
 
-.label{
-  font-size: .75em;
+.label {
   position: absolute;
   top: 0;
-  transform: translateY(-.75em);
   left: $input-padding-left;
+  font-size: 0.75em;
   background: var(--color-background);
-  border-left: 1px solid var(--color-background);
   border-right: 1px solid var(--color-background);
+  border-left: 1px solid var(--color-background);
+  transform: translateY(-0.75em);
 }
 
-input{
+input {
   width: 100%;
+  padding: 8px $input-padding-left;
   background: transparent;
   border: 0;
-  padding: 8px $input-padding-left;
   outline: none;
-  transition: color .2s linear;
-  &:focus{
+  transition: color 0.2s linear;
+
+  &:focus {
     color: var(--color-text-active);
   }
 }
 
-.hint{
+.hint {
   display: block;
-  margin-top: -.75em;
-  margin-left: $input-padding-left;
+  margin-top: -0.75em;
   margin-bottom: 1em;
+  margin-left: $input-padding-left;
 }
 </style>

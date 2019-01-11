@@ -69,39 +69,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .content-wrapper{
-    margin: 2rem auto;
+  .content-wrapper {
     max-width: 700px;
+    padding: 32px;
+    margin: 2rem auto;
     color: #333;
     text-align: center;
-    padding: 32px;
     border-radius: 8px;
   }
-  .token{
+
+  .token {
     width: 90%;
-    margin: 0 auto;
-    padding: .5rem;
     height: 5.5rem;
-    outline: none;
-    border: 1px solid #fff;
-    background: transparent;
+    padding: 0.5rem;
+    margin: 0 auto;
+    overflow: hidden;
     word-wrap: initial;
     white-space: nowrap;
     resize: none;
-    overflow: hidden;
+    background: transparent;
+    border: 1px solid #fff;
+    outline: none;
   }
-  button{
-    margin: 1rem;
+
+  button {
     padding: 1rem;
+    margin: 1rem;
     color: #fff;
     background: #dd045f;
+    border: none;
     border-radius: 5px;
     outline: none;
-    border: none;
-    box-shadow: 0 0 5px rgba(0,0,0,.5);
-    transition: all .2s ease-in-out;
-    &:hover{
-      box-shadow: 2px 4px 5px rgba(0,0,0,.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.5);
       transform: translate(-2px, -4px);
     }
   }

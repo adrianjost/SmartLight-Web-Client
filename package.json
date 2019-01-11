@@ -9,7 +9,8 @@
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "lint": "npm run lint:style",
-    "lint:style": "stylelint \"src/**/*.(vue|s?css)\"",
+    "lint:style": "stylelint \"src/**/*.(vue|css|scss)\"",
+    "lint:style:fix": "stylelint \"src/**/*.(vue|css|scss)\" --fix",
     "travis": "npm run lint && npm run build"
   },
   "dependencies": {

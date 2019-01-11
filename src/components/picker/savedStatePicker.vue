@@ -58,36 +58,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.state-list{
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
+.state-list {
+  max-width: 300px;
   padding: 8px;
   margin: 8px auto;
-  max-width: 300px;
   overflow-x: auto;
-  white-space: nowrap;
-  text-align: left;
   font-size: 0;
+  text-align: left;
+  white-space: nowrap;
   user-select: none;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
 }
-.state{
+
+.state {
   position: relative;
   display: inline-block;
-  border: 1px solid var(--color-border);
-  list-style: none;
-  border-radius: 50%;
   padding: 20px;
   margin: 0 4px;
   color: var(--color-text-active-i);
-  &:first-of-type{
+  list-style: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+
+  &:first-of-type {
     margin-left: 0;
   }
-  &:last-of-type{
+
+  &:last-of-type {
     margin-right: 0;
   }
+
   &.add {
     border-width: 2px;
-    .material-icons{
+
+    .material-icons {
       position: absolute;
       top: 50%;
       left: 50%;

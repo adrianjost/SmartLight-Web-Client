@@ -88,38 +88,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.control{
+.control {
   text-align: center;
 }
-.tab-nav{
+
+.tab-nav {
   display: flex;
-  margin: 16px auto;
   max-width: 250px;
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
+  margin: 16px auto;
   font-size: 0;
   user-select: none;
-  .tab{
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+
+  .tab {
+    display: inline-block;
     flex: 1;
+    padding: 8px;
     font-size: 16px;
     line-height: 16px;
-    display: inline-block;
-    cursor: pointer;
-    padding: 8px;
     text-align: center;
-    &.active{
+    cursor: pointer;
+
+    &.active {
       background-color: var(--color-overlay);
     }
   }
 }
 </style>
 <style lang="scss">
-.toast-dot{
+.toast-dot {
   display: inline-block;
-  vertical-align: bottom;
   width: 16px;
   height: 16px;
-  border-radius: 50%;
   margin-right: 4px;
+  vertical-align: bottom;
+  border-radius: 50%;
 }
 </style>

@@ -49,57 +49,59 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.lamps{
+.lamps {
   padding: 8px;
-  text-align: left;
   font-size: 0;
+  text-align: left;
   user-select: none;
 }
-.lamp{
+
+.lamp {
   position: relative;
   display: inline-block;
-  border: 1px solid var(--color-border);
-  list-style: none;
-  border-radius: 50%;
   padding: 16px;
   margin: 0 4px;
   color: var(--color-text-active-i);
+  list-style: none;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
 
-  transition: all .2s ease-in-out;
-  &:before{
-    transition: all .15s ease-in-out 0s;
-    content: "check";
+  &::before {
     position: absolute;
+    top: -4px;
+    right: -4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    top: -4px;
-    right: -4px;
     width: 24px;
     height: 24px;
-    border-radius: 50%;
-    color: #fff;
-    background: #34A853;
-    opacity: 0;
-
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'Material Icons'; /* stylelint-disable-line */
     font-size: 16px;
+    font-style: normal;
+    font-weight: normal;
     line-height: 1;
-    letter-spacing: normal;
+    color: #fff;
     text-transform: none;
-    white-space: nowrap;
+    letter-spacing: normal;
     word-wrap: normal;
+    white-space: nowrap;
+    content: "check";
+    background: #34a853;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.15s ease-in-out 0s;
     direction: ltr;
     -webkit-font-feature-settings: 'liga'; // sass-lint:disable-line vendorPrefix
     -webkit-font-smoothing: antialiased; // sass-lint:disable-line vendorPrefix
   }
+
   &.checked {
     background: var(--color-overlay-i);
-    &:before{
-      transition-delay: .15s;
+
+    &::before {
       opacity: 1;
+      transition-delay: 0.15s;
     }
   }
 }

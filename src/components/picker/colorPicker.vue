@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-.color-picker{
+.color-picker {
   display: inline-block;
 }
 </style>

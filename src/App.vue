@@ -89,6 +89,7 @@ export default {
 </script>
 <style lang="scss">
 @import "./styles/base";
+
 main.container {
   padding: 0 16px;
 }

@@ -25,15 +25,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.unit{
+.unit {
   display: inline-block;
-  font-size: 0;
   padding: 16px;
+  margin: 8px;
+  font-size: 0;
+  color: var(--color-text);
   border: 1px solid var(--color-border);
   border-radius: 50%;
-  margin: 8px;
-  color: var(--color-text);
-  &.add{
+
+  &.add {
     border-width: 2px;
   }
 }
