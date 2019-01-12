@@ -93,22 +93,22 @@ export default {
 }
 
 .tab-nav {
-	display: flex;
-	max-width: 250px;
-	margin: 16px auto;
-	font-size: 0;
-	user-select: none;
 	border: 1px solid var(--color-border);
 	border-radius: 4px;
+	display: flex;
+	font-size: 0;
+	margin: 16px auto;
+	max-width: 250px;
+	user-select: none;
 
 	.tab {
+		cursor: pointer;
 		display: inline-block;
 		flex: 1;
-		padding: 8px;
 		font-size: 16px;
 		line-height: 16px;
+		padding: 8px;
 		text-align: center;
-		cursor: pointer;
 
 		&.active {
 			background-color: var(--color-overlay);
@@ -118,11 +118,11 @@ export default {
 </style>
 <style lang="scss">
 .toast-dot {
+	border-radius: 50%;
 	display: inline-block;
-	width: 16px;
 	height: 16px;
 	margin-right: 4px;
 	vertical-align: bottom;
-	border-radius: 50%;
+	width: 16px;
 }
 </style>

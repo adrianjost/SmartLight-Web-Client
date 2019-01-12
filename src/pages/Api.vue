@@ -70,37 +70,37 @@ export default {
 
 <style lang="scss" scoped>
 	.content-wrapper {
+		border-radius: 8px;
+		color: #333;
+		margin: 2rem auto;
 		max-width: 700px;
 		padding: 32px;
-		margin: 2rem auto;
-		color: #333;
 		text-align: center;
-		border-radius: 8px;
 	}
 
 	.token {
-		width: 90%;
-		height: 5.5rem;
-		padding: .5rem;
-		margin: 0 auto;
-		overflow: hidden;
-		word-wrap: initial;
-		white-space: nowrap;
-		resize: none;
 		background: transparent;
 		border: 1px solid #fff;
+		height: 5.5rem;
+		margin: 0 auto;
 		outline: none;
+		overflow: hidden;
+		padding: .5rem;
+		resize: none;
+		white-space: nowrap;
+		width: 90%;
+		word-wrap: initial;
 	}
 
 	button {
-		padding: 1rem;
-		margin: 1rem;
-		color: #fff;
 		background: #dd045f;
 		border: none;
 		border-radius: 5px;
-		outline: none;
 		box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+		color: #fff;
+		margin: 1rem;
+		outline: none;
+		padding: 1rem;
 		transition: box-shadow .2s ease-in-out, transform .2s ease-in-out;
 
 		&:hover,

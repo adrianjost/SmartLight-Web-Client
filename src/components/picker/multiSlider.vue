@@ -194,11 +194,11 @@ $borderWidth: 2px;
 $activeScaleFactor: 1.5;
 
 .multi-slider {
-	max-width: 300px;
-	height: $height;
-	padding: 0 ($height / 2);
-	margin: 16px auto;
 	border-radius: $height / 2;
+	height: $height;
+	margin: 16px auto;
+	max-width: 300px;
+	padding: 0 ($height / 2);
 }
 
 .markers {
@@ -206,17 +206,17 @@ $activeScaleFactor: 1.5;
 }
 
 .marker {
-	position: absolute;
-	top: 0;
-	display: inline-block;
-	padding: ($height / 2) - $borderWidth;
-	margin-left: -($height / 2);
 	border: $borderWidth solid var(--color-border-i);
 	border-radius: 50%;
+	display: inline-block;
+	margin-left: -($height / 2);
+	padding: ($height / 2) - $borderWidth;
+	position: absolute;
+	top: 0;
 
 	&.active {
-		z-index: 2;
 		box-shadow: 0 0 0 2px var(--color-border), 0 0 0 2px var(--color-border) inset;
+		z-index: 2;
 	}
 }
 </style>

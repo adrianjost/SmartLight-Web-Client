@@ -161,11 +161,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .inputs {
-	display: flex;
 	align-items: center;
+	display: flex;
+	margin: 0 auto;
 	max-width: 300px;
 	padding: 0 2px;
-	margin: 0 auto;
 
 	.input {
 		flex: 1;

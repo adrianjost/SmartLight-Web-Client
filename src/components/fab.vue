@@ -17,20 +17,18 @@ export default {
 
 <style lang="scss" scoped>
 .fab {
-	display: flex;
 	align-items: center;
-	justify-content: center;
-	width: 56px;
-	height: 56px;
-	/* stylelint-disable */
-	font-size: 14px; /* following material specs */
-	line-height: 14px;
-	/* stylelint-enable */
-	color: var(--color-background);
-	cursor: pointer;
 	background-color: #fff;
 	border-radius: 50%;
 	box-shadow: 0 6px 6px rgba(0, 0, 0, .24);
+	color: var(--color-background);
+	cursor: pointer;
+	display: flex;
+	font-size: 14px;
+	height: 56px;
+	justify-content: center;
+	line-height: 14px;
+	width: 56px;
 
 	&:hover,
 	&:focus {

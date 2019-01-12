@@ -11,6 +11,7 @@ module.exports = {
     "stylelint-selector-no-empty", // https://github.com/ssivanatarajan/stylelint-selector-no-empty
     "stylelint-selector-tag-no-without-class", // https://github.com/Moxio/stylelint-selector-tag-no-without-class
     //"stylelint-value-no-unknown-custom-properties", // https://github.com/csstools/stylelint-value-no-unknown-custom-properties
+    "stylelint-order",
   ],
   "rules": {
     // https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md
@@ -39,7 +40,7 @@ module.exports = {
     "no-empty-source": null,
     // ...
     "indentation": "tab",
-    "linebreaks": ["unix", { "severity": "warning" }], // FIX: autofix not working properly
+    // "linebreaks": ["unix", { "severity": "warning" }], // FIX: autofix not working properly
     "no-eol-whitespace": true,
     "no-missing-end-of-source-newline": true,
     "no-empty-first-line": true,
@@ -91,6 +92,16 @@ module.exports = {
       ]
     }],
     */
+
+   "order/order": [
+      "custom-properties",
+      "dollar-variables",
+      "at-variables",
+      "declarations",
+      "rules",
+      "at-rules"
+    ],
+    "order/properties-alphabetical-order": true
 
   }
 }

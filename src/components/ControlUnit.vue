@@ -25,27 +25,27 @@ export default {
 
 <style lang="scss" scoped>
 .control-unit {
-	position: relative;
-	display: inline-block;
-	width: 128px;
-	height: 128px;
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
+	display: inline-block;
+	height: 128px;
+	position: relative;
+	width: 128px;
 }
 
 .link {
+	left: 50%;
 	position: absolute;
 	top: 50%;
-	left: 50%;
 	transform: translate(-50%, -50%);
 }
 
 .material-icons {
-	padding: 12px;
-	font-size: 28px;
-	color: var(--color-text-active-i);
 	background: var(--color-overlay-i);
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
+	color: var(--color-text-active-i);
+	font-size: 28px;
+	padding: 12px;
 }
 </style>

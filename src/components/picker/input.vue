@@ -1,12 +1,11 @@
 <template>
   <div>
     <label>
-      <span :class="{label: true, active: (value && value !== 0)}">{{label}}</span>
+      <span :class="{label: true, active: (_value && _value !== 0)}">{{label}}</span>
       <input
         :type="type"
-        :value="value"
+        :value="_value"
         :placeholder="placeholder"
-        @input="update"
         :required="required"
       />
     </label>
@@ -41,9 +40,12 @@ export default {
       type: String
     }
   },
-  methods: {
-    update($event){
-      this.$emit("input", $event.target.value);
+  data() {
+    return { _value: this.value }
+  },
+  watch: {
+    _value(to){
+      this.$emit("input", to);
     }
   }
 }
@@ -53,32 +55,32 @@ export default {
 $input-padding-left: 12px;
 
 label {
-	position: relative;
-	display: block;
-	margin: 1em 0 .75em;
-	clear: both;
 	border: 1px solid var(--color-border);
 	border-radius: 4px;
+	clear: both;
+	display: block;
+	margin: 1em 0 .75em;
+	position: relative;
 }
 
 .label {
+	background: var(--color-background);
+	border-left: 1px solid var(--color-background);
+	border-right: 1px solid var(--color-background);
+	font-size: .75em;
+	left: $input-padding-left;
 	position: absolute;
 	top: 0;
-	left: $input-padding-left;
-	font-size: .75em;
-	background: var(--color-background);
-	border-right: 1px solid var(--color-background);
-	border-left: 1px solid var(--color-background);
 	transform: translateY(-.75em);
 }
 
 input {
-	width: 100%;
-	padding: 8px $input-padding-left;
 	background: transparent;
 	border: 0;
 	outline: none;
+	padding: 8px $input-padding-left;
 	transition: color .2s linear;
+	width: 100%;
 
 	&:focus {
 		color: var(--color-text-active);
@@ -87,8 +89,8 @@ input {
 
 .hint {
 	display: block;
-	margin-top: -.75em;
 	margin-bottom: 1em;
 	margin-left: $input-padding-left;
+	margin-top: -.75em;
 }
 </style>

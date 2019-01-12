@@ -59,27 +59,27 @@ export default {
 
 <style lang="scss" scoped>
 .state-list {
-	max-width: 300px;
-	padding: 8px;
-	margin: 8px auto;
-	overflow-x: auto;
-	font-size: 0;
-	text-align: left;
-	white-space: nowrap;
-	user-select: none;
 	border: 1px solid var(--color-border);
 	border-radius: 4px;
+	font-size: 0;
+	margin: 8px auto;
+	max-width: 300px;
+	overflow-x: auto;
+	padding: 8px;
+	text-align: left;
+	user-select: none;
+	white-space: nowrap;
 }
 
 .state {
-	position: relative;
-	display: inline-block;
-	padding: 20px;
-	margin: 0 4px;
-	color: var(--color-text-active-i);
-	list-style: none;
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
+	color: var(--color-text-active-i);
+	display: inline-block;
+	list-style: none;
+	margin: 0 4px;
+	padding: 20px;
+	position: relative;
 
 	&:first-of-type {
 		margin-left: 0;
@@ -93,9 +93,9 @@ export default {
 		border-width: 2px;
 
 		.material-icons {
+			left: 50%;
 			position: absolute;
 			top: 50%;
-			left: 50%;
 			transform: translate(-50%, -50%);
 		}
 	}
