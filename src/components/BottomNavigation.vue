@@ -121,8 +121,10 @@ export default {
 	max-width: 168px;
 	height: 56px;
 	padding: 12px 8px 12px 12px;
-	font-size: 12px; /* stylelint-disable-line */ /* following material spec */
+	/* stylelint-disable */
+	font-size: 12px; /* following material spec */
 	line-height: 12px;
+	/* stylelint-enable */
 	color: var(--color-text-inactive);
 	text-align: center;
 	text-decoration: none;

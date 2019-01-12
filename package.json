@@ -12,7 +12,8 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "lint": "npm run lint:style",
+    "lint": "npm run lint:styles",
+    "lint:fix": "npm run lint:styles:fix",
     "lint:styles": "stylelint \"src/**/*.(vue|css|scss)\"",
     "lint:styles:fix": "stylelint \"src/**/*.(vue|css|scss)\" --fix",
     "travis": "npm run lint && npm run build"

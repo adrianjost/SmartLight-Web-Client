@@ -22,8 +22,10 @@ export default {
 	justify-content: center;
 	width: 56px;
 	height: 56px;
-	font-size: 14px; /* stylelint-disable-line */ /* following material specs */
+	/* stylelint-disable */
+	font-size: 14px; /* following material specs */
 	line-height: 14px;
+	/* stylelint-enable */
 	color: var(--color-background);
 	cursor: pointer;
 	background-color: #fff;

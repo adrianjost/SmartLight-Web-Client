@@ -39,7 +39,7 @@ module.exports = {
     "no-empty-source": null,
     // ...
     "indentation": "tab",
-    "linebreaks": "unix",
+    "linebreaks": ["unix", { "severity": "warning" }], // FIX: autofix not working properly
     "no-eol-whitespace": true,
     "no-missing-end-of-source-newline": true,
     "no-empty-first-line": true,
@@ -50,10 +50,11 @@ module.exports = {
       "ignore": ["width", "height", "min-width", "min-height", "max-width", "max-height"]
     },
 
-    "a11y/content-property-no-static-value": [true, { "severity": "warning" }],
-    "a11y/font-size-is-readable": [true, { "severity": "warning" }],
-    //"a11y/media-prefers-reduced-motion": true,
-    //"a11y/media-prefers-color-scheme": [true, { "severity": "warning" }],
+    // FIX: ingores /* styleling-disable */
+    //"a11y/content-property-no-static-value": [true, { "severity": "warning" }],
+    //"a11y/font-size-is-readable": [true, { "severity": "warning" }],
+    //"a11y/media-prefers-reduced-motion": true, // autofix makes code unmaintainable and unreadable
+    //"a11y/media-prefers-color-scheme": [true, { "severity": "warning" }], // autofix makes code unmaintainable and unreadable
     "a11y/no-display-none": [true, { "severity": "warning" }],
     "a11y/no-obsolete-attribute": [true, { "severity": "warning" }],
     "a11y/no-obsolete-element": [true, { "severity": "warning" }],

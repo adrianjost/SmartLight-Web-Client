@@ -74,9 +74,11 @@ export default {
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		/* stylelint-disable */
+		/* styles copied from googles material icon font */
 		width: 24px;
 		height: 24px;
-		font-family: "Material Icons"; /* stylelint-disable-line */
+		font-family: "Material Icons";
 		font-size: 16px;
 		font-style: normal;
 		font-weight: normal;
@@ -86,7 +88,7 @@ export default {
 		letter-spacing: normal;
 		word-wrap: normal;
 		white-space: nowrap;
-		content: "check"; /* stylelint-disable-line */
+		content: "check";
 		background: #34a853;
 		border-radius: 50%;
 		opacity: 0;
@@ -94,6 +96,7 @@ export default {
 		direction: ltr;
 		-webkit-font-feature-settings: "liga";
 		-webkit-font-smoothing: antialiased;
+		/* stylelint-enable */
 	}
 
 	&.checked {
