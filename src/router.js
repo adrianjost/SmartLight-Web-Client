@@ -14,7 +14,8 @@ const router = new VueRouter({
 		{ path: '/login', component: Login, meta: { isPublic: true }},
 		{ path: '/control/:id', component: Control },
 		{ path: '/control', component: ControlOverview },
-		{ path: '/settings/:id', component: Settings },
+		{ path: '/settings/add/:type', component: Settings },
+		{ path: '/settings/edit/:id', component: Settings },
 		{ path: '/settings', component: SettingsOverview },
 		{ path: '/*', redirect: '/control' },
 	]

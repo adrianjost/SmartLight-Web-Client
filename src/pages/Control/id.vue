@@ -51,7 +51,7 @@ export default {
 				actions: [
 					{
 						icon: "edit",
-						to: `/settings/${this.unit.id}`
+						to: `/settings/edit/${this.unit.id}`
 					}
 				]
 			})

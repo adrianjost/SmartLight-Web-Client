@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<label>
-			<span :class="{label: true, active: (_value && _value !== 0)}">{{label}}</span>
+			<span :class="{label: true, active: (internalValue && internalValue !== 0)}">{{label}}</span>
 			<input
 				:type="type"
-				:value="_value"
+				v-model="internalValue"
 				:placeholder="placeholder"
 				:required="required"
 			/>
@@ -41,11 +41,19 @@ export default {
 		}
 	},
 	data() {
-		return { _value: this.value }
+		return { internalValue: this.value }
 	},
 	watch: {
-		_value(to){
-			this.$emit("input", to);
+		internalValue: function(to){
+			console.log(to);
+			if(to !== this.value){
+				this.$emit("input", to);
+			}
+		},
+		value: function(to){
+			if(to !== this.internalValue){
+				this.internalValue = value;
+			}
 		}
 	}
 }

@@ -4,14 +4,14 @@
 			class="unit"
 			v-for="controlUnit in controlUnits"
 			:key="controlUnit.id"
-			:to="'/settings/'+ controlUnit.id"
+			:to="'/settings/edit/'+ controlUnit.id"
 			:style="{background: controlUnit.background}"
 		>
 			<i class="material-icons">{{controlUnit.icon}}</i>
 		</router-link>
 		<router-link
 			class="unit add"
-			:to="'/settings/add'"
+			:to="addUrl"
 		>
 			<i class="material-icons">add</i>
 		</router-link>
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-	props: ["controlUnits"]
+	props: ["controlUnits", "addUrl"]
 }
 </script>
 
