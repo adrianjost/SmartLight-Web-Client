@@ -1,21 +1,21 @@
 <template>
-  <simplebar class="state-list" tag="ul">
-    <ul class="contents">
-      <li
-        v-for="state in data"
-        :key="state.id"
-        :style="{background: state.background}"
-        @click="sendEvent(event, state.id)"
-        @contextmenu.prevent="sendEvent(contextEvent, state.id)"
-        class="state"
-      >
-      </li>
+	<simplebar class="state-list" tag="ul">
+		<ul class="contents">
+			<li
+				v-for="state in data"
+				:key="state.id"
+				:style="{background: state.background}"
+				@click="sendEvent(event, state.id)"
+				@contextmenu.prevent="sendEvent(contextEvent, state.id)"
+				class="state"
+			>
+			</li>
 
-      <li class="state add" @click="sendEvent(addEvent)">
-        <i class="material-icons">add</i>
-      </li>
-    </ul>
-  </simplebar>
+			<li class="state add" @click="sendEvent(addEvent)">
+				<i class="material-icons">add</i>
+			</li>
+		</ul>
+	</simplebar>
 </template>
 
 <script>
@@ -23,37 +23,37 @@ import simplebar from 'simplebar-vue';
 import 'simplebar/dist/simplebar.min.css';
 
 export default {
-  components: {
-    simplebar
-  },
-  props: {
-    data: {
-      type: Array,
-      required: true,
-      validator: function (value) {
-        return value.every((state) => {
-          return (typeof state.id !== undefined) && state.background;
-        })
-      }
-    },
-    event: {
-      type: String,
-      default: "state-picked"
-    },
-    addEvent: {
-      type: String,
-      default: "state-add"
-    },
-    contextEvent: {
-      type: String,
-      default: "state-context"
-    },
-  },
-  methods: {
-    sendEvent(event, data){
-      this.$emit(event, data);
-    }
-  }
+	components: {
+		simplebar
+	},
+	props: {
+		data: {
+			type: Array,
+			required: true,
+			validator: function (value) {
+				return value.every((state) => {
+					return (typeof state.id !== undefined) && state.background;
+				})
+			}
+		},
+		event: {
+			type: String,
+			default: "state-picked"
+		},
+		addEvent: {
+			type: String,
+			default: "state-add"
+		},
+		contextEvent: {
+			type: String,
+			default: "state-context"
+		},
+	},
+	methods: {
+		sendEvent(event, data){
+			this.$emit(event, data);
+		}
+	}
 }
 </script>
 

@@ -1,25 +1,25 @@
 <template>
-  <div
-    class="control-unit"
-    :style="{ 'background': data.background }"
-  >
-    <router-link class="link" :to="'/control/'+ data.id">
-      <i class="material-icons">{{data.icon}}</i>
-    </router-link>
-  </div>
+	<div
+		class="control-unit"
+		:style="{ 'background': data.background }"
+	>
+		<router-link class="link" :to="'/control/'+ data.id">
+			<i class="material-icons">{{data.icon}}</i>
+		</router-link>
+	</div>
 </template>
 
 <script>
 export default {
-  props: {
-    data: {
-      type: Object,
-      required: true,
-      validator: function (value) {
-        return value.icon && value.id
-      }
-    },
-  },
+	props: {
+		data: {
+			type: Object,
+			required: true,
+			validator: function (value) {
+				return value.icon && value.id
+			}
+		},
+	},
 }
 </script>
 
