@@ -31,6 +31,16 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /npm\.js$/,
+        loader: 'string-replace-loader',
+        include: resolve('node_modules/firebaseui'),
+        options: {
+          search: '(\'firebase\/',
+          replace: '(\'@firebase\/',
+          strict: true
+        }
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
@@ -63,7 +73,7 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      }
+      },
     ]
   }
 }

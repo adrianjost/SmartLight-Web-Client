@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-  - "lts/*"
+	- "lts/*"
 script:
-  - npm run travis
-  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+	- npm run travis
+	- export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
 notifications:
-  email: false
+	email: false
 cache:
-  directories:
-    - node_modules
+	directories:
+		- node_modules

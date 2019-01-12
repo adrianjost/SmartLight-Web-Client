@@ -1,0 +1,3 @@
+#git on windows will convert lf to crlf which makes some linters freak out. This keeps it in linux style.
+*.js text eol=lf
+*.vue text eol=lf

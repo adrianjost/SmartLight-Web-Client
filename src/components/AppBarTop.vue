@@ -130,67 +130,71 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bar{
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 56px;
-  width: 100%;
-  z-index: 9999;
-
-  background: var(--color-overlay);
-  user-select: none;
-}
-.container{
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 8px;
+.bar {
+	background: var(--color-overlay);
+	height: 56px;
+	left: 0;
+	position: fixed;
+	top: 0;
+	user-select: none;
+	width: 100%;
+	z-index: 9999;
 }
 
-a, button{
-  color: var(--color-text-active);
-}
-.navigation_back{
-  margin-right: 8px;
-  height: 40px;
-  min-width: 40px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-}
-.page_title{
-  flex: 1;
-  font-size: 20px;
-  line-height: 20px;
-  margin: 0;
-  padding: 8px;
-  font-weight: 500;
+.container {
+	display: flex;
+	flex-wrap: nowrap;
+	padding: 8px;
 }
 
-.avatar{
-  border-radius: 20px;
-  width: 40px;
-  height: 40px;
-  margin: 0 12px;
-
-  &:last-of-type{
-    margin-right: 0;
-  }
+a,
+button {
+	color: var(--color-text-active);
 }
 
-.action{
-  color: var(--color-text-active);
-  position: relative;
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  padding: 8px;
-  margin: 0 4px;
-  cursor: pointer;
-  &:last-of-type{
-    margin-right: 0;
-  }
+.navigation_back {
+	align-items: center;
+	border-radius: 20px;
+	display: flex;
+	height: 40px;
+	justify-content: center;
+	margin-right: 8px;
+	min-width: 40px;
+	text-decoration: none;
+}
+
+.page_title {
+	flex: 1;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 20px;
+	margin: 0;
+	padding: 8px;
+}
+
+.avatar {
+	border-radius: 20px;
+	height: 40px;
+	margin: 0 12px;
+	width: 40px;
+
+	&:last-of-type {
+		margin-right: 0;
+	}
+}
+
+.action {
+	border-radius: 20px;
+	color: var(--color-text-active);
+	cursor: pointer;
+	height: 40px;
+	margin: 0 4px;
+	padding: 8px;
+	position: relative;
+	width: 40px;
+
+	&:last-of-type {
+		margin-right: 0;
+	}
 }
 </style>

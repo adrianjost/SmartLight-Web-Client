@@ -1,49 +1,51 @@
 <template>
-  <div
-    class="control-unit"
-    :style="{ 'background': data.background }"
-  >
-    <router-link class="link" :to="'/control/'+ data.id">
-      <i class="material-icons">{{data.icon}}</i>
-    </router-link>
-  </div>
+	<div
+		class="control-unit"
+		:style="{ 'background': data.background }"
+	>
+		<router-link class="link" :to="'/control/'+ data.id">
+			<i class="material-icons">{{data.icon}}</i>
+		</router-link>
+	</div>
 </template>
 
 <script>
 export default {
-  props: {
-    data: {
-      type: Object,
-      required: true,
-      validator: function (value) {
-        return value.icon && value.id
-      }
-    },
-  },
+	props: {
+		data: {
+			type: Object,
+			required: true,
+			validator: function (value) {
+				return value.icon && value.id
+			}
+		},
+	},
 }
 </script>
 
 <style lang="scss" scoped>
-.control-unit{
-  position: relative;
-  display: inline-block;
-  border-radius: 50%;
-  width: 128px;
-  height: 128px;
-  border: 1px solid var(--color-border);
+.control-unit {
+	border: 1px solid var(--color-border);
+	border-radius: 50%;
+	display: inline-block;
+	height: 128px;
+	position: relative;
+	width: 128px;
 }
-.link{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+.link {
+	left: 50%;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
-.material-icons{
-  background: var(--color-overlay-i);
-  color: var(--color-text-active-i);
-  font-size: 28px;
-  padding: 12px;
-  border-radius: 50%;
-  border: 1px solid var(--color-border);
+
+.material-icons {
+	background: var(--color-overlay-i);
+	border: 1px solid var(--color-border);
+	border-radius: 50%;
+	color: var(--color-text-active-i);
+	font-size: 28px;
+	padding: 12px;
 }
 </style>
