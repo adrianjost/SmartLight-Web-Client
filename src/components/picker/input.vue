@@ -1,53 +1,53 @@
 <template>
-  <div>
-    <label>
-      <span :class="{label: true, active: (_value && _value !== 0)}">{{label}}</span>
-      <input
-        :type="type"
-        :value="_value"
-        :placeholder="placeholder"
-        :required="required"
-      />
-    </label>
-    <small v-if="hint" v-html="hint" class="hint"/>
-  </div>
+	<div>
+		<label>
+			<span :class="{label: true, active: (_value && _value !== 0)}">{{label}}</span>
+			<input
+				:type="type"
+				:value="_value"
+				:placeholder="placeholder"
+				:required="required"
+			/>
+		</label>
+		<small v-if="hint" v-html="hint" class="hint"/>
+	</div>
 </template>
 
 <script>
 export default {
-  name: "SLInput",
-  props: {
-    value: {
-      required: true
-    },
-    label: {
-      type: String,
-      default: ''
-    },
-    type: {
-      type: String,
-      default: "text"
-    },
-    placeholder: {
-      type: String,
-      default: "text"
-    },
-    required: {
-      type: Boolean,
-      default: false
-    },
-    hint: {
-      type: String
-    }
-  },
-  data() {
-    return { _value: this.value }
-  },
-  watch: {
-    _value(to){
-      this.$emit("input", to);
-    }
-  }
+	name: "SLInput",
+	props: {
+		value: {
+			required: true
+		},
+		label: {
+			type: String,
+			default: ''
+		},
+		type: {
+			type: String,
+			default: "text"
+		},
+		placeholder: {
+			type: String,
+			default: "text"
+		},
+		required: {
+			type: Boolean,
+			default: false
+		},
+		hint: {
+			type: String
+		}
+	},
+	data() {
+		return { _value: this.value }
+	},
+	watch: {
+		_value(to){
+			this.$emit("input", to);
+		}
+	}
 }
 </script>
 

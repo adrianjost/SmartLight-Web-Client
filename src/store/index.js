@@ -12,27 +12,27 @@ import units from './units';
 import savedStates from './savedStates';
 
 const config = [
-  { // DB Lamps => Vuex Lamps
-    ref: (fireDB) =>{
-      return fireDB.ref("units")
-      .orderByChild("creatorId")
-      .equalTo("IcAd2hRhBoRs5WTORWTTCSaRSvy2");
-    },
-    mutation: "units/setList",
-    direction: "down"
-  }
+	{ // DB Lamps => Vuex Lamps
+		ref: (fireDB) =>{
+			return fireDB.ref("units")
+			.orderByChild("creatorId")
+			.equalTo("IcAd2hRhBoRs5WTORWTTCSaRSvy2");
+		},
+		mutation: "units/setList",
+		direction: "down"
+	}
 ]
 
 export default new Vuex.Store({
-  plugins: [
-    createPersistedState(),
-    //firebaseSync(config),
-    firebaseAuth()
-  ],
-  modules: {
-    ui,
-    user,
-    units,
-    savedStates
-  }
+	plugins: [
+		createPersistedState(),
+		//firebaseSync(config),
+		firebaseAuth()
+	],
+	modules: {
+		ui,
+		user,
+		units,
+		savedStates
+	}
 });

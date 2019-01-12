@@ -1,19 +1,19 @@
 <template>
-  <div class="content-wrapper acrylic">
-    <h1>API token generator</h1>
-    <p>Here you can create your authentification token to use the API.<br/>
-      Never publish this token anywhere!<br/>
-      If someone has this token he has full control over your database entrys.<br/>
-      Nevertheless if you loose your token you can regenerate them by clicking the button <br/>
-      and you get a new one and the old token gets invalid.
-    </p>
-    <textarea class="token">{
-  "uid": "{{this.user.uid}}",
-  "secret": "{{token}}",
-  "textString": "{{ingredient}}"
+	<div class="content-wrapper acrylic">
+		<h1>API token generator</h1>
+		<p>Here you can create your authentification token to use the API.<br/>
+			Never publish this token anywhere!<br/>
+			If someone has this token he has full control over your database entrys.<br/>
+			Nevertheless if you loose your token you can regenerate them by clicking the button <br/>
+			and you get a new one and the old token gets invalid.
+		</p>
+		<textarea class="token">{
+	"uid": "{{this.user.uid}}",
+	"secret": "{{token}}",
+	"textString": "{{ingredient}}"
 }</textarea><br/>
-    <button class="button" @click="newToken">create new auth token</button>
-  </div>
+		<button class="button" @click="newToken">create new auth token</button>
+	</div>
 </template>
 
 <script>
@@ -24,47 +24,47 @@ import '@firebase/database';
 const randtoken = require('rand-token');
 
 export default {
-  name: "api",
-  data(){
-    return {
-      token: '',
-      user: {},
-      ingredient: "{{TextField}}"
-    }
-  },
-  created(){
-    firebase.auth().onAuthStateChanged(this.updateUser);
-  },
-  methods: {
-    getToken(snap){
-      const snapVal = snap.val();
-      if(!snapVal){return;}
-      this.token = snapVal;
-    },
-    newToken(){
-      if(!confirm("Möchtest du wirklich einen neuen token generieren und den alten ungültig machen?")){return;}
-      this.token = this.createToken();
-      let dbRef = firebase.database().ref("users/"+this.user.uid+"");
-      dbRef.update({"secret": this.token});
-    },
-    createToken(){
-      return randtoken.generate(Math.pow(2,10));
-    },
-    updateUser(user){
-      if(user) {
-        this.user = user;
-        let dbRef = firebase.database().ref("users/"+this.user.uid+"/secret");
-        dbRef.on('value', this.getToken)
-      } else {
-        this.user = {};
-      }
-    }
-  },
-  computed: {
-    user () {
-      return this.$store.getters["user/get"];
-    }
-  }
+	name: "api",
+	data(){
+		return {
+			token: '',
+			user: {},
+			ingredient: "{{TextField}}"
+		}
+	},
+	created(){
+		firebase.auth().onAuthStateChanged(this.updateUser);
+	},
+	methods: {
+		getToken(snap){
+			const snapVal = snap.val();
+			if(!snapVal){return;}
+			this.token = snapVal;
+		},
+		newToken(){
+			if(!confirm("Möchtest du wirklich einen neuen token generieren und den alten ungültig machen?")){return;}
+			this.token = this.createToken();
+			let dbRef = firebase.database().ref("users/"+this.user.uid+"");
+			dbRef.update({"secret": this.token});
+		},
+		createToken(){
+			return randtoken.generate(Math.pow(2,10));
+		},
+		updateUser(user){
+			if(user) {
+				this.user = user;
+				let dbRef = firebase.database().ref("users/"+this.user.uid+"/secret");
+				dbRef.on('value', this.getToken)
+			} else {
+				this.user = {};
+			}
+		}
+	},
+	computed: {
+		user () {
+			return this.$store.getters["user/get"];
+		}
+	}
 }
 </script>
 

@@ -1,50 +1,50 @@
 <template>
-  <ul class="lamps">
-    <li
-      v-for="lamp in lamps"
-      :key="lamp.id"
-      @click="toggle(lamp.id)"
-      :class="{
-        lamp: true,
-        checked: value.includes(lamp.id)
-      }"
-    >
-      <i class="material-icons">{{lamp.icon}}</i>
-    </li>
-  </ul>
+	<ul class="lamps">
+		<li
+			v-for="lamp in lamps"
+			:key="lamp.id"
+			@click="toggle(lamp.id)"
+			:class="{
+				lamp: true,
+				checked: value.includes(lamp.id)
+			}"
+		>
+			<i class="material-icons">{{lamp.icon}}</i>
+		</li>
+	</ul>
 </template>
 
 <script>
 export default {
-  props: {
-    lamps: {
-      type: Array,
-      required: true,
-      validator: function (value) {
-        return value.every((state) => {
-          return typeof state.id !== undefined;
-        })
-      }
-    },
-    value: {
-      type: Array,
-      required: true
-    }
-  },
-  methods: {
-    toggle(lampId){
-      const index = this.value.indexOf(lampId);
-      if(index >= 0){
-        // delete from list
-        let newValue = [...this.value]
-        newValue.splice(index, 1)
-        this.$emit("input", newValue);
-      }else{
-        // add to list
-        this.$emit("input", [...this.value, lampId]);
-      }
-    }
-  }
+	props: {
+		lamps: {
+			type: Array,
+			required: true,
+			validator: function (value) {
+				return value.every((state) => {
+					return typeof state.id !== undefined;
+				})
+			}
+		},
+		value: {
+			type: Array,
+			required: true
+		}
+	},
+	methods: {
+		toggle(lampId){
+			const index = this.value.indexOf(lampId);
+			if(index >= 0){
+				// delete from list
+				let newValue = [...this.value]
+				newValue.splice(index, 1)
+				this.$emit("input", newValue);
+			}else{
+				// add to list
+				this.$emit("input", [...this.value, lampId]);
+			}
+		}
+	}
 }
 </script>
 
