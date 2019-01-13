@@ -34,7 +34,7 @@ export default {
 	},
 	computed: {
 		units() {
-			return this.$store.getters["units/list"].map(unit => this.addBackground(unit));
+			return (this.$store.getters["units/list"] || []).map(unit => this.addBackground(unit));
 		}
 	}
 };

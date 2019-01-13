@@ -1,5 +1,5 @@
 <template>
-	<form>
+	<form class="container">
 		<h2>Edit Lamp "{{value.name}}"</h2>
 
 		<SLInput label="Name" type="text" placeholder="Kitchen" v-model="value.name" />
@@ -25,10 +25,3 @@ export default {
 	props: ["value"],
 }
 </script>
-
-<style scoped>
-form {
-	margin: 0 auto;
-	max-width: 300px;
-}
-</style>

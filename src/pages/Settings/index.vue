@@ -10,6 +10,8 @@
 			:control-units="groups"
 			add-url="/settings/add/group"
 		/>
+		<button @click="updateToken" type="button">Update API-Token</button>
+		<pre>{{api_token}}</pre>
 	</div>
 </template>
 
@@ -33,6 +35,12 @@ export default {
 			payload: UIStateDefault.bottomNav(1)
 		});
 	},
+	methods: {
+		updateToken(){
+			console.log("update Token");
+			this.$store.dispatch('user/set', {api_token: Date.now()})
+		}
+	},
 	computed: {
 		user () {
 			return this.$store.getters["user/get"];
@@ -42,6 +50,9 @@ export default {
 		},
 		groups() {
 			return this.$store.getters["units/list-groups"].map(group => this.addBackground(group));
+		},
+		api_token() {
+			return this.$store.getters["user/api_token"];
 		}
 	}
 };

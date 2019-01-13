@@ -115,14 +115,12 @@ export default {
 		saveGradient(){
 			if(!this.isGradientUnqiue(this.currentGradient)){ return; }
 			if(!this.isGradientValid()){ return; }
-			this.$store.commit("savedStates/add", {
-				data: this.currentGradient
-			});
+			this.$store.dispatch("savedStates/insert", this.currentGradient);
 		},
 		apply(){
 			if(!this.isGradientValid()){ return; }
 			this.sendGradient(this.unit, this.currentGradient);
-			this.$store.commit("units/setState", {
+			this.$store.dispatch("units/setState", {
 				id: this.unit.id,
 				data: {
 					gradient: this.currentGradient
@@ -170,6 +168,9 @@ export default {
 	.input {
 		flex: 1;
 		margin: 0 2px;
+	}
+	input.input{
+		border-bottom: 1px solid var(--color-border);
 	}
 }
 

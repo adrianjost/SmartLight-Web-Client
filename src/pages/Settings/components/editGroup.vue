@@ -1,5 +1,5 @@
 <template>
-	<form>
+	<form class="container">
 		<h2>Edit Group "{{value.name}}"</h2>
 
 		<SLInput label="Name" type="text" placeholder="Kitchen" v-model="value.name" />
@@ -32,10 +32,3 @@ export default {
 	}
 }
 </script>
-
-<style scoped>
-form {
-	margin: 0 auto;
-	max-width: 300px;
-}
-</style>

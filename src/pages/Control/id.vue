@@ -44,7 +44,7 @@ export default {
 	created(){
 		this.$store.commit("ui/set", {
 			component: "appBarTop",
-			payload: Object.assign(UIStateNestedDefault.appBarTop(this.unit.name), {
+			payload: Object.assign(UIStateNestedDefault.appBarTop(this.unit.name || ""), {
 				back_action: {
 					event: "go-back",
 					icon: "arrow_back"
@@ -57,7 +57,7 @@ export default {
 				]
 			})
 		});
-		this.$store.commit("ui/patch", {
+		this.$store.commit("ui/set", {
 			component: "bottomNav",
 			payload: Object.assign(UIStateNestedDefault.bottomNav(0), {
 				fab: {
@@ -82,8 +82,18 @@ export default {
 	},
 	computed: {
 		unit () {
-			return this.$store.getters["units/get"](this.$route.params.id) || {};
+			return this.$store.getters["units/get"](this.$route.params.id);
 		},
+	},
+	watch: {
+		unit: function(to, from){
+			if(to === from){ return; }
+
+			this.$store.commit("ui/patch", {
+				component: "appBarTop",
+				payload: { title: { text: to.name }}
+			});
+		}
 	}
 };
 </script>

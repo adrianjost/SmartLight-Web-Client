@@ -1,29 +1,10 @@
-const state = {
-	states: [
-		/*
-		{
-			id: "unique id (unique per user)",
-			type: "color",
-			color: #ff00bb
-		},
-		{
-			id: "unique id (unique per user)",
-			type: "gradient",
-			name: "rainbow",
-			colors: ["#ff0000", "#0000ff", "#00ff00", "#ff0000"],
-			transitionTimes: [0, 3, 4, 10],
-			loop: true
-		}
-		*/
-	]
-};
-
+const sortByCreatedAt = (a, b) => { return a.created_at - b.created_at; }
 const getters = {
 	"list": (state) => {
-		return state.states;
+		return Object.values(state.data).sort(sortByCreatedAt);
 	},
 	"list-colors": (state) => {
-		return state.states.filter((mode) => {
+		return Object.values(state.data).sort(sortByCreatedAt).filter((mode) => {
 			return mode.type === "color";
 		}).map(color => {
 			color.background = color.color;
@@ -31,7 +12,7 @@ const getters = {
 		});
 	},
 	"list-gradients": (state) => {
-		return state.states.filter((mode) => {
+		return Object.values(state.data).sort(sortByCreatedAt).filter((mode) => {
 			return mode.type === "gradient" && !!mode.colors;
 		}).map(gradient => {
 			// generate background pattern
@@ -50,48 +31,21 @@ const getters = {
 	},
 };
 
-function getIndex(list, id){
-	return list.findIndex((obj)=>{return obj.id === id});
-}
 
-function isIdUnique(list, id){
-	if(!id){ return false; }
-	return list.every((item) => {
-		return item.id !== id;
-	})
-}
-
-const mutations = {
-	add(state, { data, index }) {
-		while(!isIdUnique(state.states, data.id)){
-			data.id = (new Date()).getTime().toString();
-		}
-		if(!index){
-			state.states.push(data);
-		}else{
-			index = Math.min(index, state.states.length);
-			state.states.splice(index, 0, data);
-		}
-	},
-	update(state, { data }) {
-		state.states[getIndex(state.states, data.id)] = data;
-	},
-	delete(state, id) {
-		state.states.splice(getIndex(state.states, id), 1);
-	},
-	setList(state, { data }){
-		state.states = data;
-	},
-};
-
-const actions = {
-
-};
+const where = [ // an array of arrays
+  ['created_by', '==', '{userId}'],
+]
+const orderBy = [] // an array of strings
 
 export default {
+	firestorePath: 'states/',
+	firestoreRefType: 'collection',
+	statePropName: 'data',
+	moduleName: 'savedStates',
+	sync: {
+    where,
+    orderBy
+	},
 	namespaced: true,
-	state,
 	getters,
-	mutations,
-	actions
 };

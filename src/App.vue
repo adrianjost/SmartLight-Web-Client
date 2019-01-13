@@ -30,10 +30,6 @@
 import BottomNavigation from '@/components/BottomNavigation.vue'
 import AppBarTop from '@/components/AppBarTop.vue'
 
-import { firebase } from '@firebase/app';
-import {config} from '@/helpers/firebaseConfig'
-firebase.initializeApp(config);
-
 export default {
 	name: 'app',
 	components: {

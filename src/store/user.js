@@ -1,6 +1,5 @@
 import { firebase } from '@firebase/app';
 import '@firebase/auth';
-//import vm from '../main'
 
 const state = {
 	userInfo: undefined
@@ -9,6 +8,7 @@ const state = {
 const getters = {
 	isAuthenticated: (state) => { return !!state.userInfo},
 	get: (state) => { return state.userInfo; },
+	api_token: (state) => { return state.data.api_token; }
 };
 
 const mutations = {
@@ -24,10 +24,6 @@ const actions = {
 	async logout(context) {
 		try {
 			await firebase.auth().signOut();
-			/* vm.$router.push({
-					path: '/login'
-				});
-			*/
 			context.commit('logout');
 			window.location.reload()
 		} catch(error){
@@ -37,6 +33,10 @@ const actions = {
 };
 
 export default {
+	firestorePath: 'users/{userId}',
+	firestoreRefType: 'docs',
+	statePropName: 'data',
+	moduleName: 'user',
 	namespaced: true,
 	state,
 	getters,

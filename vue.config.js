@@ -1,8 +1,8 @@
 module.exports = {
   pwa: {
     name: 'SmartLight',
-    themeColor: '#333',
-    msTileColor: '#333'
+    themeColor: '#191919',
+    msTileColor: '#191919'
   },
 
   publicPath: undefined,

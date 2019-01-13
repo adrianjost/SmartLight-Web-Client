@@ -15,7 +15,6 @@
 const editLamp = () => import(/* webpackChunkName: "editLamp" */ './components/editLamp');
 const editGroup = () => import(/* webpackChunkName: "editGroup" */ './components/editGroup');
 
-
 import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 
 const defaultUnit = {
@@ -94,16 +93,12 @@ export default {
 	methods: {
 		apply(){
 			// TODO: save new state
-			this.$store.commit("units/set", { data: {
-				data: this.unit
-			}});
+			this.$store.dispatch("units/set", this.unit);
 			this.$router.go(-1);
 		},
 		delete(){
 			// TODO: save new state
-			this.$store.commit("units/delete", { data: {
-				id: this.unit.id
-			}});
+			this.$store.dispatch("units/delete", this.unit.id);
 			this.$router.go(-1);
 		},
 	},

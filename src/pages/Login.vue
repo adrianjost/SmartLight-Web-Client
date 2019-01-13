@@ -16,9 +16,6 @@ let loginUi;
 export default {
 	name: 'auth',
 	created(){
-		if(this.isAuthenticated){
-			this.$router.push(this.$route.query.redirect || "/");
-		}
 		this.$store.commit("ui/set", {
 			component: "appBarTop",
 			payload: {
@@ -49,6 +46,13 @@ export default {
 		isAuthenticated () {
 			return this.$store.getters["user/isAuthenticated"];
 		},
+	},
+	watch: {
+		isAuthenticated: function(to){
+			if(to){
+				this.$router.push(this.$route.query.redirect || "/");
+			}
+		}
 	}
 }
 </script>

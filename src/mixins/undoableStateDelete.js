@@ -20,10 +20,10 @@ export const undoableStateDelete = (listName) => {
 						}
 					},
 				});
-				this.$store.commit("savedStates/delete", id);
+				this.$store.dispatch("savedStates/delete", id);
 			},
 			restoreState(state){
-				this.$store.commit("savedStates/add", state);
+				this.$store.dispatch("savedStates/set", state.data);
 			},
 		}
 	}

@@ -65,17 +65,15 @@ export default {
 				return this.error("Color is already saved.");
 			}
 
-			this.$store.commit("savedStates/add", {
-				data: {
-					type: "color",
-					color: this.currentColor
-				}
+			this.$store.dispatch("savedStates/insert", {
+				type: "color",
+				color: this.currentColor
 			});
 		},
 		apply(){
 			console.log("apply Color", this.currentColor);
 			this.sendHexColor(this.unit, this.currentColor);
-			this.$store.commit("units/setState", {
+			this.$store.dispatch("units/setState", {
 				id: this.unit.id,
 				data: {
 					color: this.currentColor

@@ -56,7 +56,7 @@ The base Schema is the following and will be extended for lamps/groups with a co
 
 ```js
 $index: {
-  ownerId: userId,
+  created_by: userId,
   //allowedUsers: [userId, ...],
 
   type: ENUM["LAMP", "GROUP"],
@@ -92,7 +92,7 @@ $index: {
 #### StateObject
 ```js
 $index: {
-  ownerId: userId,
+  created_by: userId,
   //allowedUsers: [userId, ...],
   type: ENUM["COLOR", "GRADIENT"]
 }

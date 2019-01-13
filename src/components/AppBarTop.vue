@@ -96,10 +96,9 @@ export default {
     },
     title: {
       type: Object,
-      default: () => { return { text: "" } },
       required: true,
       validator: function (value) {
-        return value.text;
+        return typeof value.text === "string";
       }
     },
     actions: {

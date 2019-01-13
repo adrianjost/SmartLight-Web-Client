@@ -45,7 +45,6 @@ export default {
 	},
 	watch: {
 		internalValue: function(to){
-			console.log(to);
 			if(to !== this.value){
 				this.$emit("input", to);
 			}
