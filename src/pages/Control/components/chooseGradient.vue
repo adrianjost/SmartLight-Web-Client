@@ -96,18 +96,18 @@ export default {
 		},
 		isGradientUnqiue(gradient){
 			if(!this.name){
-				this.error(`You need to specify a name!`);
+				this.toastError(`You need to specify a name!`);
 				return false;
 			}
 			if(this.gradients.some(someGradient => someGradient.name == gradient.name)){
-				this.error("Gradient names must be unqiue.");
+				this.toastError("Gradient names must be unqiue.");
 				return false;
 			}
 			return true;
 		},
 		isGradientValid(){
 			if(!this.duration){
-				this.error(`You need to specify a duration!`);
+				this.toastError(`You need to specify a duration!`);
 				return false;
 			}
 			return true;

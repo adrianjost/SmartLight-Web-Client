@@ -21,8 +21,8 @@ Vue.use(VueRouter);
 import Ripple from 'vue-ripple-directive'
 Vue.directive('ripple', Ripple);
 
-import error from "@/mixins/error.js"
-Vue.mixin(error);
+import toast from "@/mixins/toast.js"
+Vue.mixin(toast);
 
 export default new Vue({
 	router,

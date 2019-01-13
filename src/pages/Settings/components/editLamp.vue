@@ -1,5 +1,5 @@
 <template>
-	<form class="container">
+	<form>
 		<h2>Edit Lamp "{{value.name}}"</h2>
 
 		<SLInput label="Name" type="text" placeholder="Kitchen" v-model="value.name" />

@@ -62,7 +62,7 @@ export default {
 		saveState(){
 			// prevent saving the last color again
 			if((this.colors[this.colors.length - 1]||{}).color === this.currentColor){
-				return this.error("Color is already saved.");
+				return this.toastError("Color is already saved.");
 			}
 
 			this.$store.dispatch("savedStates/insert", {

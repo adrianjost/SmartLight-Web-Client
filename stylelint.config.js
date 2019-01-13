@@ -56,12 +56,22 @@ module.exports = {
 		//"a11y/font-size-is-readable": [true, { "severity": "warning" }],
 		//"a11y/media-prefers-reduced-motion": true, // autofix makes code unmaintainable and unreadable
 		//"a11y/media-prefers-color-scheme": [true, { "severity": "warning" }], // autofix makes code unmaintainable and unreadable
-		"a11y/no-display-none": [true, { "severity": "warning" }],
-		"a11y/no-obsolete-attribute": [true, { "severity": "warning" }],
-		"a11y/no-obsolete-element": [true, { "severity": "warning" }],
-		"a11y/no-spread-text": [true, { "severity": "warning" }],
+		"a11y/no-display-none": [true, {
+			"severity": "warning"
+		}],
+		"a11y/no-obsolete-attribute": [true, {
+			"severity": "warning"
+		}],
+		"a11y/no-obsolete-element": [true, {
+			"severity": "warning"
+		}],
+		"a11y/no-spread-text": [true, {
+			"severity": "warning"
+		}],
 		"a11y/no-outline-none": true,
-		"a11y/no-text-align-justify": [true, { "severity": "warning" }],
+		"a11y/no-text-align-justify": [true, {
+			"severity": "warning"
+		}],
 		"a11y/selector-pseudo-class-focus": true,
 
 		"plugin/declaration-block-no-ignored-properties": true,
@@ -93,7 +103,7 @@ module.exports = {
 		}],
 		*/
 
-	 "order/order": [
+		"order/order": [
 			"custom-properties",
 			"dollar-variables",
 			"at-variables",
