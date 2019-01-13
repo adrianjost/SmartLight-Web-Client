@@ -27,7 +27,7 @@
 <script>
 import Input from "@/components/picker/input";
 import iconNames from "./material-icons";
-console.log(Input);
+
 export default {
 	name: "iconPicker",
 	components: {

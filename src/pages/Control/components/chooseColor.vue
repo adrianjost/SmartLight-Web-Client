@@ -71,7 +71,6 @@ export default {
 			});
 		},
 		apply(){
-			console.log("apply Color", this.currentColor);
 			this.sendHexColor(this.unit, this.currentColor);
 			this.$store.dispatch("units/setState", {
 				id: this.unit.id,
