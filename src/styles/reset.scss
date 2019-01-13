@@ -37,3 +37,32 @@ button {
 code {
 	font-style: italic;
 }
+
+.custom-scrollbar{
+	$scrollbarSize: 4px;
+
+	&::-webkit-scrollbar-track {
+		border-radius: $scrollbarSize;
+		background-color: transparent;
+	}
+
+	&::-webkit-scrollbar {
+		width: $scrollbarSize;
+		height: $scrollbarSize;
+		background-color: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: $scrollbarSize;
+		background-color: var(--color-border);
+		box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+	}
+	&::-webkit-scrollbar-track, &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
+		visibility: hidden;
+	}
+	&:hover, &:focus{
+		&::-webkit-scrollbar-track, &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
+			visibility: visible;
+		}
+	}
+}

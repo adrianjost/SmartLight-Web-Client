@@ -30,6 +30,10 @@
 import BottomNavigation from '@/components/BottomNavigation.vue'
 import AppBarTop from '@/components/AppBarTop.vue'
 
+import { firebase } from '@firebase/app';
+import {config} from '@/helpers/firebaseConfig'
+firebase.initializeApp(config);
+
 export default {
 	name: 'app',
 	components: {
@@ -49,7 +53,7 @@ export default {
 		handleAction(event){
 			this.$eventHub.$emit(event);
 		},
-		resize(event){
+		resize(/* event */){
 			// hide BottomNav when onscreen keyboard opens (mobile devices)
 			// only tested on android
 			// TODO: fix this hack.

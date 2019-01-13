@@ -1,22 +1,27 @@
+import Vue from 'vue'
 import VueRouter from 'vue-router';
-
-import Login from './pages/Login.vue';
-import ControlOverview from './pages/Control/index.vue';
-import Control from './pages/Control/id.vue';
-import SettingsOverview from './pages/Settings/index.vue';
-import Settings from './pages/Settings/id.vue';
 
 import store from './store'
 
+Vue.use(VueRouter)
+
+function loadView(path){
+	return () => import(/* webpackChunkName: "view-[request]" */ `${path}`)
+}
+
 const router = new VueRouter({
-	mode: 'history',
+  mode: 'history',
+  base: process.env.BASE_URL,
 	routes: [
-		{ path: '/login', component: Login, meta: { isPublic: true }},
-		{ path: '/control/:id', component: Control },
-		{ path: '/control', component: ControlOverview },
-		{ path: '/settings/add/:type', component: Settings },
-		{ path: '/settings/edit/:id', component: Settings },
-		{ path: '/settings', component: SettingsOverview },
+		{ path: '/login', component: loadView('./pages/Login.vue') , meta: { isPublic: true }},
+
+		{ path: '/control', component: loadView('./pages/Control/index.vue') },
+		{ path: '/control/:id', component: loadView('./pages/Control/id.vue') },
+
+		{ path: '/settings', component: loadView('./pages/Settings/index.vue') },
+		{ path: '/settings/add/:type', component: loadView('./pages/Settings/id.vue') },
+		{ path: '/settings/edit/:id', component: loadView('./pages/Settings/id.vue') },
+
 		{ path: '/*', redirect: '/control' },
 	]
 });

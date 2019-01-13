@@ -96,7 +96,7 @@ export default {
     },
     title: {
       type: Object,
-      default: () => { text: "" },
+      default: () => { return { text: "" } },
       required: true,
       validator: function (value) {
         return value.text;

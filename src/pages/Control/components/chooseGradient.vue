@@ -105,7 +105,7 @@ export default {
 			}
 			return true;
 		},
-		isGradientValid(gradient){
+		isGradientValid(){
 			if(!this.duration){
 				this.error(`You need to specify a duration!`);
 				return false;
@@ -114,13 +114,13 @@ export default {
 		},
 		saveGradient(){
 			if(!this.isGradientUnqiue(this.currentGradient)){ return; }
-			if(!this.isGradientValid(this.currentGradient)){ return; }
+			if(!this.isGradientValid()){ return; }
 			this.$store.commit("savedStates/add", {
 				data: this.currentGradient
 			});
 		},
 		apply(){
-			if(!this.isGradientValid(this.currentGradient)){ return; }
+			if(!this.isGradientValid()){ return; }
 			this.sendGradient(this.unit, this.currentGradient);
 			this.$store.commit("units/setState", {
 				id: this.unit.id,

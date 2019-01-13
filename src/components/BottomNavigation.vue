@@ -65,7 +65,9 @@ export default {
     },
     actions: {
       type: Array,
-      default: [],
+      default: function () {
+        return [];
+      },
       validator: function (value) {
         return value.length === 2 || value.length === 4
           && value.every(action => {

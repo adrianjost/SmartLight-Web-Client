@@ -13,7 +13,7 @@ syncMapping = [
 import { firebase } from '@firebase/app';
 import '@firebase/auth';
 
-export default function firebaseSync(syncMapping) {
+export default function firebaseSync() {
 	return (store) => {
 		firebase.auth().onAuthStateChanged((user) => {
 			if(user) {

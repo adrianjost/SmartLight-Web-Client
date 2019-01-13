@@ -52,7 +52,7 @@ export default {
 		},
 		value: function(to){
 			if(to !== this.internalValue){
-				this.internalValue = value;
+				this.internalValue = to;
 			}
 		}
 	}

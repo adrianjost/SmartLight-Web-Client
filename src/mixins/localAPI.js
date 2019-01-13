@@ -63,12 +63,12 @@ export default {
 				if(!connection || this.connections[url].readyState >= 2){
 					connection = this.connections[url] = new WebSocket('ws://' + url + ':80');
 				}
-				connection.onopen = (e) => {
+				connection.onopen = () => {
 					// wait for etablished connection then send message
 					// console.log("connected! send message:",message);
 					this._send(connection, message)
 				};
-				connection.onerror = (e) => {
+				connection.onerror = () => {
 					if(hostname){ // prevent loops
 						this.closeConnection(url);
 						return this.send({ip}, message);
@@ -104,7 +104,6 @@ export default {
 		sendGradient({hostname, ip}, gradient) {
 			gradient = JSON.parse(JSON.stringify(gradient));
 			gradient.colors = gradient.colors.map(hexColor => this.hex2rgb(hexColor));
-			gradient.transitionTimes = gradient.transitionTimes;
 			this.send({hostname, ip}, {gradient: gradient})
 		},
 	}

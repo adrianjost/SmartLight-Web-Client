@@ -1,5 +1,5 @@
 <template>
-	<simplebar class="state-list" tag="ul">
+	<div class="state-list custom-scrollbar">
 		<ul class="contents">
 			<li
 				v-for="state in data"
@@ -15,17 +15,11 @@
 				<i class="material-icons">add</i>
 			</li>
 		</ul>
-	</simplebar>
+	</div>
 </template>
 
 <script>
-import simplebar from 'simplebar-vue';
-import 'simplebar/dist/simplebar.min.css';
-
 export default {
-	components: {
-		simplebar
-	},
 	props: {
 		data: {
 			type: Array,

@@ -23,8 +23,9 @@
 </template>
 
 <script>
-import chooseColor from "./components/chooseColor"
-import chooseGradient from "./components/chooseGradient"
+const chooseColor = () => import(/* webpackChunkName: "chooseColor" */ './components/chooseColor');
+const chooseGradient = () => import(/* webpackChunkName: "chooseGradient" */ './components/chooseGradient');
+
 
 import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 
@@ -37,7 +38,7 @@ export default {
 	data(){
 		return {
 			tabNames: ["Color", "Gradient"],
-			activeTab: "Gradient", // TODO switch to "Color"
+			activeTab: "Color",
 		}
 	},
 	created(){

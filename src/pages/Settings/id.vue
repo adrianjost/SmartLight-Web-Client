@@ -12,8 +12,9 @@
 </template>
 
 <script>
-import editLamp from "./components/editLamp"
-import editGroup from "./components/editGroup"
+const editLamp = () => import(/* webpackChunkName: "editLamp" */ './components/editLamp');
+const editGroup = () => import(/* webpackChunkName: "editGroup" */ './components/editGroup');
+
 
 import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 

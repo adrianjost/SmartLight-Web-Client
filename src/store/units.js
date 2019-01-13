@@ -25,7 +25,7 @@ function getIndex(list, unitId){
 }
 
 function isIdUnique(list, id){
-	if(!id){ return false };
+	if(!id){ return false; }
 	return list.every((item) => {
 		return item.id !== id;
 	})
