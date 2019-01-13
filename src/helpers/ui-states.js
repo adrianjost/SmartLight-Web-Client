@@ -27,13 +27,13 @@ const defaultState = {
 	bottomNav: (activeIndex) => {
 		const state = {
 			visible: true,
-			fab: {
+			/*fab: {
 				icon: "add",
 				event: "add",
 				actions: [
 
 				],
-			},
+			},*/
 			actions: [
 				{
 					icon: "settings_remote",

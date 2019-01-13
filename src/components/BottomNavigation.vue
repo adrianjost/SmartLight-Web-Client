@@ -1,7 +1,7 @@
 <template>
-  <nav class="bar">
+  <nav :class="{ bar: true, 'has-fab':fab.icon }">
 
-    <div class="fab-wrapper" @click="sendEvent(fab.event)">
+    <div v-if="fab.icon" class="fab-wrapper" @click="sendEvent(fab.event)">
       <fab class="fab" :icon="fab.icon"/>
     </div>
 
@@ -91,19 +91,21 @@ export default {
 
 <style lang="scss" scoped>
 .bar {
-	$circle-radius: (56px + 16px) / 2;
-	background: var(--color-overlay); // fallback
-	background:
-		radial-gradient(circle at top right, transparent $circle-radius, var(--color-overlay) 0) top left,
-		radial-gradient(circle at top left, transparent $circle-radius, var(--color-overlay) 0) top right;
-	background-repeat: no-repeat;
-	background-size: 50.01% 100%; // the .01% fixes the gap between both gradients (seems like a chrome rendering bug)
 	bottom: 0;
 	left: 0;
 	position: fixed;
 	user-select: none;
 	width: 100%;
 	z-index: 9999;
+	background: var(--color-overlay);
+	&.has-fab{
+		$circle-radius: (56px + 16px) / 2;
+		background-repeat: no-repeat;
+		background-size: 50.01% 100%; // the .01% fixes the gap between both gradients (seems like a chrome rendering bug)
+		background:
+			radial-gradient(circle at top right, transparent $circle-radius, var(--color-overlay) 0) top left,
+			radial-gradient(circle at top left, transparent $circle-radius, var(--color-overlay) 0) top right;
+	}
 }
 
 .container {
