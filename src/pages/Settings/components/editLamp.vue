@@ -10,17 +10,18 @@
 
 		<SLInput label="Tags" type="url" placeholder="Mixer, Oven, ..." v-model="value.tags" hint="seperated by <code>,</code>"/>
 
-		<p>TODO: icon-picker</p>
+		<icon-picker v-model="value.icon" />
 	</form>
 </template>
 
 <script>
-
 import Input from "@/components/picker/input"
+import iconPicker from "@/components/picker/iconPicker"
 
 export default {
 	components: {
-		SLInput: Input
+		SLInput: Input,
+		iconPicker
 	},
 	props: ["value"],
 }

@@ -11,18 +11,20 @@
 			v-model="value.lamps"
 		/>
 
-		<p>TODO: icon-picker</p>
+		<icon-picker v-model="value.icon" />
 	</form>
 </template>
 
 <script>
 import Input from "@/components/picker/input"
+import iconPicker from "@/components/picker/iconPicker"
 import lampPicker from "@/components/picker/lampPicker.vue"
 
 export default {
 	components: {
 		SLInput: Input,
-		lampPicker
+		lampPicker,
+		iconPicker
 	},
 	props: ["value"],
 	computed: {

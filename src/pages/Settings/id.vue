@@ -70,7 +70,7 @@ export default {
     }
 		this.$store.commit("ui/set", {
 			component: "appBarTop",
-			payload: Object.assign(UIStateNestedDefault.appBarTop(this.unit.name || `add ${this.unit.type.toLowerCase()}`), topBarState)
+			payload: Object.assign(UIStateNestedDefault.appBarTop(this.unit.name || `add ${(this.unit.type || '').toLowerCase()}`), topBarState)
 		});
 		this.$store.commit("ui/patch", {
 			component: "bottomNav",
@@ -102,5 +102,15 @@ export default {
 			this.$router.go(-1);
 		},
 	},
+	watch: {
+		unit: function(to, from){
+			if(to === from){ return; }
+
+			this.$store.commit("ui/patch", {
+				component: "appBarTop",
+				payload: { title: { text: to.name }}
+			});
+		}
+	}
 };
 </script>

@@ -54,6 +54,7 @@ export default {
         return {};
       },
       validator: function (value) {
+        if(!Object.keys(value).length){ return true; }
         const isAction = value.event || value.to
         const actionsList = value.actions || [];
         const validActions = actionsList.every((action) => {

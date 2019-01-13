@@ -62,7 +62,7 @@ export default {
 	color: var(--color-text-active-i);
 	display: inline-block;
 	list-style: none;
-	margin: 0 4px;
+	margin: 4px;
 	padding: 16px;
 	position: relative;
 	transition: background-color .2s ease-in-out;
