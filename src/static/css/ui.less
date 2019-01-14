@@ -1,0 +1,176 @@
+:root {
+  --color-primary: #1E88E5;
+  --color-secondary: #E91E63;
+  --color-dark-grey: #222;
+  --color-light-grey: #888;
+  /* var(--main-bg-color); */
+}
+
+
+body{
+    background-color: #f1f1f1;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+a{
+    text-decoration: none !important;
+}
+header{
+    color: #fff;
+    background-color: var(--color-primary);
+    position: fixed;
+    top:0; left:0; right:0;
+    height: 56px;
+    z-index: 100;
+    
+    #navIcon{
+        color: #fff;
+        position: absolute;
+        top:0; bottom:0; left: 0;
+        height: 56px;
+    }
+    #navTitle{
+        position: absolute;
+        top:0; bottom:0; left: 56px;
+        height: 56px;
+        color: #fff;
+        font-size: 20px;
+        line-height: 20px;
+        display: inline-block;
+        padding: 16px 0 20px;
+        vertical-align: top;
+    }
+    ul.actions{
+        position: absolute;
+        top:0; bottom:0; right: 0;
+        list-style: none;
+        margin:0;
+        a{  
+            color: #fff;
+        }
+    }
+    .actions li{
+        display: inline-block;
+        &:not(:last-of-type) i{
+            padding-right: 8px;
+        }
+        &:not(:first-of-type) i{
+            padding-left: 8px;
+        }
+    }
+    i{
+        padding: 16px;
+    }
+}
+main.container{
+    margin: 0 auto;
+    padding: 56px 0;
+}
+
+#app-content{
+    padding: 16px 16px 0;
+    .card{
+        margin-bottom: 16px;
+    }
+    .mdl-list{
+        .mdl-list__item{
+            padding:8px 0;
+            .mdl-list__item-avatar{
+                padding: 8px;
+                font-size: 24px;
+                text-align: center;
+            }
+        }
+    }
+    .nav-tabs {
+        margin-bottom: 16px;
+        a{
+            text-decoration: none !important;
+            padding: 0;
+        }
+        .nav-item{
+            height: 48px;
+            line-height: 48px;
+            font-weight: 500;
+            color: var(--color-dark-grey);
+            text-decoration: none !important;
+            &.active{
+                color: var(--color-primary);
+                border-bottom: 2px solid var(--color-primary);
+            }
+        }
+    }
+    .tab-content .tab-pane{
+        display: none;
+        &.active{
+            display: block;
+        }
+    }
+}
+
+.ui-dialog{
+    top: 16px !important;
+    margin-bottom: 16px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    padding: 0;
+    border: none !important;
+    border-radius: 2px;
+    .ui-dialog-titlebar{
+        border: none;
+        color: #fff;
+        font-weight: 700;
+        font-size: 24px;
+        background-color: var(--color-secondary);
+        border-radius: 0;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        .ui-dialog-titlebar-close{ display: none; }
+    }
+    .ui-dialog-buttonpane{
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+    }
+}
+.mdl-snackbar{
+    bottom: 56px;
+    opacity: .95;
+    .mdl-snackbar__action{
+        color: var(--color-secondary);
+    }
+}
+.bottom-nav{
+    background-color: var(--color-dark-grey);
+    position: fixed;
+    bottom:0; left:0; right:0;
+    z-index: 100;
+    padding:0;
+    height: 56px;
+    a{
+        padding: 8px 0 !important;
+        font-size: 12px;
+        line-height: 16px !important;
+        color: var(--color-light-grey);
+        text-decoration: none !important;
+        i{
+            line-height: 1;
+            display: block;
+            width: 24px;
+            height: 24px;
+            margin: 0 auto;
+        }
+        &:first-of-type {
+            margin-left: 16px;
+        }
+        &:last-of-type {
+            margin-right: 16px;
+        }
+    }
+    a.active{
+        color: #fff;
+    }
+}

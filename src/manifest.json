@@ -1,0 +1,14 @@
+{
+  "manifest_version": 1,
+  "short_name": "SmartLight",
+  "name": "SmartLight",
+  "icons": [
+  
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  ​​"orientation": "portrait",
+  "background_color": "#1E88E5",
+  "theme_color": "#1E88E5"
+}

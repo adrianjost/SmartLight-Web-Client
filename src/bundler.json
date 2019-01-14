@@ -1,0 +1,28 @@
+{
+    "/":[
+        "index.php"
+    ],
+    "/app.js":[
+        "static/js/lib/iro.min.js",
+        "static/js/router.js",
+        "static/js/localstorage.js",
+        "static/js/ui.js",
+        "static/js/base.js",
+        "static/js/picker.js",
+        "static/js/control.js",
+        "static/js/settings.js",
+            "static/js/modes.js",
+            "static/js/lamps.js",
+            "static/js/rooms.js",
+            "static/js/about.js"
+    ],
+    "/app.css":[
+        "static/css/ui.less",
+        "static/css/control.less",
+        "static/css/modes.less",
+        "static/css/lamps.less"
+    ],
+    "/manifest.json":[
+        "manifest.json"
+    ]
+}
