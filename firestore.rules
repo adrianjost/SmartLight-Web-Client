@@ -1,0 +1,25 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+  	// options: get, list, create, update, delete
+
+		function isOwner(){
+    	return request.auth.uid == resource.data.created_by;
+    }
+    function updateIsValid(data){
+    	return request.auth.uid == data.created_by
+          && request.auth.uid == data.updated_by;
+    }
+
+    match /states/{id}{
+			allow read, create, delete: if isOwner();
+      allow update: if isOwner() && updateIsValid(request.resource.data);
+    }
+    match /units/{id}{
+			allow read, create, delete: if isOwner();
+      allow update: if isOwner() && updateIsValid(request.resource.data);
+    }
+    match /users/{userId}{
+    	allow read, write: if request.auth.uid == userId;
+    }
+  }
+}
