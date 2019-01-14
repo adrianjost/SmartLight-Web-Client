@@ -1,5 +1,6 @@
 import { firebase } from '@firebase/app';
 import '@firebase/auth';
+import vm from "@/main.js"
 
 const state = {
 	userInfo: undefined
@@ -21,11 +22,10 @@ const mutations = {
 };
 
 const actions = {
-	async logout(context) {
+	async logout() {
 		try {
 			await firebase.auth().signOut();
-			context.commit('logout');
-			window.location.reload()
+			vm.$router.go("/Login")
 		} catch(error){
 			console.error(error);
 		}

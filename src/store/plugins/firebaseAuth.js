@@ -11,7 +11,7 @@ syncMapping = [
 */
 
 import { firebase } from '@firebase/app';
-import {config} from '@/helpers/firebaseConfig'
+import { config } from '@/helpers/firebaseConfig'
 import '@firebase/auth';
 import '@firebase/firestore';
 

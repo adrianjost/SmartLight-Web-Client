@@ -94,12 +94,12 @@ export default {
 		apply(){
 			// TODO: save new state
 			this.$store.dispatch("units/set", this.unit);
-			this.$router.go(-1);
+			this.$eventHub.$emit('go-back');
 		},
 		delete(){
 			// TODO: save new state
 			this.$store.dispatch("units/delete", this.unit.id);
-			this.$router.go(-1);
+			this.$eventHub.$emit('go-back');
 		},
 	},
 	watch: {
