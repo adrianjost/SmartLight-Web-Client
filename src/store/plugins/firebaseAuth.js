@@ -1,14 +1,4 @@
-/*
-example syncMap with default values
-
-syncMapping = [
-	{
-		dbPath: "", // firebase db path
-		commit: "", // store commit mutation
-		type: "update" // type to use to react to changes
-	}
-]
-*/
+/* eslint-disable no-console */
 
 import { firebase } from '@firebase/app';
 import { config } from '@/helpers/firebaseConfig'

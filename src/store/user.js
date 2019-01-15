@@ -27,7 +27,7 @@ const actions = {
 			await firebase.auth().signOut();
 			vm.$router.go("/Login")
 		} catch(error){
-			console.error(error);
+			console.error(error); // eslint-disable-line no-console
 		}
 	}
 };
