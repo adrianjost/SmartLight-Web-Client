@@ -3,7 +3,8 @@ service cloud.firestore {
   	// options: get, list, create, update, delete
 
 		function isOwner(){
-    	return request.auth.uid == resource.data.created_by;
+    	return (resource != null && request.auth.uid == resource.data.created_by)
+        || (resource == null && request.auth.uid == request.resource.data.created_by);
     }
     function updateIsValid(data){
     	return request.auth.uid == data.created_by
