@@ -1,29 +1,29 @@
 <template>
-	<div id="app">
-		<app-bar-top
-			v-if="appBarTopState.visible"
-			:back_action="appBarTopState.back_action"
-			:title="appBarTopState.title"
-			:actions="appBarTopState.actions"
-			:user_avatar="appBarTopState.user_avatar"
-			@action="handleAction"
-		/>
-		<main
-			class="container"
-			:style="{
-				'padding-top': appBarTopState.visible?'56px':'0',
-				'padding-bottom': bottomNavState.visible?'100px':'0'
-			}"
-		>
-			<router-view v-if="isInitialized"></router-view>
-		</main>
-		<bottom-navigation
-			v-if="bottomNavState.visible"
-			:fab="bottomNavState.fab"
-			:actions="bottomNavState.actions"
-			@action="handleAction"
-		/>
-	</div>
+  <div id="app">
+    <app-bar-top
+      v-if="appBarTopState.visible"
+      :back_action="appBarTopState.back_action"
+      :title="appBarTopState.title"
+      :actions="appBarTopState.actions"
+      :user_avatar="appBarTopState.user_avatar"
+      @action="handleAction"
+    />
+    <main
+      class="container"
+      :style="{
+        'padding-top': appBarTopState.visible?'56px':'0',
+        'padding-bottom': bottomNavState.visible?'100px':'0'
+      }"
+    >
+      <router-view v-if="isInitialized" />
+    </main>
+    <bottom-navigation
+      v-if="bottomNavState.visible"
+      :fab="bottomNavState.fab"
+      :actions="bottomNavState.actions"
+      @action="handleAction"
+    />
+  </div>
 </template>
 
 <script>
@@ -31,7 +31,7 @@ import BottomNavigation from '@/components/BottomNavigation.vue'
 import AppBarTop from '@/components/AppBarTop.vue'
 
 export default {
-	name: 'app',
+	name: 'App',
 	components: {
 		AppBarTop,
 		BottomNavigation
@@ -42,10 +42,36 @@ export default {
 			windowCircumference: 0
 		}
 	},
+	computed: {
+		appBarTopState () {
+			return this.$store.getters["ui/get"]("appBarTop");
+		},
+		bottomNavState () {
+			return this.$store.getters["ui/get"]("bottomNav");
+		},
+		isInitialized () {
+			return this.$store.getters["auth/isAuthenticated"] !== undefined;
+		}
+	},
 	mounted(){
 		this.windowCircumference = window.innerWidth + window.innerHeight;
 	},
+	created() {
+		this.$eventHub.$on('logout', () => {
+			this.$store.dispatch("auth/logout");
+		});
+		window.addEventListener('resize', this.resize);
+		this.$eventHub.$on('go-back', this.goBack );
+	},
+	beforeDestroy(){
+		this.$eventHub.$off("logout");
+		this.$eventHub.$off('go-back', this.goBack);
+
+	},
 	methods: {
+		goBack(){
+			this.$router.go(-1);
+		},
 		handleAction(event){
 			this.$eventHub.$emit(event);
 		},
@@ -66,26 +92,6 @@ export default {
 				});
 				this.showBottomNav = undefined;
 			}
-		}
-	},
-	created() {
-		this.$eventHub.$on('logout', () => {
-			this.$store.dispatch("auth/logout");
-		});
-		window.addEventListener('resize', this.resize);
-	},
-	beforeDestroy(){
-		this.$eventHub.$off("logout");
-	},
-	computed: {
-		appBarTopState () {
-			return this.$store.getters["ui/get"]("appBarTop");
-		},
-		bottomNavState () {
-			return this.$store.getters["ui/get"]("bottomNav");
-		},
-		isInitialized () {
-			return this.$store.getters["auth/isAuthenticated"] !== undefined;
 		}
 	}
 }

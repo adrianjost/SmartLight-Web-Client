@@ -6,18 +6,19 @@ service cloud.firestore {
     	return (resource != null && request.auth.uid == resource.data.created_by)
         || (resource == null && request.auth.uid == request.resource.data.created_by);
     }
-    function updateIsValid(data){
+    function userinfoIsValid(data){
     	return request.auth.uid == data.created_by
           && request.auth.uid == data.updated_by;
     }
 
     match /states/{id}{
 			allow read, create, delete: if isOwner();
-      allow update: if isOwner() && updateIsValid(request.resource.data);
+      allow update: if isOwner() && userinfoIsValid(request.resource.data);
     }
     match /units/{id}{
 			allow read, create, delete: if isOwner();
-      allow update: if isOwner() && updateIsValid(request.resource.data);
+      allow update: if isOwner() && userinfoIsValid(request.resource.data);
+      // TODO: check that groups only contain lamps the user has access to.
     }
     match /users/{userId}{
     	allow read, write: if request.auth.uid == userId;

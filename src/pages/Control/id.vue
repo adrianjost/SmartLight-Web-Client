@@ -1,25 +1,27 @@
 <template>
-	<section class="control">
-		<div class="tab-nav">
-			<div v-for="tab in tabNames"
-				:key="tab"
-				@click="activeTab = tab"
-				:class="{
-					tab: true,
-					active: (activeTab == tab)
-				}">
-				{{tab}}
-			</div>
-		</div>
-		<choose-color
-			v-if="activeTab == 'Color'"
-			:unit="unit"
-		/>
-		<choose-gradient
-			v-if="activeTab == 'Gradient'"
-			:unit="unit"
-		/>
-	</section>
+  <section class="control">
+    <div class="tab-nav">
+      <div
+        v-for="tab in tabNames"
+        :key="tab"
+        :class="{
+          tab: true,
+          active: (activeTab == tab)
+        }"
+        @click="activeTab = tab"
+      >
+        {{ tab }}
+      </div>
+    </div>
+    <choose-color
+      v-if="activeTab == 'Color'"
+      :unit="unit"
+    />
+    <choose-gradient
+      v-if="activeTab == 'Gradient'"
+      :unit="unit"
+    />
+  </section>
 </template>
 
 <script>
@@ -30,7 +32,7 @@ const chooseGradient = () => import(/* webpackChunkName: "chooseGradient" */ './
 import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 
 export default {
-	name: "control-detail",
+	name: "ControlDetail",
 	components: {
 		chooseColor,
 		chooseGradient
@@ -39,6 +41,22 @@ export default {
 		return {
 			tabNames: ["Color", "Gradient"],
 			activeTab: "",
+		}
+	},
+	computed: {
+		unit () {
+			return this.$store.getters["units/get"](this.$route.params.id);
+		},
+	},
+	watch: {
+		unit: function(to, from){
+			if(to === from){ return; }
+			this.setActiveTab(to.state);
+
+			this.$store.commit("ui/patch", {
+				component: "appBarTop",
+				payload: { title: { text: to.name }}
+			});
 		}
 	},
 	created(){
@@ -68,38 +86,16 @@ export default {
 		});
 		this.setActiveTab(this.unit.state);
 
-		this.$eventHub.$on('go-back', this.goBack );
 		this.$eventHub.$on('applied', this.goBack );
 	},
 	beforeDestroy(){
-		this.$eventHub.$off('go-back', this.goBack);
 		this.$eventHub.$off('applied', this.goBack );
 	},
 	methods: {
-		goBack(){
-			this.$router.go(-1);
-		},
 		setActiveTab(state){
 			if(typeof state !== "object"){ return; }
 			if(state.gradient){ this.activeTab = "Gradient"; }
 			if(state.color){ this.activeTab = "Color"; }
-		}
-	},
-	computed: {
-		unit () {
-			return this.$store.getters["units/get"](this.$route.params.id);
-		},
-	},
-	watch: {
-		unit: function(to, from){
-			if(to === from){ return; }
-			this.setActiveTab(to.state);
-
-
-			this.$store.commit("ui/patch", {
-				component: "appBarTop",
-				payload: { title: { text: to.name }}
-			});
 		}
 	}
 };

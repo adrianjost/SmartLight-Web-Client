@@ -1,110 +1,88 @@
-import textColor from "@/mixins/textColor.js";
+import colorConversion from "@/mixins/colorConversion.js";
 
 export default {
 	data(){
 		return {
-			connections: {}
+			connections: {},
+			connectionTimeouts: {},
 		}
 	},
-	mixins: [textColor],
+	mixins: [colorConversion],
 	methods: {
-		_send(connection, message){
-			// gradient testing
-			/*
-			message = {
-				gradient: {
-					colors: [
-						{
-							r: 255,
-							g: 0,
-							b: 0
-						},
-						{
-							r: 0,
-							g: 0,
-							b: 255
-						},
-						{
-							r: 0,
-							g: 255,
-							b: 0
-						},
-						{
-							r: 255,
-							g: 0,
-							b: 0
-						}
-					],
-					transitionTimes: [0, 3, 4, 10],
-					loop: true
-				}
-			}*/
-			connection.send(JSON.stringify(message));
-			//connection.send("J"+JSON.stringify(message.color));
-		},
-		send({hostname, ip}, message){
-			// TODO implement timeout
+		openConnection({ hostname, ip }, cb){
+			// cb is called when the connection is established
 			let url;
-			if(this.connections[hostname]){
-				url = hostname;this.connections[hostname]
-			}else if(this.connections[ip]){
-				url = ip;
-			}else{
-				url = hostname || ip;
-			}
-			if(!url){
-				return new Error("hostname/ip missing");
-			}
-			if(this.connections[url] && this.connections[url].readyState === 1) {
-				//console.log("already connected! send message:",message);
-				this._send( this.connections[url], message)
-			} else {
-				let connection = this.connections[url];
-				if(!connection || this.connections[url].readyState >= 2){
-					connection = this.connections[url] = new WebSocket('ws://' + url + ':80');
-				}
-				connection.onopen = () => {
-					// wait for etablished connection then send message
-					// console.log("connected! send message:",message);
-					this._send(connection, message)
-				};
-				connection.onerror = () => {
-					if(hostname){ // prevent loops
-						this.closeConnection(url);
-						return this.send({ip}, message);
-					}
+			if(this.connections[hostname]){ url = hostname; }
+			else if(this.connections[ip]){ url = ip; }
+			else{ url = hostname || ip; }
+			if(!url){ return new Error("hostname/ip missing"); }
 
-					/*
-					this.$toasted.show(`<span class="toast-container">connection to Lamp failed</span>`, {
-						icon: "sync_problem",
-						action : {
-							text : 'CLOSE',
-							onClick : (e, toastObject) => {
-								toastObject.goAway(0);
-							}
-						},
-					});
-					*/
+			let connection = this.connections[url];
+			if(connection && connection.readyState === 1) { // connection established
+				cb(connection);
+			}else if(!connection || connection.readyState >= 2){ // No active connection => open new Socket
+				connection = this.connections[url] = new WebSocket('ws://' + url + ':80');
+				this.connectionTimeouts[url] = window.setTimeout(() => {
 					this.closeConnection(url);
-				};
+					if(url === hostname && ip){
+						this.openConnection({ ip }, cb);
+					}
+				}, 5000)
 			}
+			connection.onopen = () => {
+				this.disableTimeout(url);
+				cb(connection);
+			};
+			connection.onerror = () => {
+				this.closeConnection(url);
+			};
+			connection.onclose = () => {
+				this.disableTimeout(url);
+				delete this.connections[url];
+			};
 		},
 		closeConnection(url){
 			const connection = this.connections[url];
 			if(!connection){ return; }
-
-			connection.onclose = function () {}; // disable onclose handler first
 			connection.close();
-			delete this.connections[url];
 		},
-		sendHexColor({hostname, ip}, hexColor) {
+		disableTimeout(url){
+			if(delete this.connectionTimeouts[url]){
+				delete this.connectionTimeouts[url];
+			}
+		},
+		extractLampsFromUnit(unit){
+			const { hostname, ip } = unit;
+			if( hostname || ip){
+				return [ unit ];
+			}else{
+				return unit.lamps.map((lampId) => {
+					return this.$store.getters["units/get"](lampId);
+				})
+			}
+		},
+		_send(connection, message){
+			connection.send(JSON.stringify(message));
+		},
+		send(lamps, message){
+			lamps.forEach((lamp) => {
+				const {hostname, ip} = lamp;
+				if(!hostname && !ip){
+					return new Error("hostname and ip missing");
+				}
+				this.openConnection(lamp, (connection) => {
+					this._send( connection, message);
+				})
+			})
+		},
+		sendHexColor(unit, hexColor) {
 			const newColor = this.hex2rgb(hexColor);
-			this.send({hostname, ip}, {color: newColor})
+			this.send(this.extractLampsFromUnit(unit), {color: newColor})
 		},
-		sendGradient({hostname, ip}, gradient) {
+		sendGradient(unit, gradient) {
 			gradient = JSON.parse(JSON.stringify(gradient));
 			gradient.colors = gradient.colors.map(hexColor => this.hex2rgb(hexColor));
-			this.send({hostname, ip}, {gradient: gradient})
+			this.send(this.extractLampsFromUnit(unit), {gradient: gradient})
 		},
 	}
 };

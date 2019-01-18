@@ -1,14 +1,14 @@
 <template>
-	<section class="edit">
-		<edit-lamp
-			v-if="unit.type == 'LAMP'"
-			v-model="unit"
-		/>
-		<edit-group
-			v-if="unit.type == 'GROUP'"
-			v-model="unit"
-		/>
-	</section>
+  <section class="edit">
+    <edit-lamp
+      v-if="unit.type == 'LAMP'"
+      v-model="unit"
+    />
+    <edit-group
+      v-if="unit.type == 'GROUP'"
+      v-model="unit"
+    />
+  </section>
 </template>
 
 <script>
@@ -34,7 +34,7 @@ const defaultGroup = {
 }
 
 export default {
-	name: "settings-detail",
+	name: "SettingsDetail",
 	components: {
 		editLamp,
 		editGroup
@@ -42,6 +42,25 @@ export default {
 	data(){
 		return {
 			unit: {}
+		}
+	},
+	computed: {
+		savedUnit() {
+			return this.$store.getters["units/get"](this.$route.params.id);
+		},
+	},
+	watch: {
+		savedUnit: function(to, from){
+			if(!to || to === from){ return; }
+			this.unit = to;
+		},
+		unit: function(to, from){
+			if(to === from){ return; }
+
+			this.$store.commit("ui/patch", {
+				component: "appBarTop",
+				payload: { title: { text: to.name }}
+			});
 		}
 	},
 	created(){
@@ -84,7 +103,6 @@ export default {
 
 		this.$eventHub.$on('apply', this.apply);
 		this.$eventHub.$on('delete', this.delete);
-		this.$eventHub.$on('go-back', () => { this.$router.go(-1); });
 	},
 	beforeDestroy(){
 		this.$eventHub.$off('apply', this.apply);
@@ -101,16 +119,6 @@ export default {
 			this.$store.dispatch("units/delete", this.unit.id);
 			this.$eventHub.$emit('go-back');
 		},
-	},
-	watch: {
-		unit: function(to, from){
-			if(to === from){ return; }
-
-			this.$store.commit("ui/patch", {
-				component: "appBarTop",
-				payload: { title: { text: to.name }}
-			});
-		}
 	}
 };
 </script>

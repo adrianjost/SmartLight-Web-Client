@@ -13,7 +13,7 @@ import units from './units';
 import savedStates from './savedStates';
 
 // do the magic 🔥🧙‍♂️
-const easyFirestore = createEasyFirestore([user, units, savedStates], {logging: true})
+const easyFirestore = createEasyFirestore([user, units, savedStates], {logging: process.env.NODE_ENV !== 'production'})
 
 export default new Vuex.Store({
 	plugins: [
