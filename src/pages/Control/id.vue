@@ -38,7 +38,7 @@ export default {
 	data(){
 		return {
 			tabNames: ["Color", "Gradient"],
-			activeTab: "Color",
+			activeTab: "",
 		}
 	},
 	created(){
@@ -66,6 +66,7 @@ export default {
 				}
 			})
 		});
+		this.setActiveTab(this.unit.state);
 
 		this.$eventHub.$on('go-back', this.goBack );
 		this.$eventHub.$on('applied', this.goBack );
@@ -78,6 +79,11 @@ export default {
 		goBack(){
 			this.$router.go(-1);
 		},
+		setActiveTab(state){
+			if(typeof state !== "object"){ return; }
+			if(state.gradient){ this.activeTab = "Gradient"; }
+			if(state.color){ this.activeTab = "Color"; }
+		}
 	},
 	computed: {
 		unit () {
@@ -87,6 +93,8 @@ export default {
 	watch: {
 		unit: function(to, from){
 			if(to === from){ return; }
+			this.setActiveTab(to.state);
+
 
 			this.$store.commit("ui/patch", {
 				component: "appBarTop",

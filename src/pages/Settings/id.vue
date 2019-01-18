@@ -74,7 +74,7 @@ export default {
 		});
 		this.$store.commit("ui/patch", {
 			component: "bottomNav",
-			payload: Object.assign(UIStateNestedDefault.bottomNav(0), {
+			payload: Object.assign(UIStateNestedDefault.bottomNav(1), {
 				fab: {
 					icon: "check",
 					event: "apply"
