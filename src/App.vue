@@ -29,6 +29,7 @@
 <script>
 import BottomNavigation from '@/components/BottomNavigation.vue'
 import AppBarTop from '@/components/AppBarTop.vue'
+import hub from "@/mixins/hub.js"
 
 export default {
 	name: 'App',
@@ -36,6 +37,7 @@ export default {
 		AppBarTop,
 		BottomNavigation
 	},
+	mixins: [hub],
 	data(){
 		return {
 			showBottomNav: undefined,

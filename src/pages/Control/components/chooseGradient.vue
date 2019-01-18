@@ -182,7 +182,7 @@ export default {
 					gradient: this.currentGradient
 				}
 			});
-			this.$eventHub.$emit('applied');
+			this.$eventHub.$emit('go-back');
 		}
 	}
 }

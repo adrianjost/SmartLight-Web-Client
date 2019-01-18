@@ -1,3 +1,6 @@
+import { firebase } from '@firebase/app';
+import '@firebase/firestore';
+
 const unitPrototyp = {
   id: undefined,
   name: "",
@@ -21,11 +24,15 @@ const getters = {
 };
 
 const actions = {
-	setState(store, { id, data}) {
-		const currentObjState = store.state.data[id];
-		delete currentObjState.state;
-		const newObject = Object.assign(currentObjState, { state: data });
-		store.dispatch("set", newObject)
+	async setState(store, { id, data}) {
+		const unit = store.state.data[id];
+		if(typeof unit.state === "object"){
+			Object.keys(unit.state).forEach(key => {
+				unit.state[key] = false;
+			})
+		}
+		unit.state = {...unit.state, ...data};
+		store.dispatch("set", unit);
 	},
 };
 
@@ -41,8 +48,9 @@ export default {
 	statePropName: 'data',
 	moduleName: 'units',
 	sync: {
-    where,
-    orderBy
+		where,
+    orderBy,
+		guard: ["background"],
 	},
 	namespaced: true,
 	getters,

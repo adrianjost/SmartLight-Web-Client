@@ -62,7 +62,6 @@ export default {
 	},
 	created(){
 		this.$eventHub.$on('apply', this.apply);
-		this.$on('apply', this.apply);
 		if((this.unit.state || {}).color){
 			this.currentColor = this.unit.state.color;
 		}
@@ -96,7 +95,7 @@ export default {
 					color: this.currentColor
 				}
 			});
-			this.$eventHub.$emit('applied');
+			this.$eventHub.$emit('go-back');
 		}
 	}
 }

@@ -85,11 +85,6 @@ export default {
 			})
 		});
 		this.setActiveTab(this.unit.state);
-
-		this.$eventHub.$on('applied', this.goBack );
-	},
-	beforeDestroy(){
-		this.$eventHub.$off('applied', this.goBack );
 	},
 	methods: {
 		setActiveTab(state){
