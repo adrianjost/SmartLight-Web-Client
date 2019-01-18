@@ -62,50 +62,50 @@ import fabComponent from '@/components/fab.vue'
 //import fab from 'vue-fab'
 
 export default {
-  name:"BottomNavigation",
-  components: {
-    fab: fabComponent
-  },
-  props: {
-    fab: {
-      type: Object,
-      default: function () {
-        return {};
-      },
-      validator: function (value) {
-        if(!Object.keys(value).length){ return true; }
-        const isAction = value.event || value.to
-        const actionsList = value.actions || [];
-        const validActions = actionsList.every((action) => {
-          return action.icon && (action.event || action.to);
-        })
-        // TODO disallow isAction and actionList at the same time
-        return value.icon && (isAction || (actionsList.length > 0 && validActions));
-      }
-    },
-    actions: {
-      type: Array,
-      default: function () {
-        return [];
-      },
-      validator: function (value) {
-        return value.length === 2 || value.length === 4
-          && value.every(action => {
-              return action.icon && (action.to || action.event);
-            })
-          && value.some(action => {
-            return action.active
-          });
-      }
-    },
-  },
-  methods: {
-    sendEvent(eventName){
-      if(eventName){
-        this.$emit('action', eventName);
-      }
-    },
-  }
+	name:"BottomNavigation",
+	components: {
+		fab: fabComponent
+	},
+	props: {
+		fab: {
+			type: Object,
+			default: function () {
+				return {};
+			},
+			validator: function (value) {
+				if(!Object.keys(value).length){ return true; }
+				const isAction = value.event || value.to
+				const actionsList = value.actions || [];
+				const validActions = actionsList.every((action) => {
+					return action.icon && (action.event || action.to);
+				})
+				// TODO disallow isAction and actionList at the same time
+				return value.icon && (isAction || (actionsList.length > 0 && validActions));
+			}
+		},
+		actions: {
+			type: Array,
+			default: function () {
+				return [];
+			},
+			validator: function (value) {
+				return value.length === 2 || value.length === 4
+					&& value.every(action => {
+						return action.icon && (action.to || action.event);
+					})
+					&& value.some(action => {
+						return action.active
+					});
+			}
+		},
+	},
+	methods: {
+		sendEvent(eventName){
+			if(eventName){
+				this.$emit('action', eventName);
+			}
+		},
+	}
 }
 </script>
 

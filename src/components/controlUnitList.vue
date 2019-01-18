@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  props: {
+	props: {
 		controlUnits: {
 			type: Object,
 			required: true

@@ -44,7 +44,7 @@ export default {
 		SLInput: Input,
 		iconPicker
 	},
-  props: {
+	props: {
 		value: {
 			type: Object,
 			required: true

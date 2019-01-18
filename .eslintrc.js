@@ -17,8 +17,8 @@ module.exports = {
       "alignAttributesVertically": true,
       "ignores": []
     }],
-    "vue/script-indent": ["error", "tab"],
     */
+    "vue/script-indent": ["error", "tab"],
   },
   parserOptions: {
     parser: 'babel-eslint'

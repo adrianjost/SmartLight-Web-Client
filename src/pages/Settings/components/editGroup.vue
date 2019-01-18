@@ -37,7 +37,7 @@ export default {
 		lampPicker,
 		iconPicker
 	},
-  props: {
+	props: {
 		value: {
 			type: Object,
 			required: true
