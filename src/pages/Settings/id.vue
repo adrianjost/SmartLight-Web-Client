@@ -1,14 +1,14 @@
 <template>
-  <section class="edit">
-    <edit-lamp
-      v-if="unit.type == 'LAMP'"
-      v-model="unit"
-    />
-    <edit-group
-      v-if="unit.type == 'GROUP'"
-      v-model="unit"
-    />
-  </section>
+	<section class="edit">
+		<edit-lamp
+			v-if="unit.type == 'LAMP'"
+			v-model="unit"
+		/>
+		<edit-group
+			v-if="unit.type == 'GROUP'"
+			v-model="unit"
+		/>
+	</section>
 </template>
 
 <script>

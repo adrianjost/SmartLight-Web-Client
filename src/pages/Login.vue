@@ -1,13 +1,13 @@
 <template>
-  <section class="text-center">
-    <h1 class="header">
-      Welcome
-    </h1>
-    <h2 class="subheader">
-      Sign in to continue
-    </h2>
-    <div id="firebaseui-auth-container" />
-  </section>
+	<section class="text-center">
+		<h1 class="header">
+			Welcome
+		</h1>
+		<h2 class="subheader">
+			Sign in to continue
+		</h2>
+		<div id="firebaseui-auth-container" />
+	</section>
 </template>
 
 <script>

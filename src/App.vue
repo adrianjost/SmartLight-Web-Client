@@ -1,29 +1,29 @@
 <template>
-  <div id="app">
-    <app-bar-top
-      v-if="appBarTopState.visible"
-      :back_action="appBarTopState.back_action"
-      :title="appBarTopState.title"
-      :actions="appBarTopState.actions"
-      :user_avatar="appBarTopState.user_avatar"
-      @action="handleAction"
-    />
-    <main
-      class="container"
-      :style="{
-        'padding-top': appBarTopState.visible?'56px':'0',
-        'padding-bottom': bottomNavState.visible?'100px':'0'
-      }"
-    >
-      <router-view v-if="isInitialized" />
-    </main>
-    <bottom-navigation
-      v-if="bottomNavState.visible"
-      :fab="bottomNavState.fab"
-      :actions="bottomNavState.actions"
-      @action="handleAction"
-    />
-  </div>
+	<div id="app">
+		<app-bar-top
+			v-if="appBarTopState.visible"
+			:back_action="appBarTopState.back_action"
+			:title="appBarTopState.title"
+			:actions="appBarTopState.actions"
+			:user_avatar="appBarTopState.user_avatar"
+			@action="handleAction"
+		/>
+		<main
+			class="container"
+			:style="{
+				'padding-top': appBarTopState.visible?'56px':'0',
+				'padding-bottom': bottomNavState.visible?'100px':'0'
+			}"
+		>
+			<router-view v-if="isInitialized" />
+		</main>
+		<bottom-navigation
+			v-if="bottomNavState.visible"
+			:fab="bottomNavState.fab"
+			:actions="bottomNavState.actions"
+			@action="handleAction"
+		/>
+	</div>
 </template>
 
 <script>

@@ -1,12 +1,12 @@
 <template>
-  <div
-    v-ripple
-    class="fab"
-  >
-    <i class="material-icons">
-      {{ icon }}
-    </i>
-  </div>
+	<div
+		v-ripple
+		class="fab"
+	>
+		<i class="material-icons">
+			{{ icon }}
+		</i>
+	</div>
 </template>
 
 <script>

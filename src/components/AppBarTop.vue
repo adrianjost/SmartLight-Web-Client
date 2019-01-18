@@ -1,90 +1,90 @@
 <template>
-  <header class="bar">
-    <div class="container">
-      <!-- BACK BUTTON -->
-      <template v-if="back_action">
-        <router-link
-          v-if="back_action.to"
-          v-ripple
-          :to="back_action.to"
-          class="navigation_back"
-        >
-          <i class="material-icons">
-            {{ back_action.icon }}
-          </i>
-          <img
-            v-if="back_action && back_action.src"
-            :src="back_action.src"
-            :alt="back_action.alt"
-            class="avatar"
-          >
-        </router-link>
+	<header class="bar">
+		<div class="container">
+			<!-- BACK BUTTON -->
+			<template v-if="back_action">
+				<router-link
+					v-if="back_action.to"
+					v-ripple
+					:to="back_action.to"
+					class="navigation_back"
+				>
+					<i class="material-icons">
+						{{ back_action.icon }}
+					</i>
+					<img
+						v-if="back_action && back_action.src"
+						:src="back_action.src"
+						:alt="back_action.alt"
+						class="avatar"
+					>
+				</router-link>
 
-        <button
-          v-if="back_action.event"
-          v-ripple
-          class="navigation_back"
-          @click="sendEvent(back_action.event)"
-        >
-          <i class="material-icons">
-            {{ back_action.icon }}
-          </i>
-          <img
-            v-if="back_action && back_action.src"
-            :src="back_action.src"
-            :alt="back_action.alt"
-            class="avatar"
-          >
-        </button>
-      </template>
+				<button
+					v-if="back_action.event"
+					v-ripple
+					class="navigation_back"
+					@click="sendEvent(back_action.event)"
+				>
+					<i class="material-icons">
+						{{ back_action.icon }}
+					</i>
+					<img
+						v-if="back_action && back_action.src"
+						:src="back_action.src"
+						:alt="back_action.alt"
+						class="avatar"
+					>
+				</button>
+			</template>
 
 
-      <!-- PAGE TITLE -->
-      <h6
-        class="page_title"
-        @click="sendEvent(title.event)"
-      >
-        {{ title.text }}
-      </h6>
+			<!-- PAGE TITLE -->
+			<h6
+				class="page_title"
+				@click="sendEvent(title.event)"
+			>
+				{{ title.text }}
+			</h6>
 
-      <!-- ACTIONS -->
-      <template v-for="action in actions">
-        <router-link
-          v-if="action.to"
-          :key="action.to + action.icon"
-          v-ripple
-          tag="button"
-          :to="action.to"
-          class="action"
-        >
-          <i class="material-icons">
-            {{ action.icon }}
-          </i>
-        </router-link>
+			<!-- ACTIONS -->
+			<template v-for="action in actions">
+				<router-link
+					v-if="action.to"
+					:key="action.to + action.icon"
+					v-ripple
+					tag="button"
+					:to="action.to"
+					class="action"
+				>
+					<i class="material-icons">
+						{{ action.icon }}
+					</i>
+				</router-link>
 
-        <button
-          v-if="action.event"
-          :key="action.event + action.icon"
-          v-ripple
-          class="action"
-          @click="sendEvent(action.event)"
-        >
-          <i class="material-icons">
-            {{ action.icon }}
-          </i>
-        </button>
-      </template>
+				<button
+					v-if="action.event"
+					:key="action.event + action.icon"
+					v-ripple
+					class="action"
+					@click="sendEvent(action.event)"
+				>
+					<i class="material-icons">
+						{{ action.icon }}
+					</i>
+				</button>
+			</template>
 
-      <!-- USER AVATAR -->
-      <img
-        v-if="user_avatar && user_avatar.src"
-        :src="user_avatar.src"
-        :alt="user_avatar.alt"
-        class="avatar"
-        @click="sendEvent(user_avatar.event)"
-      >
-    </div>
-  </header>
+			<!-- USER AVATAR -->
+			<img
+				v-if="user_avatar && user_avatar.src"
+				:src="user_avatar.src"
+				:alt="user_avatar.alt"
+				class="avatar"
+				@click="sendEvent(user_avatar.event)"
+			>
+		</div>
+	</header>
 </template>
 
 <script>

@@ -1,53 +1,53 @@
 <template>
-  <div>
-    <h2>Lamps:</h2>
-    <control-unit-list
-      :control-units="lamps"
-      add-url="/settings/add/lamp"
-    />
-    <h2>Groups:</h2>
-    <control-unit-list
-      :control-units="groups"
-      add-url="/settings/add/group"
-    />
-    <h2>
-      Your API-Token <small class="no-wrap">
-        (without spaces)
-      </small>
-    </h2>
+	<div>
+		<h2>Lamps:</h2>
+		<control-unit-list
+			:control-units="lamps"
+			add-url="/settings/add/lamp"
+		/>
+		<h2>Groups:</h2>
+		<control-unit-list
+			:control-units="groups"
+			add-url="/settings/add/group"
+		/>
+		<h2>
+			Your API-Token <small class="no-wrap">
+				(without spaces)
+			</small>
+		</h2>
 
-    <!-- REFACTOR: remove v-html -->
-    <!-- eslint-disable vue/no-v-html -->
-    <p
-      class="token"
-      v-html="api_token"
-    />
-    <!-- eslint-enable -->
-    <button
-      v-ripple
-      class="button button-primary"
-      type="button"
-      @click="copyToken"
-    >
-      Copy
-    </button>
-    <button
-      v-ripple
-      class="button"
-      type="button"
-      @click="updateToken"
-    >
-      Update
-    </button>
-    <button
-      v-ripple
-      class="button"
-      type="button"
-      @click="deleteToken"
-    >
-      Delete
-    </button>
-  </div>
+		<!-- REFACTOR: remove v-html -->
+		<!-- eslint-disable vue/no-v-html -->
+		<p
+			class="token"
+			v-html="api_token"
+		/>
+		<!-- eslint-enable -->
+		<button
+			v-ripple
+			class="button button-primary"
+			type="button"
+			@click="copyToken"
+		>
+			Copy
+		</button>
+		<button
+			v-ripple
+			class="button"
+			type="button"
+			@click="updateToken"
+		>
+			Update
+		</button>
+		<button
+			v-ripple
+			class="button"
+			type="button"
+			@click="deleteToken"
+		>
+			Delete
+		</button>
+	</div>
 </template>
 
 <script>

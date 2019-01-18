@@ -1,64 +1,64 @@
 <template>
-  <section>
-    <saved-state-picker
-      :data="gradients"
-      event="loadGradient"
-      add-event="addGradient"
-      context-event="deleteState"
-      @loadGradient="loadGradient"
-      @addGradient="saveGradient"
-      @deleteState="deleteState"
-    />
+	<section>
+		<saved-state-picker
+			:data="gradients"
+			event="loadGradient"
+			add-event="addGradient"
+			context-event="deleteState"
+			@loadGradient="loadGradient"
+			@addGradient="saveGradient"
+			@deleteState="deleteState"
+		/>
 
-    <div class="inputs">
-      <input
-        id="gradient-name"
-        v-model="name"
-        class="input"
-        type="text"
-        placeholder="gradient-name"
-      >
-      <div class="input inputs duration">
-        <input
-          id="minutes"
-          v-model="minutes"
-          class="input"
-          type="number"
-          placeholder="5"
-        ><label for="minutes">
-          min
-        </label>
-        <input
-          id="seconds"
-          v-model="seconds"
-          class="input"
-          type="number"
-          placeholder="0"
-        ><label for="seconds">
-          s
-        </label>
-      </div>
-      <toggle-button
-        v-model="loop"
-        :labels="{checked: 'loop', unchecked: 'loop'}"
-      />
-    </div>
+		<div class="inputs">
+			<input
+				id="gradient-name"
+				v-model="name"
+				class="input"
+				type="text"
+				placeholder="gradient-name"
+			>
+			<div class="input inputs duration">
+				<input
+					id="minutes"
+					v-model="minutes"
+					class="input"
+					type="number"
+					placeholder="5"
+				><label for="minutes">
+					min
+				</label>
+				<input
+					id="seconds"
+					v-model="seconds"
+					class="input"
+					type="number"
+					placeholder="0"
+				><label for="seconds">
+					s
+				</label>
+			</div>
+			<toggle-button
+				v-model="loop"
+				:labels="{checked: 'loop', unchecked: 'loop'}"
+			/>
+		</div>
 
-    <multi-slider
-      :color.sync="currentColor"
-      :gradient.sync="relativeGradient"
-    />
-    <color-picker
-      v-model="currentColor"
-      class="color-picker"
-      :config="{
-        width: 250,
-        height: 300,
-        sliderMargin: 16,
-        markerRadius: 10
-      }"
-    />
-  </section>
+		<multi-slider
+			:color.sync="currentColor"
+			:gradient.sync="relativeGradient"
+		/>
+		<color-picker
+			v-model="currentColor"
+			class="color-picker"
+			:config="{
+				width: 250,
+				height: 300,
+				sliderMargin: 16,
+				markerRadius: 10
+			}"
+		/>
+	</section>
 </template>
 
 <script>

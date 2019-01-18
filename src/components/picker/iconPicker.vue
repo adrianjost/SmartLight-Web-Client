@@ -1,45 +1,45 @@
 <template>
-  <div>
-    <div class="inputs">
-      <div
-        class="icon current"
-        @click="query = value"
-      >
-        <i class="material-icons">
-          {{ value }}
-        </i>
-      </div>
-      <SLInput
-        v-model="query"
-        class="search"
-        label="Search for Icon"
-        type="text"
-        :placeholder="value"
-      />
-    </div>
+	<div>
+		<div class="inputs">
+			<div
+				class="icon current"
+				@click="query = value"
+			>
+				<i class="material-icons">
+					{{ value }}
+				</i>
+			</div>
+			<SLInput
+				v-model="query"
+				class="search"
+				label="Search for Icon"
+				type="text"
+				:placeholder="value"
+			/>
+		</div>
 
-    <ul
-      v-if="filteredIcons.length"
-      class="icons"
-    >
-      <li
-        v-for="icon of filteredIcons"
-        :key="icon"
-        :class="{icon: true, selected: (value === icon)}"
-        @click="check(icon)"
-      >
-        <i class="material-icons">
-          {{ icon }}
-        </i>
-      </li>
-    </ul>
-    <p
-      v-else
-      class="not-found"
-    >
-      No icons found.
-    </p>
-  </div>
+		<ul
+			v-if="filteredIcons.length"
+			class="icons"
+		>
+			<li
+				v-for="icon of filteredIcons"
+				:key="icon"
+				:class="{icon: true, selected: (value === icon)}"
+				@click="check(icon)"
+			>
+				<i class="material-icons">
+					{{ icon }}
+				</i>
+			</li>
+		</ul>
+		<p
+			v-else
+			class="not-found"
+		>
+			No icons found.
+		</p>
+	</div>
 </template>
 
 <script>

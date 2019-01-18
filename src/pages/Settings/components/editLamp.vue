@@ -1,38 +1,38 @@
 <template>
-  <form>
-    <h2>Edit Lamp "{{ value.name }}"</h2>
+	<form>
+		<h2>Edit Lamp "{{ value.name }}"</h2>
 
-    <SLInput
-      v-model="value.name"
-      label="Name"
-      type="text"
-      placeholder="Kitchen"
-    />
+		<SLInput
+			v-model="value.name"
+			label="Name"
+			type="text"
+			placeholder="Kitchen"
+		/>
 
-    <SLInput
-      v-model="value.hostname"
-      label="Hostname"
-      type="text"
-      placeholder="smartlight-kitchen"
-    />
+		<SLInput
+			v-model="value.hostname"
+			label="Hostname"
+			type="text"
+			placeholder="smartlight-kitchen"
+		/>
 
-    <SLInput
-      v-model="value.ip"
-      label="IP"
-      type="url"
-      placeholder="192.168.2.123"
-    />
+		<SLInput
+			v-model="value.ip"
+			label="IP"
+			type="url"
+			placeholder="192.168.2.123"
+		/>
 
-    <SLInput
-      v-model="value.tags"
-      label="Tags"
-      type="url"
-      placeholder="Mixer, Oven, ..."
-      hint="seperated by <code>,</code>"
-    />
+		<SLInput
+			v-model="value.tags"
+			label="Tags"
+			type="url"
+			placeholder="Mixer, Oven, ..."
+			hint="seperated by <code>,</code>"
+		/>
 
-    <icon-picker v-model="value.icon" />
-  </form>
+		<icon-picker v-model="value.icon" />
+	</form>
 </template>
 
 <script>

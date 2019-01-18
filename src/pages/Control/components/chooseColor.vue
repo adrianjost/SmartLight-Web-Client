@@ -1,25 +1,25 @@
 <template>
-  <section>
-    <saved-state-picker
-      :data="colors"
-      event="loadColor"
-      add-event="addColor"
-      context-event="deleteState"
-      @loadColor="loadColor"
-      @addColor="saveState"
-      @deleteState="deleteState"
-    />
-    <color-picker
-      v-model="currentColor"
-      class="color-picker"
-      :config="{
-        width: 250,
-        height: 300,
-        sliderMargin: 16,
-        markerRadius: 10
-      }"
-    />
-  </section>
+	<section>
+		<saved-state-picker
+			:data="colors"
+			event="loadColor"
+			add-event="addColor"
+			context-event="deleteState"
+			@loadColor="loadColor"
+			@addColor="saveState"
+			@deleteState="deleteState"
+		/>
+		<color-picker
+			v-model="currentColor"
+			class="color-picker"
+			:config="{
+				width: 250,
+				height: 300,
+				sliderMargin: 16,
+				markerRadius: 10
+			}"
+		/>
+	</section>
 </template>
 
 <script>

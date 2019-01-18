@@ -1,8 +1,8 @@
 <template>
-  <div
-    :id="'iro-'+id"
-    class="color-picker"
-  />
+	<div
+		:id="'iro-'+id"
+		class="color-picker"
+	/>
 </template>
 
 <script>

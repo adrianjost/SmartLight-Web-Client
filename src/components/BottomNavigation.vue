@@ -1,59 +1,59 @@
 <template>
-  <nav :class="{ bar: true, 'has-fab':fab.icon }">
-    <div
-      v-if="fab.icon"
-      class="fab-wrapper"
-      @click="sendEvent(fab.event)"
-    >
-      <fab
-        class="fab"
-        :icon="fab.icon"
-      />
-    </div>
+	<nav :class="{ bar: true, 'has-fab':fab.icon }">
+		<div
+			v-if="fab.icon"
+			class="fab-wrapper"
+			@click="sendEvent(fab.event)"
+		>
+			<fab
+				class="fab"
+				:icon="fab.icon"
+			/>
+		</div>
 
-    <ul class="container">
-      <template v-for="action in actions">
-        <li
-          :key="(action.to || action.event) + action.icon"
-          class="contents"
-        >
-          <router-link
-            v-if="action.to"
-            v-ripple
-            :to="action.to"
-            :class="{'nav-item': true, 'active': action.active}"
-          >
-            <i class="material-icons">
-              {{ action.icon }}
-            </i>
-            <span
-              v-if="action.name"
-              class="name"
-            >
-              {{ action.name }}
-            </span>
-          </router-link>
+		<ul class="container">
+			<template v-for="action in actions">
+				<li
+					:key="(action.to || action.event) + action.icon"
+					class="contents"
+				>
+					<router-link
+						v-if="action.to"
+						v-ripple
+						:to="action.to"
+						:class="{'nav-item': true, 'active': action.active}"
+					>
+						<i class="material-icons">
+							{{ action.icon }}
+						</i>
+						<span
+							v-if="action.name"
+							class="name"
+						>
+							{{ action.name }}
+						</span>
+					</router-link>
 
-          <button
-            v-else
-            v-ripple
-            :class="{'nav-item': true, 'active': action.active}"
-            @click="sendEvent(action.event)"
-          >
-            <i class="material-icons">
-              {{ action.icon }}
-            </i>
-            <span
-              v-if="action.name"
-              class="name"
-            >
-              {{ action.name }}
-            </span>
-          </button>
-        </li>
-      </template>
-    </ul>
-  </nav>
+					<button
+						v-else
+						v-ripple
+						:class="{'nav-item': true, 'active': action.active}"
+						@click="sendEvent(action.event)"
+					>
+						<i class="material-icons">
+							{{ action.icon }}
+						</i>
+						<span
+							v-if="action.name"
+							class="name"
+						>
+							{{ action.name }}
+						</span>
+					</button>
+				</li>
+			</template>
+		</ul>
+	</nav>
 </template>
 
 <script>

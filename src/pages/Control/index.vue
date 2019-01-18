@@ -1,12 +1,12 @@
 <template>
-  <div class="control-units">
-    <control-unit
-      v-for="unit in units"
-      :key="unit.id"
-      class="control-unit"
-      :data="unit"
-    />
-  </div>
+	<div class="control-units">
+		<control-unit
+			v-for="unit in units"
+			:key="unit.id"
+			class="control-unit"
+			:data="unit"
+		/>
+	</div>
 </template>
 
 <script>

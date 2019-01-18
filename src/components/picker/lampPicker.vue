@@ -1,19 +1,19 @@
 <template>
-  <ul class="lamps">
-    <li
-      v-for="lamp in lamps"
-      :key="lamp.id"
-      :class="{
-        lamp: true,
-        checked: value.includes(lamp.id)
-      }"
-      @click="toggle(lamp.id)"
-    >
-      <i class="material-icons">
-        {{ lamp.icon }}
-      </i>
-    </li>
-  </ul>
+	<ul class="lamps">
+		<li
+			v-for="lamp in lamps"
+			:key="lamp.id"
+			:class="{
+				lamp: true,
+				checked: value.includes(lamp.id),
+			}"
+			@click.prevent="toggleSelection(lamp.id)"
+		>
+			<i class="material-icons">
+				{{ lamp.icon }}
+			</i>
+		</li>
+	</ul>
 </template>
 
 <script>
@@ -34,16 +34,18 @@ export default {
 		}
 	},
 	methods: {
-		toggle(lampId){
-			const index = this.value.indexOf(lampId);
-			if(index >= 0){
-				// delete from list
-				let newValue = [...this.value]
-				newValue.splice(index, 1)
-				this.$emit("input", newValue);
-			}else{
-				// add to list
-				this.$emit("input", [...this.value, lampId]);
+		toggleSelection(lampId){
+			return () => {
+				const index = this.value.indexOf(lampId);
+				if(index >= 0){
+					// delete from list
+					let newValue = [...this.value]
+					newValue.splice(index, 1)
+					this.$emit("input", newValue);
+				}else{
+					// add to list
+					this.$emit("input", [...this.value, lampId]);
+				}
 			}
 		}
 	}

@@ -1,30 +1,30 @@
 <template>
-  <div
-    class="multi-slider"
-    :style="{ background: background }"
-    @mousedown.prevent="start"
-    @touchstart.prevent="start"
-  >
-    <GlobalEvents
-      @mousemove="move"
-      @touchmove="move"
-      @mouseup="end"
-      @touchend="end"
-    />
-    <div
-      ref="markers"
-      class="markers"
-    >
-      <div
-        v-for="(marker, index) in markers"
-        :key="index"
-        :style="{ left: marker.position + '%', background: marker.color }"
-        :class="{ marker: true, active: marker.active }"
-        :data-index="index"
-        tabindex="0"
-      />
-    </div>
-  </div>
+	<div
+		class="multi-slider"
+		:style="{ background: background }"
+		@mousedown.prevent="start"
+		@touchstart.prevent="start"
+	>
+		<GlobalEvents
+			@mousemove="move"
+			@touchmove="move"
+			@mouseup="end"
+			@touchend="end"
+		/>
+		<div
+			ref="markers"
+			class="markers"
+		>
+			<div
+				v-for="(marker, index) in markers"
+				:key="index"
+				:style="{ left: marker.position + '%', background: marker.color }"
+				:class="{ marker: true, active: marker.active }"
+				:data-index="index"
+				tabindex="0"
+			/>
+		</div>
+	</div>
 </template>
 
 <script>

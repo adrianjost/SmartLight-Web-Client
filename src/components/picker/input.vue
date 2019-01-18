@@ -1,27 +1,27 @@
 <template>
-  <div>
-    <label>
-      <span :class="{label: true, active: (internalValue && internalValue !== 0)}">
-        {{ label }}
-      </span>
-      <input
-        v-model="internalValue"
-        :type="type"
-        :placeholder="placeholder"
-        :required="required"
-      >
-    </label>
-    <small
-      v-if="hint"
-      class="hint"
-    >
-      {{ hint }}
-    </small>
-    <slot
-      v-else
-      name="hint"
-    />
-  </div>
+	<div>
+		<label>
+			<span :class="{label: true, active: (internalValue && internalValue !== 0)}">
+				{{ label }}
+			</span>
+			<input
+				v-model="internalValue"
+				:type="type"
+				:placeholder="placeholder"
+				:required="required"
+			>
+		</label>
+		<small
+			v-if="hint"
+			class="hint"
+		>
+			{{ hint }}
+		</small>
+		<slot
+			v-else
+			name="hint"
+		/>
+	</div>
 </template>
 
 <script>

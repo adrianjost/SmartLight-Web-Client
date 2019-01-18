@@ -1,27 +1,27 @@
 <template>
-  <section class="control">
-    <div class="tab-nav">
-      <div
-        v-for="tab in tabNames"
-        :key="tab"
-        :class="{
-          tab: true,
-          active: (activeTab == tab)
-        }"
-        @click="activeTab = tab"
-      >
-        {{ tab }}
-      </div>
-    </div>
-    <choose-color
-      v-if="activeTab == 'Color'"
-      :unit="unit"
-    />
-    <choose-gradient
-      v-if="activeTab == 'Gradient'"
-      :unit="unit"
-    />
-  </section>
+	<section class="control">
+		<div class="tab-nav">
+			<div
+				v-for="tab in tabNames"
+				:key="tab"
+				:class="{
+					tab: true,
+					active: (activeTab == tab),
+				}"
+				@click.prevent="setActiveTab(tab)"
+			>
+				{{ tab }}
+			</div>
+		</div>
+		<choose-color
+			v-if="activeTab == 'Color'"
+			:unit="unit"
+		/>
+		<choose-gradient
+			v-if="activeTab == 'Gradient'"
+			:unit="unit"
+		/>
+	</section>
 </template>
 
 <script>
@@ -93,9 +93,17 @@ export default {
 	},
 	methods: {
 		setActiveTab(state){
-			if(typeof state !== "object"){ return; }
-			if(state.gradient){ this.activeTab = "Gradient"; }
-			if(state.color){ this.activeTab = "Color"; }
+			if(typeof state === "string"){
+				// TODO: refactor this ugly double use of this method.
+				return () => {
+					this.activeTab = state;
+				}
+			}
+			if(typeof state === "object"){
+				if(state.gradient){ this.activeTab = "Gradient"; }
+				if(state.color){ this.activeTab = "Color"; }
+				return;
+			}
 		}
 	}
 };
