@@ -1,26 +1,39 @@
 <template>
-	<div class="units">
-		<router-link
-			class="unit"
-			v-for="controlUnit in controlUnits"
-			:key="controlUnit.id"
-			:to="'/settings/edit/'+ controlUnit.id"
-			:style="{background: controlUnit.background}"
-		>
-			<i class="material-icons">{{controlUnit.icon}}</i>
-		</router-link>
-		<router-link
-			class="unit add"
-			:to="addUrl"
-		>
-			<i class="material-icons">add</i>
-		</router-link>
-	</div>
+  <div class="units">
+    <router-link
+      v-for="controlUnit in controlUnits"
+      :key="controlUnit.id"
+      class="unit"
+      :to="'/settings/edit/'+ controlUnit.id"
+      :style="{background: controlUnit.background}"
+    >
+      <i class="material-icons">
+        {{ controlUnit.icon }}
+      </i>
+    </router-link>
+    <router-link
+      class="unit add"
+      :to="addUrl"
+    >
+      <i class="material-icons">
+        add
+      </i>
+    </router-link>
+  </div>
 </template>
 
 <script>
 export default {
-	props: ["controlUnits", "addUrl"]
+  props: {
+		controlUnits: {
+			type: Object,
+			required: true
+		},
+		addUrl: {
+			type: String,
+			required: true,
+		}
+	},
 }
 </script>
 

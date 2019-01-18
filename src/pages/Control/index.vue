@@ -1,12 +1,12 @@
 <template>
-	<div class="control-units">
-		<control-unit
-			class="control-unit"
-			v-for="unit in units"
-			:key="unit.id"
-			:data="unit"
-		/>
-	</div>
+  <div class="control-units">
+    <control-unit
+      v-for="unit in units"
+      :key="unit.id"
+      class="control-unit"
+      :data="unit"
+    />
+  </div>
 </template>
 
 <script>
@@ -19,6 +19,11 @@ export default {
 		ControlUnit
 	},
 	mixins: [unitBackground],
+	computed: {
+		units() {
+			return (this.$store.getters["units/list"] || []).map(unit => this.addBackground(unit));
+		}
+	},
 	created(){
 		this.$store.commit("ui/set", {
 			component: "appBarTop",
@@ -31,11 +36,6 @@ export default {
 			component: "bottomNav",
 			payload: UIStateDefault.bottomNav(0)
 		});
-	},
-	computed: {
-		units() {
-			return (this.$store.getters["units/list"] || []).map(unit => this.addBackground(unit));
-		}
 	}
 };
 </script>

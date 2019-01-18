@@ -1,39 +1,64 @@
 <template>
-	<section>
-			<saved-state-picker
-				:data="gradients"
-				event="loadGradient"
-				@loadGradient="loadGradient"
-				addEvent="addGradient"
-				@addGradient="saveGradient"
-				contextEvent="deleteState"
-				@deleteState="deleteState"
-			/>
+  <section>
+    <saved-state-picker
+      :data="gradients"
+      event="loadGradient"
+      add-event="addGradient"
+      context-event="deleteState"
+      @loadGradient="loadGradient"
+      @addGradient="saveGradient"
+      @deleteState="deleteState"
+    />
 
-			<div class="inputs">
-				<input id="gradient-name" class="input" type="text" v-model="name" placeholder="gradient-name">
-				<div class="input inputs duration">
-					<input id="minutes" class="input" type="number" v-model="minutes" placeholder="5"><label for="minutes">min</label>
-					<input id="seconds" class="input" type="number" v-model="seconds" placeholder="0"><label for="seconds">s</label>
-				</div>
-				<toggle-button v-model="loop" :labels="{checked: 'loop', unchecked: 'loop'}"/>
-			</div>
+    <div class="inputs">
+      <input
+        id="gradient-name"
+        v-model="name"
+        class="input"
+        type="text"
+        placeholder="gradient-name"
+      >
+      <div class="input inputs duration">
+        <input
+          id="minutes"
+          v-model="minutes"
+          class="input"
+          type="number"
+          placeholder="5"
+        ><label for="minutes">
+          min
+        </label>
+        <input
+          id="seconds"
+          v-model="seconds"
+          class="input"
+          type="number"
+          placeholder="0"
+        ><label for="seconds">
+          s
+        </label>
+      </div>
+      <toggle-button
+        v-model="loop"
+        :labels="{checked: 'loop', unchecked: 'loop'}"
+      />
+    </div>
 
-			<multi-slider
-				:color.sync="currentColor"
-				:gradient.sync="relativeGradient"
-			/>
-			<color-picker
-				class="color-picker"
-				v-model="currentColor"
-				:config="{
-					width: 250,
-					height: 300,
-					sliderMargin: 16,
-					markerRadius: 10
-				}"
-			/>
-	</section>
+    <multi-slider
+      :color.sync="currentColor"
+      :gradient.sync="relativeGradient"
+    />
+    <color-picker
+      v-model="currentColor"
+      class="color-picker"
+      :config="{
+        width: 250,
+        height: 300,
+        sliderMargin: 16,
+        markerRadius: 10
+      }"
+    />
+  </section>
 </template>
 
 <script>
@@ -46,7 +71,7 @@ import { undoableStateDelete } from "@/mixins/undoableStateDelete.js"
 import localAPI from "@/mixins/localAPI.js"
 
 export default {
-	name: "choose-gradient",
+	name: "ChooseGradient",
 	components: {
 		savedStatePicker,
 		colorPicker,
@@ -54,7 +79,12 @@ export default {
 		ToggleButton
 	},
 	mixins: [undoableStateDelete("gradients"), localAPI],
-	props: ["unit"],
+	props: {
+		unit: {
+			type: Object,
+			required: true
+		},
+	},
 	data(){
 		return {
 			currentColor: "#ffffff",
@@ -64,6 +94,32 @@ export default {
 			seconds: undefined,
 			loop: true // TODO: add toggle for this option
 		}
+	},
+	computed: {
+		gradients() {
+			return this.$store.getters["savedStates/list-gradients"];
+		},
+		states() {
+			return this.$store.getters["savedStates/list"];
+		},
+		currentGradient(){
+			if(!this.relativeGradient){ return; }
+			return {
+				type: "gradient",
+				name: this.name || "",
+				colors: this.relativeGradient.map(marker => marker.color) || [],
+				transitionTimes: this.relativeGradient.map(marker => Math.round(marker.position * this.duration * 10)) || [], // * 10 to convert to ms
+				loop: this.loop,
+			}
+		},
+		duration(){
+			return parseInt(((this.minutes || 0) * 60) + (this.seconds || 0), 10);
+		}
+	},
+	watch: {
+		currentColor: function(to){
+			this.sendHexColor(this.unit, to);
+		},
 	},
 	created(){
 		this.$eventHub.$on('apply', this.apply);
@@ -127,32 +183,6 @@ export default {
 				}
 			});
 			this.$eventHub.$emit('applied');
-		}
-	},
-	watch: {
-		currentColor: function(to){
-			this.sendHexColor(this.unit, to);
-		},
-	},
-	computed: {
-		gradients() {
-			return this.$store.getters["savedStates/list-gradients"];
-		},
-		states() {
-			return this.$store.getters["savedStates/list"];
-		},
-		currentGradient(){
-			if(!this.relativeGradient){ return; }
-			return {
-				type: "gradient",
-				name: this.name || "",
-				colors: this.relativeGradient.map(marker => marker.color) || [],
-				transitionTimes: this.relativeGradient.map(marker => Math.round(marker.position * this.duration * 10)) || [], // * 10 to convert to ms
-				loop: this.loop,
-			}
-		},
-		duration(){
-			return parseInt(((this.minutes || 0) * 60) + (this.seconds || 0), 10);
 		}
 	}
 }

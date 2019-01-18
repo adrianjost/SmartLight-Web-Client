@@ -1,17 +1,19 @@
 <template>
-	<ul class="lamps">
-		<li
-			v-for="lamp in lamps"
-			:key="lamp.id"
-			@click="toggle(lamp.id)"
-			:class="{
-				lamp: true,
-				checked: value.includes(lamp.id)
-			}"
-		>
-			<i class="material-icons">{{lamp.icon}}</i>
-		</li>
-	</ul>
+  <ul class="lamps">
+    <li
+      v-for="lamp in lamps"
+      :key="lamp.id"
+      :class="{
+        lamp: true,
+        checked: value.includes(lamp.id)
+      }"
+      @click="toggle(lamp.id)"
+    >
+      <i class="material-icons">
+        {{ lamp.icon }}
+      </i>
+    </li>
+  </ul>
 </template>
 
 <script>

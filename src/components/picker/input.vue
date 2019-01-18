@@ -1,16 +1,27 @@
 <template>
-	<div>
-		<label>
-			<span :class="{label: true, active: (internalValue && internalValue !== 0)}">{{label}}</span>
-			<input
-				:type="type"
-				v-model="internalValue"
-				:placeholder="placeholder"
-				:required="required"
-			/>
-		</label>
-		<small v-if="hint" v-html="hint" class="hint"/>
-	</div>
+  <div>
+    <label>
+      <span :class="{label: true, active: (internalValue && internalValue !== 0)}">
+        {{ label }}
+      </span>
+      <input
+        v-model="internalValue"
+        :type="type"
+        :placeholder="placeholder"
+        :required="required"
+      >
+    </label>
+    <small
+      v-if="hint"
+      class="hint"
+    >
+      {{ hint }}
+    </small>
+    <slot
+      v-else
+      name="hint"
+    />
+  </div>
 </template>
 
 <script>
@@ -18,6 +29,7 @@ export default {
 	name: "SLInput",
 	props: {
 		value: {
+			type: String,
 			required: true
 		},
 		label: {
@@ -37,7 +49,8 @@ export default {
 			default: false
 		},
 		hint: {
-			type: String
+			type: String,
+			default: ""
 		}
 	},
 	data() {

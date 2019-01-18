@@ -1,21 +1,25 @@
 <template>
-	<div class="state-list custom-scrollbar">
-		<ul class="contents">
-			<li
-				v-for="state in data"
-				:key="state.id"
-				:style="{background: state.background}"
-				@click="sendEvent(event, state.id)"
-				@contextmenu.prevent="sendEvent(contextEvent, state.id)"
-				class="state"
-			>
-			</li>
+  <div class="state-list custom-scrollbar">
+    <ul class="contents">
+      <li
+        v-for="state in data"
+        :key="state.id"
+        :style="{background: state.background}"
+        class="state"
+        @click="sendEvent(event, state.id)"
+        @contextmenu.prevent="sendEvent(contextEvent, state.id)"
+      />
 
-			<li class="state add" @click="sendEvent(addEvent)">
-				<i class="material-icons">add</i>
-			</li>
-		</ul>
-	</div>
+      <li
+        class="state add"
+        @click="sendEvent(addEvent)"
+      >
+        <i class="material-icons">
+          add
+        </i>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>

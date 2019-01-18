@@ -1,7 +1,12 @@
 <template>
-	<div class="fab" v-ripple>
-		<i class="material-icons">{{icon}}</i>
-	</div>
+  <div
+    v-ripple
+    class="fab"
+  >
+    <i class="material-icons">
+      {{ icon }}
+    </i>
+  </div>
 </template>
 
 <script>
@@ -10,8 +15,13 @@ DON'T USE THIS
 replace this code with a fork of vue-fab that enables the missing features
 */
 export default {
-	name:"fab",
-	props: ["icon"]
+	name:"Fab",
+	props: {
+		icon: {
+			type: String,
+			required: true
+		},
+	},
 }
 </script>
 

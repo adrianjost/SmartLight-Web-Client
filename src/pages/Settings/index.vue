@@ -1,22 +1,53 @@
 <template>
-	<div>
-		<h2>Lamps:</h2>
-		<control-unit-list
-			:control-units="lamps"
-			add-url="/settings/add/lamp"
-		/>
-		<h2>Groups:</h2>
-		<control-unit-list
-			:control-units="groups"
-			add-url="/settings/add/group"
-		/>
-		<h2>Your API-Token <small class="no-wrap">(without spaces)</small></h2>
+  <div>
+    <h2>Lamps:</h2>
+    <control-unit-list
+      :control-units="lamps"
+      add-url="/settings/add/lamp"
+    />
+    <h2>Groups:</h2>
+    <control-unit-list
+      :control-units="groups"
+      add-url="/settings/add/group"
+    />
+    <h2>
+      Your API-Token <small class="no-wrap">
+        (without spaces)
+      </small>
+    </h2>
 
-		<p class="token" v-html="api_token"></p>
-		<button class="button button-primary" v-ripple @click="copyToken" type="button">Copy</button>
-		<button class="button" v-ripple @click="updateToken" type="button">Update</button>
-		<button class="button" v-ripple @click="deleteToken" type="button">Delete</button>
-	</div>
+    <!-- REFACTOR: remove v-html -->
+    <!-- eslint-disable vue/no-v-html -->
+    <p
+      class="token"
+      v-html="api_token"
+    />
+    <!-- eslint-enable -->
+    <button
+      v-ripple
+      class="button button-primary"
+      type="button"
+      @click="copyToken"
+    >
+      Copy
+    </button>
+    <button
+      v-ripple
+      class="button"
+      type="button"
+      @click="updateToken"
+    >
+      Update
+    </button>
+    <button
+      v-ripple
+      class="button"
+      type="button"
+      @click="deleteToken"
+    >
+      Delete
+    </button>
+  </div>
 </template>
 
 <script>
@@ -29,6 +60,20 @@ export default {
 		controlUnitList
 	},
 	mixins: [unitBackground],
+	computed: {
+		user () {
+			return this.$store.getters["auth/get"];
+		},
+		lamps() {
+			return this.$store.getters["units/list-lamps"].map(lamp => this.addBackground(lamp));
+		},
+		groups() {
+			return this.$store.getters["units/list-groups"].map(group => this.addBackground(group));
+		},
+		api_token() {
+			return this.groupString(this.$store.getters["user/api_token"] || "", 4);
+		}
+	},
 	created(){
 		this.$store.commit("ui/set", {
 			component: "appBarTop",
@@ -75,20 +120,6 @@ export default {
 		},
 		deleteToken(){
 			this.$store.dispatch("user/delete", "api_token")
-		}
-	},
-	computed: {
-		user () {
-			return this.$store.getters["auth/get"];
-		},
-		lamps() {
-			return this.$store.getters["units/list-lamps"].map(lamp => this.addBackground(lamp));
-		},
-		groups() {
-			return this.$store.getters["units/list-groups"].map(group => this.addBackground(group));
-		},
-		api_token() {
-			return this.groupString(this.$store.getters["user/api_token"] || "", 4);
 		}
 	}
 };

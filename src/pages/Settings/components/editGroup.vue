@@ -1,18 +1,29 @@
 <template>
-	<form>
-		<h2>Edit Group "{{value.name}}"</h2>
+  <form>
+    <h2>Edit Group "{{ value.name }}"</h2>
 
-		<SLInput label="Name" type="text" placeholder="Kitchen" v-model="value.name" />
+    <SLInput
+      v-model="value.name"
+      label="Name"
+      type="text"
+      placeholder="Kitchen"
+    />
 
-		<SLInput label="Tags" type="url" placeholder="Mixer, Oven, ..." v-model="value.tags" hint="seperated by <code>,</code>"/>
+    <SLInput
+      v-model="value.tags"
+      label="Tags"
+      type="url"
+      placeholder="Mixer, Oven, ..."
+      hint="seperated by <code>,</code>"
+    />
 
-		<lampPicker
-			:lamps="lamps"
-			v-model="value.lamps"
-		/>
+    <lampPicker
+      v-model="value.lamps"
+      :lamps="lamps"
+    />
 
-		<icon-picker v-model="value.icon" />
-	</form>
+    <icon-picker v-model="value.icon" />
+  </form>
 </template>
 
 <script>
@@ -26,7 +37,12 @@ export default {
 		lampPicker,
 		iconPicker
 	},
-	props: ["value"],
+  props: {
+		value: {
+			type: Object,
+			required: true
+		},
+	},
 	computed: {
 		lamps() {
 			return this.$store.getters["units/list-lamps"];

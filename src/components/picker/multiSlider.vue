@@ -1,26 +1,30 @@
 <template>
-	<div class="multi-slider"
-		:style="{ background: background }"
-		@mousedown.prevent="start"
-		@touchstart.prevent="start"
-	>
-		<GlobalEvents
-			@mousemove="move"
-			@touchmove="move"
-			@mouseup="end"
-			@touchend="end"
-		/>
-		<div class="markers" ref="markers">
-			<div
-				v-for="(marker, index) in markers"
-				:key="index"
-				:style="{ left: marker.position + '%', background: marker.color }"
-				:class="{ marker: true, active: marker.active }"
-				:data-index="index"
-				tabindex="0"
-			></div>
-		</div>
-	</div>
+  <div
+    class="multi-slider"
+    :style="{ background: background }"
+    @mousedown.prevent="start"
+    @touchstart.prevent="start"
+  >
+    <GlobalEvents
+      @mousemove="move"
+      @touchmove="move"
+      @mouseup="end"
+      @touchend="end"
+    />
+    <div
+      ref="markers"
+      class="markers"
+    >
+      <div
+        v-for="(marker, index) in markers"
+        :key="index"
+        :style="{ left: marker.position + '%', background: marker.color }"
+        :class="{ marker: true, active: marker.active }"
+        :data-index="index"
+        tabindex="0"
+      />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -30,7 +34,8 @@ export default {
 	components: { GlobalEvents },
 	props: {
 		color: {
-			type: String
+			type: String,
+			required: true,
 		},
 		gradient: {
 			type: Array,
@@ -53,6 +58,27 @@ export default {
 	animation: {
 		target: undefined,
 		animationFrame: undefined,
+	},
+	computed: {
+		background(){
+			const sortedMarkers = this.markers.slice(0).sort((a, b) => { return a.position - b.position; });
+			return `linear-gradient(90deg,${sortedMarkers.map((marker) => { return `${marker.color} ${marker.position}%`}).join(',')})`;
+		},
+		activeIndex(){
+			return this.markers.findIndex((marker) => { return marker.active });
+		}
+	},
+	watch: {
+		"gradient": {
+			handler: function(to, from){
+				if(to === from){ return; }
+				this.importGradient(to);
+			},
+			deep: true
+		},
+		"color": function(to){
+			this.updateColor(to);
+		}
 	},
 	created(){
 		this.importGradient(this.gradient);
@@ -162,27 +188,6 @@ export default {
 
 			this.markers[markerIndex].position = this.getRelativeEventPosition(event);
 			this.cleanupMarkers();
-		}
-	},
-	computed: {
-		background(){
-			const sortedMarkers = this.markers.slice(0).sort((a, b) => { return a.position - b.position; });
-			return `linear-gradient(90deg,${sortedMarkers.map((marker) => { return `${marker.color} ${marker.position}%`}).join(',')})`;
-		},
-		activeIndex(){
-			return this.markers.findIndex((marker) => { return marker.active });
-		}
-	},
-	watch: {
-		"gradient": {
-			handler: function(to, from){
-				if(to === from){ return; }
-				this.importGradient(to);
-			},
-			deep: true
-		},
-		"color": function(to){
-			this.updateColor(to);
 		}
 	}
 }

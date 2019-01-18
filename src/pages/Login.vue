@@ -1,9 +1,13 @@
 <template>
-	<section class="text-center">
-		<h1 class="header">Welcome</h1>
-		<h2 class="subheader">Sign in to continue</h2>
-		<div id="firebaseui-auth-container"></div>
-	</section>
+  <section class="text-center">
+    <h1 class="header">
+      Welcome
+    </h1>
+    <h2 class="subheader">
+      Sign in to continue
+    </h2>
+    <div id="firebaseui-auth-container" />
+  </section>
 </template>
 
 <script>
@@ -14,7 +18,19 @@ import firebaseui from 'firebaseui';
 let loginUi;
 
 export default {
-	name: 'auth',
+	name: 'Auth',
+	computed: {
+		isAuthenticated () {
+			return this.$store.getters["auth/isAuthenticated"];
+		},
+	},
+	watch: {
+		isAuthenticated: function(to){
+			if(to){
+				this.$router.push(this.$route.query.redirect || "/");
+			}
+		}
+	},
 	created(){
 		this.$store.commit("ui/set", {
 			component: "appBarTop",
@@ -41,18 +57,6 @@ export default {
 			]
 		};
 		loginUi.start('#firebaseui-auth-container', uiConfig);
-	},
-	computed: {
-		isAuthenticated () {
-			return this.$store.getters["auth/isAuthenticated"];
-		},
-	},
-	watch: {
-		isAuthenticated: function(to){
-			if(to){
-				this.$router.push(this.$route.query.redirect || "/");
-			}
-		}
 	}
 }
 </script>

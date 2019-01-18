@@ -1,17 +1,38 @@
 <template>
-	<form>
-		<h2>Edit Lamp "{{value.name}}"</h2>
+  <form>
+    <h2>Edit Lamp "{{ value.name }}"</h2>
 
-		<SLInput label="Name" type="text" placeholder="Kitchen" v-model="value.name" />
+    <SLInput
+      v-model="value.name"
+      label="Name"
+      type="text"
+      placeholder="Kitchen"
+    />
 
-		<SLInput label="Hostname" type="text" placeholder="smartlight-kitchen" v-model="value.hostname" />
+    <SLInput
+      v-model="value.hostname"
+      label="Hostname"
+      type="text"
+      placeholder="smartlight-kitchen"
+    />
 
-		<SLInput label="IP" type="url" placeholder="192.168.2.123" v-model="value.ip" />
+    <SLInput
+      v-model="value.ip"
+      label="IP"
+      type="url"
+      placeholder="192.168.2.123"
+    />
 
-		<SLInput label="Tags" type="url" placeholder="Mixer, Oven, ..." v-model="value.tags" hint="seperated by <code>,</code>"/>
+    <SLInput
+      v-model="value.tags"
+      label="Tags"
+      type="url"
+      placeholder="Mixer, Oven, ..."
+      hint="seperated by <code>,</code>"
+    />
 
-		<icon-picker v-model="value.icon" />
-	</form>
+    <icon-picker v-model="value.icon" />
+  </form>
 </template>
 
 <script>
@@ -23,6 +44,11 @@ export default {
 		SLInput: Input,
 		iconPicker
 	},
-	props: ["value"],
+  props: {
+		value: {
+			type: Object,
+			required: true
+		},
+	},
 }
 </script>

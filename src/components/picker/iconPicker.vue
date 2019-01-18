@@ -1,27 +1,45 @@
 <template>
-	<div>
-		<div class="inputs">
-			<div
-				@click="query = value"
-				class="icon current"
-			>
-				<i class="material-icons">{{value}}</i>
-			</div>
-			<SLInput class="search" label="Search for Icon" type="text" :placeholder="value" v-model="query" />
-		</div>
+  <div>
+    <div class="inputs">
+      <div
+        class="icon current"
+        @click="query = value"
+      >
+        <i class="material-icons">
+          {{ value }}
+        </i>
+      </div>
+      <SLInput
+        v-model="query"
+        class="search"
+        label="Search for Icon"
+        type="text"
+        :placeholder="value"
+      />
+    </div>
 
-		<ul class="icons" v-if="filteredIcons.length">
-			<li
-				v-for="icon of filteredIcons"
-				:key="icon"
-				@click="check(icon)"
-				:class="{icon: true, selected: (value === icon)}"
-			>
-				<i class="material-icons">{{icon}}</i>
-			</li>
-		</ul>
-		<p class="not-found" v-else>No icons found.</p>
-	</div>
+    <ul
+      v-if="filteredIcons.length"
+      class="icons"
+    >
+      <li
+        v-for="icon of filteredIcons"
+        :key="icon"
+        :class="{icon: true, selected: (value === icon)}"
+        @click="check(icon)"
+      >
+        <i class="material-icons">
+          {{ icon }}
+        </i>
+      </li>
+    </ul>
+    <p
+      v-else
+      class="not-found"
+    >
+      No icons found.
+    </p>
+  </div>
 </template>
 
 <script>
@@ -29,7 +47,7 @@ import Input from "@/components/picker/input";
 import iconNames from "./material-icons";
 
 export default {
-	name: "iconPicker",
+	name: "IconPicker",
 	components: {
 		SLInput: Input,
 	},
@@ -45,15 +63,15 @@ export default {
 			query: ''
 		}
 	},
-	methods:{
-		check(iconName){
-			this.$emit("input", iconName);
-		}
-	},
 	computed:{
 		filteredIcons: function () {
 			return this.icons.filter((icon) => {
 				return icon.toLowerCase().includes(this.query.toLowerCase());})
+		}
+	},
+	methods:{
+		check(iconName){
+			this.$emit("input", iconName);
 		}
 	}
 }

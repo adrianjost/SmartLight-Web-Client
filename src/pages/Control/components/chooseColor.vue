@@ -1,25 +1,25 @@
 <template>
-	<section>
-			<saved-state-picker
-				:data="colors"
-				event="loadColor"
-				@loadColor="loadColor"
-				addEvent="addColor"
-				@addColor="saveState"
-				contextEvent="deleteState"
-				@deleteState="deleteState"
-			/>
-			<color-picker
-				class="color-picker"
-				v-model="currentColor"
-				:config="{
-					width: 250,
-					height: 300,
-					sliderMargin: 16,
-					markerRadius: 10
-				}"
-			/>
-	</section>
+  <section>
+    <saved-state-picker
+      :data="colors"
+      event="loadColor"
+      add-event="addColor"
+      context-event="deleteState"
+      @loadColor="loadColor"
+      @addColor="saveState"
+      @deleteState="deleteState"
+    />
+    <color-picker
+      v-model="currentColor"
+      class="color-picker"
+      :config="{
+        width: 250,
+        height: 300,
+        sliderMargin: 16,
+        markerRadius: 10
+      }"
+    />
+  </section>
 </template>
 
 <script>
@@ -30,17 +30,35 @@ import { undoableStateDelete } from "@/mixins/undoableStateDelete.js"
 import localAPI from "@/mixins/localAPI.js"
 
 export default {
-	name: "choose-color",
+	name: "ChooseColor",
 	components: {
 		savedStatePicker,
 		colorPicker,
 	},
 	mixins: [undoableStateDelete("colors"), localAPI],
-	props: ["unit"],
+	props: {
+		unit: {
+			type: Object,
+			required: true
+		},
+	},
 	data(){
 		return {
 			currentColor: "#ffffff",
 		}
+	},
+	computed: {
+		colors() {
+			return this.$store.getters["savedStates/list-colors"];
+		},
+		states() {
+			return this.$store.getters["savedStates/list"];
+		},
+	},
+	watch: {
+		currentColor: function(to){
+			this.sendHexColor(this.unit, to);
+		},
 	},
 	created(){
 		this.$eventHub.$on('apply', this.apply);
@@ -80,19 +98,6 @@ export default {
 			});
 			this.$eventHub.$emit('applied');
 		}
-	},
-	watch: {
-		currentColor: function(to){
-			this.sendHexColor(this.unit, to);
-		},
-	},
-	computed: {
-		colors() {
-			return this.$store.getters["savedStates/list-colors"];
-		},
-		states() {
-			return this.$store.getters["savedStates/list"];
-		},
 	}
 }
 </script>
