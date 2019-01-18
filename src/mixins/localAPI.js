@@ -84,5 +84,12 @@ export default {
 			gradient.colors = gradient.colors.map(hexColor => this.hex2rgb(hexColor));
 			this.send(this.extractLampsFromUnit(unit), {gradient: gradient})
 		},
+		sendState(unit, state) {
+			if(state.color){
+				this.sendHexColor(unit, state.color);
+			} else if(state.gradient){
+				this.sendGradient(unit, state.gradient);
+			}
+		},
 	}
 };
