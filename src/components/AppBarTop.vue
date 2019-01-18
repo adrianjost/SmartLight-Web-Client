@@ -2,37 +2,37 @@
 	<header class="bar">
 		<div class="container">
 			<!-- BACK BUTTON -->
-			<template v-if="back_action">
+			<template v-if="backAction">
 				<router-link
-					v-if="back_action.to"
+					v-if="backAction.to"
 					v-ripple
-					:to="back_action.to"
+					:to="backAction.to"
 					class="navigation_back"
 				>
 					<i class="material-icons">
-						{{ back_action.icon }}
+						{{ backAction.icon }}
 					</i>
 					<img
-						v-if="back_action && back_action.src"
-						:src="back_action.src"
-						:alt="back_action.alt"
+						v-if="backAction && backAction.src"
+						:src="backAction.src"
+						:alt="backAction.alt"
 						class="avatar"
 					>
 				</router-link>
 
 				<button
-					v-if="back_action.event"
+					v-if="backAction.event"
 					v-ripple
 					class="navigation_back"
-					@click="sendEvent(back_action.event)"
+					@click="sendEvent(backAction.event)"
 				>
 					<i class="material-icons">
-						{{ back_action.icon }}
+						{{ backAction.icon }}
 					</i>
 					<img
-						v-if="back_action && back_action.src"
-						:src="back_action.src"
-						:alt="back_action.alt"
+						v-if="backAction && backAction.src"
+						:src="backAction.src"
+						:alt="backAction.alt"
 						class="avatar"
 					>
 				</button>
@@ -77,11 +77,11 @@
 
 			<!-- USER AVATAR -->
 			<img
-				v-if="user_avatar && user_avatar.src"
-				:src="user_avatar.src"
-				:alt="user_avatar.alt"
+				v-if="userAvatar && userAvatar.src"
+				:src="userAvatar.src"
+				:alt="userAvatar.alt"
 				class="avatar"
-				@click="sendEvent(user_avatar.event)"
+				@click="sendEvent(userAvatar.event)"
 			>
 		</div>
 	</header>
@@ -92,7 +92,7 @@
 /*
 EXAMPLE CONFIG
 
-back_action: {
+backAction: {
   icon: "arrow_back",
   src: "https://ui-avatars.com/api/?background=0D8ABC&color=fff&size=40&name=TV",
   to: "/",  // you have to decide wheather you wan't a router-link or an event triggered

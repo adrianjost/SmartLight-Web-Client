@@ -26,7 +26,7 @@
 export default {
 	props: {
 		controlUnits: {
-			type: Object,
+			type: Array,
 			required: true
 		},
 		addUrl: {

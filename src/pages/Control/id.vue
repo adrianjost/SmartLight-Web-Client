@@ -95,9 +95,7 @@ export default {
 		setActiveTab(state){
 			if(typeof state === "string"){
 				// TODO: refactor this ugly double use of this method.
-				return () => {
-					this.activeTab = state;
-				}
+				this.activeTab = state
 			}
 			if(typeof state === "object"){
 				if(state.gradient){ this.activeTab = "Gradient"; }

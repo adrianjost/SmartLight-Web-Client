@@ -35,17 +35,15 @@ export default {
 	},
 	methods: {
 		toggleSelection(lampId){
-			return () => {
-				const index = this.value.indexOf(lampId);
-				if(index >= 0){
-					// delete from list
-					let newValue = [...this.value]
-					newValue.splice(index, 1)
-					this.$emit("input", newValue);
-				}else{
-					// add to list
-					this.$emit("input", [...this.value, lampId]);
-				}
+			const index = this.value.indexOf(lampId);
+			if(index >= 0){
+				// delete from list
+				let newValue = [...this.value]
+				newValue.splice(index, 1)
+				this.$emit("input", newValue);
+			}else{
+				// add to list
+				this.$emit("input", [...this.value, lampId]);
 			}
 		}
 	}

@@ -2,10 +2,10 @@
 	<div id="app">
 		<app-bar-top
 			v-if="appBarTopState.visible"
-			:back_action="appBarTopState.back_action"
+			:back-action="appBarTopState.back_action"
 			:title="appBarTopState.title"
 			:actions="appBarTopState.actions"
-			:user_avatar="appBarTopState.user_avatar"
+			:user-avatar="appBarTopState.user_avatar"
 			@action="handleAction"
 		/>
 		<main
