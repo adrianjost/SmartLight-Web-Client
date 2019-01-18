@@ -27,7 +27,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-	const isAuthenticated = store.getters["user/isAuthenticated"];
+	const isAuthenticated = store.getters["auth/isAuthenticated"];
 	if (!isAuthenticated && to.matched.some(record => !record.meta.isPublic)) {
 		return next({
 			path: '/login',
@@ -36,7 +36,6 @@ router.beforeEach((to, from, next) => {
 			},
 		});
 	}
-
 	return next();
 })
 

@@ -23,7 +23,7 @@ export default {
 		this.$store.commit("ui/set", {
 			component: "appBarTop",
 			payload: UIStateDefault.appBarTop({
-				user: this.$store.getters["user/get"],
+				user: this.$store.getters["auth/get"],
 				title: "Control"
 			})
 		});

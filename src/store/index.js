@@ -8,11 +8,12 @@ import createEasyFirestore from 'vuex-easy-firestore'
 
 import ui from './ui';
 import user from './user';
+import auth from './auth';
 import units from './units';
 import savedStates from './savedStates';
 
 // do the magic 🔥🧙‍♂️
-const easyFirestore = createEasyFirestore([user, units, savedStates], {logging: false})
+const easyFirestore = createEasyFirestore([user, units, savedStates], {logging: true})
 
 export default new Vuex.Store({
 	plugins: [
@@ -22,5 +23,6 @@ export default new Vuex.Store({
 	],
 	modules: {
 		ui,
+		auth
 	}
 });

@@ -15,7 +15,7 @@
 				'padding-bottom': bottomNavState.visible?'100px':'0'
 			}"
 		>
-			<router-view ></router-view>
+			<router-view v-if="isInitialized"></router-view>
 		</main>
 		<bottom-navigation
 			v-if="bottomNavState.visible"
@@ -70,7 +70,7 @@ export default {
 	},
 	created() {
 		this.$eventHub.$on('logout', () => {
-			this.$store.dispatch("user/logout");
+			this.$store.dispatch("auth/logout");
 		});
 		window.addEventListener('resize', this.resize);
 	},
@@ -83,6 +83,9 @@ export default {
 		},
 		bottomNavState () {
 			return this.$store.getters["ui/get"]("bottomNav");
+		},
+		isInitialized () {
+			return this.$store.getters["auth/isAuthenticated"] !== undefined;
 		}
 	}
 }

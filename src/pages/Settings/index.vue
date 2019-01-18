@@ -79,7 +79,7 @@ export default {
 	},
 	computed: {
 		user () {
-			return this.$store.getters["user/get"];
+			return this.$store.getters["auth/get"];
 		},
 		lamps() {
 			return this.$store.getters["units/list-lamps"].map(lamp => this.addBackground(lamp));
