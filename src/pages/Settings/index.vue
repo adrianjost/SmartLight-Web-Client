@@ -47,6 +47,14 @@
 		>
 			Delete
 		</button>
+
+		<router-link
+			v-ripple
+			to="/hub"
+			class="button"
+		>
+			IoT-Hub details
+		</router-link>
 	</div>
 </template>
 

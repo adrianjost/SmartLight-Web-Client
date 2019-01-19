@@ -38,6 +38,9 @@ input:not([type="checkbox"]):not([type="radio"]) {
 }
 
 .button{
+	color: var(--color-text-inactive);
+	text-decoration: none;
+	border: 1px solid transparent;
 	text-transform: uppercase;
 	padding: 8px 16px;
 	margin: 0 4px;
@@ -47,6 +50,6 @@ input:not([type="checkbox"]):not([type="radio"]) {
 
 	&.button-primary{
 		color: var(--color-text);
-		border: 1px solid var(--color-border);
+		border-color: var(--color-border);
 	}
 }

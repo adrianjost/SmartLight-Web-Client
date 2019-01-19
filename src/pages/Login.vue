@@ -19,18 +19,6 @@ let loginUi;
 
 export default {
 	name: 'Auth',
-	computed: {
-		isAuthenticated () {
-			return this.$store.getters["auth/isAuthenticated"];
-		},
-	},
-	watch: {
-		isAuthenticated: function(to){
-			if(to){
-				this.$router.push(this.$route.query.redirect || "/");
-			}
-		}
-	},
 	created(){
 		this.$store.commit("ui/set", {
 			component: "appBarTop",
@@ -48,7 +36,7 @@ export default {
 	mounted() {
 		loginUi = new firebaseui.auth.AuthUI(firebase.auth());
 		const uiConfig = {
-			signInSuccessUrl: this.$route.path,
+			signInSuccessUrl: (this.$route.query.redirect || "/"),
 			signInOptions: [
 				firebase.auth.GoogleAuthProvider.PROVIDER_ID,
 				firebase.auth.EmailAuthProvider.PROVIDER_ID,

@@ -108,7 +108,7 @@ export default {
 				type: "gradient",
 				name: this.name || "",
 				colors: this.relativeGradient.map(marker => marker.color) || [],
-				transitionTimes: this.relativeGradient.map(marker => Math.round(marker.position * this.duration * 10)) || [], // * 10 to convert to ms
+				transitionTimes: this.relativeGradient.map(marker => Math.round(marker.position * this.duration * 10)) || [], // * 10 to convert % to ms
 				loop: this.loop,
 			}
 		},

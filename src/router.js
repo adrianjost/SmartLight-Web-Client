@@ -37,6 +37,8 @@ router.beforeEach((to, from, next) => {
 				redirect: to.fullPath,
 			},
 		});
+	}else if(isAuthenticated && to.matched.some(record => record.path === "/login")){
+		return next({ path: '/' });
 	}
 	return next();
 })

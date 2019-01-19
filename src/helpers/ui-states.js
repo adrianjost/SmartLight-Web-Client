@@ -57,7 +57,8 @@ const nestedDefaultState = {
 		return {
 			visible: true,
 			back_action: {
-				icon: "arrow_back"
+				icon: "arrow_back",
+				event: "go-back"
 			},
 			title: {
 				text: title

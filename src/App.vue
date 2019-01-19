@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<app-bar-top
+		<AppBarTop
 			v-if="appBarTopState.visible"
 			:back-action="appBarTopState.back_action"
 			:title="appBarTopState.title"
@@ -15,9 +15,10 @@
 				'padding-bottom': bottomNavState.visible?'100px':'0'
 			}"
 		>
+			<BrowserWarning />
 			<router-view v-if="isInitialized" />
 		</main>
-		<bottom-navigation
+		<BottomNavigation
 			v-if="bottomNavState.visible"
 			:fab="bottomNavState.fab"
 			:actions="bottomNavState.actions"
@@ -29,13 +30,17 @@
 <script>
 import BottomNavigation from '@/components/BottomNavigation.vue'
 import AppBarTop from '@/components/AppBarTop.vue'
+import BrowserWarning from '@/components/BrowserWarning.vue'
+import hub from '@/mixins/hub.js'
 
 export default {
 	name: 'App',
 	components: {
 		AppBarTop,
-		BottomNavigation
+		BottomNavigation,
+		BrowserWarning
 	},
+	mixins: [hub],
 	data(){
 		return {
 			showBottomNav: undefined,
@@ -57,8 +62,9 @@ export default {
 		this.windowCircumference = window.innerWidth + window.innerHeight;
 	},
 	created() {
-		this.$eventHub.$on('logout', () => {
-			this.$store.dispatch("auth/logout");
+		this.$eventHub.$on('logout', async () => {
+			await this.$store.dispatch("auth/logout");
+			this.$router.go("/login");
 		});
 		window.addEventListener('resize', this.resize);
 		this.$eventHub.$on('go-back', this.goBack );
@@ -66,7 +72,6 @@ export default {
 	beforeDestroy(){
 		this.$eventHub.$off("logout");
 		this.$eventHub.$off('go-back', this.goBack);
-
 	},
 	methods: {
 		goBack(){
