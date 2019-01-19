@@ -20,6 +20,7 @@
 			</template>
 		</SLInput>
 
+		<b>Lamps:</b>
 		<lampPicker
 			v-model="value.lamps"
 			:lamps="lamps"

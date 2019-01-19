@@ -22,7 +22,7 @@ const router = new VueRouter({
 		{ path: '/settings/add/:type', component: loadView('./pages/Settings/id.vue') },
 		{ path: '/settings/edit/:id', component: loadView('./pages/Settings/id.vue') },
 
-		{ path: '/hub', component: loadView('./pages/Hub.vue') },
+		{ path: '/settings/hub', component: loadView('./pages/Settings/Hub.vue') },
 
 		{ path: '/*', redirect: '/control' },
 	]

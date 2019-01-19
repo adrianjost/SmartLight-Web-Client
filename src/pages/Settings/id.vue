@@ -19,7 +19,8 @@ import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 
 const defaultUnit = {
 	name: "",
-	icon: "highlight"
+	icon: "highlight",
+	tags: ""
 }
 const defaultLamp = {
 	...defaultUnit,
