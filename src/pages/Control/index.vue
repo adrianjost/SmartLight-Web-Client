@@ -1,6 +1,6 @@
 <template>
 	<div class="control-units">
-		<control-unit
+		<ControlUnit
 			v-for="unit in units"
 			:key="unit.id"
 			class="control-unit"

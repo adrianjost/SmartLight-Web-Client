@@ -34,18 +34,18 @@
 			</template>
 		</SLInput>
 
-		<icon-picker v-model="value.icon" />
+		<IconPicker v-model="value.icon" />
 	</form>
 </template>
 
 <script>
 import Input from "@/components/picker/input"
-import iconPicker from "@/components/picker/iconPicker"
+import IconPicker from "@/components/picker/iconPicker"
 
 export default {
 	components: {
 		SLInput: Input,
-		iconPicker
+		IconPicker
 	},
 	props: {
 		value: {

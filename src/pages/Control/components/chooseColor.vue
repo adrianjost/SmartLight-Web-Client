@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<saved-state-picker
+		<SavedStatePicker
 			:data="colors"
 			event="loadColor"
 			add-event="addColor"
@@ -9,7 +9,7 @@
 			@addColor="saveState"
 			@deleteState="deleteState"
 		/>
-		<color-picker
+		<ColorPicker
 			v-model="currentColor"
 			class="color-picker"
 			:config="{
@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import savedStatePicker from "@/components/picker/savedStatePicker"
-import colorPicker from "@/components/picker/colorPicker"
+import SavedStatePicker from "@/components/picker/savedStatePicker"
+import ColorPicker from "@/components/picker/colorPicker"
 
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js"
 import localAPI from "@/mixins/localAPI.js"
@@ -32,8 +32,8 @@ import localAPI from "@/mixins/localAPI.js"
 export default {
 	name: "ChooseColor",
 	components: {
-		savedStatePicker,
-		colorPicker,
+		SavedStatePicker,
+		ColorPicker,
 	},
 	mixins: [undoableStateDelete("colors"), localAPI],
 	props: {

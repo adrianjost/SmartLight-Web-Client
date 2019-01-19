@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<saved-state-picker
+		<SavedStatePicker
 			:data="gradients"
 			event="loadGradient"
 			add-event="addGradient"
@@ -38,17 +38,17 @@
 					s
 				</label>
 			</div>
-			<toggle-button
+			<ToggleButton
 				v-model="loop"
 				:labels="{checked: 'loop', unchecked: 'loop'}"
 			/>
 		</div>
 
-		<multi-slider
+		<MultiSlider
 			:color.sync="currentColor"
 			:gradient.sync="relativeGradient"
 		/>
-		<color-picker
+		<ColorPicker
 			v-model="currentColor"
 			class="color-picker"
 			:config="{
@@ -62,9 +62,9 @@
 </template>
 
 <script>
-import savedStatePicker from "@/components/picker/savedStatePicker"
-import colorPicker from "@/components/picker/colorPicker"
-import multiSlider from "@/components/picker/multiSlider"
+import SavedStatePicker from "@/components/picker/savedStatePicker"
+import ColorPicker from "@/components/picker/colorPicker"
+import MultiSlider from "@/components/picker/multiSlider"
 import ToggleButton from 'vue-js-toggle-button/src/Button.vue'
 
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js"
@@ -73,9 +73,9 @@ import localAPI from "@/mixins/localAPI.js"
 export default {
 	name: "ChooseGradient",
 	components: {
-		savedStatePicker,
-		colorPicker,
-		multiSlider,
+		SavedStatePicker,
+		ColorPicker,
+		MultiSlider,
 		ToggleButton
 	},
 	mixins: [undoableStateDelete("gradients"), localAPI],

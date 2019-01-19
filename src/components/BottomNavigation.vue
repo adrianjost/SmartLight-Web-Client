@@ -5,7 +5,7 @@
 			class="fab-wrapper"
 			@click="sendEvent(fab.event)"
 		>
-			<fab
+			<Fab
 				class="fab"
 				:icon="fab.icon"
 			/>
@@ -17,7 +17,7 @@
 					:key="(action.to || action.event) + action.icon"
 					class="contents"
 				>
-					<router-link
+					<RouterLink
 						v-if="action.to"
 						v-ripple
 						:to="action.to"
@@ -32,7 +32,7 @@
 						>
 							{{ action.name }}
 						</span>
-					</router-link>
+					</RouterLink>
 
 					<button
 						v-else
@@ -64,7 +64,7 @@ import fabComponent from '@/components/fab.vue'
 export default {
 	name:"BottomNavigation",
 	components: {
-		fab: fabComponent
+		Fab: fabComponent
 	},
 	props: {
 		fab: {

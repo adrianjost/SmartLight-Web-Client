@@ -3,14 +3,14 @@
 		class="control-unit"
 		:style="{ 'background': data.background }"
 	>
-		<router-link
+		<RouterLink
 			class="link"
 			:to="'/control/'+ data.id"
 		>
 			<i class="material-icons">
 				{{ data.icon }}
 			</i>
-		</router-link>
+		</RouterLink>
 	</div>
 </template>
 

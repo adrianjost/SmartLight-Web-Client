@@ -1,36 +1,36 @@
 <template>
 	<div>
 		<h2>Lamps:</h2>
-		<control-unit-list
+		<ControlUnitList
 			:control-units="lamps"
 			add-url="/settings/add/lamp"
 		/>
 		<h2>Groups:</h2>
-		<control-unit-list
+		<ControlUnitList
 			:control-units="groups"
 			add-url="/settings/add/group"
 		/>
 
 		<hr>
 
-		<router-link
+		<RouterLink
 			v-ripple
 			to="/settings/hub"
 			class="button button-primary"
 		>
 			IoT-Hub details
-		</router-link>
+		</RouterLink>
 	</div>
 </template>
 
 <script>
-import controlUnitList from '@/components/controlUnitList.vue';
+import ControlUnitList from '@/components/controlUnitList.vue';
 import { UIStateDefault } from '@/helpers/ui-states.js';
 import unitBackground from '@/mixins/unitBackground.js';
 
 export default {
 	components: {
-		controlUnitList
+		ControlUnitList
 	},
 	mixins: [unitBackground],
 	computed: {

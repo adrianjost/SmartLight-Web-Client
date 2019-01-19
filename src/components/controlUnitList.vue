@@ -1,6 +1,6 @@
 <template>
 	<div class="units">
-		<router-link
+		<RouterLink
 			v-for="controlUnit in controlUnits"
 			:key="controlUnit.id"
 			class="unit"
@@ -10,15 +10,15 @@
 			<i class="material-icons">
 				{{ controlUnit.icon }}
 			</i>
-		</router-link>
-		<router-link
+		</RouterLink>
+		<RouterLink
 			class="unit add"
 			:to="addUrl"
 		>
 			<i class="material-icons">
 				add
 			</i>
-		</router-link>
+		</RouterLink>
 	</div>
 </template>
 

@@ -16,7 +16,7 @@
 			}"
 		>
 			<BrowserWarning />
-			<router-view v-if="isInitialized" />
+			<RouterView v-if="isInitialized" />
 		</main>
 		<BottomNavigation
 			v-if="bottomNavState.visible"

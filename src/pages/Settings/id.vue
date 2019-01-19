@@ -1,10 +1,10 @@
 <template>
 	<section class="edit">
-		<edit-lamp
+		<EditLamp
 			v-if="unit.type == 'LAMP'"
 			v-model="unit"
 		/>
-		<edit-group
+		<EditGroup
 			v-if="unit.type == 'GROUP'"
 			v-model="unit"
 		/>
@@ -12,8 +12,8 @@
 </template>
 
 <script>
-const editLamp = () => import(/* webpackChunkName: "editLamp" */ './components/editLamp');
-const editGroup = () => import(/* webpackChunkName: "editGroup" */ './components/editGroup');
+const EditLamp = () => import(/* webpackChunkName: "editLamp" */ './components/editLamp');
+const EditGroup = () => import(/* webpackChunkName: "editGroup" */ './components/editGroup');
 
 import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 
@@ -37,8 +37,8 @@ const defaultGroup = {
 export default {
 	name: "SettingsDetail",
 	components: {
-		editLamp,
-		editGroup
+		EditLamp,
+		EditGroup
 	},
 	data(){
 		return {

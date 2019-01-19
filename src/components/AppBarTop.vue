@@ -3,7 +3,7 @@
 		<div class="container">
 			<!-- BACK BUTTON -->
 			<template v-if="backAction">
-				<router-link
+				<RouterLink
 					v-if="backAction.to"
 					v-ripple
 					:to="backAction.to"
@@ -18,7 +18,7 @@
 						:alt="backAction.alt"
 						class="avatar"
 					>
-				</router-link>
+				</RouterLink>
 
 				<button
 					v-if="backAction.event"
@@ -49,7 +49,7 @@
 
 			<!-- ACTIONS -->
 			<template v-for="action in actions">
-				<router-link
+				<RouterLink
 					v-if="action.to"
 					:key="action.to + action.icon"
 					v-ripple
@@ -60,7 +60,7 @@
 					<i class="material-icons">
 						{{ action.icon }}
 					</i>
-				</router-link>
+				</RouterLink>
 
 				<button
 					v-if="action.event"

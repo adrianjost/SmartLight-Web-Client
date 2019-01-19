@@ -13,11 +13,11 @@
 				{{ tab }}
 			</div>
 		</div>
-		<choose-color
+		<ChooseColor
 			v-if="activeTab == 'Color'"
 			:unit="unit"
 		/>
-		<choose-gradient
+		<ChooseGradient
 			v-if="activeTab == 'Gradient'"
 			:unit="unit"
 		/>
@@ -25,8 +25,8 @@
 </template>
 
 <script>
-const chooseColor = () => import(/* webpackChunkName: "chooseColor" */ './components/chooseColor');
-const chooseGradient = () => import(/* webpackChunkName: "chooseGradient" */ './components/chooseGradient');
+const ChooseColor = () => import(/* webpackChunkName: "chooseColor" */ './components/chooseColor');
+const ChooseGradient = () => import(/* webpackChunkName: "chooseGradient" */ './components/chooseGradient');
 import localAPI from "@/mixins/localAPI.js"
 
 import { UIStateNestedDefault } from '@/helpers/ui-states.js';
@@ -34,8 +34,8 @@ import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 export default {
 	name: "ControlDetail",
 	components: {
-		chooseColor,
-		chooseGradient
+		ChooseColor,
+		ChooseGradient
 	},
 	mixins: [localAPI],
 	data(){
