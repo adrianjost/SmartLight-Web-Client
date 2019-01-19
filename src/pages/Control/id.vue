@@ -27,7 +27,7 @@
 <script>
 const chooseColor = () => import(/* webpackChunkName: "chooseColor" */ './components/chooseColor');
 const chooseGradient = () => import(/* webpackChunkName: "chooseGradient" */ './components/chooseGradient');
-
+import localAPI from "@/mixins/localAPI.js"
 
 import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 
@@ -37,6 +37,7 @@ export default {
 		chooseColor,
 		chooseGradient
 	},
+	mixins: [localAPI],
 	data(){
 		return {
 			tabNames: ["Color", "Gradient"],
@@ -64,7 +65,7 @@ export default {
 			component: "appBarTop",
 			payload: Object.assign(UIStateNestedDefault.appBarTop(this.unit.name || ""), {
 				back_action: {
-					event: "go-back",
+					event: "backAndReset",
 					icon: "arrow_back"
 				},
 				actions: [
@@ -85,6 +86,10 @@ export default {
 			})
 		});
 		this.setActiveTab(this.unit.state);
+		this.$eventHub.$on('backAndReset', this.reset);
+	},
+	beforeDestroy(){
+		this.$eventHub.$off('backAndReset', this.reset);
 	},
 	methods: {
 		setActiveTab(state){
@@ -97,7 +102,11 @@ export default {
 				if(state.color){ this.activeTab = "Color"; }
 				return;
 			}
-		}
+		},
+		reset(state){
+			this.sendState(this.unit, this.unit.state);
+			this.$eventHub.$emit('go-back');
+		},
 	}
 };
 </script>

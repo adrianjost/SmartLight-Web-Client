@@ -85,6 +85,7 @@ export default {
 			this.send(this.extractLampsFromUnit(unit), {gradient: gradient})
 		},
 		sendState(unit, state) {
+			if(!state){ return; }
 			if(state.color){
 				this.sendHexColor(unit, state.color);
 			} else if(state.gradient){
