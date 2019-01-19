@@ -14,8 +14,11 @@
 			label="Tags"
 			type="url"
 			placeholder="Mixer, Oven, ..."
-			hint="seperated by <code>,</code>"
-		/>
+		>
+			<template slot="hint">
+				seperated by <code>,</code>
+			</template>
+		</SLInput>
 
 		<lampPicker
 			v-model="value.lamps"

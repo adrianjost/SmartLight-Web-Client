@@ -28,8 +28,11 @@
 			label="Tags"
 			type="url"
 			placeholder="Mixer, Oven, ..."
-			hint="seperated by <code>,</code>"
-		/>
+		>
+			<template slot="hint">
+				seperated by <code>,</code>
+			</template>
+		</SLInput>
 
 		<icon-picker v-model="value.icon" />
 	</form>

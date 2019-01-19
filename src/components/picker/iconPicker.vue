@@ -66,7 +66,8 @@ export default {
 	computed:{
 		filteredIcons: function () {
 			return this.icons.filter((icon) => {
-				return icon.toLowerCase().includes(this.query.toLowerCase());})
+				return icon.toLowerCase().includes(this.query.toLowerCase());
+			}).slice(0, 20);
 		}
 	},
 	methods:{
@@ -98,7 +99,7 @@ export default {
 .icons {
 	font-size: 0;
 	padding: 8px;
-	text-align: left;
+	text-align: center;
 	user-select: none;
 	max-height: 200px;
 	overflow: auto;

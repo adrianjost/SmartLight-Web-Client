@@ -12,15 +12,17 @@
 			>
 		</label>
 		<small
-			v-if="hint"
+			v-if="hint || $slots.hint"
 			class="hint"
 		>
-			{{ hint }}
+			<template v-if="hint">
+				{{ hint }}
+			</template>
+			<slot
+				v-else
+				name="hint"
+			/>
 		</small>
-		<slot
-			v-else
-			name="hint"
-		/>
 	</div>
 </template>
 
