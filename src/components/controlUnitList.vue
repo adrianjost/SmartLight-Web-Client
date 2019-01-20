@@ -49,6 +49,7 @@ export default {
 
 	&.add {
 		border-width: 2px;
+		color: var(--color-border);
 	}
 }
 </style>
