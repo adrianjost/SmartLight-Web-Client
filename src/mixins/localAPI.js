@@ -52,8 +52,8 @@ export default {
 			}
 		},
 		extractLampsFromUnit(unit){
-			const { hostname, ip } = unit;
-			if( hostname || ip){
+			const { type } = unit;
+			if( type === "LAMP"){
 				return [ unit ];
 			}else{
 				return unit.lamps.map((lampId) => {
