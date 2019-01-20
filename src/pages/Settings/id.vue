@@ -82,10 +82,10 @@ export default {
 		if(!this.unit.type && this.$route.params.type){
 			const type = this.$route.params.type.toUpperCase();
 			if(type === "LAMP"){
-				this.unit = defaultLamp;
+				this.unit = JSON.parse(JSON.stringify(defaultLamp));
 			}
 			if(type === "GROUP"){
-				this.unit = defaultGroup;
+				this.unit = JSON.parse(JSON.stringify(defaultGroup));
 			}
 		}
 		this.$store.commit("ui/set", {
