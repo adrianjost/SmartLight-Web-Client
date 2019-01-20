@@ -59,7 +59,8 @@ export default {
 		}
 	},
 	mounted(){
-		this.windowCircumference = window.innerWidth + window.innerHeight;
+		// -200 for chrome HTTP warnings, that may pop up on input fields
+		this.windowCircumference = window.innerWidth + window.innerHeight - 200;
 	},
 	created() {
 		this.$eventHub.$on('logout', async () => {
@@ -90,7 +91,7 @@ export default {
 					component: "bottomNav",
 					visible: false
 				});
-			}else if(this.showBottomNav !== undefined && (window.innerWidth + window.innerHeight) == this.windowCircumference){
+			}else if(this.showBottomNav !== undefined && ((window.innerWidth + window.innerHeight) >= this.windowCircumference)||document.activeElement.tagName !== "INPUT"){
 				this.$store.commit("ui/visible", {
 					component: "bottomNav",
 					visible: this.showBottomNav
