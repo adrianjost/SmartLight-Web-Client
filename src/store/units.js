@@ -1,6 +1,3 @@
-import { firebase } from '@firebase/app';
-import '@firebase/firestore';
-
 const unitPrototyp = {
   id: undefined,
   name: "",
@@ -8,15 +5,19 @@ const unitPrototyp = {
 	state: {}
 }
 
+function orderByName(unitA, unitB){
+	return unitA.name.localeCompare(unitB.name);
+}
+
 const getters = {
 	"list": (state) => {
-		return Object.values(state.data);
+		return Object.values(state.data).sort(orderByName);
 	},
 	"list-lamps": (state) => {
-		return Object.values(state.data).filter(unit => unit.type.toUpperCase() === "LAMP" );
+		return Object.values(state.data).filter(unit => unit.type.toUpperCase() === "LAMP" ).sort(orderByName);
 	},
 	"list-groups": (state) => {
-		return Object.values(state.data).filter(unit => unit.type.toUpperCase() === "GROUP" );
+		return Object.values(state.data).filter(unit => unit.type.toUpperCase() === "GROUP" ).sort(orderByName);
 	},
 	get: (state) => (unitId) => {
 		return Object.values(state.data).filter(unit => unit.id === unitId)[0] || unitPrototyp;

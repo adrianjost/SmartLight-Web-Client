@@ -1,12 +1,24 @@
 <template>
-	<div class="control-units">
-		<ControlUnit
-			v-for="unit in units"
-			:key="unit.id"
-			class="control-unit"
-			:data="unit"
-		/>
-	</div>
+	<section>
+		<h2>Groups</h2>
+		<div class="control-units">
+			<ControlUnit
+				v-for="unit in groups"
+				:key="unit.id"
+				class="control-unit"
+				:data="unit"
+			/>
+		</div>
+		<h2>Lamps</h2>
+		<div class="control-units">
+			<ControlUnit
+				v-for="unit in lamps"
+				:key="unit.id"
+				class="control-unit"
+				:data="unit"
+			/>
+		</div>
+	</section>
 </template>
 
 <script>
@@ -20,9 +32,12 @@ export default {
 	},
 	mixins: [unitBackground],
 	computed: {
-		units() {
-			return (this.$store.getters["units/list"] || []).map(unit => this.addBackground(unit));
-		}
+		lamps() {
+			return (this.$store.getters["units/list-lamps"] || []).map(unit => this.addBackground(unit));
+		},
+		groups() {
+			return (this.$store.getters["units/list-groups"] || []).map(unit => this.addBackground(unit));
+		},
 	},
 	created(){
 		this.$store.commit("ui/set", {
@@ -41,10 +56,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2{
+	text-align: center;
+	text-decoration: underline;
+}
+
 .control-units {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-evenly;
 }
 
 .control-unit {
