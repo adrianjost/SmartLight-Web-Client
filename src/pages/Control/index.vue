@@ -1,6 +1,8 @@
 <template>
 	<section>
-		<h2>Groups</h2>
+		<h2 v-if="groups.length">
+			Groups
+		</h2>
 		<div class="control-units">
 			<ControlUnit
 				v-for="unit in groups"
@@ -17,6 +19,17 @@
 				class="control-unit"
 				:data="unit"
 			/>
+			<RouterLink
+				v-if="!lamps.length"
+				v-ripple
+				to="/settings/add/lamp"
+				tag="button"
+				class="button button-primary add-lamp"
+			>
+				<i class="material-icons">
+					add
+				</i><span>Add Lamp</span>
+			</RouterLink>
 		</div>
 	</section>
 </template>
@@ -69,5 +82,11 @@ h2{
 
 .control-unit {
 	margin: 8px;
+}
+
+.add-lamp{
+	display: flex;
+	align-items: center;
+	margin: 16px 0;
 }
 </style>

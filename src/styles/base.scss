@@ -44,6 +44,7 @@ input:not([type="checkbox"]):not([type="radio"]) {
 }
 
 .button{
+	cursor: pointer;
 	display: inline-block;
 	color: var(--color-text-inactive);
 	text-decoration: none;
