@@ -22,7 +22,7 @@ const defaultUnit = {
 	icon: "highlight",
 	tags: "",
 	state: {
-		color: "#ffffff",
+		color: "#2ab5a2",
 		gradient: false,
 	}
 }
