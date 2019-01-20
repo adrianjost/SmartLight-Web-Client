@@ -2,7 +2,10 @@ const unitPrototyp = {
   id: undefined,
   name: "",
 	icon: "",
-	state: {}
+	state: {
+		color: "#ffffff",
+		gradient: false
+	}
 }
 
 function orderByName(unitA, unitB){

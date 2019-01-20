@@ -20,7 +20,11 @@ import { UIStateNestedDefault } from '@/helpers/ui-states.js';
 const defaultUnit = {
 	name: "",
 	icon: "highlight",
-	tags: ""
+	tags: "",
+	state: {
+		color: "#ffffff",
+		gradient: false,
+	}
 }
 const defaultLamp = {
 	...defaultUnit,
@@ -31,7 +35,7 @@ const defaultLamp = {
 const defaultGroup = {
 	...defaultUnit,
 	type: "GROUP",
-	lamps: []
+	lamps: [],
 }
 
 export default {
