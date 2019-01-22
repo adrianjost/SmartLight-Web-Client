@@ -22,7 +22,7 @@ export default {
 				cb(connection);
 			}else if(!connection || connection.readyState >= 2){ // No active connection => open new Socket
 				connection = this.connections[url] = new WebSocket('ws://' + url + ':80');
-				this.connectionTimeouts[url] = window.setTimeout(() => {
+				this.connectionTimeouts[url] = window.setInterval(() => {
 					this.closeConnection(url);
 					if(url === hostname && ip){
 						this.openConnection({ ip }, cb);
@@ -47,6 +47,7 @@ export default {
 			connection.close();
 		},
 		disableTimeout(url){
+			window.clearInterval(this.connectionTimeouts[url]);
 			if(delete this.connectionTimeouts[url]){
 				delete this.connectionTimeouts[url];
 			}
@@ -62,6 +63,35 @@ export default {
 			}
 		},
 		_send(connection, message){
+			console.log(connection, message);
+			/*message = {
+				gradient: {
+					colors: [
+						{
+							r: 255,
+							g: 0,
+							b: 0
+						},
+						{
+							r: 0,
+							g: 0,
+							b: 255
+						},
+						{
+							r: 0,
+							g: 255,
+							b: 0
+						},
+						{
+							r: 255,
+							g: 0,
+							b: 0
+						}
+					],
+					transitionTimes: [0, 300, 400, 1000],
+					loop: true
+				}
+			}*/
 			connection.send(JSON.stringify(message));
 		},
 		send(lamps, message){
@@ -82,7 +112,7 @@ export default {
 		sendGradient(unit, gradient) {
 			gradient = JSON.parse(JSON.stringify(gradient));
 			gradient.colors = gradient.colors.map(hexColor => this.hex2rgb(hexColor));
-			this.send(this.extractLampsFromUnit(unit), {gradient: gradient})
+			this.send(this.extractLampsFromUnit(unit), {gradient: {colors: gradient.colors, loop: gradient.loop, transitionTimes: gradient.transitionTimes}})
 		},
 		sendState(unit, state) {
 			if(!state){ return; }
