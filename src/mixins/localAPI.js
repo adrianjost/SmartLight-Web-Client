@@ -8,21 +8,26 @@ export default {
 		}
 	},
 	mixins: [colorConversion],
+	beforeCreate(){
+		// TODO: refactor to VUEX
+		if(!window.connections){ window.connections = {}; }
+		if(!window.connectionTimeouts){ window.connectionTimeouts = {}; }
+	},
 	methods: {
 		openConnection({ hostname, ip }, cb){
 			// cb is called when the connection is established
 			let url;
-			if(this.connections[hostname]){ url = hostname; }
-			else if(this.connections[ip]){ url = ip; }
+			if(window.connections[hostname]){ url = hostname; }
+			else if(window.connections[ip]){ url = ip; }
 			else{ url = hostname || ip; }
 			if(!url){ return new Error("hostname/ip missing"); }
 
-			let connection = this.connections[url];
+			let connection = window.connections[url];
 			if(connection && connection.readyState === 1) { // connection established
 				cb(connection);
 			}else if(!connection || connection.readyState >= 2){ // No active connection => open new Socket
-				connection = this.connections[url] = new WebSocket('ws://' + url + ':80');
-				this.connectionTimeouts[url] = window.setInterval(() => {
+				connection = window.connections[url] = new WebSocket('ws://' + url + ':80');
+				window.connectionTimeouts[url] = window.setInterval(() => {
 					this.closeConnection(url);
 					if(url === hostname && ip){
 						this.openConnection({ ip }, cb);
@@ -38,18 +43,18 @@ export default {
 			};
 			connection.onclose = () => {
 				this.disableTimeout(url);
-				delete this.connections[url];
+				delete window.connections[url];
 			};
 		},
 		closeConnection(url){
-			const connection = this.connections[url];
+			const connection = window.connections[url];
 			if(!connection){ return; }
 			connection.close();
 		},
 		disableTimeout(url){
-			window.clearInterval(this.connectionTimeouts[url]);
-			if(delete this.connectionTimeouts[url]){
-				delete this.connectionTimeouts[url];
+			window.clearInterval(window.connectionTimeouts[url]);
+			if(delete window.connectionTimeouts[url]){
+				delete window.connectionTimeouts[url];
 			}
 		},
 		extractLampsFromUnit(unit){
@@ -63,7 +68,6 @@ export default {
 			}
 		},
 		_send(connection, message){
-			console.log(connection, message);
 			/*message = {
 				gradient: {
 					colors: [
