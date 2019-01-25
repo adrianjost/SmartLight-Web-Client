@@ -22,6 +22,7 @@
 				:class="{ marker: true, active: marker.active }"
 				:data-index="index"
 				tabindex="0"
+				@contextmenu.prevent="remove(index)"
 			/>
 		</div>
 	</div>
@@ -114,6 +115,11 @@ export default {
 				}
 				return marker;
 			});
+		},
+		remove(index){
+			if(index === 0 || index === this.markers.length - 1){ return }
+			this.markers.splice(index, 1);
+			this.makeActive(index);
 		},
 		cleanupMarkers(){
 			// TODO update color of fixed sliders from non fixed at same position
