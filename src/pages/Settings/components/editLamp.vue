@@ -39,19 +39,19 @@
 </template>
 
 <script>
-import Input from "@/components/picker/input"
-import IconPicker from "@/components/picker/iconPicker"
+import Input from "@/components/picker/input";
+import IconPicker from "@/components/picker/iconPicker";
 
 export default {
 	components: {
 		SLInput: Input,
-		IconPicker
+		IconPicker,
 	},
 	props: {
 		value: {
 			type: Object,
-			required: true
+			required: true,
 		},
 	},
-}
+};
 </script>

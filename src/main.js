@@ -1,31 +1,31 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import './registerServiceWorker'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import "./registerServiceWorker";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 Vue.prototype.$eventHub = new Vue(); // Global event bus
 
-import Toasted from 'vue-toasted';
+import Toasted from "vue-toasted";
 Vue.use(Toasted, {
 	duration: 5000,
 	position: "bottom-left",
-	"fullWidth": true,
-})
+	fullWidth: true,
+});
 
-import VueRouter from 'vue-router'
+import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
-import Ripple from 'vue-ripple-directive'
-Vue.directive('ripple', Ripple);
+import Ripple from "vue-ripple-directive";
+Vue.directive("ripple", Ripple);
 
-import toast from "@/mixins/toast.js"
+import toast from "@/mixins/toast.js";
 Vue.mixin(toast);
 
 export default new Vue({
 	router,
 	store,
-	render: h => h(App)
-}).$mount('#app');
+	render: (h) => h(App),
+}).$mount("#app");

@@ -11,8 +11,8 @@
 		<main
 			class="container"
 			:style="{
-				'padding-top': appBarTopState.visible?'56px':'0',
-				'padding-bottom': bottomNavState.visible?'100px':'0'
+				'padding-top': appBarTopState.visible ? '56px' : '0',
+				'padding-bottom': bottomNavState.visible ? '100px' : '0',
 			}"
 		>
 			<BrowserWarning />
@@ -28,80 +28,87 @@
 </template>
 
 <script>
-import BottomNavigation from '@/components/BottomNavigation.vue'
-import AppBarTop from '@/components/AppBarTop.vue'
-import BrowserWarning from '@/components/BrowserWarning.vue'
+import BottomNavigation from "@/components/BottomNavigation.vue";
+import AppBarTop from "@/components/AppBarTop.vue";
+import BrowserWarning from "@/components/BrowserWarning.vue";
 // TODO fix hub to prevent duplicate sending.
 //import hub from '@/mixins/hub.js'
 
 export default {
-	name: 'App',
+	name: "App",
 	components: {
 		AppBarTop,
 		BottomNavigation,
-		BrowserWarning
+		BrowserWarning,
 	},
 	//mixins: [hub],
-	data(){
+	data() {
 		return {
 			showBottomNav: undefined,
-			windowCircumference: 0
-		}
+			windowCircumference: 0,
+		};
 	},
 	computed: {
-		appBarTopState () {
+		appBarTopState() {
 			return this.$store.getters["ui/get"]("appBarTop");
 		},
-		bottomNavState () {
+		bottomNavState() {
 			return this.$store.getters["ui/get"]("bottomNav");
 		},
-		isInitialized () {
+		isInitialized() {
 			return this.$store.getters["auth/isAuthenticated"] !== undefined;
-		}
+		},
 	},
-	mounted(){
+	mounted() {
 		// -200 for chrome HTTP warnings, that may pop up on input fields
 		this.windowCircumference = window.innerWidth + window.innerHeight - 200;
 	},
 	created() {
-		this.$eventHub.$on('logout', async () => {
+		this.$eventHub.$on("logout", async () => {
 			await this.$store.dispatch("auth/logout");
 			this.$router.go("/login");
 		});
-		window.addEventListener('resize', this.resize);
-		this.$eventHub.$on('go-back', this.goBack );
+		window.addEventListener("resize", this.resize);
+		this.$eventHub.$on("go-back", this.goBack);
 	},
-	beforeDestroy(){
+	beforeDestroy() {
 		this.$eventHub.$off("logout");
-		this.$eventHub.$off('go-back', this.goBack);
+		this.$eventHub.$off("go-back", this.goBack);
 	},
 	methods: {
-		goBack(){
+		goBack() {
 			this.$router.go(-1);
 		},
-		handleAction(event){
+		handleAction(event) {
 			this.$eventHub.$emit(event);
 		},
-		resize(/* event */){
+		resize(/* event */) {
 			// hide BottomNav when onscreen keyboard opens (mobile devices)
 			// only tested on android
 			// TODO: fix this hack.
-			if(document.activeElement.tagName == "INPUT" && this.showBottomNav === undefined){
+			if (
+				document.activeElement.tagName == "INPUT" &&
+				this.showBottomNav === undefined
+			) {
 				this.showBottomNav = this.bottomNavState.visible;
 				this.$store.commit("ui/visible", {
 					component: "bottomNav",
-					visible: false
+					visible: false,
 				});
-			}else if(this.showBottomNav !== undefined && ((window.innerWidth + window.innerHeight) >= this.windowCircumference)||document.activeElement.tagName !== "INPUT"){
+			} else if (
+				(this.showBottomNav !== undefined &&
+					window.innerWidth + window.innerHeight >= this.windowCircumference) ||
+				document.activeElement.tagName !== "INPUT"
+			) {
 				this.$store.commit("ui/visible", {
 					component: "bottomNav",
-					visible: this.showBottomNav
+					visible: this.showBottomNav,
 				});
 				this.showBottomNav = undefined;
 			}
-		}
-	}
-}
+		},
+	},
+};
 </script>
 <style lang="scss">
 @import "./styles/base";

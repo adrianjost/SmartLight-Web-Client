@@ -21,36 +21,33 @@
 		</SLInput>
 
 		<b>Lamps:</b>
-		<LampPicker
-			v-model="value.lamps"
-			:lamps="lamps"
-		/>
+		<LampPicker v-model="value.lamps" :lamps="lamps" />
 
 		<IconPicker v-model="value.icon" />
 	</form>
 </template>
 
 <script>
-import Input from "@/components/picker/input"
-import IconPicker from "@/components/picker/iconPicker"
-import LampPicker from "@/components/picker/lampPicker.vue"
+import Input from "@/components/picker/input";
+import IconPicker from "@/components/picker/iconPicker";
+import LampPicker from "@/components/picker/lampPicker.vue";
 
 export default {
 	components: {
 		SLInput: Input,
 		LampPicker,
-		IconPicker
+		IconPicker,
 	},
 	props: {
 		value: {
 			type: Object,
-			required: true
+			required: true,
 		},
 	},
 	computed: {
 		lamps() {
 			return this.$store.getters["units/list-lamps"];
-		}
-	}
-}
+		},
+	},
+};
 </script>

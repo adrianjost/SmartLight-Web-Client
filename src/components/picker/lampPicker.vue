@@ -22,80 +22,80 @@ export default {
 		lamps: {
 			type: Array,
 			required: true,
-			validator: function (value) {
+			validator: function(value) {
 				return value.every((state) => {
 					return typeof state.id !== undefined;
-				})
-			}
+				});
+			},
 		},
 		value: {
 			type: Array,
-			required: true
-		}
+			required: true,
+		},
 	},
 	methods: {
-		toggleSelection(lampId){
+		toggleSelection(lampId) {
 			const index = this.value.indexOf(lampId);
-			if(index >= 0){
+			if (index >= 0) {
 				// delete from list
-				let newValue = [...this.value]
-				newValue.splice(index, 1)
+				let newValue = [...this.value];
+				newValue.splice(index, 1);
 				this.$emit("input", newValue);
-			}else{
+			} else {
 				// add to list
 				this.$emit("input", [...this.value, lampId]);
 			}
-		}
-	}
-}
+		},
+	},
+};
 </script>
 
 <style lang="scss" scoped>
 .lamps {
-	font-size: 0;
 	padding: 8px;
+	font-size: 0;
 	text-align: left;
 	user-select: none;
 }
 
 .lamp {
+	position: relative;
+	display: inline-block;
+	padding: 16px;
+	margin: 4px;
+	color: var(--color-text-active-i);
+	list-style: none;
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
-	color: var(--color-text-active-i);
-	display: inline-block;
-	list-style: none;
-	margin: 4px;
-	padding: 16px;
-	position: relative;
-	transition: background-color .2s ease-in-out;
+	transition: background-color 0.2s ease-in-out;
 
 	&::before {
-		align-items: center;
-		background: #34a853;
-		border-radius: 50%;
-		color: #fff;
-		content: "check";
-		direction: ltr;
+		position: absolute;
+		top: -4px;
+		right: -4px;
 		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
 		font-family: "Material Icons", serif;
-		-webkit-font-feature-settings: "liga";
 		font-size: 16px;
-		-webkit-font-smoothing: antialiased;
 		font-style: normal;
 		font-weight: normal;
-		height: 24px;
-		justify-content: center;
-		letter-spacing: normal;
 		line-height: 1;
-		opacity: 0;
-		position: absolute;
-		right: -4px;
+		color: #fff;
 		text-transform: none;
-		top: -4px;
-		transition: opacity .15s ease-in-out 0s;
-		white-space: nowrap;
-		width: 24px;
+		letter-spacing: normal;
 		word-wrap: normal;
+		white-space: nowrap;
+		content: "check";
+		background: #34a853;
+		border-radius: 50%;
+		opacity: 0;
+		transition: opacity 0.15s ease-in-out 0s;
+		direction: ltr;
+		-webkit-font-feature-settings: "liga";
+		-webkit-font-smoothing: antialiased;
 	}
 
 	&.checked {
@@ -103,7 +103,7 @@ export default {
 
 		&::before {
 			opacity: 1;
-			transition-delay: .15s;
+			transition-delay: 0.15s;
 		}
 	}
 }

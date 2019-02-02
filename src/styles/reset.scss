@@ -3,11 +3,12 @@
 }
 
 body {
-	font: 400 16px/1.1 sans-serif;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	margin: 0;
 	padding: 0;
+	margin: 0;
+	font: 400 16px/1.1 sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu,
+		"Helvetica Neue", Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
 }
 
 h1,
@@ -16,11 +17,11 @@ h3,
 h4,
 h5,
 h6 {
+	padding: 0.4em 0 0.25em;
 	margin: 0;
-	padding: .4em 0 .25em;
 }
 
-a{
+a {
 	color: var(--color-text);
 }
 
@@ -33,22 +34,22 @@ button {
 }
 
 button {
+	padding: 0;
+	margin: 0;
 	background: transparent;
 	border: none;
-	margin: 0;
-	padding: 0;
 }
 
 code {
 	font-style: italic;
 }
 
-.custom-scrollbar{
+.custom-scrollbar {
 	$scrollbarSize: 4px;
 
 	&::-webkit-scrollbar-track {
-		border-radius: $scrollbarSize;
 		background-color: transparent;
+		border-radius: $scrollbarSize;
 	}
 
 	&::-webkit-scrollbar {
@@ -58,15 +59,20 @@ code {
 	}
 
 	&::-webkit-scrollbar-thumb {
-		border-radius: $scrollbarSize;
 		background-color: var(--color-border);
-		box-shadow: 0 0 4px rgba(0, 0, 0, .3);
+		border-radius: $scrollbarSize;
+		box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
 	}
-	&::-webkit-scrollbar-track, &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
+	&::-webkit-scrollbar-track,
+	&::-webkit-scrollbar,
+	&::-webkit-scrollbar-thumb {
 		visibility: hidden;
 	}
-	&:hover, &:focus{
-		&::-webkit-scrollbar-track, &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
+	&:hover,
+	&:focus {
+		&::-webkit-scrollbar-track,
+		&::-webkit-scrollbar,
+		&::-webkit-scrollbar-thumb {
 			visibility: visible;
 		}
 	}

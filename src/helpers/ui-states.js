@@ -1,28 +1,28 @@
 const defaultState = {
-	appBarTop: ({user, title}) => {
+	appBarTop: ({ user, title }) => {
 		const user_avatar = {
 			user_avatar: {
 				src: user.photoURL,
 				alt: "user avatar",
-				event: "logout"
-			}
+				event: "logout",
+			},
 		};
 		const logoutIconButton = {
 			actions: [
 				{
 					icon: "exit_to_app",
-					event: "logout"
-				}
-			]
-		}
-		const logoutButton = (user.photoURL) ? user_avatar : logoutIconButton;
+					event: "logout",
+				},
+			],
+		};
+		const logoutButton = user.photoURL ? user_avatar : logoutIconButton;
 		return {
 			visible: true,
 			title: {
-				text: title
+				text: title,
 			},
-			...logoutButton
-		}
+			...logoutButton,
+		};
 	},
 	bottomNav: (activeIndex) => {
 		const state = {
@@ -43,14 +43,14 @@ const defaultState = {
 				{
 					icon: "settings",
 					name: "Settings",
-					to: "/settings"
+					to: "/settings",
 				},
-			]
+			],
 		};
 		state.actions[activeIndex].active = true;
 		return state;
 	},
-}
+};
 
 const nestedDefaultState = {
 	appBarTop: (title) => {
@@ -58,24 +58,24 @@ const nestedDefaultState = {
 			visible: true,
 			back_action: {
 				icon: "arrow_back",
-				event: "go-back"
+				event: "go-back",
 			},
 			title: {
-				text: title
+				text: title,
 			},
-		}
+		};
 	},
 	bottomNav: (activeIndex) => {
 		return Object.assign(defaultState.bottomNav(activeIndex), {
 			fab: {
 				icon: "check",
-				event: "check"
+				event: "check",
 			},
-		})
+		});
 	},
-}
+};
 
 export {
 	defaultState as UIStateDefault,
-	nestedDefaultState as UIStateNestedDefault
-}
+	nestedDefaultState as UIStateNestedDefault,
+};

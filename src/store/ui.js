@@ -1,6 +1,6 @@
 const state = {
 	appBarTop: {},
-	bottomNav: {}
+	bottomNav: {},
 };
 
 const getters = {
@@ -10,24 +10,23 @@ const getters = {
 };
 
 const mutations = {
-	visible(state, {visible, component}){
+	visible(state, { visible, component }) {
 		state[component].visible = visible;
 	},
-	set(state, {component, payload}){
+	set(state, { component, payload }) {
 		state[component] = payload;
 	},
-	patch(state, {component, payload}){
+	patch(state, { component, payload }) {
 		state[component] = Object.assign(state[component], payload);
 	},
 };
 
-const actions = {
-};
+const actions = {};
 
 export default {
 	namespaced: true,
 	state,
 	getters,
 	mutations,
-	actions
+	actions,
 };

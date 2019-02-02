@@ -1,46 +1,59 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router';
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-import store from './store'
+import store from "./store";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-function loadView(path){
-	return () => import(/* webpackChunkName: "view-[request]" */ `${path}`)
+function loadView(path) {
+	return () => import(/* webpackChunkName: "view-[request]" */ `${path}`);
 }
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+	mode: "history",
+	base: process.env.BASE_URL,
 	routes: [
-		{ path: '/login', component: loadView('./pages/Login.vue') , meta: { isPublic: true }},
+		{
+			path: "/login",
+			component: loadView("./pages/Login.vue"),
+			meta: { isPublic: true },
+		},
 
-		{ path: '/control', component: loadView('./pages/Control/index.vue') },
-		{ path: '/control/:id', component: loadView('./pages/Control/id.vue') },
+		{ path: "/control", component: loadView("./pages/Control/index.vue") },
+		{ path: "/control/:id", component: loadView("./pages/Control/id.vue") },
 
-		{ path: '/settings', component: loadView('./pages/Settings/index.vue') },
-		{ path: '/settings/add/:type', component: loadView('./pages/Settings/id.vue') },
-		{ path: '/settings/edit/:id', component: loadView('./pages/Settings/id.vue') },
+		{ path: "/settings", component: loadView("./pages/Settings/index.vue") },
+		{
+			path: "/settings/add/:type",
+			component: loadView("./pages/Settings/id.vue"),
+		},
+		{
+			path: "/settings/edit/:id",
+			component: loadView("./pages/Settings/id.vue"),
+		},
 
-		{ path: '/settings/hub', component: loadView('./pages/Settings/Hub.vue') },
+		{ path: "/settings/hub", component: loadView("./pages/Settings/Hub.vue") },
 
-		{ path: '/*', redirect: '/control' },
-	]
+		{ path: "/*", redirect: "/control" },
+	],
 });
 
 router.beforeEach((to, from, next) => {
 	const isAuthenticated = store.getters["auth/isAuthenticated"];
-	if (!isAuthenticated && to.matched.some(record => !record.meta.isPublic)) {
+	if (!isAuthenticated && to.matched.some((record) => !record.meta.isPublic)) {
 		return next({
-			path: '/login',
+			path: "/login",
 			query: {
 				redirect: to.fullPath,
 			},
 		});
-	}else if(isAuthenticated && to.matched.some(record => record.path === "/login")){
-		return next({ path: '/' });
+	} else if (
+		isAuthenticated &&
+		to.matched.some((record) => record.path === "/login")
+	) {
+		return next({ path: "/" });
 	}
 	return next();
-})
+});
 
 export default router;

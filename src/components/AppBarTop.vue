@@ -17,7 +17,7 @@
 						:src="backAction.src"
 						:alt="backAction.alt"
 						class="avatar"
-					>
+					/>
 				</RouterLink>
 
 				<button
@@ -34,16 +34,12 @@
 						:src="backAction.src"
 						:alt="backAction.alt"
 						class="avatar"
-					>
+					/>
 				</button>
 			</template>
 
-
 			<!-- PAGE TITLE -->
-			<h6
-				class="page_title"
-				@click="sendEvent(title.event)"
-			>
+			<h6 class="page_title" @click="sendEvent(title.event)">
 				{{ title.text }}
 			</h6>
 
@@ -82,13 +78,12 @@
 				:alt="userAvatar.alt"
 				class="avatar"
 				@click="sendEvent(userAvatar.event)"
-			>
+			/>
 		</div>
 	</header>
 </template>
 
 <script>
-
 /*
 EXAMPLE CONFIG
 
@@ -122,54 +117,54 @@ export default {
 		backAction: {
 			type: Object,
 			default: () => {},
-			validator: function (value) {
-				return value.icon || (value.src && value.alt)
-			}
+			validator: function(value) {
+				return value.icon || (value.src && value.alt);
+			},
 		},
 		title: {
 			type: Object,
 			required: true,
-			validator: function (value) {
+			validator: function(value) {
 				return typeof value.text === "string";
-			}
+			},
 		},
 		actions: {
 			type: Array,
 			default: () => [],
-			validator: function (value) {
+			validator: function(value) {
 				return value.every((action) => {
-					return action.icon && (action.event ||action.to);
+					return action.icon && (action.event || action.to);
 				});
-			}
+			},
 		},
 		userAvatar: {
 			type: Object,
 			default: () => {},
-			validator: function (value) {
+			validator: function(value) {
 				return value.src && value.alt;
-			}
-		}
+			},
+		},
 	},
 	methods: {
-		sendEvent(eventName){
-			if(eventName){
-				this.$emit('action', eventName);
+		sendEvent(eventName) {
+			if (eventName) {
+				this.$emit("action", eventName);
 			}
 		},
-	}
-}
+	},
+};
 </script>
 
 <style lang="scss" scoped>
 .bar {
-	background: var(--color-overlay);
-	height: 56px;
-	left: 0;
 	position: fixed;
 	top: 0;
-	user-select: none;
-	width: 100%;
+	left: 0;
 	z-index: 9999;
+	width: 100%;
+	height: 56px;
+	user-select: none;
+	background: var(--color-overlay);
 }
 
 .container {
@@ -184,30 +179,30 @@ button {
 }
 
 .navigation_back {
-	align-items: center;
-	border-radius: 20px;
 	display: flex;
-	height: 40px;
+	align-items: center;
 	justify-content: center;
-	margin-right: 8px;
 	min-width: 40px;
+	height: 40px;
+	margin-right: 8px;
 	text-decoration: none;
+	border-radius: 20px;
 }
 
 .page_title {
 	flex: 1;
+	padding: 8px;
+	margin: 0;
 	font-size: 20px;
 	font-weight: 500;
 	line-height: 20px;
-	margin: 0;
-	padding: 8px;
 }
 
 .avatar {
-	border-radius: 20px;
+	width: 40px;
 	height: 40px;
 	margin: 0 12px;
-	width: 40px;
+	border-radius: 20px;
 
 	&:last-of-type {
 		margin-right: 0;
@@ -215,14 +210,14 @@ button {
 }
 
 .action {
-	border-radius: 20px;
-	color: var(--color-text-active);
-	cursor: pointer;
-	height: 40px;
-	margin: 0 4px;
-	padding: 8px;
 	position: relative;
 	width: 40px;
+	height: 40px;
+	padding: 8px;
+	margin: 0 4px;
+	color: var(--color-text-active);
+	cursor: pointer;
+	border-radius: 20px;
 
 	&:last-of-type {
 		margin-right: 0;

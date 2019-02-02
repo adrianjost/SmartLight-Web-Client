@@ -26,50 +26,52 @@
 				tag="button"
 				class="button button-primary add-lamp"
 			>
-				<i class="material-icons">
-					add
-				</i><span>Add Lamp</span>
+				<i class="material-icons"> add </i><span>Add Lamp</span>
 			</RouterLink>
 		</div>
 	</section>
 </template>
 
 <script>
-import ControlUnit from '@/components/ControlUnit.vue'
-import { UIStateDefault } from '@/helpers/ui-states.js';
-import unitBackground from '@/mixins/unitBackground.js';
+import ControlUnit from "@/components/ControlUnit.vue";
+import { UIStateDefault } from "@/helpers/ui-states.js";
+import unitBackground from "@/mixins/unitBackground.js";
 
 export default {
 	components: {
-		ControlUnit
+		ControlUnit,
 	},
 	mixins: [unitBackground],
 	computed: {
 		lamps() {
-			return (this.$store.getters["units/list-lamps"] || []).map(unit => this.addBackground(unit));
+			return (this.$store.getters["units/list-lamps"] || []).map((unit) =>
+				this.addBackground(unit)
+			);
 		},
 		groups() {
-			return (this.$store.getters["units/list-groups"] || []).map(unit => this.addBackground(unit));
+			return (this.$store.getters["units/list-groups"] || []).map((unit) =>
+				this.addBackground(unit)
+			);
 		},
 	},
-	created(){
+	created() {
 		this.$store.commit("ui/set", {
 			component: "appBarTop",
 			payload: UIStateDefault.appBarTop({
 				user: this.$store.getters["auth/get"],
-				title: "Control"
-			})
+				title: "Control",
+			}),
 		});
 		this.$store.commit("ui/set", {
 			component: "bottomNav",
-			payload: UIStateDefault.bottomNav(0)
+			payload: UIStateDefault.bottomNav(0),
 		});
-	}
+	},
 };
 </script>
 
 <style lang="scss" scoped>
-h2{
+h2 {
 	text-align: center;
 	text-decoration: underline;
 }
@@ -84,7 +86,7 @@ h2{
 	margin: 8px;
 }
 
-.add-lamp{
+.add-lamp {
 	display: flex;
 	align-items: center;
 	margin: 16px 0;

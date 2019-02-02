@@ -1,19 +1,19 @@
 module.exports = {
-	"extends": [
+	extends: [
 		"stylelint-config-recommended",
 		"stylelint-8-point-grid", // https://github.com/dcrtantuco/stylelint-8-point-grid
+		// Enforce a standard order for CSS properties
+		// https://github.com/stormwarning/stylelint-config-recess-order
+		"stylelint-config-recess-order",
 	],
-	"plugins": [
+	plugins: [
 		"stylelint-a11y", // https://github.com/YozhikM/stylelint-a11y
 		"stylelint-declaration-block-no-ignored-properties", // https://github.com/kristerkari/stylelint-declaration-block-no-ignored-properties
-		//"stylelint-declaration-strict-value", // https://github.com/AndyOGo/stylelint-declaration-strict-value
 		"stylelint-high-performance-animation", // https://github.com/kristerkari/stylelint-high-performance-animation
 		"stylelint-selector-no-empty", // https://github.com/ssivanatarajan/stylelint-selector-no-empty
 		"stylelint-selector-tag-no-without-class", // https://github.com/Moxio/stylelint-selector-tag-no-without-class
-		//"stylelint-value-no-unknown-custom-properties", // https://github.com/csstools/stylelint-value-no-unknown-custom-properties
-		"stylelint-order",
 	],
-	"rules": {
+	rules: {
 		// https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md
 		"color-named": "never",
 		"color-no-hex": null,
@@ -39,16 +39,23 @@ module.exports = {
 		// ...
 		"no-empty-source": null,
 		// ...
-		"indentation": "tab",
+		indentation: "tab",
 		// "linebreaks": ["unix", { "severity": "warning" }], // FIX: autofix not working properly
 		"no-eol-whitespace": true,
 		"no-missing-end-of-source-newline": true,
 		"no-empty-first-line": true,
 
 		"plugin/8-point-grid": {
-			"base": 4,
-			"whitelist": ["2px", "1px"],
-			"ignore": ["width", "height", "min-width", "min-height", "max-width", "max-height"]
+			base: 4,
+			whitelist: ["2px", "1px"],
+			ignore: [
+				"width",
+				"height",
+				"min-width",
+				"min-height",
+				"max-width",
+				"max-height",
+			],
 		},
 
 		// FIX: ingores /* styleling-disable */
@@ -56,22 +63,37 @@ module.exports = {
 		//"a11y/font-size-is-readable": [true, { "severity": "warning" }],
 		//"a11y/media-prefers-reduced-motion": true, // autofix makes code unmaintainable and unreadable
 		//"a11y/media-prefers-color-scheme": [true, { "severity": "warning" }], // autofix makes code unmaintainable and unreadable
-		"a11y/no-display-none": [true, {
-			"severity": "warning"
-		}],
-		"a11y/no-obsolete-attribute": [true, {
-			"severity": "warning"
-		}],
-		"a11y/no-obsolete-element": [true, {
-			"severity": "warning"
-		}],
-		"a11y/no-spread-text": [true, {
-			"severity": "warning"
-		}],
+		"a11y/no-display-none": [
+			true,
+			{
+				severity: "warning",
+			},
+		],
+		"a11y/no-obsolete-attribute": [
+			true,
+			{
+				severity: "warning",
+			},
+		],
+		"a11y/no-obsolete-element": [
+			true,
+			{
+				severity: "warning",
+			},
+		],
+		"a11y/no-spread-text": [
+			true,
+			{
+				severity: "warning",
+			},
+		],
 		"a11y/no-outline-none": true,
-		"a11y/no-text-align-justify": [true, {
-			"severity": "warning"
-		}],
+		"a11y/no-text-align-justify": [
+			true,
+			{
+				severity: "warning",
+			},
+		],
 		"a11y/selector-pseudo-class-focus": true,
 
 		"plugin/declaration-block-no-ignored-properties": true,
@@ -86,10 +108,13 @@ module.exports = {
 		}],
 		*/
 
-		"plugin/no-low-performance-animation-properties": [true, {
-			ignore: "paint-properties",
-			ignoreProperties: ['color', 'background-color'],
-		}],
+		"plugin/no-low-performance-animation-properties": [
+			true,
+			{
+				ignore: "paint-properties",
+				ignoreProperties: ["color", "background-color"],
+			},
+		],
 
 		"plugin/stylelint-selector-no-empty": true,
 
@@ -102,16 +127,5 @@ module.exports = {
 			]
 		}],
 		*/
-
-		"order/order": [
-			"custom-properties",
-			"dollar-variables",
-			"at-variables",
-			"declarations",
-			"rules",
-			"at-rules"
-		],
-		"order/properties-alphabetical-order": true
-
-	}
-}
+	},
+};

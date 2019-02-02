@@ -1,5 +1,5 @@
-import { firebase } from '@firebase/app';
-import '@firebase/auth';
+import { firebase } from "@firebase/app";
+import "@firebase/auth";
 
 const state = {
 	authState: undefined,
@@ -7,8 +7,12 @@ const state = {
 };
 
 const getters = {
-	isAuthenticated: (state) => { return state.authState},
-	get: (state) => { return state.userInfo; },
+	isAuthenticated: (state) => {
+		return state.authState;
+	},
+	get: (state) => {
+		return state.userInfo;
+	},
 };
 
 const mutations = {
@@ -26,9 +30,15 @@ const actions = {
 	async login(store, user) {
 		store.commit("login", user);
 		const syncedStores = [
-			store.dispatch('units/openDBChannel', null, {root:true}).catch(console.error), // eslint-disable-line no-console
-			store.dispatch('savedStates/openDBChannel', null, {root:true}).catch(console.error), // eslint-disable-line no-console
-			store.dispatch('user/openDBChannel', null, {root:true}).catch(console.error), // eslint-disable-line no-console
+			store
+				.dispatch("units/openDBChannel", null, { root: true })
+				.catch(console.error), // eslint-disable-line no-console
+			store
+				.dispatch("savedStates/openDBChannel", null, { root: true })
+				.catch(console.error), // eslint-disable-line no-console
+			store
+				.dispatch("user/openDBChannel", null, { root: true })
+				.catch(console.error), // eslint-disable-line no-console
 		];
 		return Promise.all(syncedStores);
 	},
@@ -36,16 +46,34 @@ const actions = {
 		try {
 			const syncedStores = [
 				firebase.auth().signOut(),
-				store.dispatch('units/closeDBChannel', {clearModule: true}, {root:true}).catch(console.error), // eslint-disable-line no-console
-				store.dispatch('savedStates/closeDBChannel', {clearModule: true}, {root:true}).catch(console.error), // eslint-disable-line no-console
-				store.dispatch('user/closeDBChannel', {clearModule: true}, {root:true}).catch(console.error), // eslint-disable-line no-console
+				store
+					.dispatch(
+						"units/closeDBChannel",
+						{ clearModule: true },
+						{ root: true }
+					)
+					.catch(console.error), // eslint-disable-line no-console
+				store
+					.dispatch(
+						"savedStates/closeDBChannel",
+						{ clearModule: true },
+						{ root: true }
+					)
+					.catch(console.error), // eslint-disable-line no-console
+				store
+					.dispatch(
+						"user/closeDBChannel",
+						{ clearModule: true },
+						{ root: true }
+					)
+					.catch(console.error), // eslint-disable-line no-console
 			];
 			await Promise.all(syncedStores);
 			store.commit("logout");
-		} catch(error){
+		} catch (error) {
 			console.error(error); // eslint-disable-line no-console
 		}
-	}
+	},
 };
 
 export default {
@@ -53,5 +81,5 @@ export default {
 	state,
 	getters,
 	mutations,
-	actions
+	actions,
 };

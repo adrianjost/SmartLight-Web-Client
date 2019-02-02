@@ -4,16 +4,13 @@
 			<li
 				v-for="state in data"
 				:key="state.id"
-				:style="{background: state.background}"
+				:style="{ background: state.background }"
 				class="state"
 				@click="sendEvent(event, state.id)"
 				@contextmenu.prevent="sendEvent(contextEvent, state.id)"
 			/>
 
-			<li
-				class="state add"
-				@click="sendEvent(addEvent)"
-			>
+			<li class="state add" @click="sendEvent(addEvent)">
 				<i class="material-icons">
 					add
 				</i>
@@ -28,56 +25,56 @@ export default {
 		data: {
 			type: Array,
 			required: true,
-			validator: function (value) {
+			validator: function(value) {
 				return value.every((state) => {
-					return (typeof state.id !== undefined) && state.background;
-				})
-			}
+					return typeof state.id !== undefined && state.background;
+				});
+			},
 		},
 		event: {
 			type: String,
-			default: "state-picked"
+			default: "state-picked",
 		},
 		addEvent: {
 			type: String,
-			default: "state-add"
+			default: "state-add",
 		},
 		contextEvent: {
 			type: String,
-			default: "state-context"
+			default: "state-context",
 		},
 	},
 	methods: {
-		sendEvent(event, data){
+		sendEvent(event, data) {
 			this.$emit(event, data);
-		}
-	}
-}
+		},
+	},
+};
 </script>
 
 <style lang="scss" scoped>
 .state-list {
+	max-width: 300px;
+	padding: 8px;
+	margin: 8px auto;
+	overflow-x: auto;
+	font-size: 0;
+	text-align: left;
+	white-space: nowrap;
+	user-select: none;
 	border: 1px solid var(--color-border);
 	border-radius: 4px;
-	font-size: 0;
-	margin: 8px auto;
-	max-width: 300px;
-	overflow-x: auto;
-	padding: 8px;
-	text-align: left;
-	user-select: none;
-	white-space: nowrap;
 }
 
 .state {
+	position: relative;
+	display: inline-block;
+	padding: 20px;
+	margin: 0 4px;
+	color: var(--color-text-active-i);
+	list-style: none;
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
-	color: var(--color-text-active-i);
-	display: inline-block;
-	list-style: none;
-	margin: 0 4px;
-	padding: 20px;
-	position: relative;
 
 	&:first-of-type {
 		margin-left: 0;
@@ -91,9 +88,9 @@ export default {
 		border-width: 2px;
 
 		.material-icons {
-			left: 50%;
 			position: absolute;
 			top: 50%;
+			left: 50%;
 			transform: translate(-50%, -50%);
 		}
 	}

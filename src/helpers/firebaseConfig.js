@@ -4,5 +4,5 @@ export const config = {
 	databaseURL: "https://smartlight-4861d.firebaseio.com",
 	projectId: "smartlight-4861d",
 	storageBucket: "smartlight-4861d.appspot.com",
-	messagingSenderId: "535232876187"
+	messagingSenderId: "535232876187",
 };

@@ -3,13 +3,13 @@
 
 body,
 #app {
-	background-color: var(--color-background);
-	color: var(--color-text);
-	min-height: 100vh;
 	width: 100%;
+	min-height: 100vh;
+	color: var(--color-text);
+	background-color: var(--color-background);
 }
 
-hr{
+hr {
 	margin: 1em 0;
 	border: 0;
 	border-bottom: 1px solid var(--color-border);
@@ -18,9 +18,9 @@ hr{
 .container {
 	width: 100%;
 	max-width: 700px;
-	margin: 0 auto;
-	padding-left: 0;
 	padding-right: 0;
+	padding-left: 0;
+	margin: 0 auto;
 }
 
 .contents {
@@ -37,27 +37,31 @@ hr{
 }
 
 input:not([type="checkbox"]):not([type="radio"]) {
+	width: 100%;
+	color: var(--color-text);
 	background: transparent;
 	border: none;
-	color: var(--color-text);
-	width: 100%;
 }
 
-.button{
-	cursor: pointer;
+.button {
 	display: inline-block;
-	color: var(--color-text-inactive);
-	text-decoration: none;
-	border: 1px solid transparent;
-	text-transform: uppercase;
 	padding: 8px 16px;
 	margin: 0 4px;
-	border-radius: 8px;
+	color: var(--color-text-inactive);
+	text-decoration: none;
+	text-transform: uppercase;
 	white-space: nowrap;
-	&:first-of-type{ margin-left: 0; }
-	&:last-of-type{ margin-right: 0; }
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	&:first-of-type {
+		margin-left: 0;
+	}
+	&:last-of-type {
+		margin-right: 0;
+	}
 
-	&.button-primary{
+	&.button-primary {
 		color: var(--color-text);
 		border-color: var(--color-border);
 	}
