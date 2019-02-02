@@ -13,12 +13,8 @@
 						:to="action.to"
 						:class="{ 'nav-item': true, active: action.active }"
 					>
-						<i class="material-icons">
-							{{ action.icon }}
-						</i>
-						<span v-if="action.name" class="name">
-							{{ action.name }}
-						</span>
+						<i class="material-icons">{{ action.icon }}</i>
+						<span v-if="action.name" class="name">{{ action.name }}</span>
 					</RouterLink>
 
 					<button
@@ -27,12 +23,8 @@
 						:class="{ 'nav-item': true, active: action.active }"
 						@click="sendEvent(action.event)"
 					>
-						<i class="material-icons">
-							{{ action.icon }}
-						</i>
-						<span v-if="action.name" class="name">
-							{{ action.name }}
-						</span>
+						<i class="material-icons">{{ action.icon }}</i>
+						<span v-if="action.name" class="name">{{ action.name }}</span>
 					</button>
 				</li>
 			</template>

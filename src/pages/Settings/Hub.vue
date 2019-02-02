@@ -1,34 +1,27 @@
 <template>
 	<div class="hub">
-		<h1>
-			IoT-Hub is always active :)
-		</h1>
-		<i class="material-icons md-64">
-			device_hub
-		</i>
-		<p
-			>As long as you have any page of this app open, the website acts as an hub
-			for external communication.</p
-		>
-		<p
-			>So you can control your lights from anywhere on earth, as long as one
-			device in your local network has this app opened.</p
-		>
+		<h1>IoT-Hub is always active :)</h1>
+		<i class="material-icons md-64">device_hub</i>
+		<p>
+			As long as you have any page of this app open, the website acts as an hub
+			for external communication.
+		</p>
+		<p>
+			So you can control your lights from anywhere on earth, as long as one
+			device in your local network has this app opened.
+		</p>
 		<p>
 			This is also required to be able to use Google Assistant & IFTTT.
 			<a
 				href="https://adrian-jost.gitbook.io/smartlight/setup/enable-google-home"
 				target="_blank"
+				>Read more, how to setup Google Assistant & IFTTT</a
 			>
-				Read more, how to setup Google Assistant & IFTTT
-			</a>
 		</p>
 
 		<h2>
 			Your API-Token
-			<small class="no-wrap">
-				(without spaces)
-			</small>
+			<small class="no-wrap">(without spaces)</small>
 		</h2>
 
 		<p class="token">
@@ -42,15 +35,14 @@
 			class="button button-primary"
 			type="button"
 			@click="copyToken"
+			>Copy</button
 		>
-			Copy
-		</button>
-		<button v-ripple class="button" type="button" @click="updateToken">
-			Update
-		</button>
-		<button v-ripple class="button" type="button" @click="deleteToken">
-			Delete
-		</button>
+		<button v-ripple class="button" type="button" @click="updateToken"
+			>Update</button
+		>
+		<button v-ripple class="button" type="button" @click="deleteToken"
+			>Delete</button
+		>
 	</div>
 </template>
 

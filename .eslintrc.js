@@ -3,6 +3,9 @@ module.exports = {
 	env: {
 		node: true,
 	},
+	parserOptions: {
+		sourceType: "module",
+	},
 	extends: [
 		// https://github.com/vuejs/eslint-plugin-vue#bulb-rules
 		"plugin:vue/recommended",
@@ -12,10 +15,23 @@ module.exports = {
 		"prettier/vue",
 	],
 	rules: {
-		"no-console": "off",
-		"no-debugger": "off",
-		"vue/html-indent": ["error", "tab"],
-		"vue/script-indent": ["error", "tab"],
+		// Only allow debugger in development
+		"no-debugger":
+			process.env.NODE_ENV === "production" || process.env.PRE_COMMIT
+				? "error"
+				: "off",
+		// Only allow `console.log` in development
+		"no-console":
+			process.env.NODE_ENV === "production" || process.env.PRE_COMMIT
+				? [
+						"error",
+						{
+							allow: ["warn", "error"],
+						},
+				  ]
+				: "off",
+		//"vue/html-indent": ["error", "tab"],
+		//"vue/script-indent": ["error", "tab"],
 		"vue/component-name-in-template-casing": [
 			"error",
 			"PascalCase",

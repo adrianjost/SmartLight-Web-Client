@@ -1,10 +1,11 @@
 <template>
 	<div v-if="!isSupported" class="warning">
-		<b>Warning:</b> Your Browser is unsupported! <br />
-		<small
-			>This site uses modern web technologies that are only available on
-			<b>Google Chrome (Version >= 69)</b>.</small
-		>
+		<b>Warning:</b> Your Browser is unsupported!
+		<br />
+		<small>
+			This site uses modern web technologies that are only available on
+			<b>Google Chrome (Version >= 69)</b>.
+		</small>
 	</div>
 </template>
 
