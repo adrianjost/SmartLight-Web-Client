@@ -39,7 +39,6 @@ module.exports = {
 		// ...
 		"no-empty-source": null,
 		// ...
-		indentation: "tab",
 		// "linebreaks": ["unix", { "severity": "warning" }], // FIX: autofix not working properly
 		"no-eol-whitespace": true,
 		"no-missing-end-of-source-newline": true,

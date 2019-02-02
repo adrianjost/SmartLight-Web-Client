@@ -25,9 +25,9 @@
 		</h2>
 
 		<p class="token">
-			<span v-for="(token, index) in api_token" :key="index" class="block">
-				{{ token }}
-			</span>
+			<span v-for="(token, index) in api_token" :key="index" class="block">{{
+				token
+			}}</span>
 		</p>
 
 		<button
