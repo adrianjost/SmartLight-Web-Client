@@ -1,5 +1,7 @@
 # firebase-smart-light
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/adrianjost/SmartLight-Web-Client.svg)](https://greenkeeper.io/)
+
 > A Firebase Hosted SmartLight Client
 
 ## Build Setup
