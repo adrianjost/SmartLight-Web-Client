@@ -1,29 +1,26 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
+import Vue from "vue";
+import Vuex from "vuex";
+Vue.use(Vuex);
 
-Vue.use(Vuex)
+import createPersistedState from "vuex-persistedstate";
+import firebaseAuth from "./plugins/firebaseAuth";
+import createEasyFirestore from "vuex-easy-firestore";
 
-let mixin = {
-  computed: {
-    user: function() {
-    return this.$store.state.user;
-    }
-  },
-}
-Vue.mixin(mixin);
+import ui from "./ui";
+import user from "./user";
+import auth from "./auth";
+import units from "./units";
+import savedStates from "./savedStates";
+
+// do the magic 🔥🧙‍♂️
+const easyFirestore = createEasyFirestore([user, units, savedStates], {
+	logging: process.env.NODE_ENV !== "production",
+});
 
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
-  state: {
-    user: undefined
-  },
-  mutations: {
-    logout(state) {
-      state.user = undefined;
-    },
-    login(state, user) {
-      state.user = user;
-    },
-  }
-})
+	plugins: [createPersistedState(), easyFirestore, firebaseAuth()],
+	modules: {
+		ui,
+		auth,
+	},
+});

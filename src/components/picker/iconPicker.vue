@@ -1,81 +1,150 @@
 <template>
-  <div class="icon-picker">
-    <!-- list of icons taken from https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/codepoints-->
-    <div id="selected-icon-container">
-      <i class="material-icons" id="selected-icon">{{selection}}</i>
-    </div>
-    <div id="icons">
-      <i :class="{'material-icons': true, selected: selection==icon}"
-        v-for="icon in iconList"
-        :key="icon"
-        @click="iconSelected(icon)"
-        @keyup.space="iconSelected(icon)"
-        :tabindex="selection == icon ? '-1' : '0'">
-          {{icon}}
-        </i>
-    </div>
-  </div>
+	<div>
+		<div class="inputs">
+			<div class="icon current" @click="query = value">
+				<i class="material-icons">
+					{{ value }}
+				</i>
+			</div>
+			<SLInput
+				v-model="query"
+				class="search"
+				label="Search for Icon"
+				type="text"
+				:placeholder="value"
+			/>
+		</div>
+
+		<ul v-if="filteredIcons.length" class="icons">
+			<li
+				v-for="icon of filteredIcons"
+				:key="icon"
+				:class="{ icon: true, selected: value === icon }"
+				@click="check(icon)"
+			>
+				<i class="material-icons">
+					{{ icon }}
+				</i>
+			</li>
+		</ul>
+		<p v-else class="not-found">
+			No icons found.
+		</p>
+	</div>
 </template>
 
 <script>
+import Input from "@/components/picker/input";
+import iconNames from "./material-icons";
+
 export default {
-  name: "icon-picker",
-  props: ['value'],
-  data(){
-    return {
-      selection: (this.value || "lightbulb_outline"),
-      iconList: ["lightbulb_outline", "highlight", "smoking_rooms", "room_service", "weekend", "wallpaper"]
-    }
-  },
-  methods: {
-    iconSelected(icon) {
-      this.selection = icon;
-      this.$emit('input', icon);
-    }
-  }
-}
+	name: "IconPicker",
+	components: {
+		SLInput: Input,
+	},
+	props: {
+		value: {
+			type: String,
+			default: "",
+		},
+	},
+	data() {
+		return {
+			icons: iconNames.sort(),
+			query: "",
+		};
+	},
+	computed: {
+		filteredIcons: function() {
+			return this.icons
+				.filter((icon) => {
+					return icon.toLowerCase().includes(this.query.toLowerCase());
+				})
+				.slice(0, 20);
+		},
+	},
+	methods: {
+		check(iconName) {
+			this.$emit("input", iconName);
+		},
+	},
+};
 </script>
 
 <style lang="scss" scoped>
-@import "../../helpers/colors";
-
-#selected-icon-container {
-  display: inline-block;
-  i {
-    font-size: 3.5em;
-    margin: 5px;
-    color: $color-text-light;
-    background: $color-primary;
-    border-radius: 4px;
-    padding: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
+.inputs {
+	display: flex;
+	flex-wrap: nowrap;
+}
+.search {
+	flex: 1;
+}
+.icon.current {
+	margin-right: 16px;
+	background-color: var(--color-overlay-i);
+}
+.not-found {
+	text-align: center;
 }
 
-#icons i {
-  font-size: 2em;
-  display: inline-block;
-  margin: 5px;
-  background: #ccc;
-  color: $color-text-dark;
-  border-radius: 4px;
-  padding: 5px;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  outline: none;
-  &.selected{
-    opacity: .3;
-    cursor: default;
-  }
-  &:not(.selected){
-    &:hover, &:focus{
-      color: $color-text-light;
-      background: $color-secondary;
-      box-shadow: 2px 2px 8px #0009;
-      transform: translate(-2px, -2px);
-    }
-  }
+.icons {
+	max-height: 200px;
+	padding: 8px;
+	overflow: auto;
+	font-size: 0;
+	text-align: center;
+	user-select: none;
+	-webkit-overflow-scrolling: touch;
 }
 
+.icon {
+	position: relative;
+	display: inline-block;
+	padding: 16px;
+	margin: 4px;
+	font-size: 0;
+	color: var(--color-text-active-i);
+	list-style: none;
+	border: 1px solid var(--color-border);
+	border-radius: 50%;
+	transition: background-color 0.2s ease-in-out;
+
+	&::before {
+		position: absolute;
+		top: -4px;
+		right: -4px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		font-family: "Material Icons", serif;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1;
+		color: #fff;
+		text-transform: none;
+		letter-spacing: normal;
+		word-wrap: normal;
+		white-space: nowrap;
+		content: "check";
+		background: #34a853;
+		border-radius: 50%;
+		opacity: 0;
+		transition: opacity 0.15s ease-in-out 0s;
+		direction: ltr;
+		-webkit-font-feature-settings: "liga";
+		-webkit-font-smoothing: antialiased;
+	}
+
+	&.selected {
+		background-color: var(--color-overlay-i);
+
+		&::before {
+			opacity: 1;
+			transition-delay: 0.15s;
+		}
+	}
+}
 </style>

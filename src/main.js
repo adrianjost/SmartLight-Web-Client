@@ -1,21 +1,31 @@
-import Vue from 'vue'
-import App from './App.vue'
-import VueRouter from 'vue-router'
-import firebase from 'firebase'
-import router from './router'
-import {config} from './helpers/firebaseConfig'
-import PortalVue from 'portal-vue'
-import store from './store'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import store from "./store";
+import "./registerServiceWorker";
 
-Vue.use(VueRouter);
-Vue.use(PortalVue)
+Vue.config.productionTip = false;
 
-new Vue({
-  router,
-  created() {
-    firebase.initializeApp(config);
-  },
-  el: '#app',
-  store,
-  render: h => h(App)
+Vue.prototype.$eventHub = new Vue(); // Global event bus
+
+import Toasted from "vue-toasted";
+Vue.use(Toasted, {
+	duration: 5000,
+	position: "bottom-left",
+	fullWidth: true,
 });
+
+import VueRouter from "vue-router";
+Vue.use(VueRouter);
+
+import Ripple from "vue-ripple-directive";
+Vue.directive("ripple", Ripple);
+
+import toast from "@/mixins/toast.js";
+Vue.mixin(toast);
+
+export default new Vue({
+	router,
+	store,
+	render: (h) => h(App),
+}).$mount("#app");

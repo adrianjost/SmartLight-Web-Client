@@ -1,0 +1,105 @@
+<template>
+	<section>
+		<SavedStatePicker
+			:data="colors"
+			event="loadColor"
+			add-event="addColor"
+			context-event="deleteState"
+			@loadColor="loadColor"
+			@addColor="saveState"
+			@deleteState="deleteState"
+		/>
+		<ColorPicker
+			v-model="currentColor"
+			class="color-picker"
+			:config="{
+				width: 250,
+				height: 300,
+				sliderMargin: 16,
+				markerRadius: 10,
+				color: (unit.state || {}).color,
+			}"
+		/>
+	</section>
+</template>
+
+<script>
+import SavedStatePicker from "@/components/picker/savedStatePicker";
+import ColorPicker from "@/components/picker/colorPicker";
+
+import { undoableStateDelete } from "@/mixins/undoableStateDelete.js";
+import localAPI from "@/mixins/localAPI.js";
+
+export default {
+	name: "ChooseColor",
+	components: {
+		SavedStatePicker,
+		ColorPicker,
+	},
+	mixins: [undoableStateDelete("colors"), localAPI],
+	props: {
+		unit: {
+			type: Object,
+			required: true,
+		},
+	},
+	data() {
+		return {
+			currentColor: "#ffffff",
+		};
+	},
+	computed: {
+		colors() {
+			return this.$store.getters["savedStates/list-colors"];
+		},
+		states() {
+			return this.$store.getters["savedStates/list"];
+		},
+	},
+	watch: {
+		currentColor: function(to) {
+			this.sendHexColor(this.unit, to);
+		},
+	},
+	created() {
+		this.$eventHub.$on("apply", this.apply);
+		if ((this.unit.state || {}).color) {
+			this.currentColor = this.unit.state.color;
+		}
+	},
+	beforeDestroy() {
+		this.$eventHub.$off("apply", this.apply);
+		this.closeConnection(this.unit);
+	},
+	methods: {
+		loadColor(id) {
+			this.currentColor = this.colors.find((state) => {
+				return state.id === id;
+			}).color;
+		},
+		saveState() {
+			// prevent saving the last color again
+			if (
+				(this.colors[this.colors.length - 1] || {}).color === this.currentColor
+			) {
+				return this.toastError("Color is already saved.");
+			}
+
+			this.$store.dispatch("savedStates/insert", {
+				type: "color",
+				color: this.currentColor,
+			});
+		},
+		apply() {
+			this.sendHexColor(this.unit, this.currentColor);
+			this.$store.dispatch("units/setState", {
+				id: this.unit.id,
+				data: {
+					color: this.currentColor,
+				},
+			});
+			this.$eventHub.$emit("go-back");
+		},
+	},
+};
+</script>

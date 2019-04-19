@@ -1,120 +1,119 @@
 <template>
-  <div id="app" class="wrapper" :style="{'--background-image': 'url('+backgroundurl+')'}">
-    <main v-if="user">
-      <toolbar/>
-      <router-view></router-view>
-    </main>
-    <auth v-show="!user"/>
-    <portal-target name="dialog-container" />
-  </div>
+	<div id="app">
+		<AppBarTop
+			v-if="appBarTopState.visible"
+			:back-action="appBarTopState.back_action"
+			:title="appBarTopState.title"
+			:actions="appBarTopState.actions"
+			:user-avatar="appBarTopState.user_avatar"
+			@action="handleAction"
+		/>
+		<main
+			class="container"
+			:style="{
+				'padding-top': appBarTopState.visible ? '56px' : '0',
+				'padding-bottom': bottomNavState.visible ? '100px' : '0',
+			}"
+		>
+			<BrowserWarning />
+			<RouterView v-if="isInitialized" />
+		</main>
+		<BottomNavigation
+			v-if="bottomNavState.visible"
+			:fab="bottomNavState.fab"
+			:actions="bottomNavState.actions"
+			@action="handleAction"
+		/>
+	</div>
 </template>
 
 <script>
-import firebase from 'firebase'
-import auth from "@/pages/Auth.vue";
-import toolbar from "@/components/Toolbar.vue";
+import BottomNavigation from "@/components/BottomNavigation.vue";
+import AppBarTop from "@/components/AppBarTop.vue";
+import BrowserWarning from "@/components/BrowserWarning.vue";
+// TODO fix hub to prevent duplicate sending.
+//import hub from '@/mixins/hub.js'
 
 export default {
-  name: 'app',
-  components: {
-    auth,
-    toolbar
-  },
-  data(){
-    return {
-      backgroundurl: ''
-    };
-  },
-  mounted(){
-    this.backgroundurl = `https://source.unsplash.com/${window.screen.width}x${window.screen.height}/?Light`;
-  }
-}
+	name: "App",
+	components: {
+		AppBarTop,
+		BottomNavigation,
+		BrowserWarning,
+	},
+	//mixins: [hub],
+	data() {
+		return {
+			showBottomNav: undefined,
+			windowCircumference: 0,
+		};
+	},
+	computed: {
+		appBarTopState() {
+			return this.$store.getters["ui/get"]("appBarTop");
+		},
+		bottomNavState() {
+			return this.$store.getters["ui/get"]("bottomNav");
+		},
+		isInitialized() {
+			return this.$store.getters["auth/isAuthenticated"] !== undefined;
+		},
+	},
+	mounted() {
+		// -200 for chrome HTTP warnings, that may pop up on input fields
+		this.windowCircumference = window.innerWidth + window.innerHeight - 200;
+	},
+	created() {
+		this.$eventHub.$on("logout", async () => {
+			await this.$store.dispatch("auth/logout");
+			this.$router.go("/login");
+		});
+		window.addEventListener("resize", this.resize);
+		this.$eventHub.$on("go-back", this.goBack);
+	},
+	beforeDestroy() {
+		this.$eventHub.$off("logout");
+		this.$eventHub.$off("go-back", this.goBack);
+	},
+	methods: {
+		goBack() {
+			this.$router.go(-1);
+		},
+		handleAction(event) {
+			this.$eventHub.$emit(event);
+		},
+		resize(/* event */) {
+			// hide BottomNav when onscreen keyboard opens (mobile devices)
+			// only tested on android
+			// TODO: fix this hack.
+			if (
+				document.activeElement.tagName == "INPUT" &&
+				this.showBottomNav === undefined
+			) {
+				this.showBottomNav = this.bottomNavState.visible;
+				this.$store.commit("ui/visible", {
+					component: "bottomNav",
+					visible: false,
+				});
+			} else if (
+				(this.showBottomNav !== undefined &&
+					window.innerWidth + window.innerHeight >= this.windowCircumference) ||
+				document.activeElement.tagName !== "INPUT"
+			) {
+				this.$store.commit("ui/visible", {
+					component: "bottomNav",
+					visible: this.showBottomNav,
+				});
+				this.showBottomNav = undefined;
+			}
+		},
+	},
+};
 </script>
 <style lang="scss">
-  body{
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    min-width: 250px;
-    min-height: 100vh;
-    font: 400 16px/16px sans-serif;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    background-color: #eee;
-    * {
-      line-height: 1em;
-    }
-  }
-  *{
-    box-sizing: border-box;
-  }
+@import "./styles/base";
 
-  .wrapper, .wrapper:after{
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-  }
-  .wrapper:after{
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    background-color: #555;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: var(--background-image);
-  }
-
-  /* Fluent Design Acrilic by https://codepen.io/ErickPetru/pen/eRzBgJ?editors=1100 */
-  /*.acrylic {
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-  }
-
-  .acrylic::before {
-    content: "";
-    position: absolute;
-    left: -8px;
-    top: -8px;
-    right: -8px;
-    bottom: -8px;
-    z-index: -1;
-    background-blend-mode: exclusion;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    filter: url(#blur);
-    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='8');
-  }
-
-  .acrylic::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.8);
-    background-image: url("http://api.thumbr.it/whitenoise-361x370.png?background=ffffff00&noise=a0a0a0&density=35&opacity=10");
-  }
-
-  .acrylic.low::after {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .acrylic.medium::after {
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-
-  .acrylic.medium-high::after {
-    background-color: rgba(255, 255, 255, 0.6);
-  }*/
-
+main.container {
+	padding: 0 16px;
+}
 </style>
