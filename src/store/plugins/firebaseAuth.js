@@ -7,7 +7,7 @@ import "@firebase/firestore";
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
-firestore.settings({ timestampsInSnapshots: true });
+firestore.settings();
 
 export default function firebaseSync() {
 	return (store) => {
