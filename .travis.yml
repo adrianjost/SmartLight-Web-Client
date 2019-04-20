@@ -16,5 +16,3 @@ deploy:
   provider: surge
   project: ./dist/
   domain: smartlight.ga
-    branch:
-      - master
