@@ -1,3 +1,5 @@
+[<img src="./public/img/logo/SmartLight-512.png" width="150" align="right">](http://smartlight.ga)
+
 # SmartLight Web
 [![Active Contributors](https://api.gitential.com/accounts/1294/projects/1473/badges/active-contributors.svg)](https://gitential.com/accounts/1294/projects/1473/share?uuid=923d642f-dd80-4b4e-9d58-cb42f7242231&utm_source=shield&utm_medium=shield&utm_campaign=1473)
 [![Code Volume](https://api.gitential.com/accounts/1294/projects/1473/badges/code-volume.svg)](https://gitential.com/accounts/1294/projects/1473/share?uuid=923d642f-dd80-4b4e-9d58-cb42f7242231&utm_source=shield&utm_medium=shield&utm_campaign=1473)
