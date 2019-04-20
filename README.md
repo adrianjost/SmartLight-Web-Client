@@ -5,7 +5,7 @@
 
 **master status:**
 [![Build Status](https://travis-ci.com/adrianjost/SmartLight-Web-Client.svg?branch=master)](https://travis-ci.com/adrianjost/SmartLight-Web-Client)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d705c9d8c51c48e185c13b76cb5406b9)](https://www.codacy.com/app/adrianjost/SmartLight-Web-Client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adrianjost/SmartLight-Web-Client&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d705c9d8c51c48e185c13b76cb5406b9)](https://www.codacy.com/app/adrianjost/SmartLight-Web-Client?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adrianjost/SmartLight-Web-Client&amp;utm_campaign=Badge_Grade) [![Greenkeeper badge](https://badges.greenkeeper.io/adrianjost/SmartLight-Web-Client.svg)](https://greenkeeper.io/)
 
 This Repository contains the (Web-) UI for SmartLight as well as the Firebase hosted Backend Code.
 
