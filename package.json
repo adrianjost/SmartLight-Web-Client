@@ -1,7 +1,7 @@
 {
-	"name": "SmartLight-Web",
+	"name": "smartlight-web",
 	"version": "3.0.0",
-	"private": true,
+	"private": false,
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
