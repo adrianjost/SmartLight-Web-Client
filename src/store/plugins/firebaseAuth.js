@@ -2,12 +2,10 @@
 
 import { firebase } from "@firebase/app";
 import { config } from "@/helpers/firebaseConfig";
-import "@firebase/auth";
 import "@firebase/firestore";
 
 firebase.initializeApp(config);
-const firestore = firebase.firestore();
-firestore.settings({ timestampsInSnapshots: true });
+firebase.firestore();
 
 export default function firebaseSync() {
 	return (store) => {
