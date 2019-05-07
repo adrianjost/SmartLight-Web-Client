@@ -723,12 +723,24 @@
   resolved "https://registry.yarnpkg.com/@firebase/auth-types/-/auth-types-0.6.0.tgz#d9fc946fb1e562e0c9e80eeb803142da23917e25"
   integrity sha512-vpFYjko0J2BTYUxUihfK5wftmkus0Ndz4IieU3KLBd5a58gtc18jRZh/1M/JQhUVmV51SiDIZvhvJwyyKl0tLA==
 
-"@firebase/auth@0.10.1", "@firebase/auth@^0.10.0":
+"@firebase/auth-types@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@firebase/auth-types/-/auth-types-0.7.0.tgz#8aac4b9c04aff61362827c35b5ad36db16a837ba"
+  integrity sha512-QEG9azYwssGWcb4NaKFHe3Piez0SG46nRlu76HM4/ob0sjjNpNTY1Z5C3IoeJYknp2kMzuQi0TTW8tjEgkUAUA==
+
+"@firebase/auth@0.10.1":
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.10.1.tgz#35edb23ce47ef6c9e5212c6eafb6b98f03dab143"
   integrity sha512-oAJ7OasVT7pShvboKV6aQFM8ESsNw3OH5BoNi66NAQVXpTv8+dvcJz2iRf0MHsJJBHS3N1weli7YrtsT1mne5A==
   dependencies:
     "@firebase/auth-types" "0.6.0"
+
+"@firebase/auth@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.11.0.tgz#e697e570137e45ba2f0037b5a162197df78bd33d"
+  integrity sha512-+KQfSyP6k4a/fLod+fb6FyUrh5qH6cyIonG8ymiK/h4Lz9xH2WnbnZbcr3Fq/tJ3Gn6AX57h+pcog7iv7aI06g==
+  dependencies:
+    "@firebase/auth-types" "0.7.0"
 
 "@firebase/database-types@0.3.10":
   version "0.3.10"
