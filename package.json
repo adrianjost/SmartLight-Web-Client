@@ -22,7 +22,7 @@
 		"@firebase/database": "^0.4.0",
 		"@firebase/firestore": "^1.2.0",
 		"@jaames/iro": "^4.3.3",
-		"firebase": "^5.7.3",
+		"firebase": "^6.0.0",
 		"firebaseui": "^3.5.1",
 		"portal-vue": "^2.1.1",
 		"rand-token": "^0.4.0",
