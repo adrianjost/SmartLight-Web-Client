@@ -702,11 +702,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@firebase/app-types@0.3.9":
-  version "0.3.9"
-  resolved "https://registry.yarnpkg.com/@firebase/app-types/-/app-types-0.3.9.tgz#357dfe45e32626cef6113c80671033d47ae995f0"
-  integrity sha512-XI+jfMTghpXnK13oCPPMF69AV1dn1HsmjPZvobtyy2K4gzPWIRpavLNA9+yzThHBJQCbTJa2Igqe1H0tZ5+bTA==
-
 "@firebase/app-types@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@firebase/app-types/-/app-types-0.4.0.tgz#bb2c651f3b275fef549050cff28af752839c75c0"
@@ -723,52 +718,29 @@
     tslib "1.9.3"
     xmlhttprequest "1.8.0"
 
-"@firebase/app@^0.3.6":
-  version "0.3.16"
-  resolved "https://registry.yarnpkg.com/@firebase/app/-/app-0.3.16.tgz#e278eb5efda33c3caca722eb6f9c942c5130bcb0"
-  integrity sha512-rZMu9EwiQsLVyNd5R847OY5rVxZ99OEbw/Vf/AxfUFb8TyA+Fp/sgwnuB+M4xltkTECh1ouR4pByg1mJgnYzMQ==
+"@firebase/app@^0.4.0":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@firebase/app/-/app-0.4.1.tgz#07df341e1a71ffe2ef07988f8377cf4b053a374a"
+  integrity sha512-NHzEMPXWRXmDMMhFbCqElOkoVo5mScw81KzhqiEkU7e0v1Ia0P0fztfwqIzawvJtYW158UFSU7Q+EbpzthImqQ==
   dependencies:
-    "@firebase/app-types" "0.3.9"
-    "@firebase/util" "0.2.13"
+    "@firebase/app-types" "0.4.0"
+    "@firebase/logger" "0.1.14"
+    "@firebase/util" "0.2.15"
     dom-storage "2.1.0"
     tslib "1.9.3"
     xmlhttprequest "1.8.0"
-
-"@firebase/auth-types@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@firebase/auth-types/-/auth-types-0.6.0.tgz#d9fc946fb1e562e0c9e80eeb803142da23917e25"
-  integrity sha512-vpFYjko0J2BTYUxUihfK5wftmkus0Ndz4IieU3KLBd5a58gtc18jRZh/1M/JQhUVmV51SiDIZvhvJwyyKl0tLA==
 
 "@firebase/auth-types@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@firebase/auth-types/-/auth-types-0.7.0.tgz#8aac4b9c04aff61362827c35b5ad36db16a837ba"
   integrity sha512-QEG9azYwssGWcb4NaKFHe3Piez0SG46nRlu76HM4/ob0sjjNpNTY1Z5C3IoeJYknp2kMzuQi0TTW8tjEgkUAUA==
 
-"@firebase/auth@0.11.0":
+"@firebase/auth@0.11.0", "@firebase/auth@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.11.0.tgz#e697e570137e45ba2f0037b5a162197df78bd33d"
   integrity sha512-+KQfSyP6k4a/fLod+fb6FyUrh5qH6cyIonG8ymiK/h4Lz9xH2WnbnZbcr3Fq/tJ3Gn6AX57h+pcog7iv7aI06g==
   dependencies:
     "@firebase/auth-types" "0.7.0"
-
-"@firebase/auth@^0.10.0":
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.10.1.tgz#35edb23ce47ef6c9e5212c6eafb6b98f03dab143"
-  integrity sha512-oAJ7OasVT7pShvboKV6aQFM8ESsNw3OH5BoNi66NAQVXpTv8+dvcJz2iRf0MHsJJBHS3N1weli7YrtsT1mne5A==
-  dependencies:
-    "@firebase/auth-types" "0.6.0"
-
-"@firebase/auth@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.11.0.tgz#e697e570137e45ba2f0037b5a162197df78bd33d"
-  integrity sha512-+KQfSyP6k4a/fLod+fb6FyUrh5qH6cyIonG8ymiK/h4Lz9xH2WnbnZbcr3Fq/tJ3Gn6AX57h+pcog7iv7aI06g==
-  dependencies:
-    "@firebase/auth-types" "0.7.0"
-
-"@firebase/database-types@0.3.10":
-  version "0.3.10"
-  resolved "https://registry.yarnpkg.com/@firebase/database-types/-/database-types-0.3.10.tgz#51f44e28ef7c60df4730e81ab6cff97fcba76a97"
-  integrity sha512-yREigbf0wOaIIbipX2yK7O5YU0IlbsPFSET8MZHvesAB9b4/AZcDZ2zeJiXZTWmxb5EDbngFsUvmGBuxRNPsfw==
 
 "@firebase/database-types@0.4.0":
   version "0.4.0"
@@ -786,14 +758,14 @@
     faye-websocket "0.11.1"
     tslib "1.9.3"
 
-"@firebase/database@^0.3.9":
-  version "0.3.19"
-  resolved "https://registry.yarnpkg.com/@firebase/database/-/database-0.3.19.tgz#cdf7c0f5e6e4c2534be013c43e0b1641682b49cd"
-  integrity sha512-o1/1BXE3t2UOpntGDD9/eAGG4OqM8KtLEB4l2Ual/B6GPXmUOS7m1RP36QHmLfCFcnzo4z29gZHnbk0Tq7XSVg==
+"@firebase/database@^0.4.0":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@firebase/database/-/database-0.4.1.tgz#272bc1ffb71f122436eaa4f00d18e6735b2c1f9f"
+  integrity sha512-3hCq5m1JOvg037Yci471LA+1B7PnmiZDiwztNZ9a2U7t28VXGXkf4ECriG7UyxWoR6yTFWUUQeaBTr4SJ78fhA==
   dependencies:
-    "@firebase/database-types" "0.3.10"
-    "@firebase/logger" "0.1.12"
-    "@firebase/util" "0.2.13"
+    "@firebase/database-types" "0.4.0"
+    "@firebase/logger" "0.1.14"
+    "@firebase/util" "0.2.15"
     faye-websocket "0.11.1"
     tslib "1.9.3"
 
@@ -869,6 +841,11 @@
   resolved "https://registry.yarnpkg.com/@firebase/logger/-/logger-0.1.13.tgz#8e4847a0d5b77cedd8dcf4c6a8e4b98de7297e6b"
   integrity sha512-wIbLwQ2oJCkvHIE7J3FDxpScKY84fSctEEjOi0PB+Yn2dN8AwqtM7YF8rtcY8cxntv8dyR+i7GNg1Nd89cGxkA==
 
+"@firebase/logger@0.1.14":
+  version "0.1.14"
+  resolved "https://registry.yarnpkg.com/@firebase/logger/-/logger-0.1.14.tgz#e65e1f6bf86225b98a57018a2037b18dc4d79fae"
+  integrity sha512-WREaY2n6HzypeoovOjYefjLJqT9+zlI1wQlLMXnkSPhwuM+udIQ87orjVL6tfmuHW++u5bZh3JJAyvuRv/nciA==
+
 "@firebase/messaging-types@0.2.11":
   version "0.2.11"
   resolved "https://registry.yarnpkg.com/@firebase/messaging-types/-/messaging-types-0.2.11.tgz#b81d09c0aa6be7dbac421edff8100971c56d64e0"
@@ -921,17 +898,17 @@
     "@firebase/storage-types" "0.2.11"
     tslib "1.9.3"
 
-"@firebase/util@0.2.13":
-  version "0.2.13"
-  resolved "https://registry.yarnpkg.com/@firebase/util/-/util-0.2.13.tgz#f1a9e795ef79223be3a05ae306dce815a4f953d3"
-  integrity sha512-hMIayBKkHFLEhYlqmpGUjvg4/QkdG/i5QsL8+WQyKhkeJTk6U0BnlExeDxizKwu+FC+HkijQqRADcX3am8uqrQ==
-  dependencies:
-    tslib "1.9.3"
-
 "@firebase/util@0.2.14":
   version "0.2.14"
   resolved "https://registry.yarnpkg.com/@firebase/util/-/util-0.2.14.tgz#c22911407453436d0f472c8d408791a6bd5feb9c"
   integrity sha512-2ke1Lra0R5T+5ucCMWft/IB2rI/IzumHHYm9aqrM9lJ3XURiWmBHAYrvaPVP7///gDhJAo+NNDUCAJH/Y4PmvA==
+  dependencies:
+    tslib "1.9.3"
+
+"@firebase/util@0.2.15":
+  version "0.2.15"
+  resolved "https://registry.yarnpkg.com/@firebase/util/-/util-0.2.15.tgz#727799e7c018cc946f8809cd5cc53b0ea32b4ed7"
+  integrity sha512-XA6C4HkBOcUfDyvp/clq0MCFSuWSm3bPkolP689RCrGzjBs+bnCzC5a7by6Fq106zAQYeASwULJjTfVtZjKaaQ==
   dependencies:
     tslib "1.9.3"
 
@@ -5074,10 +5051,10 @@ firebase@^6.0.0:
     "@firebase/polyfill" "0.3.13"
     "@firebase/storage" "0.2.15"
 
-firebaseui@^3.5.1:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/firebaseui/-/firebaseui-3.6.0.tgz#35ffada85e7c7ecfe77b2ce206cb90c04449c419"
-  integrity sha512-q9MP5P2F+SIzBsz3EFdI7AJvsJLFDGZvk7K3XHS5GXX6hCDbO7PlR/avatbeDJH912inXNFGyLtxSXVCeOCt3w==
+firebaseui@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/firebaseui/-/firebaseui-4.0.0.tgz#994547340a62da0b0e55f9f133d8986a37c542e6"
+  integrity sha512-NFlzv/pY64vkFQnGOEZH/FNbkKBFskLn7El9IxeTbyppNtYjWXHs2Ww5OaqnoiK0qfCWVuQqizsnoWpKtF57tA==
   dependencies:
     dialog-polyfill "^0.4.7"
 
