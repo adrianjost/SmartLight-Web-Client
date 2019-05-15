@@ -10,7 +10,7 @@
 		/>
 
 		<SLInput
-			v-model="value.tags"
+			v-model="tagString"
 			label="Tags"
 			type="url"
 			placeholder="Mixer, Oven, ..."
@@ -47,6 +47,19 @@ export default {
 	computed: {
 		lamps() {
 			return this.$store.getters["units/list-lamps"];
+		},
+		tagString: {
+			get() {
+				return Array.isArray(this.value.tags)
+					? this.value.tags.join(", ")
+					: this.value.tags;
+			},
+			set(to) {
+				this.value.tags = to
+					.split(",")
+					.map((item) => item.trim())
+					.filter((item) => item);
+			},
 		},
 	},
 };
