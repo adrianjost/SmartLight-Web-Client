@@ -24,7 +24,7 @@
 		/>
 
 		<SLInput
-			v-model="value.tags"
+			v-model="tagString"
 			label="Tags"
 			type="url"
 			placeholder="Mixer, Oven, ..."
@@ -51,6 +51,21 @@ export default {
 		value: {
 			type: Object,
 			required: true,
+		},
+	},
+	computed: {
+		tagString: {
+			get() {
+				return Array.isArray(this.value.tags)
+					? this.value.tags.join(", ")
+					: this.value.tags;
+			},
+			set(to) {
+				this.value.tags = to
+					.split(",")
+					.map((item) => item.trim())
+					.filter((item) => item);
+			},
 		},
 	},
 };
