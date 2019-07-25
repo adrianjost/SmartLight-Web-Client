@@ -13,8 +13,7 @@
 		"lint:all:stylelint": "yarn lint:stylelint \"src/**/*.{vue,sass,scss,css}\"",
 		"lint:all:prettier": "yarn lint:prettier \"**/*.{js,json,css,scss,vue,html}\"",
 		"lint": "run-s lint:all:*",
-		"test:unit": "vue-cli-service test:unit",
-		"travis": "yarn lint && yarn build"
+		"test:unit": "vue-cli-service test:unit"
 	},
 	"dependencies": {
 		"@firebase/app": "^0.4.0",
@@ -46,7 +45,7 @@
 		"@vue/cli-plugin-pwa": "^3.3.0",
 		"@vue/cli-plugin-unit-mocha": "^3.3.0",
 		"@vue/cli-service": "^3.3.0",
-		"@vue/eslint-config-prettier": "^4.0.1",
+		"@vue/eslint-config-prettier": "^5.0.0",
 		"@vue/eslint-config-standard": "^4.0.0",
 		"@vue/test-utils": "^1.0.0-beta.20",
 		"babel-eslint": "^10.0.1",
