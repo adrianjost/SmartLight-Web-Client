@@ -5,9 +5,11 @@ git:
   lfs_skip_smudge: true
 script:
   - yarn travis
-  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+  - yarn lint
+  - yarn build
 deploy:
   skip-cleanup: true
   provider: surge
   project: ./dist/
   domain: smartlight.ga
+cache: yarn

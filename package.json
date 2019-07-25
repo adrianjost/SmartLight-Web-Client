@@ -13,8 +13,7 @@
 		"lint:all:stylelint": "yarn lint:stylelint \"src/**/*.{vue,sass,scss,css}\"",
 		"lint:all:prettier": "yarn lint:prettier \"**/*.{js,json,css,scss,vue,html}\"",
 		"lint": "run-s lint:all:*",
-		"test:unit": "vue-cli-service test:unit",
-		"travis": "yarn lint && yarn build"
+		"test:unit": "vue-cli-service test:unit"
 	},
 	"dependencies": {
 		"@firebase/app": "^0.4.0",
