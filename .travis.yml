@@ -4,7 +4,6 @@ node_js:
 git:
   lfs_skip_smudge: true
 script:
-  - yarn travis
   - yarn lint
   - yarn build
 deploy:
