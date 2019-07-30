@@ -5,6 +5,7 @@ Vue.use(Vuex);
 import createPersistedState from "vuex-persistedstate";
 import firebaseAuth from "./plugins/firebaseAuth";
 import createEasyFirestore from "vuex-easy-firestore";
+import { firebase } from "@/helpers/firebase";
 
 import ui from "./ui";
 import user from "./user";
@@ -15,10 +16,11 @@ import savedStates from "./savedStates";
 // do the magic 🔥🧙‍♂️
 const easyFirestore = createEasyFirestore([user, units, savedStates], {
 	logging: process.env.NODE_ENV !== "production",
+	FirebaseDependency: firebase,
 });
 
 export default new Vuex.Store({
-	plugins: [createPersistedState(), easyFirestore, firebaseAuth()],
+	plugins: [createPersistedState(), easyFirestore, firebaseAuth],
 	modules: {
 		ui,
 		auth,
