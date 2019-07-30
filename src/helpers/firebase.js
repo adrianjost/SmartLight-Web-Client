@@ -6,8 +6,12 @@ import "@firebase/auth";
 
 import { config } from "./firebaseConfig";
 
-firebase.initializeApp(config);
+// initialize if not already done
+if (!firebase.apps.length) {
+	firebase.initializeApp(config);
+}
 firebase.firestore().enablePersistence();
 
 export { firebase };
 export const FAuth = firebase.auth();
+export const FStore = firebase.firestore();
