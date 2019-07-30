@@ -1,5 +1,4 @@
-import { firebase } from "@firebase/app";
-import "@firebase/auth";
+import { FAuth } from "@/helpers/firebase";
 
 const state = {
 	authState: undefined,
@@ -45,7 +44,7 @@ const actions = {
 	async logout(store) {
 		try {
 			const syncedStores = [
-				firebase.auth().signOut(),
+				FAuth.signOut(),
 				store
 					.dispatch(
 						"units/closeDBChannel",

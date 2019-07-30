@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import { firebase } from "@firebase/app";
-import "@firebase/auth";
+import { firebase, FAuth } from "@/helpers/firebase";
+import { mapGetters } from "vuex";
 
 import firebaseui from "firebaseui";
 let loginUi;
@@ -34,7 +34,7 @@ export default {
 		});
 	},
 	mounted() {
-		loginUi = new firebaseui.auth.AuthUI(firebase.auth());
+		loginUi = new firebaseui.auth.AuthUI(FAuth);
 		const uiConfig = {
 			signInSuccessUrl: this.$route.query.redirect || "/",
 			signInOptions: [

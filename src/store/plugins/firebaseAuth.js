@@ -1,20 +1,11 @@
-/* eslint-disable no-console */
+import { FAuth } from "@/helpers/firebase";
 
-import { firebase } from "@firebase/app";
-import { config } from "@/helpers/firebaseConfig";
-import "@firebase/firestore";
-
-firebase.initializeApp(config);
-firebase.firestore();
-
-export default function firebaseSync() {
-	return (store) => {
-		firebase.auth().onAuthStateChanged((user) => {
-			if (user) {
-				store.dispatch("auth/login", user);
-			} else {
-				store.dispatch("auth/logout");
-			}
-		});
-	};
-}
+export default (store) => {
+	FAuth.onAuthStateChanged((user) => {
+		if (user) {
+			store.dispatch("auth/login", user);
+		} else {
+			store.dispatch("auth/logout", user);
+		}
+	});
+};
