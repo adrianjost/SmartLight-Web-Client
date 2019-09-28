@@ -1,15 +1,18 @@
 /* eslint-disable no-console */
 
-import { firebase } from "@firebase/app";
-import "@firebase/firestore";
-import "@firebase/auth";
+import * as firebase from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 
 import { config } from "./firebaseConfig";
 
 // initialize if not already done
-if (!firebase.apps.length) {
+try{
 	firebase.initializeApp(config);
+} catch(error){
+	console.warn("firebase already initialized", error);
 }
+
 firebase.firestore().enablePersistence();
 
 export { firebase };
