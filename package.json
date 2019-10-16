@@ -40,7 +40,7 @@
 		"@vue/cli-plugin-babel": "^4.0.0",
 		"@vue/cli-plugin-eslint": "^3.9.2",
 		"@vue/cli-plugin-pwa": "^3.3.0",
-		"@vue/cli-plugin-unit-mocha": "^3.3.0",
+		"@vue/cli-plugin-unit-mocha": "^4.0.0",
 		"@vue/cli-service": "^3.3.0",
 		"@vue/eslint-config-prettier": "^5.0.0",
 		"@vue/eslint-config-standard": "^4.0.0",
