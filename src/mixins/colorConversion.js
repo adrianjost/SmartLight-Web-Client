@@ -29,5 +29,12 @@ export default {
 		rgb2hex({ r, g, b }) {
 			return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 		},
+		colorToChannel(mapping, { r, g, b }) {
+			const out = {};
+			out[mapping["r"]] = r;
+			out[mapping["g"]] = g;
+			out[mapping["b"]] = b;
+			return out;
+		},
 	},
 };

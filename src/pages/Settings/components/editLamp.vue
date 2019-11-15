@@ -23,6 +23,21 @@
 			placeholder="192.168.2.123"
 		/>
 
+		<SLSelect
+			v-model="value.lamptype"
+			label="LED Type"
+			placeholder="NeoPixel"
+			:options="availableLampTypes"
+		/>
+
+		<SLSelect
+			v-model="value.channelMap"
+			label="Channel Mapping"
+			placeholder="RGB"
+			:options="availableChannelMappings"
+			hint="RGB => IO1: Red, IO2: Blue, ..."
+		/>
+
 		<SLInput
 			v-model="tagString"
 			label="Tags"
@@ -40,11 +55,13 @@
 
 <script>
 import Input from "@/components/picker/input";
+import Select from "@/components/picker/select";
 import IconPicker from "@/components/picker/iconPicker";
 
 export default {
 	components: {
 		SLInput: Input,
+		SLSelect: Select,
 		IconPicker,
 	},
 	props: {
@@ -53,7 +70,54 @@ export default {
 			required: true,
 		},
 	},
+	data() {
+		return {
+			availableLampTypes: [
+				{ label: "RGB", value: "RGB" },
+				{ label: "WWCW", value: "WWCW" },
+				{ label: "Switch", value: "Switch" },
+			],
+		};
+	},
 	computed: {
+		availableChannelMappings() {
+			const RGBMappings = [
+				{ label: "RGB", value: { r: 1, g: 2, b: 3 } },
+				{ label: "RBG", value: { r: 1, g: 3, b: 2 } },
+				{ label: "BRG", value: { r: 2, g: 3, b: 1 } },
+				{ label: "GRB", value: { r: 2, g: 1, b: 3 } },
+				{ label: "GBR", value: { r: 3, g: 1, b: 2 } },
+				{ label: "BGR", value: { r: 3, g: 2, b: 1 } },
+			];
+			const WWCWMappings = [
+				{ label: "WW CW // ", value: { r: 1, g: 2, b: 3 } },
+				{ label: "WW // CW ", value: { r: 1, g: 3, b: 2 } },
+				{ label: "// WW CW ", value: { r: 2, g: 3, b: 1 } },
+				{ label: "CW WW // ", value: { r: 2, g: 1, b: 3 } },
+				{ label: "CW // WW ", value: { r: 3, g: 1, b: 2 } },
+				{ label: "// CW WW ", value: { r: 3, g: 2, b: 1 } },
+			];
+			const Switch = [
+				{
+					label: "For Switches you don't need to set this option",
+					value: { r: 1, g: 2, b: 3 },
+					disabled: true,
+				},
+			];
+			const lampTypes = {
+				RGB: RGBMappings,
+				WWCW: WWCWMappings,
+				Switch: Switch,
+			};
+			return (
+				lampTypes[this.value.lamptype] || [
+					{
+						label: "Please Select the Type first",
+						disabled: true,
+					},
+				]
+			);
+		},
 		tagString: {
 			get() {
 				return Array.isArray(this.value.tags)

@@ -1,20 +1,24 @@
 <template>
 	<section class="control">
-		<div class="tab-nav">
-			<div
-				v-for="tab in tabNames"
-				:key="tab"
-				:class="{
-					tab: true,
-					active: activeTab == tab,
-				}"
-				@click.prevent="setActiveTab(tab)"
+		<template v-if="unit.lamptype === 'Switch'">
+			SwitchToggle
+		</template>
+		<template v-else-if="unit.lamptype === 'RGB'">
+			<TabNav v-model="activeTab" :tab-names="['Color', 'Gradient']" />
+			<ChooseColor v-if="activeTab == 'Color'" :unit="unit" />
+			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
+		</template>
+		<template v-else-if="unit.lamptype === 'WWCW'">
+			<TabNav v-model="activeTab" :tab-names="['Color', 'Gradient']" />
+			<ChooseColor
+				v-if="activeTab == 'Color'"
+				v-slot:colorPicker="{ color, setColor }"
+				:unit="unit"
 			>
-				{{ tab }}
-			</div>
-		</div>
-		<ChooseColor v-if="activeTab == 'Color'" :unit="unit" />
-		<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
+				<WhitePicker :value="color" @input="setColor($event)" />
+			</ChooseColor>
+			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
+		</template>
 	</section>
 </template>
 
@@ -23,6 +27,9 @@ const ChooseColor = () =>
 	import(/* webpackChunkName: "chooseColor" */ "./components/chooseColor");
 const ChooseGradient = () =>
 	import(/* webpackChunkName: "chooseGradient" */ "./components/chooseGradient");
+const WhitePicker = () =>
+	import(/* webpackChunkName: "chooseGradient" */ "@/components/picker/WhitePicker");
+import TabNav from "@/components/TabNav";
 import localAPI from "@/mixins/localAPI.js";
 
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
@@ -32,11 +39,12 @@ export default {
 	components: {
 		ChooseColor,
 		ChooseGradient,
+		WhitePicker,
+		TabNav,
 	},
 	mixins: [localAPI],
 	data() {
 		return {
-			tabNames: ["Color", "Gradient"],
 			activeTab: "",
 		};
 	},
@@ -51,32 +59,11 @@ export default {
 				return;
 			}
 			this.setActiveTab(to.state);
-
-			this.$store.commit("ui/patch", {
-				component: "appBarTop",
-				payload: { title: { text: to.name } },
-			});
+			this.setTopNav();
 		},
 	},
 	created() {
-		this.$store.commit("ui/set", {
-			component: "appBarTop",
-			payload: Object.assign(
-				UIStateNestedDefault.appBarTop(this.unit.name || ""),
-				{
-					back_action: {
-						event: "backAndReset",
-						icon: "arrow_back",
-					},
-					actions: [
-						{
-							icon: "edit",
-							to: `/settings/edit/${this.unit.id}`,
-						},
-					],
-				}
-			),
-		});
+		this.setTopNav();
 		this.$store.commit("ui/set", {
 			component: "bottomNav",
 			payload: Object.assign(UIStateNestedDefault.bottomNav(0), {
@@ -93,11 +80,27 @@ export default {
 		this.$eventHub.$off("backAndReset", this.reset);
 	},
 	methods: {
+		setTopNav() {
+			this.$store.commit("ui/set", {
+				component: "appBarTop",
+				payload: Object.assign(
+					UIStateNestedDefault.appBarTop(this.unit.name || ""),
+					{
+						back_action: {
+							event: "backAndReset",
+							icon: "arrow_back",
+						},
+						actions: [
+							{
+								icon: "edit",
+								to: `/settings/edit/${this.unit.id}`,
+							},
+						],
+					}
+				),
+			});
+		},
 		setActiveTab(state) {
-			if (typeof state === "string") {
-				// TODO: refactor this ugly double use of this method.
-				this.activeTab = state;
-			}
 			if (typeof state === "object") {
 				if (state.gradient) {
 					this.activeTab = "Gradient";
@@ -105,7 +108,6 @@ export default {
 				if (state.color) {
 					this.activeTab = "Color";
 				}
-				return;
 			}
 		},
 		reset(state) {
@@ -119,30 +121,6 @@ export default {
 <style lang="scss" scoped>
 .control {
 	text-align: center;
-}
-
-.tab-nav {
-	display: flex;
-	max-width: 250px;
-	margin: 16px auto;
-	font-size: 0;
-	user-select: none;
-	border: 1px solid var(--color-border);
-	border-radius: 4px;
-
-	.tab {
-		display: inline-block;
-		flex: 1;
-		padding: 8px;
-		font-size: 16px;
-		line-height: 16px;
-		text-align: center;
-		cursor: pointer;
-
-		&.active {
-			background-color: var(--color-overlay);
-		}
-	}
 }
 </style>
 <style lang="scss">

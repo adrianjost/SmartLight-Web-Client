@@ -114,36 +114,41 @@ export default {
 			}*/
 			connection.send(JSON.stringify(message));
 		},
-		send(lamps, message) {
-			lamps.forEach((lamp) => {
-				const { hostname, ip } = lamp;
-				if (!hostname && !ip) {
-					return new Error("hostname and ip missing");
-				}
-				this.openConnection(lamp, (connection) => {
-					this._send(connection, message);
-				});
+		send(lamp, message) {
+			const { hostname, ip } = lamp;
+			if (!hostname && !ip) {
+				return new Error("hostname and ip missing");
+			}
+			this.openConnection(lamp, (connection) => {
+				this._send(connection, message);
 			});
 		},
 		sendHexColor(unit, hexColor) {
 			const newColor = this.hex2rgb(hexColor);
-			this.send(this.extractLampsFromUnit(unit), { color: newColor });
+			const lamps = this.extractLampsFromUnit(unit);
+			lamps.forEach((lamp) => {
+				const channelValues = this.colorToChannel(lamp.channelMap, newColor);
+				this.send(lamp, { color: channelValues });
+			});
 		},
 		sendGradient(unit, gradient) {
-			gradient = JSON.parse(JSON.stringify(gradient));
-			gradient.colors = gradient.colors.map((hexColor) =>
-				this.hex2rgb(hexColor)
-			);
-			this.send(this.extractLampsFromUnit(unit), {
-				gradient: {
-					colors: gradient.colors,
-					loop: gradient.loop,
-					transitionTimes: gradient.transitionTimes,
-				},
+			const lamps = this.extractLampsFromUnit(unit);
+			lamps.forEach((lamp) => {
+				const colors = gradient.colors.map((hexColor) => {
+					return this.colorToChannel(lamp.channelMap, this.hex2rgb(hexColor));
+				});
+				this.send(lamp, {
+					gradient: {
+						colors: colors,
+						loop: gradient.loop,
+						transitionTimes: gradient.transitionTimes,
+					},
+				});
 			});
 		},
 		sendState(unit, state) {
 			if (!state) {
+				console.warn("sendState: missing state");
 				return;
 			}
 			if (state.color) {
