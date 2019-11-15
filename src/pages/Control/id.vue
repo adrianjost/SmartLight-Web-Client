@@ -15,7 +15,11 @@
 				v-slot:colorPicker="{ color, setColor }"
 				:unit="unit"
 			>
-				<WhitePicker :value="color" @input="setColor($event)" />
+				<WhiteTonePicker
+					:value="color"
+					class="white-tone-picker"
+					@input="setColor($event)"
+				/>
 			</ChooseColor>
 			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
 		</template>
@@ -27,8 +31,8 @@ const ChooseColor = () =>
 	import(/* webpackChunkName: "chooseColor" */ "./components/chooseColor");
 const ChooseGradient = () =>
 	import(/* webpackChunkName: "chooseGradient" */ "./components/chooseGradient");
-const WhitePicker = () =>
-	import(/* webpackChunkName: "chooseGradient" */ "@/components/picker/WhitePicker");
+const WhiteTonePicker = () =>
+	import(/* webpackChunkName: "chooseGradient" */ "@/components/picker/WhiteTonePicker");
 import TabNav from "@/components/TabNav";
 import localAPI from "@/mixins/localAPI.js";
 
@@ -39,7 +43,7 @@ export default {
 	components: {
 		ChooseColor,
 		ChooseGradient,
-		WhitePicker,
+		WhiteTonePicker,
 		TabNav,
 	},
 	mixins: [localAPI],
@@ -121,6 +125,10 @@ export default {
 <style lang="scss" scoped>
 .control {
 	text-align: center;
+}
+.white-tone-picker {
+	max-width: 300px;
+	margin: 0 auto;
 }
 </style>
 <style lang="scss">
