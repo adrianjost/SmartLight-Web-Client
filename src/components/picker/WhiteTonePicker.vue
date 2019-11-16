@@ -1,35 +1,46 @@
 <template>
 	<!-- TODO decouple visual color value from v-model value to fade between full 255 and 0 on only 2 channels -->
-	<div class="wrapper-tone-picker">
-		<div
-			ref="picker"
-			class="tone-picker"
-			:style="
-				`background: linear-gradient(to right, ${colorLeft} 0%, ${colorRight} 100%);`
-			"
-			@mousedown.prevent="start"
-			@mouseup.prevent="end"
-			@mousemove.prevent="move"
-			@touchstart.prevent="start"
-			@touchend.prevent="end"
-			@touchmove.prevent="move"
-		>
-			<div
-				ref="marker"
-				:class="{ marker: true, active: dragActive }"
-				:style="{
-					background: currentColor,
-					left: `${x * 100}%`,
-					bottom: `${y * 100}%`,
-				}"
+	<div>
+		{{ value }}
+		{{ currentColor }}
+		<div class="wrapper-tone-picker">
+			<GlobalEvents
+				@mousemove="move"
+				@touchmove="move"
+				@mouseup="end"
+				@touchend="end"
 			/>
+			<div
+				ref="picker"
+				class="tone-picker"
+				:style="
+					`background: linear-gradient(to right, ${colorLeft} 0%, ${colorRight} 100%);`
+				"
+				@mousedown="start"
+				@touchstart="start"
+			>
+				<div
+					ref="marker"
+					:class="{ marker: true, active: dragActive }"
+					:style="{
+						background: currentColor,
+						left: `${x * 100}%`,
+						bottom: `${y * 100}%`,
+					}"
+				/>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 import colorConversion from "@/mixins/colorConversion.js";
+import GlobalEvents from "vue-global-events";
+
 export default {
+	components: {
+		GlobalEvents,
+	},
 	mixins: [colorConversion],
 	props: {
 		value: {
@@ -44,6 +55,9 @@ export default {
 			type: String,
 			default: "#9df",
 		},
+		readOnly: {
+			type: Boolean,
+		},
 	},
 	data() {
 		return {
@@ -57,17 +71,21 @@ export default {
 	},
 	computed: {
 		currentColor() {
-			const cL = this.hex2rgb(this.colorLeft);
-			const cR = this.hex2rgb(this.colorRight);
-			let currentColor = {
-				r: cL.r + (cR.r - cL.r) * this.x,
-				g: cL.g + (cR.g - cL.g) * this.x,
-				b: cL.b + (cR.b - cL.b) * this.x,
-			};
-			currentColor.r = Math.round(currentColor.r * this.y);
-			currentColor.g = Math.round(currentColor.g * this.y);
-			currentColor.b = Math.round(currentColor.b * this.y);
-			return this.rgb2hex(currentColor);
+			return this.getColorForPosition({
+				x: this.x,
+				y: this.y,
+			});
+		},
+		colorPositions() {
+			// TODO this implementation is bullshit
+			const map = {};
+			for (let x = 0; x < 256; x++) {
+				for (let y = 0; y < 256; y++) {
+					const color = this.getColorForPosition({ x: x / 255, y: y / 255 });
+					map[color] = { x, y };
+				}
+			}
+			return map;
 		},
 	},
 	watch: {
@@ -75,7 +93,15 @@ export default {
 			this.$emit("input", to);
 		},
 		value(to) {
-			// console.log("TODO convert value to x & y");
+			if (to === this.currentColor) {
+				return;
+			}
+			const position = this.getPositionForColor(to);
+			if (!this.position) {
+				return console.warn("position for color not defined", to);
+			}
+			this.x = position.x;
+			this.y = position.y;
 		},
 	},
 	mounted() {
@@ -84,19 +110,27 @@ export default {
 	},
 	methods: {
 		start(event) {
+			if (this.readOnly) {
+				return;
+			}
 			this.dragActive = true;
 			this.move(event);
 		},
 		end(event) {
+			if (this.readOnly) {
+				return;
+			}
 			this.move(event);
 			this.dragActive = false;
 		},
 		move(event) {
-			event.preventDefault();
+			if (this.readOnly) {
+				return;
+			}
+			// event.preventDefault();
 			if (this.$options.animation.animationFrame || !this.dragActive) {
 				return;
 			}
-
 			this.$options.animation.animationFrame = window.requestAnimationFrame(
 				() => {
 					const { x, y } = this.getRelativeEventPosition(event);
@@ -117,9 +151,14 @@ export default {
 			this.$options.animation.maxY = boundingBox.bottom;
 		},
 		_getEventPosition(event) {
+			// mouse
+			if (event.x !== undefined && event.y !== undefined) {
+				return { x: event.x, y: event.y };
+			}
+			// touch
 			return {
-				x: event.x || event.changedTouches[0].clientX,
-				y: event.y || event.changedTouches[0].clientY,
+				x: event.changedTouches[0].clientX,
+				y: event.changedTouches[0].clientY,
 			};
 		},
 		getRelativeEventPosition(event) {
@@ -132,6 +171,25 @@ export default {
 				y: 1 - (newY - minY) / (maxY - minY),
 			};
 		},
+		getColorForPosition({ x, y }) {
+			const cL = this.hex2rgb(this.colorLeft);
+			const cR = this.hex2rgb(this.colorRight);
+			let currentColor = {
+				r: cL.r + (cR.r - cL.r) * x,
+				g: cL.g + (cR.g - cL.g) * x,
+				b: cL.b + (cR.b - cL.b) * x,
+			};
+			currentColor.r = Math.round(currentColor.r * y);
+			currentColor.g = Math.round(currentColor.g * y);
+			currentColor.b = Math.round(currentColor.b * y);
+			return this.rgb2hex(currentColor);
+		},
+		getPositionForColor(color) {
+			// TODO this implementation is bullshit
+			const cache = this.colorPositions;
+			// console.log(color, this.colorPositions[color]);
+			return this.colorPositions[color];
+		},
 	},
 };
 </script>
@@ -141,7 +199,7 @@ $height: 32px;
 $borderWidth: 2px;
 
 .wrapper-tone-picker {
-	padding: $height / 2;
+	padding: $height;
 }
 .tone-picker {
 	position: relative;

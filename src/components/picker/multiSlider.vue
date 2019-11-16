@@ -168,7 +168,8 @@ export default {
 			this.$options.animation.maxX = boundingBox.right;
 		},
 		_getEventPosition(event) {
-			return event.x || event.changedTouches[0].clientX;
+			// mouse : touch
+			return event.x !== undefined ? event.x : event.changedTouches[0].clientX;
 		},
 		getRelativeEventPosition(event) {
 			const min = this.$options.animation.minX;

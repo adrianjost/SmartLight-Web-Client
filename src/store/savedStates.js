@@ -5,6 +5,18 @@ const getters = {
 	list: (state) => {
 		return Object.values(state.data).sort(sortByCreatedAt);
 	},
+	"list-whitetones": (state) => {
+		return Object.values(state.data)
+			.sort(sortByCreatedAt)
+			.filter((mode) => {
+				return mode.type === "whitetone";
+			})
+			.map((color) => {
+				// scaleColor("#f00", "#00f", "#fd9", "9df", "#f00");
+				color.background = color.color;
+				return color;
+			});
+	},
 	"list-colors": (state) => {
 		return Object.values(state.data)
 			.sort(sortByCreatedAt)

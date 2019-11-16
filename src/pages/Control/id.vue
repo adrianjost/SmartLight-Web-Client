@@ -18,7 +18,16 @@
 				<WhiteTonePicker
 					:value="color"
 					class="white-tone-picker"
+					color-left="#fd9"
+					color-right="#9df"
 					@input="setColor($event)"
+				/>
+				<WhiteTonePicker
+					:value="scaleColor('#fd9', '#9df', '#f00', '#00f', color)"
+					class="white-tone-picker"
+					color-left="#f00"
+					color-right="#00f"
+					:read-only="true"
 				/>
 			</ChooseColor>
 			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
@@ -37,6 +46,7 @@ import TabNav from "@/components/TabNav";
 import localAPI from "@/mixins/localAPI.js";
 
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
+import { scaleColor } from "@/mixins/colorConversion";
 
 export default {
 	name: "ControlDetail",
@@ -84,6 +94,7 @@ export default {
 		this.$eventHub.$off("backAndReset", this.reset);
 	},
 	methods: {
+		scaleColor,
 		setTopNav() {
 			this.$store.commit("ui/set", {
 				component: "appBarTop",
@@ -127,7 +138,7 @@ export default {
 	text-align: center;
 }
 .white-tone-picker {
-	max-width: 300px;
+	max-width: 400px;
 	margin: 0 auto;
 }
 </style>
