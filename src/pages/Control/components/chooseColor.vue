@@ -1,6 +1,7 @@
 <template>
 	<section>
 		<SavedStatePicker
+			v-if="!noSave"
 			:data="colors"
 			event="loadColor"
 			add-event="addColor"
@@ -9,7 +10,6 @@
 			@addColor="saveState"
 			@deleteState="deleteState"
 		/>
-		{{ currentColor }}
 		<slot name="colorPicker" :setColor="setColor" :color="currentColor">
 			<ColorPicker
 				v-model="currentColor"
@@ -44,6 +44,9 @@ export default {
 		unit: {
 			type: Object,
 			required: true,
+		},
+		noSave: {
+			type: Boolean,
 		},
 	},
 	data() {

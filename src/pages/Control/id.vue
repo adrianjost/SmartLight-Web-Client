@@ -14,6 +14,7 @@
 				v-if="activeTab == 'Color'"
 				v-slot:colorPicker="{ color, setColor }"
 				:unit="unit"
+				:no-save="true"
 			>
 				<WhiteTonePicker
 					:value="extractWhiteChannels(color)"

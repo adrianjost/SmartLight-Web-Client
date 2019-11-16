@@ -28,7 +28,6 @@
 				/>
 			</div>
 		</div>
-		{{ currentColor }}
 	</div>
 </template>
 

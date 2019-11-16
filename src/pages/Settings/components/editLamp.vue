@@ -75,7 +75,7 @@ export default {
 			availableLampTypes: [
 				{ label: "RGB", value: "RGB" },
 				{ label: "WWCW", value: "WWCW" },
-				{ label: "Switch", value: "Switch" },
+				// { label: "Switch", value: "Switch" },
 			],
 		};
 	},
