@@ -181,10 +181,11 @@ export default {
 			return this.rgb2hex(currentColor);
 		},
 		getPositionForChannels([a, b]) {
+			const minMax = (min, max, val) => Math.max(min, Math.min(max, val));
 			const scaleFactor = a >= b ? 1 / a || 0 : 1 / b || 0;
 			const scaledValues = [a * scaleFactor, b * scaleFactor];
-			const x = (scaledValues[1] - scaledValues[0] + 1) / 2 || 0;
-			const y = a + b;
+			const x = minMax(0, 1, (scaledValues[1] - scaledValues[0] + 1) / 2 || 0);
+			const y = minMax(0, 1, a + b);
 			return { x, y };
 		},
 	},
