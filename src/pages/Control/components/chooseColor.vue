@@ -9,6 +9,7 @@
 			@addColor="saveState"
 			@deleteState="deleteState"
 		/>
+		{{ currentColor }}
 		<slot name="colorPicker" :setColor="setColor" :color="currentColor">
 			<ColorPicker
 				v-model="currentColor"

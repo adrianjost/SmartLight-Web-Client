@@ -105,7 +105,7 @@ $index: {
 $index: {
   created_by: userId,
   //allowedUsers: [userId, ...],
-  type: ENUM["COLOR", "GRADIENT"]
+  type: ENUM["COLOR", "GRADIENT"],
 }
 ```
 

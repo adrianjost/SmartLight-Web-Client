@@ -78,28 +78,6 @@ export const scaleColor = (FROM_A, TO_A, FROM_B, TO_B, COLOR) => {
 		b: Math.max(0, Math.round(scaledColorMatrix.get([2, 0]))),
 	};
 	return rgb2hex(scaledColor);
-	/*
-
-	const colorDiff = (A, B) =>
-		Object.keys(A).reduce((color, key) => {
-			color[key] = B[key] - A[key];
-			return color;
-		}, {});
-
-	const scaleFactors = {};
-	["r", "g", "b"].forEach((p) => {
-		if (RANGE_A_RGB[p] === 0) {
-			scaleFactors[p] = 0;
-			return;
-		}
-		scaleFactors[p] = (COLOR_RGB[p] - FROM_A_RGB[p]) / RANGE_A_RGB[p];
-	});
-	const scaledColor = {};
-	["r", "g", "b"].forEach((p) => {
-		scaledColor[p] = FROM_B_RGB[p] + RANGE_B_RGB[p] * scaleFactors[p];
-	});
-	return rgb2hex(scaledColor);
-	*/
 };
 
 export default {

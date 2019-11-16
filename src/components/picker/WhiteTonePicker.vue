@@ -1,8 +1,6 @@
 <template>
 	<!-- TODO decouple visual color value from v-model value to fade between full 255 and 0 on only 2 channels -->
 	<div>
-		{{ value }}
-		{{ currentColor }}
 		<div class="wrapper-tone-picker">
 			<GlobalEvents
 				@mousemove="move"
@@ -30,6 +28,7 @@
 				/>
 			</div>
 		</div>
+		{{ currentColor }}
 	</div>
 </template>
 
@@ -44,8 +43,9 @@ export default {
 	mixins: [colorConversion],
 	props: {
 		value: {
-			type: String,
+			type: Array,
 			required: true,
+			validator: (v) => v[0] >= 0 && v[0] <= 1 && v[1] >= 0 && v[1] <= 1,
 		},
 		colorLeft: {
 			type: String,
@@ -68,6 +68,8 @@ export default {
 	},
 	animation: {
 		animationFrame: undefined,
+		changeTimeout: undefined,
+		hasChangedLately: false,
 	},
 	computed: {
 		currentColor() {
@@ -76,32 +78,26 @@ export default {
 				y: this.y,
 			});
 		},
-		colorPositions() {
-			// TODO this implementation is bullshit
-			const map = {};
-			for (let x = 0; x < 256; x++) {
-				for (let y = 0; y < 256; y++) {
-					const color = this.getColorForPosition({ x: x / 255, y: y / 255 });
-					map[color] = { x, y };
-				}
-			}
-			return map;
-		},
 	},
 	watch: {
 		currentColor(to) {
-			this.$emit("input", to);
+			this.$emit("input", [(1 - this.x) * this.y, this.x * this.y]);
 		},
-		value(to) {
-			if (to === this.currentColor) {
+		value(values) {
+			if (this.$options.hasChangedLately) {
+				clearTimeout(this.$options.changeTimeout);
+				this.$options.changeTimeout = setTimeout(() => {
+					this.$options.hasChangedLately = false;
+				}, 200);
 				return;
 			}
-			const position = this.getPositionForColor(to);
-			if (!this.position) {
-				return console.warn("position for color not defined", to);
-			}
-			this.x = position.x;
-			this.y = position.y;
+			this.$options.hasChangedLately = true;
+			this.$options.changeTimeout = setTimeout(() => {
+				this.$options.hasChangedLately = false;
+			}, 200);
+			const { x, y } = this.getPositionForChannels(values);
+			this.x = x;
+			this.y = y;
 		},
 	},
 	mounted() {
@@ -174,7 +170,7 @@ export default {
 		getColorForPosition({ x, y }) {
 			const cL = this.hex2rgb(this.colorLeft);
 			const cR = this.hex2rgb(this.colorRight);
-			let currentColor = {
+			const currentColor = {
 				r: cL.r + (cR.r - cL.r) * x,
 				g: cL.g + (cR.g - cL.g) * x,
 				b: cL.b + (cR.b - cL.b) * x,
@@ -184,11 +180,12 @@ export default {
 			currentColor.b = Math.round(currentColor.b * y);
 			return this.rgb2hex(currentColor);
 		},
-		getPositionForColor(color) {
-			// TODO this implementation is bullshit
-			const cache = this.colorPositions;
-			// console.log(color, this.colorPositions[color]);
-			return this.colorPositions[color];
+		getPositionForChannels([a, b]) {
+			const scaleFactor = a >= b ? 1 / a || 0 : 1 / b || 0;
+			const scaledValues = [a * scaleFactor, b * scaleFactor];
+			const x = (scaledValues[1] - scaledValues[0] + 1) / 2 || 0;
+			const y = a + b;
+			return { x, y };
 		},
 	},
 };

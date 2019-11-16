@@ -16,18 +16,11 @@
 				:unit="unit"
 			>
 				<WhiteTonePicker
-					:value="color"
+					:value="extractWhiteChannels(color)"
 					class="white-tone-picker"
 					color-left="#fd9"
 					color-right="#9df"
-					@input="setColor($event)"
-				/>
-				<WhiteTonePicker
-					:value="scaleColor('#fd9', '#9df', '#f00', '#00f', color)"
-					class="white-tone-picker"
-					color-left="#f00"
-					color-right="#00f"
-					:read-only="true"
+					@input="setColor(getColorForWhiteChannels($event))"
 				/>
 			</ChooseColor>
 			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
@@ -46,7 +39,7 @@ import TabNav from "@/components/TabNav";
 import localAPI from "@/mixins/localAPI.js";
 
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
-import { scaleColor } from "@/mixins/colorConversion";
+import { scaleColor, hex2rgb, rgb2hex } from "@/mixins/colorConversion";
 
 export default {
 	name: "ControlDetail",
@@ -128,6 +121,21 @@ export default {
 		reset(state) {
 			this.sendState(this.unit, this.unit.state);
 			this.$eventHub.$emit("go-back");
+		},
+		extractWhiteChannels(color) {
+			const rgb = hex2rgb(color);
+			rgb.r /= 255;
+			rgb.g = 0;
+			rgb.b /= 255;
+			return [rgb.r, rgb.b];
+		},
+		getColorForWhiteChannels([a, b]) {
+			const newColor = rgb2hex({
+				r: Math.round(a * 255),
+				g: 0,
+				b: Math.round(b * 255),
+			});
+			return newColor;
 		},
 	},
 };
