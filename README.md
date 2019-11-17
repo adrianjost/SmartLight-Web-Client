@@ -83,7 +83,7 @@ $index: {
   ip: String,
   hostname: String,
   lamptype: String,
-	channelMap: Object,
+  channelMap: Object,
 }
 ```
 

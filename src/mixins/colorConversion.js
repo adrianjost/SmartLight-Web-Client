@@ -31,7 +31,10 @@ export const rgb2hex = ({ r, g, b }) => {
 	return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 };
 
-export const colorToChannel = (mapping, { r, g, b }) => {
+export const colorToChannel = (
+	mapping = { r: 1, g: 2, b: 3 },
+	{ r, g, b } = {}
+) => {
 	const out = {};
 	out[mapping["r"]] = r;
 	out[mapping["g"]] = g;
