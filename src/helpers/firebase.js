@@ -7,9 +7,9 @@ import "firebase/auth";
 import { config } from "./firebaseConfig";
 
 // initialize if not already done
-try{
+try {
 	firebase.initializeApp(config);
-} catch(error){
+} catch (error) {
 	console.warn("firebase already initialized", error);
 }
 
