@@ -95,7 +95,7 @@ export default {
 	methods: {
 		setActiveTab(state) {
 			if (typeof state === "string") {
-				// TODO: refactor this ugly double use of this method.
+				// TODO [$5dd14fbbf66ebd000711ec5d]: refactor this ugly double use of this method.
 				this.activeTab = state;
 			}
 			if (typeof state === "object") {
