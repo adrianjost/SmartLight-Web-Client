@@ -21,7 +21,7 @@ pull_request_rules:
       merge:
         method: squash
         strict: true
-  - name: automatic merge on CI success and review
+  - name: automatic merge on CI success when label is set
     conditions:
       - label~=merge pull
       - status-success~=Travis CI

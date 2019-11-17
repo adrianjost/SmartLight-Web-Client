@@ -142,7 +142,6 @@ export default {
 			this.makeActive(index);
 		},
 		cleanupMarkers() {
-			// TODO update color of fixed sliders from non fixed at same position
 			let markers = this.markers.sort((a, b) => {
 				return a.position - b.position;
 			});
