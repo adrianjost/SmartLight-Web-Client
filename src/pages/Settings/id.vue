@@ -120,12 +120,12 @@ export default {
 	},
 	methods: {
 		apply() {
-			// TODO [$5dd14fbbf66ebd000711ec5e]: save new state
+			// TODO [#62]: save new state
 			this.$store.dispatch("units/set", this.unit);
 			this.$eventHub.$emit("go-back");
 		},
 		delete() {
-			// TODO [$5dd14fbbf66ebd000711ec5f]: save new state
+			// TODO [#63]: save new state
 			this.$store.dispatch("units/delete", this.unit.id);
 			this.$eventHub.$emit("go-back");
 		},

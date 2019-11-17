@@ -85,7 +85,7 @@ export default {
 		resize(/* event */) {
 			// hide BottomNav when onscreen keyboard opens (mobile devices)
 			// only tested on android
-			// TODO [$5dd14fbbf66ebd000711ec5a]: fix this hack.
+			// TODO [#58]: fix this hack.
 			if (
 				document.activeElement.tagName == "INPUT" &&
 				this.showBottomNav === undefined

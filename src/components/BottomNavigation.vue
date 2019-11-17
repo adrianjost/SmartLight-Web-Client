@@ -34,7 +34,7 @@
 
 <script>
 import fabComponent from "@/components/fab.vue";
-// TODO [$5dd14fbbf66ebd000711ec5b]: fork vue-fab and allow positioning & text-color
+// TODO [#59]: fork vue-fab and allow positioning & text-color
 //import fab from 'vue-fab'
 
 export default {
