@@ -18,7 +18,7 @@ service cloud.firestore {
     match /units/{id}{
 			allow read, create, delete: if isOwner();
       allow update: if isOwner() && userinfoIsValid(request.resource.data);
-      // TODO: check that groups only contain lamps the user has access to.
+      // TODO [#57]: check that groups only contain lamps the user has access to.
     }
     match /users/{userId}{
     	allow read, write: if request.auth.uid == userId;

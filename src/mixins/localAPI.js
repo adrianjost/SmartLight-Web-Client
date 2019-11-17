@@ -9,7 +9,7 @@ export default {
 	},
 	mixins: [colorConversion],
 	beforeCreate() {
-		// TODO: refactor to VUEX
+		// TODO [#60]: refactor to VUEX
 		if (!window.connections) {
 			window.connections = {};
 		}
