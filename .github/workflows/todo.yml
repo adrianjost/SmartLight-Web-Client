@@ -4,13 +4,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v1
     - name: checkout
       run: |
-        export GIT_LFS_SKIP_SMUDGE=1
         export BRANCH=${GITHUB_REF/refs\/heads\/}
-        echo "REPO: $GITHUB_REPOSITORY"
         echo "BRANCH: $BRANCH"
-        git clone --branch=$BRANCH https://github.com/$GITHUB_REPOSITORY
+        git checkout $BRANCH
         git reset --hard $GITHUB_SHA
     - name: todo-actions
       uses: dtinth/todo-actions@v0.2.0
