@@ -9,7 +9,7 @@ export default {
 	},
 	mixins: [colorConversion],
 	beforeCreate() {
-		// TODO [#60]: refactor to VUEX
+		// TODO [#60]: refactor list of active websocket connections to VUEX
 		if (!window.connections) {
 			window.connections = {};
 		}

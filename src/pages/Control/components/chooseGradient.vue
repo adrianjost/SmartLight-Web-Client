@@ -89,7 +89,7 @@ export default {
 			name: "",
 			minutes: undefined,
 			seconds: undefined,
-			loop: true, // TODO: add toggle for this option
+			loop: true,
 		};
 	},
 	computed: {
