@@ -6,10 +6,10 @@ jobs:
     steps:
     - name: checkout
       run: |
-        export BRANCH=${GITHUB_REF/\/refs\/heads\/}
+        export BRANCH=${GITHUB_REF/refs\/heads\/}
         echo "REPO: $GITHUB_REPOSITORY"
         echo "BRANCH: $BRANCH"
-        git clone --branch=$BRANCH $GITHUB_REPOSITORY
+        git clone --branch=$BRANCH https://github.com/$GITHUB_REPOSITORY
         git reset --hard $GITHUB_SHA
     - name: todo-actions
       uses: dtinth/todo-actions@v0.2.0
