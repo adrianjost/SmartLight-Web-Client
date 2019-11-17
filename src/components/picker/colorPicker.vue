@@ -56,7 +56,7 @@ export default {
 			this.$options.colorPicker.on("color:change", this.emitColor);
 		},
 		updateConfig() {
-			// TODO - watch for config changes and apply them
+			// TODO ColorPicker - watch for config changes and apply them
 		},
 		emitColor(color) {
 			this.$emit("input", color.hexString);
