@@ -6,7 +6,7 @@ jobs:
     steps:
     - name: checkout
       run: |
-        export BRANCH=${GITHUB_REF/\/refs\/heads\/}
+        export BRANCH=${GITHUB_REF/refs\/heads\/}
         echo "REPO: $GITHUB_REPOSITORY"
         echo "BRANCH: $BRANCH"
         git clone --branch=$BRANCH $GITHUB_REPOSITORY
