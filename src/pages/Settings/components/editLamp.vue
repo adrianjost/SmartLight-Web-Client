@@ -22,7 +22,9 @@
 			type="url"
 			placeholder="192.168.2.123"
 		/>
-
+		<!--
+			TODO enable v4 options when fully implemented
+			refactoring to channel based color assignment needed
 		<SLSelect
 			v-model="value.lamptype"
 			label="LED Type"
@@ -37,11 +39,12 @@
 			:options="availableChannelMappings"
 			hint="RGB => IO1: Red, IO2: Blue, ..."
 		/>
+		-->
 
 		<SLInput
 			v-model="tagString"
 			label="Tags"
-			type="url"
+			type="text"
 			placeholder="Mixer, Oven, ..."
 		>
 			<template slot="hint">
@@ -55,13 +58,13 @@
 
 <script>
 import Input from "@/components/picker/input";
-import Select from "@/components/picker/select";
+// import Select from "@/components/picker/select";
 import IconPicker from "@/components/picker/iconPicker";
 
 export default {
 	components: {
 		SLInput: Input,
-		SLSelect: Select,
+		// SLSelect: Select,
 		IconPicker,
 	},
 	props: {
