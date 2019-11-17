@@ -1,20 +1,32 @@
 <template>
 	<section class="control">
-		<div class="tab-nav">
-			<div
-				v-for="tab in tabNames"
-				:key="tab"
-				:class="{
-					tab: true,
-					active: activeTab == tab,
-				}"
-				@click.prevent="setActiveTab(tab)"
+		<template v-if="unit.lamptype === 'Switch'">
+			SwitchToggle
+		</template>
+		<template v-else-if="unit.lamptype === 'WWCW'">
+			<!-- <TabNav v-model="activeTab" :tab-names="['Color']" /> -->
+			<ChooseColor
+				v-if="activeTab == 'Color'"
+				v-slot:colorPicker="{ color, setColor }"
+				:unit="unit"
+				:no-save="true"
 			>
-				{{ tab }}
-			</div>
-		</div>
-		<ChooseColor v-if="activeTab == 'Color'" :unit="unit" />
-		<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
+				<WhiteTonePicker
+					:value="extractWhiteChannels(color)"
+					class="white-tone-picker"
+					color-left="#fd9"
+					color-right="#9df"
+					@input="setColor(getColorForWhiteChannels($event))"
+				/>
+			</ChooseColor>
+			<!-- <ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" /> -->
+		</template>
+		<!-- <template v-else-if="unit.lamptype === 'RGB'">-->
+		<template v-else>
+			<TabNav v-model="activeTab" :tab-names="['Color', 'Gradient']" />
+			<ChooseColor v-if="activeTab == 'Color'" :unit="unit" />
+			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
+		</template>
 	</section>
 </template>
 
@@ -23,20 +35,25 @@ const ChooseColor = () =>
 	import(/* webpackChunkName: "chooseColor" */ "./components/chooseColor");
 const ChooseGradient = () =>
 	import(/* webpackChunkName: "chooseGradient" */ "./components/chooseGradient");
+const WhiteTonePicker = () =>
+	import(/* webpackChunkName: "chooseGradient" */ "@/components/picker/WhiteTonePicker");
+import TabNav from "@/components/TabNav";
 import localAPI from "@/mixins/localAPI.js";
 
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
+import { scaleColor, hex2rgb, rgb2hex } from "@/mixins/colorConversion";
 
 export default {
 	name: "ControlDetail",
 	components: {
 		ChooseColor,
 		ChooseGradient,
+		WhiteTonePicker,
+		TabNav,
 	},
 	mixins: [localAPI],
 	data() {
 		return {
-			tabNames: ["Color", "Gradient"],
 			activeTab: "",
 		};
 	},
@@ -51,32 +68,11 @@ export default {
 				return;
 			}
 			this.setActiveTab(to.state);
-
-			this.$store.commit("ui/patch", {
-				component: "appBarTop",
-				payload: { title: { text: to.name } },
-			});
+			this.setTopNav();
 		},
 	},
 	created() {
-		this.$store.commit("ui/set", {
-			component: "appBarTop",
-			payload: Object.assign(
-				UIStateNestedDefault.appBarTop(this.unit.name || ""),
-				{
-					back_action: {
-						event: "backAndReset",
-						icon: "arrow_back",
-					},
-					actions: [
-						{
-							icon: "edit",
-							to: `/settings/edit/${this.unit.id}`,
-						},
-					],
-				}
-			),
-		});
+		this.setTopNav();
 		this.$store.commit("ui/set", {
 			component: "bottomNav",
 			payload: Object.assign(UIStateNestedDefault.bottomNav(0), {
@@ -93,11 +89,28 @@ export default {
 		this.$eventHub.$off("backAndReset", this.reset);
 	},
 	methods: {
+		scaleColor,
+		setTopNav() {
+			this.$store.commit("ui/set", {
+				component: "appBarTop",
+				payload: Object.assign(
+					UIStateNestedDefault.appBarTop(this.unit.name || ""),
+					{
+						back_action: {
+							event: "backAndReset",
+							icon: "arrow_back",
+						},
+						actions: [
+							{
+								icon: "edit",
+								to: `/settings/edit/${this.unit.id}`,
+							},
+						],
+					}
+				),
+			});
+		},
 		setActiveTab(state) {
-			if (typeof state === "string") {
-				// TODO [#61]: refactor this ugly double use of this method.
-				this.activeTab = state;
-			}
 			if (typeof state === "object") {
 				if (state.gradient) {
 					this.activeTab = "Gradient";
@@ -105,12 +118,26 @@ export default {
 				if (state.color) {
 					this.activeTab = "Color";
 				}
-				return;
 			}
 		},
 		reset(state) {
 			this.sendState(this.unit, this.unit.state);
 			this.$eventHub.$emit("go-back");
+		},
+		extractWhiteChannels(color) {
+			const rgb = hex2rgb(color);
+			rgb.r /= 255;
+			rgb.g = 0;
+			rgb.b /= 255;
+			return [rgb.r, rgb.b];
+		},
+		getColorForWhiteChannels([a, b]) {
+			const newColor = rgb2hex({
+				r: Math.round(a * 255),
+				g: 0,
+				b: Math.round(b * 255),
+			});
+			return newColor;
 		},
 	},
 };
@@ -120,29 +147,9 @@ export default {
 .control {
 	text-align: center;
 }
-
-.tab-nav {
-	display: flex;
-	max-width: 250px;
-	margin: 16px auto;
-	font-size: 0;
-	user-select: none;
-	border: 1px solid var(--color-border);
-	border-radius: 4px;
-
-	.tab {
-		display: inline-block;
-		flex: 1;
-		padding: 8px;
-		font-size: 16px;
-		line-height: 16px;
-		text-align: center;
-		cursor: pointer;
-
-		&.active {
-			background-color: var(--color-overlay);
-		}
-	}
+.white-tone-picker {
+	max-width: 400px;
+	margin: 0 auto;
 }
 </style>
 <style lang="scss">

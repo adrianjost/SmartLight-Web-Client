@@ -27,6 +27,8 @@ const defaultLamp = {
 	type: "LAMP",
 	ip: "",
 	hostname: "",
+	lampType: "RGB",
+	channelMap: { r: 1, g: 2, b: 3 },
 };
 const defaultGroup = {
 	...defaultUnit,

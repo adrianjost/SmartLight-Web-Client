@@ -14,7 +14,7 @@
 import { firebase, FAuth } from "@/helpers/firebase";
 import { mapGetters } from "vuex";
 
-import firebaseui from "firebaseui";
+import * as firebaseui from "firebaseui";
 let loginUi;
 
 export default {

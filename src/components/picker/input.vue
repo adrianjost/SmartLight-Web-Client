@@ -1,17 +1,20 @@
 <template>
 	<div>
-		<label>
+		<label class="input-wrapper">
 			<span
 				:class="{ label: true, active: internalValue && internalValue !== 0 }"
 			>
 				{{ label }}
 			</span>
-			<input
-				v-model="internalValue"
-				:type="type"
-				:placeholder="placeholder"
-				:required="required"
-			/>
+			<slot>
+				<input
+					v-model="internalValue"
+					class="input"
+					:type="type"
+					:placeholder="placeholder"
+					:required="required"
+				/>
+			</slot>
 		</label>
 		<small v-if="hint || $slots.hint" class="hint">
 			<template v-if="hint">
@@ -28,7 +31,7 @@ export default {
 	props: {
 		value: {
 			type: String,
-			required: true,
+			default: "",
 		},
 		label: {
 			type: String,
@@ -72,7 +75,7 @@ export default {
 <style lang="scss" scoped>
 $input-padding-left: 12px;
 
-label {
+.input-wrapper {
 	position: relative;
 	display: block;
 	margin: 1em 0 0.75em;
@@ -92,7 +95,7 @@ label {
 	transform: translateY(-0.75em);
 }
 
-input {
+.input {
 	width: 100%;
 	padding: 8px $input-padding-left;
 	background: transparent;

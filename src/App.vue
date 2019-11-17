@@ -60,15 +60,21 @@ export default {
 		},
 	},
 	mounted() {
-		// -200 for chrome HTTP warnings, that may pop up on input fields
-		this.windowCircumference = window.innerWidth + window.innerHeight - 200;
+		// only use 80% of height for chrome HTTP warnings,
+		// url bars and other stuff that may pop up on input fields
+		this.windowCircumference = window.innerWidth + window.innerHeight * 0.8;
+		window.addEventListener("orientationchange", () => {
+			this.windowCircumference = window.innerWidth + window.innerHeight * 0.8;
+		});
+		window.addEventListener("mouseup", this.resize);
+		window.addEventListener("touchend", this.resize);
+		window.addEventListener("resize", this.resize);
 	},
 	created() {
 		this.$eventHub.$on("logout", async () => {
 			await this.$store.dispatch("auth/logout");
 			this.$router.go("/login");
 		});
-		window.addEventListener("resize", this.resize);
 		this.$eventHub.$on("go-back", this.goBack);
 	},
 	beforeDestroy() {
@@ -96,9 +102,9 @@ export default {
 					visible: false,
 				});
 			} else if (
-				(this.showBottomNav !== undefined &&
-					window.innerWidth + window.innerHeight >= this.windowCircumference) ||
-				document.activeElement.tagName !== "INPUT"
+				this.showBottomNav !== undefined &&
+				window.innerWidth + window.innerHeight >= this.windowCircumference
+				// || document.activeElement.tagName !== "INPUT"
 			) {
 				this.$store.commit("ui/visible", {
 					component: "bottomNav",

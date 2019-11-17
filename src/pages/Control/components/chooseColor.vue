@@ -1,6 +1,7 @@
 <template>
 	<section>
 		<SavedStatePicker
+			v-if="!noSave"
 			:data="colors"
 			event="loadColor"
 			add-event="addColor"
@@ -9,17 +10,19 @@
 			@addColor="saveState"
 			@deleteState="deleteState"
 		/>
-		<ColorPicker
-			v-model="currentColor"
-			class="color-picker"
-			:config="{
-				width: 250,
-				height: 300,
-				sliderMargin: 16,
-				markerRadius: 10,
-				color: (unit.state || {}).color,
-			}"
-		/>
+		<slot name="colorPicker" :setColor="setColor" :color="currentColor">
+			<ColorPicker
+				v-model="currentColor"
+				class="color-picker"
+				:config="{
+					width: 250,
+					height: 300,
+					sliderMargin: 16,
+					markerRadius: 10,
+					color: (unit.state || {}).color,
+				}"
+			/>
+		</slot>
 	</section>
 </template>
 
@@ -42,10 +45,16 @@ export default {
 			type: Object,
 			required: true,
 		},
+		noSave: {
+			type: Boolean,
+		},
 	},
 	data() {
 		return {
 			currentColor: "#ffffff",
+			setColor: (color) => {
+				this.currentColor = color;
+			},
 		};
 	},
 	computed: {
