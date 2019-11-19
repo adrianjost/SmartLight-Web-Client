@@ -32,6 +32,7 @@
 			:options="availableLampTypes"
 		/>
 
+		-->
 		<SLSelect
 			v-model="value.channelMap"
 			label="Channel Mapping"
@@ -39,7 +40,6 @@
 			:options="availableChannelMappings"
 			hint="RGB => IO1: Red, IO2: Blue, ..."
 		/>
-		-->
 
 		<SLInput
 			v-model="tagString"
@@ -58,13 +58,13 @@
 
 <script>
 import Input from "@/components/picker/input";
-// import Select from "@/components/picker/select";
+import Select from "@/components/picker/select";
 import IconPicker from "@/components/picker/iconPicker";
 
 export default {
 	components: {
 		SLInput: Input,
-		// SLSelect: Select,
+		SLSelect: Select,
 		IconPicker,
 	},
 	props: {
@@ -113,7 +113,7 @@ export default {
 				Switch: Switch,
 			};
 			return (
-				lampTypes[this.value.lamptype] || [
+				lampTypes[this.value.lamptype || "RGB"] || [
 					{
 						label: "Please Select the Type first",
 						disabled: true,
