@@ -1,6 +1,6 @@
 {
 	"name": "smartlight-web",
-	"version": "3.0.0",
+	"version": "3.1.0",
 	"private": false,
 	"license": "MIT",
 	"scripts": {
@@ -17,7 +17,7 @@
 		"test:unit": "vue-cli-service test:unit"
 	},
 	"dependencies": {
-		"@adrianjost/two-channel-picker": "^0.3.1",
+		"@adrianjost/two-channel-picker": "^0.3.3",
 		"@jaames/iro": "^4.3.3",
 		"firebase": "^7.0.0",
 		"firebaseui": "^4.0.0",
@@ -79,5 +79,6 @@
 	},
 	"gitHooks": {
 		"pre-commit": "cross-env PRE_COMMIT=true lint-staged"
-	}
+	},
+	"repository": "github:adrianjost/SmartLight-Web-Client"
 }

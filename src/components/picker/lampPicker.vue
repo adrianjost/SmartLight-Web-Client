@@ -3,6 +3,7 @@
 		<li
 			v-for="lamp in lamps"
 			:key="lamp.id"
+			:title="lamp.name"
 			:class="{
 				lamp: true,
 				checked: value.includes(lamp.id),

@@ -4,7 +4,7 @@
 			SwitchToggle
 		</template>
 		<template v-else-if="unit.lamptype === 'WWCW'">
-			<!-- <TabNav v-model="activeTab" :tab-names="['Color']" /> -->
+			<!-- <TabNav v-model="activeTab" :tab-names="['Color', 'Gradient']" /> -->
 			<ChooseColor
 				v-if="activeTab == 'Color'"
 				v-slot:colorPicker="{ color, setColor }"
@@ -19,7 +19,7 @@
 					@input="setColor(getColorForWhiteChannels($event))"
 				/>
 			</ChooseColor>
-			<!-- <ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" /> -->
+			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
 		</template>
 		<!-- <template v-else-if="unit.lamptype === 'RGB'">-->
 		<template v-else>
