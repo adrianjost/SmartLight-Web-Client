@@ -4,40 +4,28 @@
 			SwitchToggle
 		</template>
 		<template v-else-if="unit.lamptype === 'WWCW'">
-			<!-- <TabNav v-model="activeTab" :tab-names="['Color', 'Gradient']" /> -->
-			<ChooseColor
-				v-if="activeTab == 'Color'"
-				v-slot:colorPicker="{ color, setColor }"
-				:unit="unit"
-				:no-save="true"
-			>
-				<WhiteTonePicker
-					:value="extractWhiteChannels(color)"
-					class="white-tone-picker"
-					color-left="#fd9"
-					color-right="#9df"
-					@input="setColor(getColorForWhiteChannels($event))"
-				/>
-			</ChooseColor>
+			<TabNav v-model="activeTab" :tab-names="['Color' /*, 'Gradient'*/]" />
+			<WWCWChooseColor v-if="activeTab == 'Color'" :unit="unit" />
 			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
 		</template>
 		<!-- <template v-else-if="unit.lamptype === 'RGB'">-->
 		<template v-else>
 			<TabNav v-model="activeTab" :tab-names="['Color', 'Gradient']" />
-			<ChooseColor v-if="activeTab == 'Color'" :unit="unit" />
-			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
+			<RGBChooseColor v-if="activeTab == 'Color'" :unit="unit" />
+			<RGBChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
 		</template>
 	</section>
 </template>
 
 <script>
-const ChooseColor = () =>
-	import(/* webpackChunkName: "chooseColor" */ "./components/chooseColor");
-const ChooseGradient = () =>
-	import(/* webpackChunkName: "chooseGradient" */ "./components/chooseGradient");
+const RGBChooseColor = () =>
+	import(/* webpackChunkName: "rgbChooseColor" */ "./components/rgb/chooseColor");
+const RGBChooseGradient = () =>
+	import(/* webpackChunkName: "rgbChooseGradient" */ "./components/rgb/chooseGradient");
 
-const WhiteTonePicker = () =>
-	import(/* webpackChunkName: "whitePicker" */ "@adrianjost/two-channel-picker");
+const WWCWChooseColor = () =>
+	import(/* webpackChunkName: "wwcwChooseColor" */ "./components/wwcw/chooseColor");
+
 import TabNav from "@/components/TabNav";
 import localAPI from "@/mixins/localAPI.js";
 
@@ -47,9 +35,9 @@ import { scaleColor, hex2rgb, rgb2hex } from "@/mixins/colorConversion";
 export default {
 	name: "ControlDetail",
 	components: {
-		ChooseColor,
-		ChooseGradient,
-		WhiteTonePicker,
+		RGBChooseColor,
+		RGBChooseGradient,
+		WWCWChooseColor,
 		TabNav,
 	},
 	mixins: [localAPI],
@@ -125,21 +113,6 @@ export default {
 			this.sendState(this.unit, this.unit.state);
 			this.$eventHub.$emit("go-back");
 		},
-		extractWhiteChannels(color) {
-			const rgb = hex2rgb(color);
-			rgb.r /= 255;
-			rgb.g = 0;
-			rgb.b /= 255;
-			return [rgb.r, rgb.b];
-		},
-		getColorForWhiteChannels([a, b]) {
-			const newColor = rgb2hex({
-				r: Math.round(a * 255),
-				g: 0,
-				b: Math.round(b * 255),
-			});
-			return newColor;
-		},
 	},
 };
 </script>
@@ -147,10 +120,6 @@ export default {
 <style lang="scss" scoped>
 .control {
 	text-align: center;
-}
-.white-tone-picker {
-	max-width: 400px;
-	margin: 2rem auto;
 }
 </style>
 <style lang="scss">

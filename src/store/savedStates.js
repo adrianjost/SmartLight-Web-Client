@@ -1,3 +1,5 @@
+import { getColorForChannels } from "@adrianjost/two-channel-picker/dist/helpers/channelColor.js";
+
 const sortByCreatedAt = (a, b) => {
 	return a.created_at - b.created_at;
 };
@@ -11,10 +13,9 @@ const getters = {
 			.filter((mode) => {
 				return mode.type === "whitetone";
 			})
-			.map((color) => {
-				// scaleColor("#f00", "#00f", "#fd9", "9df", "#f00");
-				color.background = color.color;
-				return color;
+			.map((state) => {
+				state.background = getColorForChannels(state.channels, "#fd9", "#9df");
+				return state;
 			});
 	},
 	"list-colors": (state) => {
@@ -32,7 +33,7 @@ const getters = {
 		return Object.values(state.data)
 			.sort(sortByCreatedAt)
 			.filter((mode) => {
-				return mode.type === "gradient" && !!mode.colors;
+				return mode.type === "gradient";
 			})
 			.map((gradient) => {
 				// generate background pattern

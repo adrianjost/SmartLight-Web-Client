@@ -61,9 +61,6 @@ export default {
 		colors() {
 			return this.$store.getters["savedStates/list-colors"];
 		},
-		states() {
-			return this.$store.getters["savedStates/list"];
-		},
 	},
 	watch: {
 		currentColor: function(to) {
@@ -89,7 +86,10 @@ export default {
 		saveState() {
 			// prevent saving the last color again
 			if (
-				(this.colors[this.colors.length - 1] || {}).color === this.currentColor
+				this.colors.find(
+					(color) =>
+						JSON.stringify(color.color) === JSON.stringify(this.currentColor)
+				)
 			) {
 				return this.toastError("Color is already saved.");
 			}
