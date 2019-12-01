@@ -35,8 +35,9 @@ const ChooseColor = () =>
 	import(/* webpackChunkName: "chooseColor" */ "./components/chooseColor");
 const ChooseGradient = () =>
 	import(/* webpackChunkName: "chooseGradient" */ "./components/chooseGradient");
+
 const WhiteTonePicker = () =>
-	import(/* webpackChunkName: "chooseGradient" */ "@/components/picker/WhiteTonePicker");
+	import(/* webpackChunkName: "whitePicker" */ "@adrianjost/two-channel-picker");
 import TabNav from "@/components/TabNav";
 import localAPI from "@/mixins/localAPI.js";
 
@@ -149,7 +150,7 @@ export default {
 }
 .white-tone-picker {
 	max-width: 400px;
-	margin: 0 auto;
+	margin: 2rem auto;
 }
 </style>
 <style lang="scss">

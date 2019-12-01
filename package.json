@@ -17,6 +17,7 @@
 		"test:unit": "vue-cli-service test:unit"
 	},
 	"dependencies": {
+		"@adrianjost/two-channel-picker": "^0.3.1",
 		"@jaames/iro": "^4.3.3",
 		"firebase": "^7.0.0",
 		"firebaseui": "^4.0.0",
