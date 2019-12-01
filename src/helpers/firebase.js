@@ -19,7 +19,7 @@ firebase.firestore().enablePersistence();
 export { firebase };
 export const FAuth = firebase.auth();
 export const FStore = firebase.firestore();
-export const perf =
+export const FPerf =
 	process.env.NODE_ENV === "production"
 		? firebase.performance()
 		: firebase.performance;
