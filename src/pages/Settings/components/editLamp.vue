@@ -22,9 +22,7 @@
 			type="url"
 			placeholder="192.168.2.123"
 		/>
-		<!--
-			TODO enable v4 options when fully implemented
-			refactoring to channel based color assignment needed
+
 		<SLSelect
 			v-model="value.lamptype"
 			label="LED Type"
@@ -32,7 +30,6 @@
 			:options="availableLampTypes"
 		/>
 
-		-->
 		<SLSelect
 			v-model="value.channelMap"
 			label="Channel Mapping"
@@ -113,7 +110,7 @@ export default {
 				Switch: Switch,
 			};
 			return (
-				lampTypes[this.value.lamptype || "RGB"] || [
+				lampTypes[this.value.lamptype] || [
 					{
 						label: "Please Select the Type first",
 						disabled: true,

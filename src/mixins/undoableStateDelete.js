@@ -1,5 +1,10 @@
 export const undoableStateDelete = (listName) => {
 	return {
+		computed: {
+			states() {
+				return this.$store.getters["savedStates/list"];
+			},
+		},
 		methods: {
 			deleteState(id) {
 				const identify = (state) => {
