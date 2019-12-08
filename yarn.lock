@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@adrianjost/two-channel-picker@^0.3.5":
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@adrianjost/two-channel-picker/-/two-channel-picker-0.3.5.tgz#9714dbc13b80c5d4dc63be11a15fdfab2cffc20b"
-  integrity sha512-gSB1b50Dj+5wWHb7x5Fol8GJt3NBzSOImzxKHwWlqkX58eKzuM6dIgJv+9f/V30OtmDhqwBxPRIrzNJMlcnmBw==
+"@adrianjost/two-channel-picker@^0.3.6":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@adrianjost/two-channel-picker/-/two-channel-picker-0.3.6.tgz#0bd018248e28c454d680df64c8d7a3a3c03c2e88"
+  integrity sha512-3kAwGpDnEOX+4ics482HFOQJTRsUdDhw/bS0Ja7O2ezp7TAa8Aa+QqXBLsi06kM8KROEddCv9FL5VF3lmnoqjw==
 
 "@angular/compiler@6.1.10":
   version "6.1.10"
