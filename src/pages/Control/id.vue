@@ -1,7 +1,7 @@
 <template>
 	<section class="control">
 		<template v-if="unit.lamptype === 'Switch'">
-			SwitchToggle
+			<!-- TODO: implement SwitchToggle -->
 		</template>
 		<template v-else-if="unit.lamptype === 'WWCW'">
 			<TabNav v-model="activeTab" :tab-names="['Color' /*, 'Gradient'*/]" />
@@ -72,10 +72,14 @@ export default {
 			}),
 		});
 		this.setActiveTab(this.unit.state);
-		this.$eventHub.$on("backAndReset", this.reset);
+		this.$eventHub.$on("backAndReset", this.backAndReset);
+	},
+	beforeRouteLeave(to, from, next) {
+		this.resetColor();
+		next();
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("backAndReset", this.reset);
+		this.$eventHub.$off("backAndReset", this.backAndReset);
 	},
 	methods: {
 		scaleColor,
@@ -109,8 +113,11 @@ export default {
 				}
 			}
 		},
-		reset(state) {
+		resetColor() {
 			this.sendState(this.unit, this.unit.state);
+		},
+		backAndReset(state) {
+			this.resetColor();
 			this.$eventHub.$emit("go-back");
 		},
 	},
