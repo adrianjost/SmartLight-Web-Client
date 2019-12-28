@@ -170,6 +170,7 @@ export default {
 .container {
 	display: flex;
 	flex-wrap: nowrap;
+	align-items: center;
 	padding: 8px;
 }
 
