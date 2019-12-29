@@ -68,13 +68,13 @@ export default {
 		},
 	},
 	created() {
-		this.$eventHub.$on("apply", this.apply);
+		this.$eventHub.$on("apply-color", this.apply);
 		if ((this.unit.state || {}).color) {
 			this.currentColor = this.unit.state.color;
 		}
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("apply", this.apply);
+		this.$eventHub.$off("apply-color", this.apply);
 		this.closeConnection(this.unit);
 	},
 	methods: {

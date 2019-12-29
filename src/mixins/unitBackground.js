@@ -31,14 +31,15 @@ export default {
 			if (!lamp.state) {
 				return lamp;
 			}
+			let background = "";
 			if (lamp.state.color) {
-				lamp.background = getVisibleColor(lamp.lamptype, lamp.state.color);
+				background = getVisibleColor(lamp.lamptype, lamp.state.color);
 			}
 			if (lamp.state.gradient) {
 				if (linear) {
-					lamp.background = "linear-gradient(90deg,";
+					background = "linear-gradient(90deg,";
 				} else {
-					lamp.background = "conic-gradient(";
+					background = "conic-gradient(";
 				}
 				const maxTime =
 					lamp.state.gradient.transitionTimes[
@@ -47,17 +48,18 @@ export default {
 				lamp.state.gradient.colors
 					.map((c) => getVisibleColor(lamp.lamptype, c))
 					.forEach((color, index) => {
-						lamp.background += `${color} ${(lamp.state.gradient.transitionTimes[
+						background += `${color} ${(lamp.state.gradient.transitionTimes[
 							index
 						] /
 							maxTime) *
 							100}%`;
 						if (index < lamp.state.gradient.colors.length - 1) {
-							lamp.background += ", ";
+							background += ", ";
 						}
 					});
-				lamp.background += `)`;
+				background += `)`;
 			}
+			this.$set(lamp, "background", background);
 			return lamp;
 		},
 	},

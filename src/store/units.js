@@ -17,20 +17,22 @@ const getters = {
 		return Object.values(state.data).sort(orderByName);
 	},
 	"list-lamps": (state) => {
-		return Object.values(state.data)
-			.filter((unit) => unit.type.toUpperCase() === "LAMP")
-			.sort(orderByName);
+		return (
+			Object.values(state.data)
+				.filter((unit) => unit.type.toUpperCase() === "LAMP")
+				.sort(orderByName) || []
+		);
 	},
 	"list-groups": (state) => {
-		return Object.values(state.data)
-			.filter((unit) => unit.type.toUpperCase() === "GROUP")
-			.sort(orderByName);
+		return (
+			Object.values(state.data)
+				.filter((unit) => unit.type.toUpperCase() === "GROUP")
+				.sort(orderByName) || []
+		);
 	},
 	get: (state) => (unitId) => {
-		return (
-			Object.values(state.data).filter((unit) => unit.id === unitId)[0] ||
-			unitPrototyp
-		);
+		const unit = Object.values(state.data).find((unit) => unit.id === unitId);
+		return unit || unitPrototyp;
 	},
 };
 
