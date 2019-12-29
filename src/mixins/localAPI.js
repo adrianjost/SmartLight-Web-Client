@@ -84,34 +84,6 @@ export default {
 			}
 		},
 		_send(connection, message) {
-			/*message = {
-				gradient: {
-					colors: [
-						{
-							r: 255,
-							g: 0,
-							b: 0
-						},
-						{
-							r: 0,
-							g: 0,
-							b: 255
-						},
-						{
-							r: 0,
-							g: 255,
-							b: 0
-						},
-						{
-							r: 255,
-							g: 0,
-							b: 0
-						}
-					],
-					transitionTimes: [0, 300, 400, 1000],
-					loop: true
-				}
-			}*/
 			connection.send(JSON.stringify(message));
 		},
 		send(lamp, message) {
