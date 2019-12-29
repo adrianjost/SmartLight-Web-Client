@@ -17,14 +17,18 @@ const getters = {
 		return Object.values(state.data).sort(orderByName);
 	},
 	"list-lamps": (state) => {
-		return Object.values(state.data)
-			.filter((unit) => unit.type.toUpperCase() === "LAMP")
-			.sort(orderByName);
+		return (
+			Object.values(state.data)
+				.filter((unit) => unit.type.toUpperCase() === "LAMP")
+				.sort(orderByName) || []
+		);
 	},
 	"list-groups": (state) => {
-		return Object.values(state.data)
-			.filter((unit) => unit.type.toUpperCase() === "GROUP")
-			.sort(orderByName);
+		return (
+			Object.values(state.data)
+				.filter((unit) => unit.type.toUpperCase() === "GROUP")
+				.sort(orderByName) || []
+		);
 	},
 	get: (state) => (unitId) => {
 		return (
