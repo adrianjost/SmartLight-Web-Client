@@ -24,6 +24,7 @@ export default {
 	},
 	colorPickerConfig: {},
 	colorPicker: undefined,
+	isMounted: false,
 	watch: {
 		value: function(to) {
 			if (!to || to.length !== 7) {
@@ -42,6 +43,7 @@ export default {
 	},
 	mounted() {
 		this.init();
+		this.$options.isMounted = true;
 	},
 	methods: {
 		init() {
@@ -57,6 +59,9 @@ export default {
 			this.$options.colorPicker.on("color:change", this.emitColor);
 		},
 		updateConfig() {
+			if (!this.$options.isMounted) {
+				return;
+			}
 			if (
 				JSON.stringify(this.$options.colorPickerConfig) !==
 				JSON.stringify(this.config)
