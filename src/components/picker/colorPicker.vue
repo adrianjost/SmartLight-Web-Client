@@ -1,5 +1,5 @@
 <template>
-	<div :id="'iro-' + id" class="color-picker" />
+	<div :id="'iro-' + id" ref="picker" class="color-picker" />
 </template>
 
 <script>
@@ -36,7 +36,7 @@ export default {
 				this.$options.colorPickerConfig.color = to;
 			}
 		},
-		config: function() {
+		config() {
 			this.updateConfig();
 		},
 	},
@@ -48,6 +48,7 @@ export default {
 			if (!this.config || this.config === {}) {
 				return;
 			}
+			this.$refs.picker.innerHTML = "";
 			this.$options.colorPickerConfig = this.config;
 			this.$options.colorPicker = new iro.ColorPicker(
 				"#iro-" + this.id,
@@ -56,7 +57,13 @@ export default {
 			this.$options.colorPicker.on("color:change", this.emitColor);
 		},
 		updateConfig() {
-			// TODO ColorPicker - watch for config changes and apply them
+			if (
+				JSON.stringify(this.$options.colorPickerConfig) !==
+				JSON.stringify(this.config)
+			) {
+				this.$options.colorPicker.off("color:change", this.emitColor);
+				this.init();
+			}
 		},
 		emitColor(color) {
 			this.$emit("input", color.hexString);

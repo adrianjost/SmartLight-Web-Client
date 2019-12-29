@@ -31,10 +31,8 @@ const getters = {
 		);
 	},
 	get: (state) => (unitId) => {
-		return (
-			Object.values(state.data).filter((unit) => unit.id === unitId)[0] ||
-			unitPrototyp
-		);
+		const unit = Object.values(state.data).find((unit) => unit.id === unitId);
+		return unit || unitPrototyp;
 	},
 };
 
