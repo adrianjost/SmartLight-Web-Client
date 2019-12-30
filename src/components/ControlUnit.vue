@@ -1,5 +1,8 @@
 <template>
-	<div class="control-unit" :style="{ background: background }">
+	<div
+		class="control-unit"
+		:style="{ background: background, '--size': `${size}px` }"
+	>
 		<RouterLink class="link" :to="'/control/' + id">
 			<i class="material-icons">
 				{{ icon }}
@@ -23,17 +26,11 @@ export default {
 			type: String,
 			default: "var(--color-border)",
 		},
-	},
-	/*
-	watch: {
-		data: {
-			handler() {
-				this.$forceUpdate();
-			},
-			deep: true,
+		size: {
+			type: Number,
+			default: 96,
 		},
 	},
-	*/
 };
 </script>
 
@@ -41,8 +38,8 @@ export default {
 .control-unit {
 	position: relative;
 	display: inline-block;
-	width: 128px;
-	height: 128px;
+	width: var(--size);
+	height: var(--size);
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
 }
@@ -55,10 +52,10 @@ export default {
 }
 
 .material-icons {
-	padding: 12px;
+	padding: calc(var(--size) / 8);
 	font-size: 28px;
-	color: var(--color-text-active-i);
-	background: var(--color-overlay-i);
+	color: var(--color-text-active);
+	background: var(--color-overlay);
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
 }

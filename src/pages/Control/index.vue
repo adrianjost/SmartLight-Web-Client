@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section class="control">
 		<h2 v-if="groups.length">
 			Groups
 		</h2>
@@ -9,6 +9,7 @@
 				:key="unit.id"
 				class="control-unit"
 				v-bind="unit"
+				:size="zoom"
 			/>
 		</div>
 		<h2>Lamps</h2>
@@ -18,6 +19,7 @@
 				:key="unit.id"
 				class="control-unit"
 				v-bind="unit"
+				:size="zoom"
 			/>
 			<RouterLink
 				v-if="!lamps.length"
@@ -29,8 +31,9 @@
 				<i class="material-icons"> add </i><span>Add Lamp</span>
 			</RouterLink>
 		</div>
+		<div style="flex: 1"></div>
 		<div class="control-zoom">
-			<ZoomPicker v-model="zoom" :min="0" :max="10" :step="1" />
+			<ZoomPicker v-model="zoom" :min="64" :max="256" :step="16" />
 		</div>
 	</section>
 </template>
@@ -49,7 +52,7 @@ export default {
 	mixins: [unitBackground],
 	data() {
 		return {
-			zoom: 5,
+			zoom: 96,
 		};
 	},
 	computed: {
@@ -81,6 +84,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.control {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
 h2 {
 	text-align: center;
 	text-decoration: underline;

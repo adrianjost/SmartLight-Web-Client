@@ -120,6 +120,9 @@ export default {
 @import "./styles/base";
 
 main.container {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
 	padding: 0 16px;
 }
 </style>

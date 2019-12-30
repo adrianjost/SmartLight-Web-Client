@@ -65,7 +65,7 @@ $border-width: 1px;
 	button {
 		display: inline-flex;
 		align-items: center;
-		padding: 0.5em 0.75em;
+		padding: 0.25em 0.5em;
 		> * {
 			font-size: 1.5em;
 		}
