@@ -77,7 +77,6 @@ export default {
 	},
 	beforeDestroy() {
 		this.$eventHub.$off("apply-color", this.apply);
-		// this.$store.dispatch("localAPI/closeConnection", this.unit);
 	},
 	methods: {
 		extractWhiteChannels(color) {

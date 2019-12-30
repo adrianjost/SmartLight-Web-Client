@@ -131,7 +131,6 @@ export default {
 	},
 	beforeDestroy() {
 		this.$eventHub.$off("apply-gradient", this.apply);
-		// this.$store.dispatch("localAPI/closeConnection", this.unit);
 	},
 	methods: {
 		loadGradient(id) {
