@@ -21,7 +21,11 @@ const easyFirestore = createEasyFirestore([user, units, savedStates], {
 });
 
 export default new Vuex.Store({
-	plugins: [createPersistedState(), easyFirestore, firebaseAuth],
+	plugins: [
+		createPersistedState({ paths: ["auth.authState", "auth.userInfo"] }),
+		easyFirestore,
+		firebaseAuth,
+	],
 	modules: {
 		ui,
 		auth,

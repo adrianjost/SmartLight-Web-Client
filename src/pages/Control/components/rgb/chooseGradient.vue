@@ -126,11 +126,11 @@ export default {
 		},
 	},
 	created() {
-		this.$eventHub.$on("apply", this.apply);
+		this.$eventHub.$on("apply-gradient", this.apply);
 		this.loadGradient((this.unit.state || {}).gradient);
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("apply", this.apply);
+		this.$eventHub.$off("apply-gradient", this.apply);
 		// this.$store.dispatch("localAPI/closeConnection", this.unit);
 	},
 	methods: {

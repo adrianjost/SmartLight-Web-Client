@@ -8,7 +8,7 @@
 				v-for="unit in groups"
 				:key="unit.id"
 				class="control-unit"
-				:data="unit"
+				v-bind="unit"
 			/>
 		</div>
 		<h2>Lamps</h2>
@@ -17,7 +17,7 @@
 				v-for="unit in lamps"
 				:key="unit.id"
 				class="control-unit"
-				:data="unit"
+				v-bind="unit"
 			/>
 			<RouterLink
 				v-if="!lamps.length"
@@ -44,12 +44,12 @@ export default {
 	mixins: [unitBackground],
 	computed: {
 		lamps() {
-			return (this.$store.getters["units/list-lamps"] || []).map((unit) =>
+			return this.$store.getters["units/list-lamps"].map((unit) =>
 				this.addBackground(unit)
 			);
 		},
 		groups() {
-			return (this.$store.getters["units/list-groups"] || []).map((unit) =>
+			return this.$store.getters["units/list-groups"].map((unit) =>
 				this.addBackground(unit)
 			);
 		},

@@ -1,19 +1,9 @@
 <template>
 	<section class="control">
-		<template v-if="unit.lamptype === 'Switch'">
-			<!-- TODO: implement SwitchToggle -->
-		</template>
-		<template v-else-if="unit.lamptype === 'WWCW'">
-			<TabNav v-model="activeTab" :tab-names="['Color' /*, 'Gradient'*/]" />
-			<WWCWChooseColor v-if="activeTab == 'Color'" :unit="unit" />
-			<ChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
-		</template>
-		<!-- <template v-else-if="unit.lamptype === 'RGB'">-->
-		<template v-else>
-			<TabNav v-model="activeTab" :tab-names="['Color', 'Gradient']" />
-			<RGBChooseColor v-if="activeTab == 'Color'" :unit="unit" />
-			<RGBChooseGradient v-if="activeTab == 'Gradient'" :unit="unit" />
-		</template>
+		<TabNav v-model="activeTab" :tab-names="availablePicker" />
+		<keep-alive>
+			<component :is="activePicker" :unit="unit" />
+		</keep-alive>
 	</section>
 </template>
 
@@ -30,6 +20,17 @@ import TabNav from "@/components/TabNav";
 
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
 import { scaleColor, hex2rgb, rgb2hex } from "@/mixins/colorConversion";
+
+const picker = {
+	RGB: {
+		Color: RGBChooseColor,
+		Gradient: RGBChooseGradient,
+	},
+	WWCW: {
+		Color: WWCWChooseColor,
+	},
+	Switch: {},
+};
 
 export default {
 	name: "ControlDetail",
@@ -48,27 +49,35 @@ export default {
 		unit() {
 			return this.$store.getters["units/get"](this.$route.params.id);
 		},
+		availablePicker() {
+			switch (this.unit.lamptype) {
+				case "Switch":
+					return [""];
+				case "WWCW":
+					return ["Color" /*, 'Gradient'*/];
+				default:
+					return ["Color", "Gradient"];
+			}
+		},
+		activePicker() {
+			return picker[this.unit.lamptype || "RGB"][this.activeTab || "Color"];
+		},
 	},
 	watch: {
-		unit: function(to, from) {
-			if (to === from) {
-				return;
-			}
-			this.setActiveTab(to.state);
-			this.setTopNav();
+		unit: {
+			handler(to) {
+				this.setActiveTab(to.state);
+				this.setTopNav();
+			},
+			deep: true,
+		},
+		activeTab() {
+			this.setBottomNav();
 		},
 	},
 	created() {
 		this.setTopNav();
-		this.$store.commit("ui/set", {
-			component: "bottomNav",
-			payload: Object.assign(UIStateNestedDefault.bottomNav(0), {
-				fab: {
-					icon: "check",
-					event: "apply",
-				},
-			}),
-		});
+		this.setBottomNav();
 		this.setActiveTab(this.unit.state);
 		this.$eventHub.$on("backAndReset", this.backAndReset);
 	},
@@ -99,6 +108,17 @@ export default {
 						],
 					}
 				),
+			});
+		},
+		setBottomNav() {
+			this.$store.commit("ui/set", {
+				component: "bottomNav",
+				payload: Object.assign(UIStateNestedDefault.bottomNav(0), {
+					fab: {
+						icon: "check",
+						event: `apply-${this.activeTab.toLowerCase()}`,
+					},
+				}),
 			});
 		},
 		setActiveTab(state) {

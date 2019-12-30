@@ -1,8 +1,8 @@
 <template>
-	<div class="control-unit" :style="{ background: data.background }">
-		<RouterLink class="link" :to="'/control/' + data.id">
+	<div class="control-unit" :style="{ background: background }">
+		<RouterLink class="link" :to="'/control/' + id">
 			<i class="material-icons">
-				{{ data.icon }}
+				{{ icon }}
 			</i>
 		</RouterLink>
 	</div>
@@ -11,14 +11,29 @@
 <script>
 export default {
 	props: {
-		data: {
-			type: Object,
+		id: {
+			type: String,
 			required: true,
-			validator: function(value) {
-				return value.icon && value.id;
-			},
+		},
+		icon: {
+			type: String,
+			default: "lightbulb_outline",
+		},
+		background: {
+			type: String,
+			default: "var(--color-border)",
 		},
 	},
+	/*
+	watch: {
+		data: {
+			handler() {
+				this.$forceUpdate();
+			},
+			deep: true,
+		},
+	},
+	*/
 };
 </script>
 

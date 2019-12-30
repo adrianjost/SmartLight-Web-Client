@@ -70,13 +70,13 @@ export default {
 		},
 	},
 	created() {
-		this.$eventHub.$on("apply", this.apply);
+		this.$eventHub.$on("apply-color", this.apply);
 		if ((this.unit.state || {}).color) {
 			this.currentChannels = this.extractWhiteChannels(this.unit.state.color);
 		}
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("apply", this.apply);
+		this.$eventHub.$off("apply-color", this.apply);
 		// this.$store.dispatch("localAPI/closeConnection", this.unit);
 	},
 	methods: {
