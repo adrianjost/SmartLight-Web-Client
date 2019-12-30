@@ -29,15 +29,9 @@ const actions = {
 	async login(store, user) {
 		store.commit("login", user);
 		const syncedStores = [
-			store
-				.dispatch("units/openDBChannel", null, { root: true })
-				.catch(console.error), // eslint-disable-line no-console
-			store
-				.dispatch("savedStates/openDBChannel", null, { root: true })
-				.catch(console.error), // eslint-disable-line no-console
-			store
-				.dispatch("user/openDBChannel", null, { root: true })
-				.catch(console.error), // eslint-disable-line no-console
+			store.dispatch("units/openDBChannel", null, { root: true }),
+			store.dispatch("savedStates/openDBChannel", null, { root: true }),
+			store.dispatch("user/openDBChannel", null, { root: true }),
 		];
 		return Promise.all(syncedStores);
 	},
@@ -45,27 +39,21 @@ const actions = {
 		try {
 			const syncedStores = [
 				FAuth.signOut(),
-				store
-					.dispatch(
-						"units/closeDBChannel",
-						{ clearModule: true },
-						{ root: true }
-					)
-					.catch(console.error), // eslint-disable-line no-console
-				store
-					.dispatch(
-						"savedStates/closeDBChannel",
-						{ clearModule: true },
-						{ root: true }
-					)
-					.catch(console.error), // eslint-disable-line no-console
-				store
-					.dispatch(
-						"user/closeDBChannel",
-						{ clearModule: true },
-						{ root: true }
-					)
-					.catch(console.error), // eslint-disable-line no-console
+				store.dispatch(
+					"units/closeDBChannel",
+					{ clearModule: true },
+					{ root: true }
+				),
+				store.dispatch(
+					"savedStates/closeDBChannel",
+					{ clearModule: true },
+					{ root: true }
+				),
+				store.dispatch(
+					"user/closeDBChannel",
+					{ clearModule: true },
+					{ root: true }
+				),
 			];
 			await Promise.all(syncedStores);
 			store.commit("logout");

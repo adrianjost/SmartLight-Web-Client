@@ -25,5 +25,5 @@ module.exports = {
 		extract: false,
 	},
 
-	lintOnSave: undefined,
+	lintOnSave: true,
 };
