@@ -12,6 +12,7 @@ import user from "./user";
 import auth from "./auth";
 import units from "./units";
 import savedStates from "./savedStates";
+import localAPI from "./localAPI";
 
 // do the magic 🔥🧙‍♂️
 const easyFirestore = createEasyFirestore([user, units, savedStates], {
@@ -24,5 +25,6 @@ export default new Vuex.Store({
 	modules: {
 		ui,
 		auth,
+		localAPI,
 	},
 });

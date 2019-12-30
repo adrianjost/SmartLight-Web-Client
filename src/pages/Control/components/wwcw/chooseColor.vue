@@ -24,7 +24,6 @@ import SavedStatePicker from "@/components/picker/savedStatePicker";
 import WhiteTonePicker from "@adrianjost/two-channel-picker";
 
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js";
-import localAPI from "@/mixins/localAPI.js";
 import { hex2rgb, rgb2hex } from "@/mixins/colorConversion";
 
 export default {
@@ -33,7 +32,7 @@ export default {
 		SavedStatePicker,
 		WhiteTonePicker,
 	},
-	mixins: [undoableStateDelete("savedWhites"), localAPI],
+	mixins: [undoableStateDelete("savedWhites")],
 	props: {
 		unit: {
 			type: Object,
@@ -64,7 +63,10 @@ export default {
 	},
 	watch: {
 		currentColor: function(to) {
-			this.sendHexColor(this.unit, to);
+			this.$store.dispatch("localAPI/sendHexColor", {
+				unit: this.unit,
+				color: to,
+			});
 		},
 	},
 	created() {
@@ -75,7 +77,7 @@ export default {
 	},
 	beforeDestroy() {
 		this.$eventHub.$off("apply", this.apply);
-		this.closeConnection(this.unit);
+		// this.$store.dispatch("localAPI/closeConnection", this.unit);
 	},
 	methods: {
 		extractWhiteChannels(color) {
@@ -109,7 +111,6 @@ export default {
 			});
 		},
 		apply() {
-			this.sendHexColor(this.unit, this.currentColor);
 			this.$store.dispatch("units/setState", {
 				id: this.unit.id,
 				data: {

@@ -27,7 +27,6 @@ const WWCWChooseColor = () =>
 	import(/* webpackChunkName: "wwcwChooseColor" */ "./components/wwcw/chooseColor");
 
 import TabNav from "@/components/TabNav";
-import localAPI from "@/mixins/localAPI.js";
 
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
 import { scaleColor, hex2rgb, rgb2hex } from "@/mixins/colorConversion";
@@ -40,7 +39,6 @@ export default {
 		WWCWChooseColor,
 		TabNav,
 	},
-	mixins: [localAPI],
 	data() {
 		return {
 			activeTab: "",
@@ -114,7 +112,10 @@ export default {
 			}
 		},
 		resetColor() {
-			this.sendState(this.unit, this.unit.state);
+			this.$store.dispatch("localAPI/sendState", {
+				unit: this.unit,
+				state: this.unit.state,
+			});
 		},
 		backAndReset(state) {
 			this.resetColor();

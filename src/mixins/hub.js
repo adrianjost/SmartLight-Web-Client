@@ -1,7 +1,4 @@
-import localAPI from "@/mixins/localAPI.js";
-
 export default {
-	mixins: [localAPI],
 	computed: {
 		hub_units() {
 			return this.$store.getters["units/list"];
@@ -11,7 +8,10 @@ export default {
 		hub_units: {
 			handler: function(to, from) {
 				to.forEach((unit) => {
-					this.sendState(unit, unit.state);
+					this.$store.dispatch("localAPI/sendState", {
+						unit,
+						state: unit.state,
+					});
 				});
 			},
 			deep: true,
