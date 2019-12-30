@@ -31,7 +31,6 @@ import SavedStatePicker from "@/components/picker/savedStatePicker";
 import ColorPicker from "@/components/picker/colorPicker";
 
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js";
-import localAPI from "@/mixins/localAPI.js";
 
 export default {
 	name: "ChooseColor",
@@ -39,7 +38,7 @@ export default {
 		SavedStatePicker,
 		ColorPicker,
 	},
-	mixins: [undoableStateDelete("colors"), localAPI],
+	mixins: [undoableStateDelete("colors")],
 	props: {
 		unit: {
 			type: Object,
@@ -64,7 +63,10 @@ export default {
 	},
 	watch: {
 		currentColor: function(to) {
-			this.sendHexColor(this.unit, to);
+			this.$store.dispatch("localAPI/sendHexColor", {
+				unit: this.unit,
+				color: to,
+			});
 		},
 	},
 	created() {
@@ -75,7 +77,6 @@ export default {
 	},
 	beforeDestroy() {
 		this.$eventHub.$off("apply-color", this.apply);
-		this.closeConnection(this.unit);
 	},
 	methods: {
 		loadColor(id) {
@@ -100,7 +101,6 @@ export default {
 			});
 		},
 		apply() {
-			this.sendHexColor(this.unit, this.currentColor);
 			this.$store.dispatch("units/setState", {
 				id: this.unit.id,
 				data: {

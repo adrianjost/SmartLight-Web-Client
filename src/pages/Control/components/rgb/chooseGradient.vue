@@ -65,7 +65,6 @@ import MultiSlider from "@/components/picker/multiSlider";
 import ToggleButton from "vue-js-toggle-button/src/Button.vue";
 
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js";
-import localAPI from "@/mixins/localAPI.js";
 
 export default {
 	name: "ChooseGradient",
@@ -75,7 +74,7 @@ export default {
 		MultiSlider,
 		ToggleButton,
 	},
-	mixins: [undoableStateDelete("gradients"), localAPI],
+	mixins: [undoableStateDelete("gradients")],
 	props: {
 		unit: {
 			type: Object,
@@ -120,7 +119,10 @@ export default {
 	},
 	watch: {
 		currentColor: function(to) {
-			this.sendHexColor(this.unit, to);
+			this.$store.dispatch("localAPI/sendHexColor", {
+				unit: this.unit,
+				color: to,
+			});
 		},
 	},
 	created() {
@@ -129,7 +131,6 @@ export default {
 	},
 	beforeDestroy() {
 		this.$eventHub.$off("apply-gradient", this.apply);
-		this.closeConnection(this.unit);
 	},
 	methods: {
 		loadGradient(id) {
@@ -192,7 +193,6 @@ export default {
 			if (!this.isGradientValid()) {
 				return;
 			}
-			this.sendGradient(this.unit, this.currentGradient);
 			this.$store.dispatch("units/setState", {
 				id: this.unit.id,
 				data: {
