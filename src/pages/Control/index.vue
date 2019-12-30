@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section class="control">
 		<h2 v-if="groups.length">
 			Groups
 		</h2>
@@ -9,6 +9,7 @@
 				:key="unit.id"
 				class="control-unit"
 				v-bind="unit"
+				:size="zoom"
 			/>
 		</div>
 		<h2>Lamps</h2>
@@ -18,6 +19,7 @@
 				:key="unit.id"
 				class="control-unit"
 				v-bind="unit"
+				:size="zoom"
 			/>
 			<RouterLink
 				v-if="!lamps.length"
@@ -29,17 +31,23 @@
 				<i class="material-icons"> add </i><span>Add Lamp</span>
 			</RouterLink>
 		</div>
+		<div style="flex: 1"></div>
+		<div class="control-zoom">
+			<ZoomPicker ref="zoom" v-model="zoom" :min="64" :max="256" :step="16" />
+		</div>
 	</section>
 </template>
 
 <script>
 import ControlUnit from "@/components/ControlUnit.vue";
+import ZoomPicker from "@/components/picker/ZoomPicker.vue";
 import { UIStateDefault } from "@/helpers/ui-states.js";
 import unitBackground from "@/mixins/unitBackground.js";
 
 export default {
 	components: {
 		ControlUnit,
+		ZoomPicker,
 	},
 	mixins: [unitBackground],
 	computed: {
@@ -52,6 +60,20 @@ export default {
 			return this.$store.getters["units/list-groups"].map((unit) =>
 				this.addBackground(unit)
 			);
+		},
+		zoom: {
+			get() {
+				return this.$store.getters["ui/get"]("overviewZoom");
+			},
+			set(value) {
+				this.$store.commit("ui/set", {
+					component: "overviewZoom",
+					payload: value,
+				});
+				this.$nextTick(() => {
+					this.$refs.zoom.$el.scrollIntoView();
+				});
+			},
 		},
 	},
 	created() {
@@ -71,6 +93,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.control {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+}
+
 h2 {
 	text-align: center;
 	text-decoration: underline;
@@ -90,5 +118,10 @@ h2 {
 	display: flex;
 	align-items: center;
 	margin: 16px 0;
+}
+.control-zoom {
+	display: flex;
+	justify-content: center;
+	margin: 16px 0 0;
 }
 </style>
