@@ -29,19 +29,29 @@
 				<i class="material-icons"> add </i><span>Add Lamp</span>
 			</RouterLink>
 		</div>
+		<div class="control-zoom">
+			<ZoomPicker v-model="zoom" :min="0" :max="10" :step="1" />
+		</div>
 	</section>
 </template>
 
 <script>
 import ControlUnit from "@/components/ControlUnit.vue";
+import ZoomPicker from "@/components/picker/ZoomPicker.vue";
 import { UIStateDefault } from "@/helpers/ui-states.js";
 import unitBackground from "@/mixins/unitBackground.js";
 
 export default {
 	components: {
 		ControlUnit,
+		ZoomPicker,
 	},
 	mixins: [unitBackground],
+	data() {
+		return {
+			zoom: 5,
+		};
+	},
 	computed: {
 		lamps() {
 			return this.$store.getters["units/list-lamps"].map((unit) =>
@@ -90,5 +100,10 @@ h2 {
 	display: flex;
 	align-items: center;
 	margin: 16px 0;
+}
+.control-zoom {
+	display: flex;
+	justify-content: center;
+	margin: 16px 0 0;
 }
 </style>
