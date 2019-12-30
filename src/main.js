@@ -14,10 +14,12 @@ if (process.env.VUE_APP_SENTRY_DSN) {
 		environment: process.env.NODE_ENV,
 		release: pkg.version,
 		integrations: [
-			new Integrations.Vue({ Vue, attachProps: true, logErrors: true }),
+			new Integrations.Vue({ Vue, attachProps: true }),
+			/*
 			new Integrations.CaptureConsole({
 				levels: ["warn", "error", "debug", "assert"],
 			}),
+			*/
 		],
 	});
 }
