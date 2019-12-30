@@ -31,8 +31,7 @@
 import BottomNavigation from "@/components/BottomNavigation.vue";
 import AppBarTop from "@/components/AppBarTop.vue";
 import BrowserWarning from "@/components/BrowserWarning.vue";
-// TODO fix hub to prevent duplicate sending.
-//import hub from '@/mixins/hub.js'
+import hub from "@/mixins/hub.js";
 
 export default {
 	name: "App",
@@ -41,7 +40,7 @@ export default {
 		BottomNavigation,
 		BrowserWarning,
 	},
-	//mixins: [hub],
+	mixins: [hub],
 	data() {
 		return {
 			showBottomNav: undefined,
