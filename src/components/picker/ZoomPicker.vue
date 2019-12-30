@@ -1,14 +1,14 @@
 <template>
 	<span class="zoom-picker">
-		<button v-ripple type="button" @click="increment">
-			<i class="material-icons">
-				add
-			</i>
-		</button>
-		<div class="border" />
 		<button v-ripple type="button" @click="decrement">
 			<i class="material-icons">
 				remove
+			</i>
+		</button>
+		<div class="border" />
+		<button v-ripple type="button" @click="increment">
+			<i class="material-icons">
+				add
 			</i>
 		</button>
 	</span>
@@ -72,7 +72,7 @@ $border-width: 1px;
 	}
 	.border {
 		width: $border-width;
-		height: 16px;
+		height: 1em;
 		background: var(--color-border);
 		border-radius: $border-width;
 	}
