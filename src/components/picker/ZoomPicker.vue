@@ -60,6 +60,7 @@ $border-width: 1px;
 	display: inline-flex;
 	align-items: center;
 	justify-content: space-evenly;
+	user-select: none;
 	border: $border-width solid var(--color-border);
 	border-radius: 4px;
 	button {

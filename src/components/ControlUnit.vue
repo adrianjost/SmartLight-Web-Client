@@ -40,6 +40,7 @@ export default {
 	display: inline-block;
 	width: var(--size);
 	height: var(--size);
+	user-select: none;
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
 }
