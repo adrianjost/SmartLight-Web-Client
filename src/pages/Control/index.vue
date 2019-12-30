@@ -33,7 +33,7 @@
 		</div>
 		<div style="flex: 1"></div>
 		<div class="control-zoom">
-			<ZoomPicker v-model="zoom" :min="64" :max="256" :step="16" />
+			<ZoomPicker ref="zoom" v-model="zoom" :min="64" :max="256" :step="16" />
 		</div>
 	</section>
 </template>
@@ -50,11 +50,6 @@ export default {
 		ZoomPicker,
 	},
 	mixins: [unitBackground],
-	data() {
-		return {
-			zoom: 96,
-		};
-	},
 	computed: {
 		lamps() {
 			return this.$store.getters["units/list-lamps"].map((unit) =>
@@ -65,6 +60,20 @@ export default {
 			return this.$store.getters["units/list-groups"].map((unit) =>
 				this.addBackground(unit)
 			);
+		},
+		zoom: {
+			get() {
+				return this.$store.getters["ui/get"]("overviewZoom");
+			},
+			set(value) {
+				this.$store.commit("ui/set", {
+					component: "overviewZoom",
+					payload: value,
+				});
+				this.$nextTick(() => {
+					this.$refs.zoom.$el.scrollIntoView();
+				});
+			},
 		},
 	},
 	created() {

@@ -1,6 +1,7 @@
 const state = {
 	appBarTop: {},
 	bottomNav: {},
+	overviewZoom: 96,
 };
 
 const getters = {
