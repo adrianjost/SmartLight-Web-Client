@@ -29,6 +29,12 @@ npm deploy
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
+## Environment Variables
+
+| Variable             | Description                                                               |
+| -------------------- | ------------------------------------------------------------------------- |
+| `VUE_APP_SENTRY_DSN` | SENTRY DSN URL - if defined, sentry is enabled and will report all errors |
+
 ## Database
 
 ### Schema
