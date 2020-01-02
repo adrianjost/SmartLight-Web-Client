@@ -11,38 +11,78 @@
 			device in your local network has this app opened.
 		</p>
 		<p>
-			This is also required to be able to use Google Assistant & IFTTT.
-			<a
-				href="https://adrian-jost.gitbook.io/smartlight/setup/enable-google-home"
-				target="_blank"
-				>Read more, how to setup Google Assistant & IFTTT</a
-			>
+			This is also required to be able to use the API, e.g. for Google Assistant
+			and IFTTT.
+			<br />
+			You can read more,
+			<a href="https://docs.smartlight.ga/integrations" target="_blank">
+				how to setup integrations here.
+			</a>
 		</p>
 
-		<h2>
-			Your API-Token
+		<h2>Credentials</h2>
+		<h3>
+			User-Id
 			<small class="no-wrap">(without spaces)</small>
-		</h2>
-
-		<p class="token">
-			<span v-for="(token, index) in api_token" :key="index" class="block">{{
-				token
-			}}</span>
+		</h3>
+		<p class="formatted uid">
+			<span
+				v-for="(uidSection, index) in groupString(user.uid || '', 4)"
+				:key="index"
+			>
+				{{ uidSection }}
+			</span>
 		</p>
-
 		<button
 			v-ripple
 			class="button button-primary"
 			type="button"
-			@click="copyToken"
-			>Copy</button
+			@click="copyToClipboard(user.uid, 'userid')"
 		>
-		<button v-ripple class="button" type="button" @click="updateToken"
-			>Update</button
-		>
-		<button v-ripple class="button" type="button" @click="deleteToken"
-			>Delete</button
-		>
+			Copy
+		</button>
+		<h3>
+			API-Token
+			<small class="no-wrap">(without spaces)</small>
+		</h3>
+		<template v-if="api_token">
+			<p class="formatted">
+				<span v-for="(token, index) in api_token" :key="index">
+					{{ token }}
+				</span>
+			</p>
+
+			<button
+				v-ripple
+				class="button button-primary"
+				type="button"
+				@click="copyToClipboard(api_token.join(''), 'token')"
+			>
+				Copy
+			</button>
+			<button v-ripple class="button" type="button" @click="updateToken">
+				Update
+			</button>
+			<button v-ripple class="button" type="button" @click="deleteToken">
+				Delete
+			</button>
+			<p>
+				<small>
+					* deleting or updating the token will invalidate the old one and you
+					have to reconfigure all API integrations.
+				</small>
+			</p>
+		</template>
+		<template v-else>
+			<button
+				v-ripple
+				class="button button-primary"
+				type="button"
+				@click="updateToken"
+			>
+				Create API Token
+			</button>
+		</template>
 	</div>
 </template>
 
@@ -90,14 +130,14 @@ export default {
 		groupString(string, groupLength) {
 			return string.match(/.{1,4}/g);
 		},
-		copyToken() {
+		copyToClipboard(text, name) {
 			navigator.clipboard
-				.writeText(this.api_token)
+				.writeText(text)
 				.then(() => {
-					this.toast("Copied token to clipboard.", "check");
+					this.toast(`Copied ${name} to clipboard.`, "check");
 				})
 				.catch(() => {
-					this.toastError("Failed coping token to clipboard.");
+					this.toastError(`Failed copying ${name} to clipboard.`);
 				});
 		},
 		updateToken() {
@@ -120,19 +160,19 @@ export default {
 }
 </style>
 <style lang="scss" scoped>
-.token {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	max-height: 13ch;
-	margin: 0.25em 0;
+.formatted {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(7ch, 1fr));
+	grid-gap: 0.25em;
+	max-height: 7rem;
 	overflow-y: auto;
-	color: var(--color-text-inactive);
 	-webkit-overflow-scrolling: touch;
-	.block {
-		display: inline-block;
-		flex: 1;
-		margin: 0.25em 0.5em;
-	}
+}
+.uid {
+	max-width: 55ch;
+	max-height: initial;
+	margin-right: auto;
+	margin-left: auto;
+	overflow-y: initial;
 }
 </style>

@@ -27,8 +27,8 @@ if (process.env.VUE_APP_SENTRY_DSN) {
 import Toasted from "vue-toasted";
 Vue.use(Toasted, {
 	duration: 5000,
-	position: "bottom-left",
-	fullWidth: true,
+	position: "bottom-right",
+	fullWidth: false,
 });
 
 import VueRouter from "vue-router";
