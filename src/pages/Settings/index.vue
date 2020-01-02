@@ -7,8 +7,8 @@
 
 		<hr />
 
-		<RouterLink v-ripple to="/settings/hub" class="button button-primary">
-			IoT-Hub details
+		<RouterLink v-ripple to="/settings/api" class="button button-primary">
+			API Info
 		</RouterLink>
 	</div>
 </template>
