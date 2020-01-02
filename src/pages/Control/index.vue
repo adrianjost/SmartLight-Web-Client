@@ -28,7 +28,8 @@
 				tag="button"
 				class="button button-primary add-lamp"
 			>
-				<i class="material-icons"> add </i><span>Add Lamp</span>
+				<i class="material-icons">add</i>
+				<span>Add Lamp</span>
 			</RouterLink>
 		</div>
 		<div style="flex: 1"></div>

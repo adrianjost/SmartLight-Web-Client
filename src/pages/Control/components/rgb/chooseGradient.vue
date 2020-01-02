@@ -25,7 +25,8 @@
 					class="input"
 					type="number"
 					placeholder="5"
-				/><label for="minutes">
+				/>
+				<label for="minutes">
 					min
 				</label>
 				<input
@@ -34,7 +35,8 @@
 					class="input"
 					type="number"
 					placeholder="0"
-				/><label for="seconds">
+				/>
+				<label for="seconds">
 					s
 				</label>
 			</div>

@@ -32,7 +32,7 @@ const router = new VueRouter({
 			component: loadView("./pages/Settings/id.vue"),
 		},
 
-		{ path: "/settings/hub", component: loadView("./pages/Settings/Hub.vue") },
+		{ path: "/settings/api", component: loadView("./pages/Settings/api.vue") },
 
 		{ path: "/*", redirect: "/control" },
 	],

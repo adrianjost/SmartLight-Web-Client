@@ -45,7 +45,8 @@
 			placeholder="Mixer, Oven, ..."
 		>
 			<template slot="hint">
-				seperated by <code>,</code>
+				seperated by
+				<code>,</code>
 			</template>
 		</SLInput>
 
