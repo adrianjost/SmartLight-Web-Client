@@ -1046,10 +1046,18 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@jaames/iro@^4.3.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@jaames/iro/-/iro-4.5.3.tgz#4fbeabaf119b9f53ef5b88e262dbfc3477fa9e9a"
-  integrity sha512-knBqezLEprrpHCb9hHZbQLApzCZyI/AuWg3mqQVkgTtQX3MNX3W2uVkX1hFwS6pmEUHbA022rid9fRqV0IshMA==
+"@irojs/iro-core@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@irojs/iro-core/-/iro-core-0.0.4.tgz#57a1d5457249e348075d9ca955002a90453bc08d"
+  integrity sha512-AisHA2eBPIMC08rGbKv/mqbsM/Z0Khg0HxNK1/dc+YPRv57BIcZ6/qqHwrhURTBJLHOVkmlmv7PU5eA1+QBQ9w==
+
+"@jaames/iro@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@jaames/iro/-/iro-5.0.0.tgz#df5d1a901ec0898f0e01633343b1273cda71409d"
+  integrity sha512-4LCzPHPetpKyDsc/LXeY5xQWTjt4S27NyZSjoZtP3FnakuZOKVPdhRKxP9UDoHfrLqUzb30lBAZtX6Xm39fU8Q==
+  dependencies:
+    "@irojs/iro-core" "0.0.4"
+    preact "^10.0.0"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -9639,6 +9647,11 @@ postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.13, postcss@^7.0.14, postcss@^7.0.1
     chalk "^2.4.2"
     source-map "^0.6.1"
     supports-color "^6.1.0"
+
+preact@^10.0.0:
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.2.1.tgz#b30eb4cdc455499ee2ff82e0fa1a16fc8e20f3a4"
+  integrity sha512-BUNvmQcVtNElku7mYHexIiM5JlGNSW2BY9O2t9xk1NqA43O8wbE0cah6PAlvT7PBHvyDRJ5TAj5Fewdi9DqLoQ==
 
 prelude-ls@~1.1.2:
   version "1.1.2"
