@@ -12388,10 +12388,10 @@ vuex-easy-firestore@^1.35.9:
     path-to-prop "0.0.3"
     vuex-easy-access "^3.1.8"
 
-vuex-persistedstate@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/vuex-persistedstate/-/vuex-persistedstate-3.0.0.tgz#3fdb6d4d96699eb7f6b1d36f3e5b440727c2e563"
-  integrity sha512-3xhBOKRfTYTngXGfSUuLM7MdDba+ZR5xGkcR6VMUi29jOpr3frQtQy4cFjWaIbaktwlG/OKG5YXKFYPGJYpuCw==
+vuex-persistedstate@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vuex-persistedstate/-/vuex-persistedstate-3.0.1.tgz#6eacc3c416fe8cfe63c40d3ee7b8ed13aac4f04f"
+  integrity sha512-2dH77+fIecAXO8GeJEXiYnC++gx48PFGUayB5d7rWrN3fblRCOHQoVnmu/VV9DXbHHJcJth/0W/ofl8vw12j1A==
   dependencies:
     deepmerge "^4.2.2"
     shvl "^2.0.0"
