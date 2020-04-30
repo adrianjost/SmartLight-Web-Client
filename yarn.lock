@@ -1175,17 +1175,17 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
-"@irojs/iro-core@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@irojs/iro-core/-/iro-core-0.0.4.tgz#57a1d5457249e348075d9ca955002a90453bc08d"
-  integrity sha512-AisHA2eBPIMC08rGbKv/mqbsM/Z0Khg0HxNK1/dc+YPRv57BIcZ6/qqHwrhURTBJLHOVkmlmv7PU5eA1+QBQ9w==
+"@irojs/iro-core@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@irojs/iro-core/-/iro-core-1.0.0.tgz#8cbd19c699c59f70b3c3a773fb7ca2985de5f367"
+  integrity sha512-7vup43KLDtLuurfVXmhFnnNxtDVQ5JvjQglo5yZDM5DcHwSF3XeEjyeerM5nE6Me1QmAoKRGNDz4QVhzQI1OBw==
 
-"@jaames/iro@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@jaames/iro/-/iro-5.0.0.tgz#df5d1a901ec0898f0e01633343b1273cda71409d"
-  integrity sha512-4LCzPHPetpKyDsc/LXeY5xQWTjt4S27NyZSjoZtP3FnakuZOKVPdhRKxP9UDoHfrLqUzb30lBAZtX6Xm39fU8Q==
+"@jaames/iro@^5.1.8":
+  version "5.1.8"
+  resolved "https://registry.yarnpkg.com/@jaames/iro/-/iro-5.1.8.tgz#60f5e8a4e56931f0b195fab8c8baef6f73fc10cd"
+  integrity sha512-jsFNYbbSVDQojo9WFf54HD9QxF41FQiPDvDx3wDTLJQSydlbhCzTiGpOSrPNsCfWaqHVuq8QEStrbsXGQOhDlA==
   dependencies:
-    "@irojs/iro-core" "0.0.4"
+    "@irojs/iro-core" "^1.0.0"
     preact "^10.0.0"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
