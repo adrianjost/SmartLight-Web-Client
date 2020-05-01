@@ -23,7 +23,7 @@
 		"@sentry/integrations": "^5.10.2",
 		"firebase": "^7.0.0",
 		"firebaseui": "^4.0.0",
-		"mathjs": "^6.2.3",
+		"mathjs": "^6.6.4",
 		"portal-vue": "^2.1.7",
 		"rand-token": "^0.4.0",
 		"register-service-worker": "^1.5.2",
