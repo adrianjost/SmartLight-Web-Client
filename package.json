@@ -21,7 +21,7 @@
 		"@jaames/iro": "^5.1.8",
 		"@sentry/browser": "^5.15.5",
 		"@sentry/integrations": "^5.10.2",
-		"firebase": "^7.0.0",
+		"firebase": "^7.14.2",
 		"firebaseui": "^4.0.0",
 		"mathjs": "^6.6.4",
 		"portal-vue": "^2.1.7",
