@@ -74,7 +74,7 @@
 		"stylelint-group-selectors": "^1.0.7",
 		"stylelint-high-performance-animation": "^1.5.1",
 		"stylelint-no-unsupported-browser-features": "^4.0.0",
-		"stylelint-prettier": "^1.0.6",
+		"stylelint-prettier": "^1.1.2",
 		"stylelint-selector-no-empty": "^1.0.7",
 		"stylelint-selector-tag-no-without-class": "^2.0.3",
 		"stylelint-webpack-plugin": "^1.2.3",
