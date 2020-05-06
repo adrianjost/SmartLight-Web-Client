@@ -26,7 +26,7 @@
 		"mathjs": "^6.6.5",
 		"portal-vue": "^2.1.7",
 		"rand-token": "^0.4.0",
-		"register-service-worker": "^1.5.2",
+		"register-service-worker": "^1.7.1",
 		"simplebar-vue": "^1.4.0",
 		"vue": "^2.5.21",
 		"vue-fab": "^2.3.1",
