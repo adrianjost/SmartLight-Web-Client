@@ -66,7 +66,7 @@
 		"sass-loader": "^8.0.2",
 		"stylelint": "^13.1.0",
 		"stylelint-8-point-grid": "^0.2.6",
-		"stylelint-a11y": "^1.1.9",
+		"stylelint-a11y": "^1.2.3",
 		"stylelint-at-rule-no-children": "^0.3.1",
 		"stylelint-config-recess-order": "^2.0.4",
 		"stylelint-config-recommended": "^3.0.0",
