@@ -1,5 +1,7 @@
+# GENERATED CONTENT
+# remove repo from adrianjost/.github/synced/workflows/generator.js before editing
 name: Process TODO comments
-on:
+'on':
   push:
     branches:
       - master
@@ -12,5 +14,5 @@ jobs:
       - name: Collect TODO
         uses: dtinth/todo-actions@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TODO_ACTIONS_MONGO_URL: ${{ secrets.TODO_ACTIONS_MONGO_URL }}
+          GITHUB_TOKEN: '${{ secrets.SYNCED_GITHUB_TOKEN }}'
+          TODO_ACTIONS_MONGO_URL: '${{ secrets.SYNCED_TODO_ACTIONS_MONGO_URL }}'
