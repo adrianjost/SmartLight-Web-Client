@@ -15,7 +15,7 @@
 			and IFTTT.
 			<br />
 			You can read more,
-			<a href="https://docs.smartlight.ga/integrations" target="_blank">
+			<a href="https://docs.smart-light.ga/integrations" target="_blank">
 				how to setup integrations here.
 			</a>
 		</p>
