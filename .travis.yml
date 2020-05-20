@@ -10,5 +10,5 @@ deploy:
   skip-cleanup: true
   provider: surge
   project: ./dist/
-  domain: app.smartlight.ga
+  domain: app.smart-light.ga
 cache: yarn
