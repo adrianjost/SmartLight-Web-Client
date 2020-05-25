@@ -7,7 +7,7 @@ export default {
 	},
 	watch: {
 		hub_units: {
-			handler: function(to) {
+			handler: function (to) {
 				const cache = this.$options.state_cache;
 				to.forEach((unit) => {
 					const state = JSON.stringify(unit.state);

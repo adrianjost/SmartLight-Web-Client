@@ -41,9 +41,9 @@ const getters = {
 				const maxTime =
 					gradient.transitionTimes[gradient.transitionTimes.length - 1];
 				gradient.colors.forEach((color, index) => {
-					gradient.background += `${color} ${(gradient.transitionTimes[index] /
-						maxTime) *
-						100}%`;
+					gradient.background += `${color} ${
+						(gradient.transitionTimes[index] / maxTime) * 100
+					}%`;
 					if (index < gradient.colors.length - 1) {
 						gradient.background += ", ";
 					}

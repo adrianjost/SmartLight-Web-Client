@@ -23,7 +23,7 @@ export default {
 		lamps: {
 			type: Array,
 			required: true,
-			validator: function(value) {
+			validator: function (value) {
 				return value.every((state) => {
 					return typeof state.id !== undefined;
 				});

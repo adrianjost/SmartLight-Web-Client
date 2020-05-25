@@ -53,13 +53,13 @@ export default {
 		},
 	},
 	watch: {
-		savedUnit: function(to, from) {
+		savedUnit: function (to, from) {
 			if (!to || to === from) {
 				return;
 			}
 			this.unit = to;
 		},
-		unit: function(to, from) {
+		unit: function (to, from) {
 			if (to === from) {
 				return;
 			}

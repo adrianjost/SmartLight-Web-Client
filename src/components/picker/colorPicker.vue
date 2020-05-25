@@ -26,7 +26,7 @@ export default {
 	colorPicker: undefined,
 	isMounted: false,
 	watch: {
-		value: function(to) {
+		value: function (to) {
 			if (!to || to.length !== 7) {
 				return;
 			}

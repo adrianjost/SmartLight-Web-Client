@@ -40,17 +40,17 @@ export default {
 		return { internalValue: this.value };
 	},
 	watch: {
-		internalValue: function(to) {
+		internalValue: function (to) {
 			if (to !== this.value) {
 				this.$emit("input", to);
 			}
 		},
-		value: function(to) {
+		value: function (to) {
 			if (to !== this.internalValue) {
 				this.internalValue = to;
 			}
 		},
-		options: function(to) {
+		options: function (to) {
 			if (to.length === 1) {
 				this.internalValue = to[0].value;
 			}

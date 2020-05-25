@@ -3,11 +3,11 @@ import { hex2rgb, colorToChannel } from "@/mixins/colorConversion.js";
 const PENDING_TIMEOUT = 5000;
 const ACTIVE_TIMEOUT = 60000;
 
-Promise.any = function(promises) {
+Promise.any = function (promises) {
 	let errors = [];
 	return Promise.race(
-		promises.map(function(p) {
-			return p.catch(function(e) {
+		promises.map(function (p) {
+			return p.catch(function (e) {
 				errors.push(e);
 				if (errors.length >= promises.length) throw errors;
 			});

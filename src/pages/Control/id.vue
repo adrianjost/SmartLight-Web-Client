@@ -9,12 +9,18 @@
 
 <script>
 const RGBChooseColor = () =>
-	import(/* webpackChunkName: "rgbChooseColor" */ "./components/rgb/chooseColor");
+	import(
+		/* webpackChunkName: "rgbChooseColor" */ "./components/rgb/chooseColor"
+	);
 const RGBChooseGradient = () =>
-	import(/* webpackChunkName: "rgbChooseGradient" */ "./components/rgb/chooseGradient");
+	import(
+		/* webpackChunkName: "rgbChooseGradient" */ "./components/rgb/chooseGradient"
+	);
 
 const WWCWChooseColor = () =>
-	import(/* webpackChunkName: "wwcwChooseColor" */ "./components/wwcw/chooseColor");
+	import(
+		/* webpackChunkName: "wwcwChooseColor" */ "./components/wwcw/chooseColor"
+	);
 
 import TabNav from "@/components/TabNav";
 

@@ -62,7 +62,7 @@ export default {
 		},
 	},
 	watch: {
-		currentColor: function(to) {
+		currentColor: function (to) {
 			this.$store.dispatch("localAPI/sendHexColor", {
 				unit: this.unit,
 				color: to,

@@ -25,7 +25,7 @@ export default {
 		data: {
 			type: Array,
 			required: true,
-			validator: function(value) {
+			validator: function (value) {
 				return value.every((state) => {
 					return typeof state.id !== undefined && state.background;
 				});

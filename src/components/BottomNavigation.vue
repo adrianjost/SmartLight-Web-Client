@@ -45,10 +45,10 @@ export default {
 	props: {
 		fab: {
 			type: Object,
-			default: function() {
+			default: function () {
 				return {};
 			},
-			validator: function(value) {
+			validator: function (value) {
 				if (!Object.keys(value).length) {
 					return true;
 				}
@@ -65,10 +65,10 @@ export default {
 		},
 		actions: {
 			type: Array,
-			default: function() {
+			default: function () {
 				return [];
 			},
-			validator: function(value) {
+			validator: function (value) {
 				return (
 					value.length === 2 ||
 					(value.length === 4 &&

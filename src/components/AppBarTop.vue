@@ -117,21 +117,21 @@ export default {
 		backAction: {
 			type: Object,
 			default: () => {},
-			validator: function(value) {
+			validator: function (value) {
 				return value.icon || (value.src && value.alt);
 			},
 		},
 		title: {
 			type: Object,
 			required: true,
-			validator: function(value) {
+			validator: function (value) {
 				return typeof value.text === "string";
 			},
 		},
 		actions: {
 			type: Array,
 			default: () => [],
-			validator: function(value) {
+			validator: function (value) {
 				return value.every((action) => {
 					return action.icon && (action.event || action.to);
 				});
@@ -140,7 +140,7 @@ export default {
 		userAvatar: {
 			type: Object,
 			default: () => {},
-			validator: function(value) {
+			validator: function (value) {
 				return value.src && value.alt;
 			},
 		},

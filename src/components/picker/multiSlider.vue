@@ -37,13 +37,13 @@ export default {
 		},
 		gradient: {
 			type: Array,
-			default: function() {
+			default: function () {
 				return [
 					{ position: 0, color: "#c8ff00" },
 					{ position: 100, color: "#ff00bb" },
 				];
 			},
-			validator: function(value) {
+			validator: function (value) {
 				return (
 					value.length >= 2 &&
 					value.every((marker) => {
@@ -81,7 +81,7 @@ export default {
 	},
 	watch: {
 		gradient: {
-			handler: function(to, from) {
+			handler: function (to, from) {
 				if (to === from) {
 					return;
 				}
@@ -89,7 +89,7 @@ export default {
 			},
 			deep: true,
 		},
-		color: function(to) {
+		color: function (to) {
 			this.updateColor(to);
 		},
 	},

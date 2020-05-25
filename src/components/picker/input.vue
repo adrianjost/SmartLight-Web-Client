@@ -58,12 +58,12 @@ export default {
 		return { internalValue: this.value };
 	},
 	watch: {
-		internalValue: function(to) {
+		internalValue: function (to) {
 			if (to !== this.value) {
 				this.$emit("input", to);
 			}
 		},
-		value: function(to) {
+		value: function (to) {
 			if (to !== this.internalValue) {
 				this.internalValue = to;
 			}

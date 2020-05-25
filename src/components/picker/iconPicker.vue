@@ -55,7 +55,7 @@ export default {
 		};
 	},
 	computed: {
-		filteredIcons: function() {
+		filteredIcons: function () {
 			return this.icons
 				.filter((icon) => {
 					return icon.toLowerCase().includes(this.query.toLowerCase());

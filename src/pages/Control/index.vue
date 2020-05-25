@@ -32,7 +32,7 @@
 				<span>Add Lamp</span>
 			</RouterLink>
 		</div>
-		<div style="flex: 1"></div>
+		<div style="flex: 1;"></div>
 		<div class="control-zoom">
 			<ZoomPicker ref="zoom" v-model="zoom" :min="64" :max="256" :step="16" />
 		</div>

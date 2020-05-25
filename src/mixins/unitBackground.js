@@ -48,11 +48,9 @@ export default {
 				lamp.state.gradient.colors
 					.map((c) => getVisibleColor(lamp.lamptype, c))
 					.forEach((color, index) => {
-						background += `${color} ${(lamp.state.gradient.transitionTimes[
-							index
-						] /
-							maxTime) *
-							100}%`;
+						background += `${color} ${
+							(lamp.state.gradient.transitionTimes[index] / maxTime) * 100
+						}%`;
 						if (index < lamp.state.gradient.colors.length - 1) {
 							background += ", ";
 						}
