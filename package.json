@@ -37,7 +37,7 @@
 		"vue-tabs-component": "^1.5.0",
 		"vue-toasted": "^1.1.28",
 		"vuex": "^3.4.0",
-		"vuex-easy-firestore": "^1.35.9",
+		"vuex-easy-firestore": "^1.35.10",
 		"vuex-persistedstate": "^3.0.1"
 	},
 	"devDependencies": {
