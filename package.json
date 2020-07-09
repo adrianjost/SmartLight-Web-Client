@@ -22,7 +22,7 @@
 		"@sentry/browser": "^5.19.1",
 		"@sentry/integrations": "^5.19.1",
 		"firebase": "^7.15.5",
-		"firebaseui": "^4.5.1",
+		"firebaseui": "^4.5.2",
 		"mathjs": "^7.0.2",
 		"portal-vue": "^2.1.7",
 		"rand-token": "^1.0.1",
