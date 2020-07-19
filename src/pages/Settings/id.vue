@@ -68,6 +68,23 @@ export default {
 				component: "appBarTop",
 				payload: { title: { text: to.name } },
 			});
+			if (to.type === "LAMP") {
+				this.$store.commit("ui/patch", {
+					component: "appBarTop",
+					payload: {
+						actions: [
+							{
+								icon: "share",
+								event: "share",
+							},
+							{
+								icon: "delete",
+								event: "delete",
+							},
+						],
+					},
+				});
+			}
 		},
 	},
 	created() {
@@ -80,6 +97,12 @@ export default {
 		};
 		if (this.$route.params.id) {
 			this.unit = this.$store.getters["units/get"](this.$route.params.id);
+			if (this.unit.type === "LAMP") {
+				topBarState.actions.push({
+					icon: "share",
+					event: "share",
+				});
+			}
 			topBarState.actions.push({
 				icon: "delete",
 				event: "delete",
@@ -114,10 +137,12 @@ export default {
 		});
 
 		this.$eventHub.$on("apply", this.apply);
+		this.$eventHub.$on("share", this.share);
 		this.$eventHub.$on("delete", this.delete);
 	},
 	beforeDestroy() {
 		this.$eventHub.$off("apply", this.apply);
+		this.$eventHub.$off("share", this.share);
 		this.$eventHub.$off("delete", this.delete);
 	},
 	methods: {
@@ -126,8 +151,32 @@ export default {
 			this.$eventHub.$emit("go-back");
 		},
 		async delete() {
-			await this.$store.dispatch("units/delete", this.unit.id);
+			this.$store.dispatch("units/delete", this.unit.id); // Do not await delete
 			this.$eventHub.$emit("go-back");
+		},
+		async share() {
+			const u = this.unit;
+			const sharedData = JSON.stringify({
+				lamptype: u.lamptype,
+				tags: u.tags,
+				state: {},
+				icon: u.icon,
+				channelMap: u.channelMap,
+				name: u.name,
+				ip: u.ip,
+				type: u.type,
+				lamptype: u.lamptype,
+				hostname: u.hostname,
+			});
+
+			await navigator.clipboard
+				.writeText(sharedData)
+				.then(() => {
+					this.toast(`Copied ${name} to clipboard.`, "check");
+				})
+				.catch(() => {
+					this.toastError(`Failed copying ${name} to clipboard.`);
+				});
 		},
 	},
 };
