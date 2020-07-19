@@ -7,6 +7,15 @@
 
 		<hr />
 
+		<button
+			v-ripple
+			class="button button-primary"
+			style="margin-right: 16px;"
+			@click="importData"
+		>
+			Import
+		</button>
+
 		<RouterLink v-ripple to="/settings/api" class="button button-primary">
 			API Info
 		</RouterLink>
@@ -47,6 +56,25 @@ export default {
 			component: "bottomNav",
 			payload: UIStateDefault.bottomNav(1),
 		});
+	},
+	methods: {
+		async importData() {
+			try {
+				let data = JSON.parse(prompt("Shared Data"));
+				if (!Array.isArray(data)) {
+					data = [data];
+				}
+				await Promise.all(
+					data.map((unit) => {
+						return this.$store.dispatch("units/set", unit);
+					})
+				);
+				this.toast("Import successfull", "check");
+			} catch (error) {
+				console.error(error);
+				this.toastError("Failed to import data");
+			}
+		},
 	},
 };
 </script>
