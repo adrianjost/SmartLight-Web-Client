@@ -31,8 +31,8 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## Environment Variables
 
-| Variable             | Description                                                               |
-| -------------------- | ------------------------------------------------------------------------- |
+| Variable | Description |
+| --- | --- |
 | `VUE_APP_SENTRY_DSN` | SENTRY DSN URL - if defined, sentry is enabled and will report all errors |
 
 ## Database
@@ -69,6 +69,7 @@ $index: {
   //allowedUsers: [userId, ...],
 
   type: ENUM["LAMP", "GROUP"],
+  lamptype: String, // ["RGB", "WWCW"]
 
   id: String,
   name: String,
@@ -88,7 +89,6 @@ $index: {
   ...
   ip: String,
   hostname: String,
-  lamptype: String,
   channelMap: Object,
 }
 ```

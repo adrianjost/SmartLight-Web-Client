@@ -21,6 +21,13 @@
 			</template>
 		</SLInput>
 
+		<SLSelect
+			v-model="value.lamptype"
+			label="Color Picker Type"
+			placeholder="RGB"
+			:options="availableLampTypes"
+		/>
+
 		<b>Lamps:</b>
 		<LampPicker v-model="value.lamps" :lamps="lamps" />
 
@@ -31,11 +38,14 @@
 <script>
 import Input from "@/components/picker/input";
 import IconPicker from "@/components/picker/iconPicker";
+import Select from "@/components/picker/select";
 import LampPicker from "@/components/picker/lampPicker.vue";
+import { lamptTypes } from "@/helpers/types";
 
 export default {
 	components: {
 		SLInput: Input,
+		SLSelect: Select,
 		LampPicker,
 		IconPicker,
 	},
@@ -44,6 +54,11 @@ export default {
 			type: Object,
 			required: true,
 		},
+	},
+	data() {
+		return {
+			availableLampTypes: lamptTypes,
+		};
 	},
 	computed: {
 		lamps() {

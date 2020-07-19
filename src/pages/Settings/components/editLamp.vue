@@ -58,6 +58,7 @@
 import Input from "@/components/picker/input";
 import Select from "@/components/picker/select";
 import IconPicker from "@/components/picker/iconPicker";
+import { lamptTypes } from "@/helpers/types";
 
 export default {
 	components: {
@@ -73,11 +74,7 @@ export default {
 	},
 	data() {
 		return {
-			availableLampTypes: [
-				{ label: "RGB", value: "RGB" },
-				{ label: "WWCW", value: "WWCW" },
-				// { label: "Switch", value: "Switch" },
-			],
+			availableLampTypes: lamptTypes,
 		};
 	},
 	computed: {
