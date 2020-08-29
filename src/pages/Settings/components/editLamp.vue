@@ -88,12 +88,12 @@ export default {
 				{ label: "BGR", value: { r: 3, g: 2, b: 1 } },
 			];
 			const WWCWMappings = [
-				{ label: "WW CW // ", value: { r: 1, g: 2, b: 3 } },
-				{ label: "WW // CW ", value: { r: 1, g: 3, b: 2 } },
-				{ label: "// WW CW ", value: { r: 2, g: 3, b: 1 } },
-				{ label: "CW WW // ", value: { r: 2, g: 1, b: 3 } },
-				{ label: "CW // WW ", value: { r: 3, g: 1, b: 2 } },
-				{ label: "// CW WW ", value: { r: 3, g: 2, b: 1 } },
+				{ label: "WW CW //", value: { r: 1, g: 3, b: 2 } },
+				{ label: "WW // CW", value: { r: 1, g: 2, b: 3 } },
+				{ label: "// WW CW", value: { r: 2, g: 1, b: 3 } },
+				{ label: "CW WW //", value: { r: 2, g: 3, b: 1 } },
+				{ label: "CW // WW", value: { r: 3, g: 2, b: 1 } },
+				{ label: "// CW WW", value: { r: 3, g: 1, b: 2 } },
 			];
 			const Switch = [
 				{
