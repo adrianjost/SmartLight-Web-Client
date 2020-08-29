@@ -57,7 +57,7 @@ const getters = {
 
 const where = [
 	// an array of arrays
-	["created_by", "==", "{userId}"],
+	["allowedUsers", "array-contains", "{userId}"],
 ];
 const orderBy = []; // an array of strings
 

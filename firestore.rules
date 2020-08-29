@@ -1,27 +1,42 @@
 service cloud.firestore {
-  match /databases/{database}/documents {
-  	// options: get, list, create, update, delete
+	match /databases/{database}/documents {
+		// options: get, list, create, update, delete
 
 		function isOwner(){
-    	return (resource != null && request.auth.uid == resource.data.created_by)
-        || (resource == null && request.auth.uid == request.resource.data.created_by);
-    }
-    function userinfoIsValid(data){
-    	return request.auth.uid == data.created_by
-          && request.auth.uid == data.updated_by;
-    }
+			return resource != null && request.auth.uid == resource.data.created_by;
+		}
 
-    match /states/{id}{
-			allow read, create, delete: if isOwner();
-      allow update: if isOwner() && userinfoIsValid(request.resource.data);
-    }
-    match /units/{id}{
-			allow read, create, delete: if isOwner();
-      allow update: if isOwner() && userinfoIsValid(request.resource.data);
-      // TODO [#57]: check that groups only contain lamps the user has access to.
-    }
-    match /users/{userId}{
-    	allow read, write: if request.auth.uid == userId;
-    }
-  }
+		function isAllowedUser(){
+			return (resource != null && request.auth.uid in resource.data.allowedUsers)
+		}
+
+		function isUid(field){
+			return request.auth.uid == request.resource.data[field]
+		}
+
+		function unchanged(field){
+			return request.resource.data[field] == resource.data[field]
+		}
+
+		function validUpdate(){
+			return isAllowedUser() && isUid("updated_by") && unchanged("created_by")
+		}
+
+		match /states/{id}{
+			allow create: if isUid("created_by");
+			allow read: if isAllowedUser();
+			allow update: if validUpdate();
+			allow delete: if isOwner();
+		}
+		match /units/{id}{
+			allow create: if isUid("created_by");
+			allow read: if isAllowedUser();
+			allow update: if validUpdate();
+			allow delete: if isOwner();
+			// TODO [#57]: check that groups only contain lamps the user has access to.
+		}
+		match /users/{userId}{
+			allow read, write: if request.auth.uid == userId;
+		}
+	}
 }
