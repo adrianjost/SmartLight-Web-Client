@@ -4,11 +4,11 @@ node_js:
 git:
   lfs_skip_smudge: true
 script:
-  - yarn lint
-  - yarn build
+  - npm run lint
+  - npm run build
 deploy:
   skip-cleanup: true
   provider: surge
   project: ./dist/
   domain: app.smart-light.ga
-cache: yarn
+cache: npm

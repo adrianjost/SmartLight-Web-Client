@@ -15,13 +15,13 @@ This Repository contains the (Web-) UI for SmartLight as well as the Firebase ho
 npm install
 
 # serve with hot reload at localhost:8080
-yarn dev
+npm run dev
 
 # build for production with minification
-yarn build
+npm run build
 
 # build for production and view the bundle analyzer report
-yarn build --report
+npm run build --report
 
 # deploy to firebase
 npm deploy
