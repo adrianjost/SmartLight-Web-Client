@@ -26,9 +26,7 @@
 					type="number"
 					placeholder="5"
 				/>
-				<label for="minutes">
-					min
-				</label>
+				<label for="minutes">min</label>
 				<input
 					id="seconds"
 					v-model="seconds"
@@ -36,9 +34,7 @@
 					type="number"
 					placeholder="0"
 				/>
-				<label for="seconds">
-					s
-				</label>
+				<label for="seconds">s</label>
 			</div>
 			<ToggleButton
 				v-model="loop"

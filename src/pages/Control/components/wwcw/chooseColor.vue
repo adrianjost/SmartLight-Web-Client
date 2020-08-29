@@ -124,7 +124,7 @@ export default {
 <style lang="scss" scoped>
 .white-tone-picker {
 	max-width: 300px;
-	padding: 1rem;
-	margin: 2rem auto;
+	padding: 16px;
+	margin: 32px auto;
 }
 </style>

@@ -27,9 +27,7 @@
 				</i>
 			</li>
 		</ul>
-		<p v-else class="not-found">
-			No icons found.
-		</p>
+		<p v-else class="not-found">No icons found.</p>
 	</div>
 </template>
 

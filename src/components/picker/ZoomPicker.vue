@@ -1,15 +1,11 @@
 <template>
 	<span class="zoom-picker">
 		<button v-ripple type="button" @click="decrement">
-			<i class="material-icons">
-				remove
-			</i>
+			<i class="material-icons">remove</i>
 		</button>
 		<div class="border" />
 		<button v-ripple type="button" @click="increment">
-			<i class="material-icons">
-				add
-			</i>
+			<i class="material-icons">add</i>
 		</button>
 	</span>
 </template>

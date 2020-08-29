@@ -11,9 +11,7 @@
 			/>
 
 			<li class="state add" @click="sendEvent(addEvent)">
-				<i class="material-icons">
-					add
-				</i>
+				<i class="material-icons">add</i>
 			</li>
 		</ul>
 	</div>

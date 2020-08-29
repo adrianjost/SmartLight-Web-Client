@@ -15,9 +15,7 @@
 		</RouterLink>
 		<RouterLink class="unit add" :to="addUrl">
 			<div class="icon-container">
-				<i class="material-icons">
-					add
-				</i>
+				<i class="material-icons">add</i>
 			</div>
 		</RouterLink>
 	</div>
