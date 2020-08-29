@@ -11,10 +11,11 @@
 			@deleteState="deleteState"
 		/>
 		<WhiteTonePicker
-			v-model="currentChannels"
+			:value="currentChannels"
 			class="white-tone-picker"
 			color-left="#fd9"
 			color-right="#9df"
+			@input="updateChannels"
 		/>
 	</section>
 </template>
@@ -45,6 +46,7 @@ export default {
 	data() {
 		return {
 			currentChannels: [1, 1],
+			connection: new WebSocket("ws://" + this.unit.hostname + ":80"),
 		};
 	},
 	computed: {
@@ -74,11 +76,46 @@ export default {
 		if ((this.unit.state || {}).color) {
 			this.currentChannels = this.extractWhiteChannels(this.unit.state.color);
 		}
+		return;
+		this.connection.onopen = () => {};
+		this.connection.onmessage = (event) => {
+			console.log(event);
+			try {
+				const data = JSON.parse(event.data);
+				if (data.color) {
+					const ww = data.color[this.unit.channelMap.r.toString()] / 255;
+					const cw = data.color[this.unit.channelMap.b.toString()] / 255;
+					const newColor = [ww, cw];
+					const hasChanged = newColor.some(
+						(val, i) => this.currentChannels[i].toFixed(2) !== val.toFixed(2)
+					);
+					console.log(
+						hasChanged,
+						this.currentChannels.map((a) => a.toFixed(2)),
+						newColor.map((a) => a.toFixed(2))
+					);
+					if (hasChanged) {
+						console.log("update color");
+						this.$set(this, "currentChannels", newColor);
+					}
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		};
 	},
 	beforeDestroy() {
 		this.$eventHub.$off("apply-color", this.apply);
 	},
 	methods: {
+		updateChannels(to) {
+			const hasChanged = to.some(
+				(val, i) => this.currentChannels[i].toFixed(2) !== val.toFixed(2)
+			);
+			if (hasChanged) {
+				this.$set(this, "currentChannels", to);
+			}
+		},
 		extractWhiteChannels(color) {
 			const rgb = hex2rgb(color);
 			rgb.r /= 255;

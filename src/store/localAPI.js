@@ -18,7 +18,7 @@ Promise.any = function (promises) {
 class Connection {
 	static connections = {};
 
-	constructor(addresses) {
+	constructor(id, addresses) {
 		this.addresses = [...new Set(addresses)];
 		this.open();
 	}
@@ -166,7 +166,9 @@ const actions = {
 		const lamps = store.getters.extractLampsFromUnit(unit);
 		lamps.forEach((lamp) => {
 			const channelValues = colorToChannel(lamp.channelMap, newColor);
-			new Connection([lamp.ip, lamp.hostname]).send({ color: channelValues });
+			new Connection(lamp.id, [lamp.hostname]).send({
+				color: channelValues,
+			});
 		});
 	},
 	sendGradient(store, { unit, gradient }) {
@@ -175,7 +177,7 @@ const actions = {
 			const colors = gradient.colors.map((hexColor) => {
 				return colorToChannel(lamp.channelMap, hex2rgb(hexColor));
 			});
-			new Connection([lamp.ip, lamp.hostname]).send({
+			new Connection(lamp.id, [lamp.hostname]).send({
 				gradient: {
 					colors: colors,
 					loop: gradient.loop,
@@ -197,10 +199,10 @@ const actions = {
 		}
 	},
 	openConnection(unit) {
-		return new Connection([unit.ip, unit.hostname]).open();
+		return new Connection(unit.id, [unit.hostname]).open();
 	},
 	closeConnection(unit) {
-		return new Connection([unit.ip, unit.hostname]).close();
+		return new Connection(unit.id, [unit.hostname]).close();
 	},
 };
 
