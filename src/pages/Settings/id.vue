@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import * as clipboard from "clipboard-polyfill/text";
+
 const EditLamp = () =>
 	import(/* webpackChunkName: "editLamp" */ "./components/editLamp");
 const EditGroup = () =>
@@ -169,7 +171,7 @@ export default {
 				hostname: u.hostname,
 			});
 
-			await navigator.clipboard
+			await clipboard
 				.writeText(sharedData)
 				.then(() => {
 					this.toast(`Copied ${name} to clipboard.`, "check");

@@ -89,6 +89,7 @@
 <script>
 import hub from "@/mixins/hub.js";
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
+import * as clipboard from "clipboard-polyfill/text";
 
 export default {
 	mixins: [hub],
@@ -131,7 +132,7 @@ export default {
 			return string.match(/.{1,4}/g);
 		},
 		copyToClipboard(text, name) {
-			navigator.clipboard
+			clipboard
 				.writeText(text)
 				.then(() => {
 					this.toast(`Copied ${name} to clipboard.`, "check");

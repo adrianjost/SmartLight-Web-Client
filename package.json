@@ -20,6 +20,7 @@
 		"@jaames/iro": "^5.2.2",
 		"@sentry/browser": "^5.22.3",
 		"@sentry/integrations": "^5.22.3",
+		"clipboard-polyfill": "^3.0.1",
 		"firebase": "^7.19.1",
 		"firebaseui": "^4.6.1",
 		"mathjs": "^7.2.0",
