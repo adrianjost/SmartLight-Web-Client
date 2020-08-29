@@ -13,8 +13,7 @@
 		"lint:all:eslint": "npm run lint:eslint -- --ext .js,.vue .",
 		"lint:all:stylelint": "npm run lint:stylelint -- \"src/**/*.{vue,sass,scss,css}\"",
 		"lint:all:prettier": "npm run lint:prettier -- \"**/*.{js,json,css,scss,vue,html}\"",
-		"lint": "run-s lint:all:*",
-		"test:unit": "vue-cli-service test:unit"
+		"lint": "run-s lint:all:*"
 	},
 	"dependencies": {
 		"@adrianjost/two-channel-picker": "^0.3.6",
@@ -49,7 +48,6 @@
 		"@vue/cli-service": "^4.5.4",
 		"@vue/eslint-config-prettier": "^6.0.0",
 		"@vue/eslint-config-standard": "^5.1.2",
-		"@vue/test-utils": "^1.0.4",
 		"babel-eslint": "^10.1.0",
 		"chai": "^4.1.2",
 		"cross-env": "^7.0.2",
