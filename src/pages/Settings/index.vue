@@ -10,7 +10,7 @@
 		<button
 			v-ripple
 			class="button button-primary"
-			style="margin-right: 16px;"
+			style="margin-right: 16px"
 			@click="importData"
 		>
 			Import

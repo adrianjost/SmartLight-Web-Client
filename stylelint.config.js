@@ -46,8 +46,8 @@ module.exports = {
 
 		"plugin/8-point-grid": {
 			base: 4,
-			whitelist: ["2px", "1px"],
-			ignore: [
+			allowlist: ["2px", "1px"],
+			ignorelist: [
 				"width",
 				"height",
 				"min-width",

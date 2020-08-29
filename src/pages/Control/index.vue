@@ -1,8 +1,6 @@
 <template>
 	<section class="control">
-		<h2 v-if="groups.length">
-			Groups
-		</h2>
+		<h2 v-if="groups.length">Groups</h2>
 		<div class="control-units">
 			<ControlUnit
 				v-for="unit in groups"
@@ -32,7 +30,7 @@
 				<span>Add Lamp</span>
 			</RouterLink>
 		</div>
-		<div style="flex: 1;"></div>
+		<div style="flex: 1"></div>
 		<div class="control-zoom">
 			<ZoomPicker ref="zoom" v-model="zoom" :min="64" :max="256" :step="16" />
 		</div>
