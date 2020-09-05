@@ -1,9 +1,16 @@
 <template>
 	<section class="control">
-		<TabNav v-model="activeTab" :tab-names="availablePicker" />
-		<keep-alive>
-			<component :is="activePicker" :unit="unit" />
-		</keep-alive>
+		<template v-if="!loading">
+			<TabNav v-model="activeTab" :tab-names="availablePicker" />
+			<keep-alive>
+				<component :is="activePicker" :unit="unit" />
+			</keep-alive>
+		</template>
+		<template v-else>
+			<SkeletonTabNav :tab-names="availablePicker" />
+			<SkeletonSavedStatePicker />
+			<SkeletonStatePicker />
+		</template>
 	</section>
 </template>
 
@@ -23,6 +30,9 @@ const WWCWChooseColor = () =>
 	);
 
 import TabNav from "@/components/TabNav";
+import SkeletonTabNav from "@/components/skeleton/TabNav";
+import SkeletonStatePicker from "@/components/skeleton/StatePicker";
+import SkeletonSavedStatePicker from "@/components/skeleton/SavedStatePicker";
 
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
 import { scaleColor, hex2rgb, rgb2hex } from "@/mixins/colorConversion";
@@ -45,10 +55,14 @@ export default {
 		RGBChooseGradient,
 		WWCWChooseColor,
 		TabNav,
+		SkeletonTabNav,
+		SkeletonStatePicker,
+		SkeletonSavedStatePicker,
 	},
 	data() {
 		return {
 			activeTab: "",
+			loading: true,
 		};
 	},
 	computed: {
@@ -60,9 +74,9 @@ export default {
 				case "Switch":
 					return [""];
 				case "WWCW":
-					return ["Color" /*, 'Gradient'*/];
-				default:
 					return ["Color", "Gradient"];
+				default:
+					return ["Color" /*, "Gradient" */];
 			}
 		},
 		activePicker() {
@@ -81,11 +95,13 @@ export default {
 			this.setBottomNav();
 		},
 	},
-	created() {
+	async created() {
 		this.setTopNav();
 		this.setBottomNav();
 		this.setActiveTab(this.unit.state);
 		this.$eventHub.$on("backAndReset", this.backAndReset);
+		await this.$store.getters["units/load"](this.$route.params.id);
+		this.loading = false;
 	},
 	beforeRouteLeave(to, from, next) {
 		this.resetColor();

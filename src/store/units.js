@@ -34,6 +34,21 @@ const getters = {
 		const unit = Object.values(state.data).find((unit) => unit.id === unitId);
 		return unit || unitPrototyp;
 	},
+	load: (state) => (unitId) => {
+		const waitForUnit = () =>
+			new Promise((resolve) =>
+				setTimeout(async () => {
+					const unit = Object.values(state.data).find(
+						(unit) => unit.id === unitId
+					);
+					if (!unit) {
+						await waitForUnit();
+					}
+					resolve();
+				}, 10)
+			);
+		return waitForUnit();
+	},
 };
 
 const actions = {
