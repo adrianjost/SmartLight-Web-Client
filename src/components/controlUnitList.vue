@@ -74,12 +74,12 @@ $iconPadding: 16px;
 		color: var(--color-border);
 		border-width: 2px;
 		.icon-container {
-			// stylelint-disable plugin/8-point-grid
+			/* stylelint-disable plugin/8-point-grid */
 			// adjust offset because the border is 1px larger
 			// this moves the 0 position by 1 px;
 			top: -1px;
 			left: -1px;
-			// stylelint-enable plugin/8-point-grid
+			/* stylelint-enable plugin/8-point-grid */
 		}
 	}
 }

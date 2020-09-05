@@ -26,7 +26,7 @@ module.exports = {
 		"function-comma-space-after": "always",
 		"function-comma-space-before": "never",
 		"function-name-case": "lower",
-		"number-leading-zero": "never",
+		"number-leading-zero": "always",
 		"string-quotes": "double",
 		"length-zero-no-unit": true,
 		"unit-case": "lower",
