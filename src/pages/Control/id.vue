@@ -226,7 +226,7 @@ export default {
 }
 .fade-enter-active,
 .fade-leave-active {
-	transition: filter 0.5s;
+	transition: filter 0.3s;
 }
 .fade-enter,
 .fade-leave-to {
