@@ -27,6 +27,7 @@ export default {
 	background-color: var(--color-skeleton);
 	border: 1px solid var(--color-skeleton-border);
 	border-radius: 4px;
+	animation: skeleton-fadein 0.5s ease-in-out;
 
 	.tab {
 		display: inline-block;

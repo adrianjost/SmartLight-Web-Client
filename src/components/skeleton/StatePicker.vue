@@ -15,6 +15,7 @@ export default {};
 	max-width: 300px;
 	padding: 16px;
 	margin: 32px auto;
+	animation: skeleton-fadein 0.5s ease-in-out;
 }
 .state-picker {
 	position: relative;

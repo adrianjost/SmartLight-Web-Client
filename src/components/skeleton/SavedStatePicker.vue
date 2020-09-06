@@ -12,6 +12,7 @@ export default {};
 .state-list {
 	max-width: 300px;
 	padding: 8px;
+	padding-bottom: 12px;
 	margin: 8px auto;
 	overflow-x: hidden;
 	font-size: 0;
@@ -20,6 +21,7 @@ export default {};
 	user-select: none;
 	border: 1px solid var(--color-skeleton-border);
 	border-radius: 4px;
+	animation: skeleton-fadein 0.5s ease-in-out;
 }
 .state {
 	position: relative;

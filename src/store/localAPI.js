@@ -31,6 +31,9 @@ class Connection {
 
 	async keepAlive() {
 		let activeConnection = this.getActiveConnection();
+		if (!activeConnection) {
+			return;
+		}
 		clearTimeout(activeConnection.timeout);
 		Connection.connections[
 			activeConnection.address
@@ -105,7 +108,6 @@ class Connection {
 			}
 			delete Connection.connections[address];
 			clearTimeout(connection.timeout);
-			connection.status === "connected";
 			const ws = connection.connection;
 			try {
 				ws.close();
@@ -122,16 +124,21 @@ class Connection {
 
 	async getConnection() {
 		let activeConnection = this.getActiveConnection();
-		if (!activeConnection) {
-			try {
-				await this.open();
-				activeConnection = this.getActiveConnection();
-			} catch (e) {}
-		}
-		if (!activeConnection) {
-			return Promise.reject();
-		}
-		return activeConnection.connectionPromise;
+		return new Promise(async (resolve, reject) => {
+			setTimeout(reject, 5000);
+			if (!activeConnection) {
+				try {
+					await this.open();
+					activeConnection = this.getActiveConnection();
+				} catch (e) {
+					reject();
+				}
+			}
+			if (!activeConnection) {
+				return reject();
+			}
+			resolve(activeConnection.connectionPromise);
+		});
 	}
 
 	async send(message) {
@@ -164,25 +171,31 @@ const actions = {
 	sendHexColor(store, { unit, color }) {
 		const newColor = hex2rgb(color);
 		const lamps = store.getters.extractLampsFromUnit(unit);
-		lamps.forEach((lamp) => {
-			const channelValues = colorToChannel(lamp.channelMap, newColor);
-			new Connection([lamp.ip, lamp.hostname]).send({ color: channelValues });
-		});
+		return Promise.all(
+			lamps.map((lamp) => {
+				const channelValues = colorToChannel(lamp.channelMap, newColor);
+				return new Connection([lamp.ip, lamp.hostname]).send({
+					color: channelValues,
+				});
+			})
+		);
 	},
 	sendGradient(store, { unit, gradient }) {
 		const lamps = store.getters.extractLampsFromUnit(unit);
-		lamps.forEach((lamp) => {
-			const colors = gradient.colors.map((hexColor) => {
-				return colorToChannel(lamp.channelMap, hex2rgb(hexColor));
-			});
-			new Connection([lamp.ip, lamp.hostname]).send({
-				gradient: {
-					colors: colors,
-					loop: gradient.loop,
-					transitionTimes: gradient.transitionTimes,
-				},
-			});
-		});
+		return Promise.all(
+			lamps.map((lamp) => {
+				const colors = gradient.colors.map((hexColor) => {
+					return colorToChannel(lamp.channelMap, hex2rgb(hexColor));
+				});
+				return new Connection([lamp.ip, lamp.hostname]).send({
+					gradient: {
+						colors: colors,
+						loop: gradient.loop,
+						transitionTimes: gradient.transitionTimes,
+					},
+				});
+			})
+		);
 	},
 	sendState(store, options) {
 		const { unit, state } = options;
@@ -191,15 +204,15 @@ const actions = {
 			return;
 		}
 		if (state.color) {
-			store.dispatch("sendHexColor", { color: state.color, unit });
+			return store.dispatch("sendHexColor", { color: state.color, unit });
 		} else if (state.gradient) {
-			store.dispatch("sendGradient", { gradient: state.gradient, unit });
+			return store.dispatch("sendGradient", { gradient: state.gradient, unit });
 		}
 	},
-	openConnection(unit) {
-		return new Connection([unit.ip, unit.hostname]).open();
+	openConnection(store, unit) {
+		return new Connection([unit.ip, unit.hostname]).getConnection();
 	},
-	closeConnection(unit) {
+	closeConnection(store, unit) {
 		return new Connection([unit.ip, unit.hostname]).close();
 	},
 };

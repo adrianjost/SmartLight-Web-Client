@@ -68,3 +68,13 @@ input:not([type="checkbox"]):not([type="radio"]) {
 		border-color: var(--color-border);
 	}
 }
+
+@keyframes skeleton-fadein {
+	0%,
+	40% {
+		filter: opacity(0);
+	}
+	100% {
+		filter: opacity(1);
+	}
+}

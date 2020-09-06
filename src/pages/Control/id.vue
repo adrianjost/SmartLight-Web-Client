@@ -1,16 +1,18 @@
 <template>
 	<section class="control">
-		<template v-if="!loading">
-			<TabNav v-model="activeTab" :tab-names="availablePicker" />
-			<keep-alive>
-				<component :is="activePicker" :unit="unit" />
-			</keep-alive>
-		</template>
-		<template v-else>
-			<SkeletonTabNav :tab-names="availablePicker" />
-			<SkeletonSavedStatePicker />
-			<SkeletonStatePicker />
-		</template>
+		<transition name="fade">
+			<div v-if="loading" key="skeleton" class="skeleton">
+				<SkeletonTabNav :tab-names="availablePicker" />
+				<SkeletonSavedStatePicker />
+				<SkeletonStatePicker />
+			</div>
+			<div v-else key="control">
+				<TabNav v-model="activeTab" :tab-names="availablePicker" />
+				<keep-alive>
+					<component :is="activePicker" :unit="unit" />
+				</keep-alive>
+			</div>
+		</transition>
 	</section>
 </template>
 
@@ -100,11 +102,57 @@ export default {
 		this.setBottomNav();
 		this.setActiveTab(this.unit.state);
 		this.$eventHub.$on("backAndReset", this.backAndReset);
+		// Load units initial state and preconnect
 		await this.$store.getters["units/load"](this.$route.params.id);
+		if (this.unit.type === "LAMP") {
+			let unitInitialState = null;
+			let connection;
+			try {
+				connection = await this.$store.dispatch(
+					"localAPI/openConnection",
+					this.unit
+				);
+			} catch (error) {
+				this.toastError(`${this.unit.name} is not reachable.`);
+				this.$router.push("/control");
+				return;
+			}
+			connection.onmessage = (message) => {
+				const data = JSON.parse(message.data);
+				if (data && data.color) {
+					unitInitialState = {
+						color: rgb2hex({
+							r: parseInt(data.color[1], 10),
+							g: parseInt(data.color[2], 10),
+							b: parseInt(data.color[3], 10),
+						}),
+					};
+					connection.onmessage = null;
+				}
+			};
+			setTimeout(() => {
+				unitInitialState = false;
+				connection.onmessage = null;
+			}, 3000);
+			const waitForUnitInitialState = () =>
+				new Promise((resolve) =>
+					setTimeout(async () => {
+						if (unitInitialState === null) {
+							await waitForUnitInitialState();
+						}
+						resolve();
+					}, 10)
+				);
+			await waitForUnitInitialState();
+			if (unitInitialState) {
+				this.unit.state = unitInitialState;
+			}
+		}
 		this.loading = false;
 	},
-	beforeRouteLeave(to, from, next) {
-		this.resetColor();
+	async beforeRouteLeave(to, from, next) {
+		await this.resetColor();
+		await this.$store.dispatch("localAPI/closeConnection", this.unit);
 		next();
 	},
 	beforeDestroy() {
@@ -154,7 +202,7 @@ export default {
 			}
 		},
 		resetColor() {
-			this.$store.dispatch("localAPI/sendState", {
+			return this.$store.dispatch("localAPI/sendState", {
 				unit: this.unit,
 				state: this.unit.state,
 			});
@@ -170,6 +218,19 @@ export default {
 <style lang="scss" scoped>
 .control {
 	text-align: center;
+}
+.skeleton {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.fade-enter-active,
+.fade-leave-active {
+	transition: filter 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+	filter: opacity(0);
 }
 </style>
 <style lang="scss">
