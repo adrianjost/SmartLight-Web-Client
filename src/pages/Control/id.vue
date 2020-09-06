@@ -76,7 +76,7 @@ export default {
 				case "Switch":
 					return [""];
 				case "WWCW":
-					return ["Color", "Gradient"];
+					return ["Color" /*, "Gradient" */];
 				default:
 					return ["Color" /*, "Gradient" */];
 			}
