@@ -23,7 +23,7 @@
 		"clipboard-polyfill": "^3.0.1",
 		"firebase": "^7.23.0",
 		"firebaseui": "^4.6.1",
-		"mathjs": "^7.5.0",
+		"mathjs": "^7.5.1",
 		"portal-vue": "^2.1.7",
 		"rand-token": "^1.0.1",
 		"register-service-worker": "^1.7.1",
