@@ -18,7 +18,7 @@
 	"dependencies": {
 		"@adrianjost/two-channel-picker": "^0.3.6",
 		"@jaames/iro": "^5.3.1",
-		"@sentry/browser": "^5.29.0",
+		"@sentry/browser": "^5.29.1",
 		"@sentry/integrations": "^5.29.1",
 		"clipboard-polyfill": "^3.0.1",
 		"firebase": "^7.24.0",
