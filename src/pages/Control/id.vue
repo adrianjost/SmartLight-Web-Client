@@ -117,19 +117,34 @@ export default {
 				this.$router.push("/control");
 				return;
 			}
-			connection.onmessage = (message) => {
-				const data = JSON.parse(message.data);
-				if (data && data.color) {
+			connection.onmessage = (event) => {
+				const message = JSON.parse(event.data);
+				if (message.action === "GET /output/channel") {
 					unitInitialState = {
 						color: rgb2hex({
-							r: parseInt(data.color[1], 10),
-							g: parseInt(data.color[2], 10),
-							b: parseInt(data.color[3], 10),
+							r: parseInt(message.data[0], 10),
+							g: 0,
+							b: parseInt(message.data[1], 10),
+						}),
+					};
+				}
+				// legacy handling
+				if (message && message.color) {
+					unitInitialState = {
+						color: rgb2hex({
+							r: parseInt(message.color[1], 10),
+							g: parseInt(message.color[2], 10),
+							b: parseInt(message.color[3], 10),
 						}),
 					};
 					connection.onmessage = null;
 				}
 			};
+			connection.send(
+				JSON.stringify({
+					action: "GET /output/channel",
+				})
+			);
 			setTimeout(() => {
 				unitInitialState = false;
 				connection.onmessage = null;
