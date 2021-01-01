@@ -79,6 +79,16 @@ export default {
 		where,
 		orderBy,
 		guard: ["background"],
+		insertHook: function (updateFirestore, doc, store) {
+			const uid = store.getters["auth/get"].uid;
+			if (!Array.isArray(doc.allowedUsers)) {
+				doc.allowedUsers = [];
+			}
+			if (!doc.allowedUsers.includes(uid)) {
+				doc.allowedUsers.push(uid);
+			}
+			return updateFirestore(doc);
+		},
 	},
 	namespaced: true,
 	getters,
