@@ -18,7 +18,7 @@ jobs:
         env:
           VUE_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       - name: Deploy
-        run: surge --project ./dist/ --domain app.smart-light.ga
+        run: npx surge --project ./dist/ --domain app.smart-light.ga
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
