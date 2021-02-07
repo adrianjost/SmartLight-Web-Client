@@ -37,7 +37,7 @@
 		"vue-router": "^3.5.1",
 		"vue-tabs-component": "^1.5.0",
 		"vue-toasted": "^1.1.28",
-		"vuex": "^3.6.0",
+		"vuex": "^3.6.2",
 		"vuex-easy-firestore": "^1.36.0",
 		"vuex-persistedstate": "^3.1.0"
 	},
