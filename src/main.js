@@ -1,9 +1,10 @@
 import Vue from "vue";
 import "./registerServiceWorker";
+import Emitter from "tiny-emitter";
 
 Vue.config.productionTip = false;
 
-Vue.prototype.$eventHub = new Vue(); // Global event bus
+Vue.prototype.$eventHub = new Emitter(); // Global event bus
 
 import pkg from "../package.json";
 import * as Sentry from "@sentry/browser";

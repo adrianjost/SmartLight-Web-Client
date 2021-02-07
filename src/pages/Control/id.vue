@@ -101,7 +101,7 @@ export default {
 		this.setTopNav();
 		this.setBottomNav();
 		this.setActiveTab(this.unit.state);
-		this.$eventHub.$on("backAndReset", this.backAndReset);
+		this.$eventHub.on("backAndReset", this.backAndReset);
 		// Load units initial state and preconnect
 		await this.$store.getters["units/load"](this.$route.params.id);
 		if (this.unit.type === "LAMP") {
@@ -171,7 +171,7 @@ export default {
 		next();
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("backAndReset", this.backAndReset);
+		this.$eventHub.off("backAndReset", this.backAndReset);
 	},
 	methods: {
 		scaleColor,
@@ -224,7 +224,7 @@ export default {
 		},
 		backAndReset(state) {
 			this.resetColor();
-			this.$eventHub.$emit("go-back");
+			this.$eventHub.emit("go-back");
 		},
 	},
 };

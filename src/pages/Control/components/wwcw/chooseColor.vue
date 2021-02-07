@@ -70,13 +70,13 @@ export default {
 		},
 	},
 	created() {
-		this.$eventHub.$on("apply-color", this.apply);
+		this.$eventHub.on("apply-color", this.apply);
 		if ((this.unit.state || {}).color) {
 			this.currentChannels = this.extractWhiteChannels(this.unit.state.color);
 		}
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("apply-color", this.apply);
+		this.$eventHub.off("apply-color", this.apply);
 	},
 	methods: {
 		extractWhiteChannels(color) {
@@ -116,7 +116,7 @@ export default {
 					color: this.currentColor,
 				},
 			});
-			this.$eventHub.$emit("go-back");
+			this.$eventHub.emit("go-back");
 		},
 	},
 };

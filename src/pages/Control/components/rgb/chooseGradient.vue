@@ -124,11 +124,11 @@ export default {
 		},
 	},
 	created() {
-		this.$eventHub.$on("apply-gradient", this.apply);
+		this.$eventHub.on("apply-gradient", this.apply);
 		this.loadGradient((this.unit.state || {}).gradient);
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("apply-gradient", this.apply);
+		this.$eventHub.off("apply-gradient", this.apply);
 	},
 	methods: {
 		loadGradient(id) {
@@ -197,7 +197,7 @@ export default {
 					gradient: this.currentGradient,
 				},
 			});
-			this.$eventHub.$emit("go-back");
+			this.$eventHub.emit("go-back");
 		},
 	},
 };

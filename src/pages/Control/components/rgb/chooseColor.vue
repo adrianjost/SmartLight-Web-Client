@@ -70,13 +70,13 @@ export default {
 		},
 	},
 	created() {
-		this.$eventHub.$on("apply-color", this.apply);
+		this.$eventHub.on("apply-color", this.apply);
 		if ((this.unit.state || {}).color) {
 			this.currentColor = this.unit.state.color;
 		}
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("apply-color", this.apply);
+		this.$eventHub.off("apply-color", this.apply);
 	},
 	methods: {
 		loadColor(id) {
@@ -107,7 +107,7 @@ export default {
 					color: this.currentColor,
 				},
 			});
-			this.$eventHub.$emit("go-back");
+			this.$eventHub.emit("go-back");
 		},
 	},
 };
