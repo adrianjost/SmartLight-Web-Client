@@ -38,8 +38,6 @@ const router = new VueRouter({
 	],
 });
 
-import { FAuth } from "@/helpers/firebase";
-
 router.beforeEach((to, from, next) => {
 	const isAuthenticated = store.getters["auth/isAuthenticated"];
 	if (!isAuthenticated && to.matched.some((record) => !record.meta.isPublic)) {

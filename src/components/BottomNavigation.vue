@@ -5,29 +5,31 @@
 		</div>
 
 		<ul class="container">
-			<template v-for="action in actions">
-				<li :key="(action.to || action.event) + action.icon" class="contents">
-					<RouterLink
-						v-if="action.to"
-						v-ripple
-						:to="action.to"
-						:class="{ 'nav-item': true, active: action.active }"
-					>
-						<i class="material-icons">{{ action.icon }}</i>
-						<span v-if="action.name" class="name">{{ action.name }}</span>
-					</RouterLink>
+			<li
+				v-for="action in actions"
+				:key="(action.to || action.event) + action.icon"
+				class="contents"
+			>
+				<RouterLink
+					v-if="action.to"
+					v-ripple
+					:to="action.to"
+					:class="{ 'nav-item': true, active: action.active }"
+				>
+					<i class="material-icons">{{ action.icon }}</i>
+					<span v-if="action.name" class="name">{{ action.name }}</span>
+				</RouterLink>
 
-					<button
-						v-else
-						v-ripple
-						:class="{ 'nav-item': true, active: action.active }"
-						@click="sendEvent(action.event)"
-					>
-						<i class="material-icons">{{ action.icon }}</i>
-						<span v-if="action.name" class="name">{{ action.name }}</span>
-					</button>
-				</li>
-			</template>
+				<button
+					v-else
+					v-ripple
+					:class="{ 'nav-item': true, active: action.active }"
+					@click="sendEvent(action.event)"
+				>
+					<i class="material-icons">{{ action.icon }}</i>
+					<span v-if="action.name" class="name">{{ action.name }}</span>
+				</button>
+			</li>
 		</ul>
 	</nav>
 </template>
