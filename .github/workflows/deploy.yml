@@ -1,0 +1,24 @@
+name: CI
+"on":
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        run: npm run build
+        env:
+          VUE_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+      - name: Deploy
+        run: surge --project ./dist/ --domain app.smart-light.ga
+        env:
+          SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
