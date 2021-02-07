@@ -70,22 +70,22 @@ export default {
 		window.addEventListener("resize", this.resize);
 	},
 	created() {
-		this.$eventHub.$on("logout", async () => {
+		this.$eventHub.on("logout", async () => {
 			await this.$store.dispatch("auth/logout");
 			this.$router.go("/login");
 		});
-		this.$eventHub.$on("go-back", this.goBack);
+		this.$eventHub.on("go-back", this.goBack);
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("logout");
-		this.$eventHub.$off("go-back", this.goBack);
+		this.$eventHub.off("logout");
+		this.$eventHub.off("go-back", this.goBack);
 	},
 	methods: {
 		goBack() {
 			this.$router.go(-1);
 		},
 		handleAction(event) {
-			this.$eventHub.$emit(event);
+			this.$eventHub.emit(event);
 		},
 		resize(/* event */) {
 			// hide BottomNav when onscreen keyboard opens (mobile devices)

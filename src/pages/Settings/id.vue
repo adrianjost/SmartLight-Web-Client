@@ -138,23 +138,23 @@ export default {
 			}),
 		});
 
-		this.$eventHub.$on("apply", this.apply);
-		this.$eventHub.$on("share", this.share);
-		this.$eventHub.$on("delete", this.delete);
+		this.$eventHub.on("apply", this.apply);
+		this.$eventHub.on("share", this.share);
+		this.$eventHub.on("delete", this.delete);
 	},
 	beforeDestroy() {
-		this.$eventHub.$off("apply", this.apply);
-		this.$eventHub.$off("share", this.share);
-		this.$eventHub.$off("delete", this.delete);
+		this.$eventHub.off("apply", this.apply);
+		this.$eventHub.off("share", this.share);
+		this.$eventHub.off("delete", this.delete);
 	},
 	methods: {
 		async apply() {
 			await this.$store.dispatch("units/set", this.unit);
-			this.$eventHub.$emit("go-back");
+			this.$eventHub.emit("go-back");
 		},
 		async delete() {
 			this.$store.dispatch("units/delete", this.unit.id); // Do not await delete
-			this.$eventHub.$emit("go-back");
+			this.$eventHub.emit("go-back");
 		},
 		async share() {
 			const u = this.unit;

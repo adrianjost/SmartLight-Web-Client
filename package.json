@@ -29,6 +29,7 @@
 		"rand-token": "^1.0.1",
 		"register-service-worker": "^1.7.2",
 		"simplebar-vue": "^1.6.0",
+		"tiny-emitter": "^2.1.0",
 		"vue": "^2.6.12",
 		"vue-fab": "^2.3.1",
 		"vue-global-events": "^1.2.1",
