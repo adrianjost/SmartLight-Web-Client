@@ -31,7 +31,6 @@
 import BottomNavigation from "@/components/BottomNavigation.vue";
 import AppBarTop from "@/components/AppBarTop.vue";
 import BrowserWarning from "@/components/BrowserWarning.vue";
-import hub from "@/mixins/hub.js";
 
 export default {
 	name: "App",
@@ -40,7 +39,6 @@ export default {
 		BottomNavigation,
 		BrowserWarning,
 	},
-	mixins: [hub],
 	data() {
 		return {
 			showBottomNav: undefined,
