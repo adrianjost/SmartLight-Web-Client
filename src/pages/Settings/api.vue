@@ -1,18 +1,17 @@
 <template>
 	<div class="hub">
-		<h1>IoT-Hub is always active :)</h1>
+		<h1>IoT-Hub is active :)</h1>
 		<i class="material-icons md-64">device_hub</i>
 		<p>
 			As long as you have this page open, the website acts as an hub for
 			external communication.
 		</p>
 		<p>
-			So you can control your lights from anywhere on earth, as long as one
-			device in your local network has this app opened.
+			So you can control your lights from anywhere on earth using the API, as
+			long as one device in your local network has this app opened.
 		</p>
 		<p>
-			This is also required to be able to use the API, e.g. for Google Assistant
-			and IFTTT.
+			This is also required to setup Google Assistant and IFTTT.
 			<br />
 			You can read more,
 			<a href="https://docs.smart-light.ga/integrations" target="_blank">
