@@ -61,6 +61,11 @@ export default {
 		SkeletonStatePicker,
 		SkeletonSavedStatePicker,
 	},
+	async beforeRouteLeave(to, from, next) {
+		await this.resetColor();
+		await this.$store.dispatch("localAPI/closeConnection", this.unit);
+		next();
+	},
 	data() {
 		return {
 			activeTab: "",
@@ -164,11 +169,6 @@ export default {
 			}
 		}
 		this.loading = false;
-	},
-	async beforeRouteLeave(to, from, next) {
-		await this.resetColor();
-		await this.$store.dispatch("localAPI/closeConnection", this.unit);
-		next();
 	},
 	beforeDestroy() {
 		this.$eventHub.off("backAndReset", this.backAndReset);
