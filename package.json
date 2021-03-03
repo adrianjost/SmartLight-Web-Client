@@ -83,6 +83,10 @@
 		"surge": "^0.21.7",
 		"vue-template-compiler": "^2.6.12"
 	},
+	"engines": {
+		"node": ">=14",
+		"npm": ">=7"
+	},
 	"gitHooks": {
 		"pre-commit": "cross-env PRE_COMMIT=true lint-staged"
 	},
