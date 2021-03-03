@@ -3,8 +3,8 @@ import { rgb2hex, hex2rgb } from "./colorConversion";
 import { throttle } from "throttle-debounce";
 const cache = {};
 
-// TODO [$603f4a521945130008a4d3a4]: cleanup connections for removed hub_units
-// TODO [$603f4a521945130008a4d3a5]: create new connection if lamp IP changes
+// TODO [#511]: cleanup connections for removed hub_units
+// TODO [#512]: create new connection if lamp IP changes
 
 export default {
 	computed: {
