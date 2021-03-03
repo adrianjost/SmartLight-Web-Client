@@ -1,6 +1,6 @@
 {
 	"name": "smartlight-web",
-	"version": "3.1.0-beta",
+	"version": "3.2.0-beta",
 	"private": false,
 	"license": "MIT",
 	"scripts": {
@@ -29,6 +29,7 @@
 		"rand-token": "^1.0.1",
 		"register-service-worker": "^1.7.2",
 		"simplebar-vue": "^1.6.0",
+		"throttle-debounce": "^3.0.1",
 		"tiny-emitter": "^2.1.0",
 		"vue": "^2.6.12",
 		"vue-fab": "^2.3.1",
@@ -81,6 +82,10 @@
 		"stylelint-webpack-plugin": "^2.1.1",
 		"surge": "^0.21.7",
 		"vue-template-compiler": "^2.6.12"
+	},
+	"engines": {
+		"node": ">=14",
+		"npm": ">=7"
 	},
 	"gitHooks": {
 		"pre-commit": "cross-env PRE_COMMIT=true lint-staged"
