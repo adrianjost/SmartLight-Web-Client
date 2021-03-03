@@ -1,10 +1,10 @@
 import Connection from "../helpers/connection";
-import { rgb2hex } from "./colorConversion";
-import debounce from "debounce";
+import { rgb2hex, hex2rgb } from "./colorConversion";
+import { throttle } from "throttle-debounce";
 const cache = {};
 
 // TODO: cleanup connections for removed hub_units
-// TODO: create new connection if hub IP changes
+// TODO: create new connection if lamp IP changes
 
 export default {
 	computed: {
@@ -39,17 +39,11 @@ export default {
 							}
 						}, 60 * 1000);
 						connection.onMessage(
-							/* TODO execute action in regular intervals even if we get continously messages
-								if the lamp is in time control mode, we constantly get messages so the debounced
-								would never trigger, but we still want to save the current state in regular
-								intervals (5mins or so) anyway.
-							*/
-							debounce((message) => {
+							throttle(5000, false, (message) => {
 								if (message.action !== "GET /output") {
 									// irrelevant message
 									return;
 								}
-								// TODO debounce updates to reduce server load (firstore)
 								const [r, b] = message.data.channel;
 								const newState = {
 									color: rgb2hex({ r, g: 0, b }),
@@ -60,17 +54,18 @@ export default {
 									id: unit.id,
 									data: newState,
 								});
-							}, 5000)
+							})
 						);
 					}
 					if (cache[unit.id].state === JSON.stringify(unit.state)) {
 						// nothing changed
 						return;
 					}
-					const { connection, state } = cache[unit.id];
+					const { connection } = cache[unit.id];
+					const { r, b } = hex2rgb(unit.state.color);
 					connection.send({
-						// TODO use new firmware API
-						color: unit.state.color,
+						action: "SET /output/channel",
+						data: [r, b],
 					});
 					cache[unit.id].state = JSON.stringify(unit.state);
 				});
