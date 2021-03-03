@@ -27,8 +27,7 @@ export default {
 					}
 					if (!cache[unit.id]) {
 						cache[unit.id] = {
-							// TODO fallback to IP based connection if hostname connection fails within a given amount of time
-							connection: new Connection(unit.hostname || unit.ip),
+							connection: new Connection([unit.hostname, unit.ip]),
 							state: JSON.stringify(unit.state),
 						};
 						const connection = cache[unit.id].connection;
