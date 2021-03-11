@@ -24,7 +24,7 @@
 		"clipboard-polyfill": "^3.0.2",
 		"firebase": "^8.2.10",
 		"firebaseui": "^4.8.0",
-		"mathjs": "^9.2.0",
+		"mathjs": "^9.3.0",
 		"portal-vue": "^2.1.7",
 		"rand-token": "^1.0.1",
 		"register-service-worker": "^1.7.2",
