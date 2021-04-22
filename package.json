@@ -70,7 +70,7 @@
 		"stylelint-8-point-grid": "^1.0.0",
 		"stylelint-a11y": "^1.2.3",
 		"stylelint-at-rule-no-children": "^0.3.1",
-		"stylelint-config-recess-order": "^2.3.0",
+		"stylelint-config-recess-order": "^2.4.0",
 		"stylelint-config-recommended": "^4.0.0",
 		"stylelint-declaration-block-no-ignored-properties": "^2.3.0",
 		"stylelint-group-selectors": "^1.0.8",
@@ -78,7 +78,7 @@
 		"stylelint-no-unsupported-browser-features": "^4.1.4",
 		"stylelint-prettier": "^1.2.0",
 		"stylelint-selector-no-empty": "^1.0.8",
-		"stylelint-selector-tag-no-without-class": "^2.0.3",
+		"stylelint-selector-tag-no-without-class": "^2.0.4",
 		"stylelint-webpack-plugin": "^2.1.1",
 		"surge": "^0.23.0",
 		"vue-template-compiler": "^2.6.12"
