@@ -98,7 +98,7 @@ export default {
 				const result = await FAuth.signInWithPopup(new currentProvider());
 				credential = result.credential;
 				if (currentEMail !== this.user.email) {
-					// TODO [$608a607429b9aa0008265c45]: handle authentication with other account more nicely
+					// TODO [#570]: handle authentication with other account more nicely
 					//
 					// Currently the app data changes in the background to the new account which isn't
 					// wanted. Actually we just want some new credentials to be able to reauthenticate.
@@ -113,7 +113,7 @@ export default {
 				if (this.password.length < 20) {
 					throw new Error("Password must have at least 20 Characters");
 				}
-				// TODO [$608a607429b9aa0008265c46]: use in-app dialog instead of unstyled browser confirm
+				// TODO [#571]: use in-app dialog instead of unstyled browser confirm
 				confirm(
 					"This is a sensitive operation. You will be asked to reauthenticate before you can continue."
 				);
