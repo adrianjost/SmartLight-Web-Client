@@ -8,7 +8,6 @@
 
 <script>
 import { firebase, FAuth } from "@/helpers/firebase";
-import { mapGetters } from "vuex";
 
 import * as firebaseui from "firebaseui";
 let loginUi;

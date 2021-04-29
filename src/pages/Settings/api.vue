@@ -1,6 +1,6 @@
 <template>
 	<div class="hub">
-		<h1>IoT-Hub is active :)</h1>
+		<!-- <h1>IoT-Hub is active :)</h1>
 		<i class="material-icons md-64">device_hub</i>
 		<p>
 			As long as you have this page open, the website acts as an hub for
@@ -17,9 +17,10 @@
 			<a href="https://docs.smart-light.ga/integrations" target="_blank">
 				how to setup integrations here.
 			</a>
-		</p>
+		</p> -->
 
 		<h2>Credentials</h2>
+		<AccountSettings />
 		<h3>
 			User-Id
 			<small class="no-wrap">(without spaces)</small>
@@ -89,8 +90,13 @@
 import hub from "@/mixins/hub.js";
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
 import * as clipboard from "clipboard-polyfill/text";
+const AccountSettings = () =>
+	import(
+		/* webpackChunkName: "accountSettings" */ "./components/accountSettings"
+	);
 
 export default {
+	components: { AccountSettings },
 	mixins: [hub],
 	computed: {
 		user() {
@@ -150,16 +156,19 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .hub {
 	margin: 2em 0;
-	text-align: center;
 }
+
 .material-icons.md-64 {
 	font-size: 64px;
 }
-</style>
-<style lang="scss" scoped>
+
+h3 {
+	margin-top: 2em;
+}
+
 .formatted {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(7ch, 1fr));
@@ -171,8 +180,6 @@ export default {
 .uid {
 	max-width: 55ch;
 	max-height: initial;
-	margin-right: auto;
-	margin-left: auto;
 	overflow-y: initial;
 }
 </style>
