@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import hub from "@/mixins/hub.js";
+// import hub from "@/mixins/hub.js";
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
 import * as clipboard from "clipboard-polyfill/text";
 const AccountSettings = () =>
@@ -97,7 +97,7 @@ const AccountSettings = () =>
 
 export default {
 	components: { AccountSettings },
-	mixins: [hub],
+	// mixins: [hub],
 	computed: {
 		user() {
 			return this.$store.getters["auth/get"];
