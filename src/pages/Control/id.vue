@@ -118,8 +118,8 @@ export default {
 					this.unit
 				);
 			} catch (error) {
-				this.toastError(`${this.unit.name} is not reachable.`);
-				this.$router.push("/control");
+				this.toastError(`${this.unit.name} is not in reach.`);
+				this.loading = false;
 				return;
 			}
 			connection.onmessage = (event) => {
