@@ -152,6 +152,7 @@ export default {
 <style lang="scss" scoped>
 .password-actions {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 }
 </style>
