@@ -35,8 +35,26 @@
 			label="Channel Mapping"
 			placeholder="RGB"
 			:options="availableChannelMappings"
-			hint="RGB => IO1: Red, IO2: Blue, ..."
 		/>
+
+		<fieldset v-if="value.lamptype === 'WWCW'" class="color-temp-input-group">
+			<legend>Color Temperature</legend>
+			<div class="color-temp-input">
+				<SLInput
+					v-model.number="value.tempMin"
+					label="Min (in Kelvin)"
+					type="number"
+					placeholder="2700"
+				/>
+
+				<SLInput
+					v-model.number="value.tempMax"
+					label="Max (in Kelvin)"
+					type="number"
+					placeholder="6000"
+				/>
+			</div>
+		</fieldset>
 
 		<SLInput
 			v-model="tagString"
@@ -132,3 +150,16 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+.color-temp-input-group {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	.color-temp-input {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 1em;
+	}
+}
+</style>
