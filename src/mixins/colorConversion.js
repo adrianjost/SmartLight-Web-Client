@@ -1,10 +1,5 @@
 import { matrix, multiply, lusolve } from "mathjs";
 
-function componentToHex(color) {
-	var hex = color.toString(16);
-	return hex.length === 1 ? "0" + hex : hex;
-}
-
 export const hex2rgb = (hexColor) => {
 	// remove leading #
 	if (hexColor.length === 7 || hexColor.length === 4) {
@@ -27,6 +22,10 @@ export const hex2rgb = (hexColor) => {
 	return { r: r, g: g, b: b };
 };
 
+function componentToHex(color) {
+	var hex = color.toString(16);
+	return hex.length === 1 ? "0" + hex : hex;
+}
 export const rgb2hex = ({ r, g, b }) => {
 	return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 };
