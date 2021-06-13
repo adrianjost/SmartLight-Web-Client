@@ -98,7 +98,6 @@ export default {
 	watch: {
 		unit: {
 			handler(to) {
-				this.setActiveTab(to.state);
 				this.setTopNav();
 			},
 			deep: true,
@@ -110,7 +109,6 @@ export default {
 	async created() {
 		this.setTopNav();
 		this.setBottomNav();
-		this.setActiveTab(this.unit.state);
 		this.$eventHub.on("backAndReset", this.backAndReset);
 		// Load units initial state and preconnect
 		await this.$store.getters["units/load"](this.$route.params.id);
@@ -211,23 +209,13 @@ export default {
 				}),
 			});
 		},
-		setActiveTab(state) {
-			if (typeof state === "object") {
-				if (state.gradient) {
-					this.activeTab = "Gradient";
-				}
-				if (state.color) {
-					this.activeTab = "Color";
-				}
-			}
-		},
 		resetColor() {
 			return this.$store.dispatch("localAPI/sendState", {
 				unit: this.unit,
 				state: this.unit.state,
 			});
 		},
-		backAndReset(state) {
+		backAndReset() {
 			this.resetColor();
 			this.$eventHub.emit("go-back");
 		},
