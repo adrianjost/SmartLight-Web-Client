@@ -30,6 +30,10 @@ const WWCWChooseColor = () =>
 	import(
 		/* webpackChunkName: "wwcwChooseColor" */ "./components/wwcw/chooseColor"
 	);
+const WWCWCAutoConfig = () =>
+	import(
+		/* webpackChunkName: "wwcwChooseColor" */ "./components/wwcw/autoConfig"
+	);
 
 import TabNav from "@/components/TabNav";
 import SkeletonTabNav from "@/components/skeleton/TabNav";
@@ -46,6 +50,7 @@ const picker = {
 	},
 	WWCW: {
 		Color: WWCWChooseColor,
+		"Auto-Config": WWCWCAutoConfig,
 	},
 	Switch: {},
 };
@@ -81,7 +86,7 @@ export default {
 				case "Switch":
 					return [""];
 				case "WWCW":
-					return ["Color" /*, "Gradient" */];
+					return ["Color", "Auto-Config" /*, "Gradient" */];
 				default:
 					return ["Color" /*, "Gradient" */];
 			}
