@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<!-- TODO [$60c5fce2e1a8c6000839cbf3]: add chart preview of data -->
+		<!-- TODO [#627]: add chart preview of data -->
 		<div class="data-view custom-scrollbar">
 			<table>
 				<thead>
