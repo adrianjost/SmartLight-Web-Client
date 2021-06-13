@@ -30,7 +30,7 @@ export default {
 	name: "SLInput",
 	props: {
 		value: {
-			type: String,
+			type: [String, Number],
 			default: "",
 		},
 		label: {
