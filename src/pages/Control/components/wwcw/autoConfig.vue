@@ -12,6 +12,11 @@
 							:class="{
 								active: hour === hourPicker,
 							}"
+							@click="
+								() => {
+									hourPicker = hour;
+								}
+							"
 						>
 							{{ hour }}
 						</th>
@@ -26,6 +31,11 @@
 							:class="{
 								active: hour === hourPicker,
 							}"
+							@click="
+								() => {
+									hourPicker = hour;
+								}
+							"
 						>
 							{{ br }}
 						</td>
@@ -38,6 +48,11 @@
 							:class="{
 								active: hour === hourPicker,
 							}"
+							@click="
+								() => {
+									hourPicker = hour;
+								}
+							"
 						>
 							{{ temp }}
 						</td>
@@ -99,7 +114,7 @@ export default {
 	},
 	data() {
 		return {
-			hourPicker: 0,
+			hourPickerValue: 0,
 			brightnessMax: 255,
 			tempMax: 100,
 			hours: new Array(24).fill(0).map((a, i) => i),
@@ -107,14 +122,25 @@ export default {
 				brightness: [],
 				ratio: [],
 			},
+			saveTimeout: null,
 		};
 	},
 	computed: {
+		hourPicker: {
+			get() {
+				return this.hourPickerValue;
+			},
+			set(value) {
+				this.hapticStep();
+				this.hourPickerValue = value;
+			},
+		},
 		brightness: {
 			get() {
 				return this.data.brightness[this.hourPicker];
 			},
 			set(value) {
+				this.hapticStep();
 				this.$set(this.data.brightness, this.hourPicker, value);
 			},
 		},
@@ -123,6 +149,7 @@ export default {
 				return this.data.ratio[this.hourPicker];
 			},
 			set(value) {
+				this.hapticStep();
 				this.$set(this.data.ratio, this.hourPicker, value);
 			},
 		},
@@ -161,12 +188,49 @@ export default {
 		this.$eventHub.on("apply-auto-config", this.apply);
 	},
 	beforeDestroy() {
+		if (this.saveTimeout !== null) {
+			clearTimeout(this.saveTimeout);
+		}
 		this.$eventHub.off("apply-auto-config", this.apply);
 	},
 	methods: {
-		apply() {
+		async apply() {
 			// TODO - send new config to unit
+			const id = Math.round(Math.random() * 1000000);
+			try {
+				const connection = await this.$store.dispatch(
+					"localAPI/openConnection",
+					this.unit
+				);
+				const messageAcknowledged = new Promise((resolve, reject) => {
+					this.saveTimeout = setTimeout(reject, 5000);
+					connection.onmessage = (event) => {
+						const message = JSON.parse(event.data);
+						if (message.id === id && message.status === "OK") {
+							clearTimeout(this.saveTimeout);
+							resolve();
+						}
+					};
+				});
+				connection.send(
+					JSON.stringify({
+						action: "SET /settings/daylight",
+						id,
+						data: {
+							...this.data,
+						},
+					})
+				);
+				await messageAcknowledged;
+			} catch (error) {
+				console.error(error);
+				this.toastError("Failed to update unit.");
+				return;
+			}
 			this.toast("Updated Configuration");
+		},
+		hapticStep() {
+			window.navigator.vibrate(50);
 		},
 	},
 };
@@ -183,6 +247,7 @@ table {
 	border-collapse: collapse;
 
 	th[scope="row"] {
+		padding-right: 1em;
 		text-align: left;
 	}
 	tr > * {
@@ -197,5 +262,6 @@ table {
 label {
 	display: block;
 	margin: 32px 0;
+	text-align: left;
 }
 </style>
