@@ -109,7 +109,6 @@
 
 <script>
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js";
-import { hex2rgb, rgb2hex } from "@/mixins/colorConversion";
 import { throttle } from "throttle-debounce";
 
 export default {

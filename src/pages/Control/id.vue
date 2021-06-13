@@ -86,9 +86,9 @@ export default {
 				case "Switch":
 					return [""];
 				case "WWCW":
-					return ["Color", "Auto-Config" /*, "Gradient" */];
+					return ["Color", "Auto-Config"];
 				default:
-					return ["Color" /*, "Gradient" */];
+					return ["Color"];
 			}
 		},
 		activePicker() {
