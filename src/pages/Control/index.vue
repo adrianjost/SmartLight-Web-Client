@@ -21,13 +21,18 @@
 			/>
 			<RouterLink
 				v-if="!lamps.length"
-				v-ripple
+				v-slot="{ navigate }"
 				to="/settings/add/lamp"
-				tag="button"
-				class="button button-primary add-lamp"
+				custom
 			>
-				<i class="material-icons">add</i>
-				<span>Add Lamp</span>
+				<button
+					v-ripple
+					class="button button-primary add-lamp"
+					@click="navigate"
+				>
+					<i class="material-icons">add</i>
+					<span>Add Lamp</span>
+				</button>
 			</RouterLink>
 		</div>
 		<div style="flex: 1"></div>

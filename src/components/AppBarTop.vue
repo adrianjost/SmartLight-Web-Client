@@ -48,14 +48,15 @@
 				<RouterLink
 					v-if="action.to"
 					:key="action.to + action.icon"
-					v-ripple
-					tag="button"
+					v-slot="{ navigate }"
 					:to="action.to"
-					class="action"
+					custom
 				>
-					<i class="material-icons">
-						{{ action.icon }}
-					</i>
+					<button v-ripple class="action" @click="navigate">
+						<i class="material-icons">
+							{{ action.icon }}
+						</i>
+					</button>
 				</RouterLink>
 
 				<button
