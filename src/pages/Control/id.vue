@@ -111,6 +111,7 @@ export default {
 		this.setBottomNav();
 		this.$eventHub.on("backAndReset", this.backAndReset);
 		// Load units initial state and preconnect
+		this.activeTab = this.availablePicker[0];
 		await this.$store.getters["units/load"](this.$route.params.id);
 		if (this.unit.type === "LAMP") {
 			let unitInitialState = null;
