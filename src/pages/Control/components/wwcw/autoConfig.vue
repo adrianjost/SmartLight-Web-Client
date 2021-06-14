@@ -95,6 +95,13 @@
 			/>
 		</label>
 
+		<SLInput
+			v-model.number="data.utcOffset"
+			label="UTC Offset"
+			type="number"
+			placeholder="1"
+		/>
+
 		<button
 			v-ripple
 			type="button"
@@ -110,10 +117,13 @@
 <script>
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js";
 import { throttle } from "throttle-debounce";
+import Input from "@/components/picker/input";
 
 export default {
 	name: "ChooseColor",
-	components: {},
+	components: {
+		SLInput: Input,
+	},
 	mixins: [undoableStateDelete("savedWhites")],
 	props: {
 		unit: {
@@ -133,6 +143,7 @@ export default {
 			data: {
 				brightness: [],
 				ratio: [],
+				utcOffset: 0,
 			},
 			messageTimeout: null,
 			connection: null,
