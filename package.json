@@ -23,7 +23,7 @@
 		"@sentry/integrations": "^6.9.0",
 		"clipboard-polyfill": "^3.0.3",
 		"firebase": "^8.7.1",
-		"firebaseui": "^4.8.0",
+		"firebaseui": "^4.8.1",
 		"mathjs": "^9.4.4",
 		"portal-vue": "^2.1.7",
 		"rand-token": "^1.0.1",
