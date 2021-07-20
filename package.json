@@ -79,7 +79,7 @@
 		"stylelint-prettier": "^1.2.0",
 		"stylelint-selector-no-empty": "^1.0.8",
 		"stylelint-selector-tag-no-without-class": "^2.0.4",
-		"stylelint-webpack-plugin": "^3.0.0",
+		"stylelint-webpack-plugin": "^3.0.1",
 		"surge": "^0.23.0",
 		"vue-template-compiler": "^2.6.14"
 	},
