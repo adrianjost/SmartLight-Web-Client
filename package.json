@@ -41,7 +41,7 @@
 		"vue-toasted": "^1.1.28",
 		"vuex": "^3.6.2",
 		"vuex-easy-firestore": "^1.36.0",
-		"vuex-persistedstate": "^4.0.0"
+		"vuex-persistedstate": "^4.1.0"
 	},
 	"devDependencies": {
 		"@babel/plugin-proposal-optional-chaining": "^7.14.5",
