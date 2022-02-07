@@ -101,7 +101,7 @@ export default {
 					power: true,
 				});
 				this.unit.state.type = "AUTO";
-				// TODO: wait for state update from unit and apply to local state
+				// TODO [$6201337bf98c0a00093470a9]: wait for state update from unit and apply to local state
 				// implementation can be similar to the initial state fetch in id.vue
 				// It's then unnecessary to go back immediately.
 				this.$eventHub.emit("go-back");
