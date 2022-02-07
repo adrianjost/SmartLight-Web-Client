@@ -2,7 +2,7 @@
 	<section class="control">
 		<transition name="fade">
 			<div v-if="loading" key="skeleton" class="skeleton">
-				<SkeletonTabNav :tab-names="availablePicker" />
+				<SkeletonTabNav :tab-names="['...']" />
 				<SkeletonSavedStatePicker />
 				<SkeletonStatePicker />
 			</div>
@@ -21,11 +21,6 @@ const RGBChooseColor = () =>
 	import(
 		/* webpackChunkName: "rgbChooseColor" */ "./components/rgb/chooseColor"
 	);
-const RGBChooseGradient = () =>
-	import(
-		/* webpackChunkName: "rgbChooseGradient" */ "./components/rgb/chooseGradient"
-	);
-
 const WWCWChooseColor = () =>
 	import(
 		/* webpackChunkName: "wwcwChooseColor" */ "./components/wwcw/chooseColor"
@@ -46,7 +41,6 @@ import { scaleColor, hex2rgb, rgb2hex } from "@/mixins/colorConversion";
 const picker = {
 	RGB: {
 		Color: RGBChooseColor,
-		Gradient: RGBChooseGradient,
 	},
 	WWCW: {
 		Color: WWCWChooseColor,
@@ -59,7 +53,6 @@ export default {
 	name: "ControlDetail",
 	components: {
 		RGBChooseColor,
-		RGBChooseGradient,
 		WWCWChooseColor,
 		TabNav,
 		SkeletonTabNav,
@@ -87,8 +80,12 @@ export default {
 					return [""];
 				case "WWCW":
 					return ["Color", "Auto-Config"];
-				default:
+				case "RGB":
 					return ["Color"];
+				default:
+					throw new Error(
+						`unknown lamptype ${JSON.stringify(this.unit.lamptype)}`
+					);
 			}
 		},
 		activePicker() {
@@ -111,8 +108,8 @@ export default {
 		this.setBottomNav();
 		this.$eventHub.on("backAndReset", this.backAndReset);
 		// Load units initial state and preconnect
-		this.activeTab = this.availablePicker[0];
 		await this.$store.getters["units/load"](this.$route.params.id);
+		this.activeTab = this.availablePicker[0];
 		if (this.unit.type === "LAMP") {
 			let unitInitialState = null;
 			let connection;

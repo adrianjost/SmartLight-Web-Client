@@ -21,7 +21,6 @@ const defaultUnit = {
 	tags: "",
 	state: {
 		color: "#2ab5a2",
-		gradient: false,
 	},
 };
 const defaultLamp = {

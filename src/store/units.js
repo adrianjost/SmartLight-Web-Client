@@ -4,7 +4,6 @@ const unitPrototyp = {
 	icon: "",
 	state: {
 		color: "#ffffff",
-		gradient: false,
 	},
 };
 

@@ -35,28 +35,6 @@ export default {
 			if (lamp.state.color) {
 				background = getVisibleColor(lamp.lamptype, lamp.state.color);
 			}
-			if (lamp.state.gradient) {
-				if (linear) {
-					background = "linear-gradient(90deg,";
-				} else {
-					background = "conic-gradient(";
-				}
-				const maxTime =
-					lamp.state.gradient.transitionTimes[
-						lamp.state.gradient.transitionTimes.length - 1
-					];
-				lamp.state.gradient.colors
-					.map((c) => getVisibleColor(lamp.lamptype, c))
-					.forEach((color, index) => {
-						background += `${color} ${
-							(lamp.state.gradient.transitionTimes[index] / maxTime) * 100
-						}%`;
-						if (index < lamp.state.gradient.colors.length - 1) {
-							background += ", ";
-						}
-					});
-				background += `)`;
-			}
 			this.$set(lamp, "background", background);
 			return lamp;
 		},

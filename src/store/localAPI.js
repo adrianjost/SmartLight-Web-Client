@@ -191,34 +191,16 @@ const actions = {
 			})
 		);
 	},
-	sendGradient(store, { unit, gradient }) {
-		const lamps = store.getters.extractLampsFromUnit(unit);
-		return Promise.all(
-			lamps.map((lamp) => {
-				const colors = gradient.colors.map((hexColor) => {
-					return colorToChannel(lamp.channelMap, hex2rgb(hexColor));
-				});
-				return new Connection([lamp.ip, lamp.hostname]).send({
-					gradient: {
-						colors: colors,
-						loop: gradient.loop,
-						transitionTimes: gradient.transitionTimes,
-					},
-				});
-			})
-		);
-	},
 	sendState(store, options) {
 		const { unit, state } = options;
 		if (!state) {
 			console.warn("sendState: missing state");
 			return;
 		}
-		if (state.color) {
-			return store.dispatch("sendHexColor", { color: state.color, unit });
-		} else if (state.gradient) {
-			return store.dispatch("sendGradient", { gradient: state.gradient, unit });
+		if (state.color === undefined) {
+			throw new Error("no color to send");
 		}
+		return store.dispatch("sendHexColor", { color: state.color, unit });
 	},
 	openConnection(store, unit) {
 		return new Connection([unit.ip, unit.hostname]).getConnection();
