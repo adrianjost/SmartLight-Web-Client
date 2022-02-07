@@ -172,9 +172,21 @@ const actions = {
 		const lamps = store.getters.extractLampsFromUnit(unit);
 		return Promise.all(
 			lamps.map((lamp) => {
-				const channelValues = colorToChannel(lamp.channelMap, newColor);
+				const inverseChannelMap = Object.fromEntries(
+					Object.entries(lamp.channelMap).map(([key, value]) => [value, key])
+				);
+				const channelValues =
+					lamp.lamptype === "WWCW"
+						? [newColor[inverseChannelMap[1]], newColor[inverseChannelMap[2]]]
+						: [
+								newColor[inverseChannelMap[1]],
+								newColor[inverseChannelMap[2]],
+								newColor[inverseChannelMap[3]],
+						  ];
 				return new Connection([lamp.ip, lamp.hostname]).send({
-					color: channelValues,
+					action: "SET /output/channel",
+					id: 0,
+					data: channelValues,
 				});
 			})
 		);
