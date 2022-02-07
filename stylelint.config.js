@@ -1,4 +1,5 @@
 module.exports = {
+	customSyntax: "postcss-html",
 	extends: [
 		"stylelint-config-recommended",
 		"stylelint-8-point-grid", // https://github.com/dcrtantuco/stylelint-8-point-grid
@@ -21,25 +22,15 @@ module.exports = {
 		"value-no-vendor-prefix": true,
 		"color-hex-case": "lower",
 		"color-hex-length": "short", // https://youtu.be/Sd14d1t5vbQ?t=888
-		"function-comma-newline-after": "never-multi-line",
-		"function-comma-newline-before": "never-multi-line",
-		"function-comma-space-after": "always",
-		"function-comma-space-before": "never",
 		"function-name-case": "lower",
-		"number-leading-zero": "always",
-		"string-quotes": "double",
 		"length-zero-no-unit": true,
 		"unit-case": "lower",
 		"value-keyword-case": "lower",
-		"value-list-comma-newline-after": "always-multi-line",
-		"value-list-comma-newline-before": "never-multi-line",
-		"value-list-comma-space-after": "always-single-line",
 		"value-list-comma-space-before": "never",
 		"property-case": "lower",
 		// ...
 		"no-empty-source": null,
 		// ...
-		// "linebreaks": ["unix", { "severity": "warning" }], // FIX: autofix not working properly
 		"no-eol-whitespace": true,
 		"no-missing-end-of-source-newline": true,
 		"no-empty-first-line": true,
