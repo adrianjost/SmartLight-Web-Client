@@ -191,6 +191,18 @@ const actions = {
 			})
 		);
 	},
+	turnOn(store, { unit }) {
+		const lamps = store.getters.extractLampsFromUnit(unit);
+		return Promise.all(
+			lamps.map((lamp) => {
+				return new Connection([lamp.ip, lamp.hostname]).send({
+					id: 0,
+					action: "SET /output/power",
+					data: 1,
+				});
+			})
+		);
+	},
 	sendState(store, options) {
 		const { unit, state } = options;
 		if (!state) {

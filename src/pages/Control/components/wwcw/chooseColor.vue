@@ -49,7 +49,15 @@ export default {
 	},
 	computed: {
 		savedWhites() {
-			return this.$store.getters["savedStates/list-whitetones"];
+			return [
+				{
+					id: "STATE_AUTO",
+					icon: "power_settings_new",
+					background:
+						"conic-gradient(from 0deg at 50% 50%, #15120d,#15120d,#15120d,#322c1e, #99855c, #caedff, #caedff,#caedff, #ffdd99,#99855c, #322c1e, #15120d)",
+				},
+				...this.$store.getters["savedStates/list-whitetones"],
+			];
 		},
 		currentColor() {
 			const [a, b] = this.currentChannels;
@@ -87,6 +95,18 @@ export default {
 			return [rgb.r, rgb.b];
 		},
 		loadColor(id) {
+			if (id === "STATE_AUTO") {
+				this.$store.dispatch("localAPI/turnOn", {
+					unit: this.unit,
+					power: true,
+				});
+				this.unit.state.type = "AUTO";
+				// TODO: wait for state update from unit and apply to local state
+				// implementation can be similar to the initial state fetch in id.vue
+				// It's then unnecessary to go back immediately.
+				this.$eventHub.emit("go-back");
+				return;
+			}
 			this.currentChannels = this.savedWhites.find((state) => {
 				return state.id === id;
 			}).channels;

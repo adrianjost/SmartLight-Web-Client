@@ -11,6 +11,11 @@ export const undoableStateDelete = (listName) => {
 					return state.id === id;
 				};
 
+				if (this.states.find(identify) === undefined) {
+					this.toastError(`State is not deletable.`);
+					return;
+				}
+
 				window.navigator.vibrate(50);
 				const deletedState = {
 					index: this.states.findIndex(identify),

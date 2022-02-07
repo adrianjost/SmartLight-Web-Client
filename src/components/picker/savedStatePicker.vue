@@ -8,7 +8,11 @@
 				class="state"
 				@click="sendEvent(event, state.id)"
 				@contextmenu.prevent="sendEvent(contextEvent, state.id)"
-			/>
+			>
+				<template v-if="state.icon">
+					<i class="material-icons">{{ state.icon }}</i>
+				</template>
+			</li>
 
 			<li class="state add" @click="sendEvent(addEvent)">
 				<i class="material-icons">add</i>
@@ -82,14 +86,18 @@ export default {
 		margin-right: 0;
 	}
 
+	.material-icons {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		text-shadow: var(--color-text-active) 0 0 4px;
+		transform: translate(-50%, -50%);
+	}
+
 	&.add {
 		border-width: 2px;
-
 		.material-icons {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+			text-shadow: none;
 		}
 	}
 }

@@ -60,7 +60,9 @@ export default {
 		SkeletonSavedStatePicker,
 	},
 	async beforeRouteLeave(to, from, next) {
-		await this.resetColor();
+		if (this.unit.state.type !== "AUTO") {
+			await this.resetColor();
+		}
 		await this.$store.dispatch("localAPI/closeConnection", this.unit);
 		next();
 	},
