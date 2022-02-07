@@ -35,11 +35,10 @@ class Connection {
 			return;
 		}
 		clearTimeout(activeConnection.timeout);
-		Connection.connections[
-			activeConnection.address
-		].timeout = window.setInterval(() => {
-			this.close([activeConnection.address]);
-		}, ACTIVE_TIMEOUT);
+		Connection.connections[activeConnection.address].timeout =
+			window.setInterval(() => {
+				this.close([activeConnection.address]);
+			}, ACTIVE_TIMEOUT);
 	}
 
 	async open() {

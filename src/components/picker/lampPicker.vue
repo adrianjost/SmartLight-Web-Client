@@ -83,6 +83,7 @@ export default {
 		font-size: 16px;
 		font-style: normal;
 		font-weight: normal;
+		-webkit-font-feature-settings: "liga";
 		line-height: 1;
 		color: #fff;
 		text-transform: none;
@@ -95,7 +96,6 @@ export default {
 		opacity: 0;
 		transition: opacity 0.15s ease-in-out 0s;
 		direction: ltr;
-		-webkit-font-feature-settings: "liga";
 		-webkit-font-smoothing: antialiased;
 	}
 

@@ -215,9 +215,8 @@ export default {
 
 			this.$options.animation.animationFrame = window.requestAnimationFrame(
 				() => {
-					this.markers[
-						this.$options.animation.index
-					].position = this.getRelativeEventPosition(event);
+					this.markers[this.$options.animation.index].position =
+						this.getRelativeEventPosition(event);
 					this.$options.animation.animationFrame = undefined;
 				}
 			);
