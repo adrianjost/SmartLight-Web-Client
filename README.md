@@ -75,7 +75,7 @@ $index: {
 
   state: { // only one child at a time allowed
     color: String, // #aabbcc
-    gradient: StateObject
+    type: String // ["OFF", "MANUAL", "AUTO"]
   }
 }
 ```
@@ -109,7 +109,7 @@ $index: {
 $index: {
   created_by: userId,
   //allowedUsers: [userId, ...],
-  type: ENUM["COLOR", "GRADIENT"],
+  type: ENUM["COLOR"],
 }
 ```
 
@@ -119,16 +119,5 @@ $index: {
 {
   ...,
   color: String // Hex color with 6 digits + `#` Symbol (e.g. `#ab98cd`)
-}
-```
-
-##### GradientObject
-
-```js
-{
-  ...,
-  colors: [String, ...], // [#aabbcc, ...]
-  transitionTimes: [0, 3, 4, 10], // [#aabbcc, ...]
-  loop: true
 }
 ```
