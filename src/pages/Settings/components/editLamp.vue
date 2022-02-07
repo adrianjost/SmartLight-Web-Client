@@ -62,7 +62,7 @@
 			type="text"
 			placeholder="Mixer, Oven, ..."
 		>
-			<template slot="hint">
+			<template #hint>
 				seperated by
 				<code>,</code>
 			</template>
