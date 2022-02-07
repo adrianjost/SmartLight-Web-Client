@@ -15,7 +15,6 @@
 				'padding-bottom': bottomNavState.visible ? '100px' : '0',
 			}"
 		>
-			<BrowserWarning />
 			<RouterView v-if="isInitialized" />
 		</main>
 		<BottomNavigation
@@ -30,14 +29,12 @@
 <script>
 import BottomNavigation from "@/components/BottomNavigation.vue";
 import AppBarTop from "@/components/AppBarTop.vue";
-import BrowserWarning from "@/components/BrowserWarning.vue";
 
 export default {
 	name: "App",
 	components: {
 		AppBarTop,
 		BottomNavigation,
-		BrowserWarning,
 	},
 	data() {
 		return {
