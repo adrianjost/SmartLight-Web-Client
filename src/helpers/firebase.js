@@ -9,7 +9,7 @@ import { config } from "./firebaseConfig";
 export const firebaseApp = initializeApp(config);
 const db = getFirestore(firebaseApp);
 
-// TODO: enable performance monitoring
+// TODO [$620295039df3610009f66d5a]: enable performance monitoring
 // import { getPerformance } from "firebase/performance";
 // const perf = getPerformance(app);
 
