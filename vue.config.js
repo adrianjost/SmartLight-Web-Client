@@ -11,6 +11,9 @@ module.exports = {
 			appleTouchIcon: "img/logo/SmartLight-152.png",
 			msTileImage: "img/logo/SmartLight-142.png",
 		},
+		workboxOptions: {
+			exclude: [".htaccess", "CNAME", "robots.txt"],
+		},
 	},
 
 	publicPath: undefined,
