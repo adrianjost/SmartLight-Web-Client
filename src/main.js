@@ -12,7 +12,7 @@ app.config.globalProperties.$eventHub = new Emitter(); // Global event bus
 app.use(router);
 app.use(store);
 
-// TODO: update to Vue3
+// TODO [$620286cf5149d1000864e541]: update to Vue3
 // import pkg from "../package.json";
 // import * as Sentry from "@sentry/browser";
 // import * as Integrations from "@sentry/integrations";
