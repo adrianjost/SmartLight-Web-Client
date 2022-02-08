@@ -1,3 +1,46 @@
+diff --git a/node_modules/vue-toasted/dist/vue-toasted.js b/node_modules/vue-toasted/dist/vue-toasted.js
+index 28d2061..65d3d1d 100644
+--- a/node_modules/vue-toasted/dist/vue-toasted.js
++++ b/node_modules/vue-toasted/dist/vue-toasted.js
+@@ -665,8 +665,10 @@ var Toasted = {
+         }
+ 
+         var Toast = new __WEBPACK_IMPORTED_MODULE_0__js_toast__["a" /* Toasted */](options);
+-        Vue.component('toasted', __WEBPACK_IMPORTED_MODULE_1__toast_vue___default.a);
+-        Vue.toasted = Vue.prototype.$toasted = Toast;
++        return {
++            component: __WEBPACK_IMPORTED_MODULE_1__toast_vue___default.a,
++            global: Toast
++        };
+     }
+ };
+ 
+@@ -800,10 +802,10 @@ var parseOptions = function parseOptions(options) {
+ 	options.onComplete = options.onComplete || null;
+ 
+ 	// toast position
+-	options.position = options.position || "top-right";
++	options.position = options.position || "bottom-right";
+ 
+ 	// toast duration
+-	options.duration = options.duration || null;
++	options.duration = options.duration || 5000;
+ 
+ 	// keep toast open on mouse over
+ 	options.keepOnHover = options.keepOnHover || false;
+diff --git a/node_modules/vue-toasted/package.json b/node_modules/vue-toasted/package.json
+index 4cd5760..6419bb3 100644
+--- a/node_modules/vue-toasted/package.json
++++ b/node_modules/vue-toasted/package.json
+@@ -8,7 +8,7 @@
+     "type": "git",
+     "url": "https://github.com/shakee93/vue-toasted.git"
+   },
+-  "main": "./dist/vue-toasted.min.js",
++  "main": "./dist/vue-toasted.js",
+   "types": "./types/index.d.ts",
+   "scripts": {
+     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
 diff --git a/node_modules/vue-toasted/postcss.config.js b/node_modules/vue-toasted/postcss.config.js
 deleted file mode 100644
 index ccc98cd..0000000

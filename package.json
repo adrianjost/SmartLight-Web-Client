@@ -15,6 +15,7 @@
 		"lint:all:prettier": "npm run lint:prettier -- \"**/*.{js,json,css,scss,vue,html}\"",
 		"lint": "run-s lint:all:*",
 		"lint:ci": "run-s lint:all:*",
+		"prepare": "patch-package",
 		"postinstall": "patch-package"
 	},
 	"dependencies": {
