@@ -214,7 +214,7 @@ export default {
 		this.$eventHub.on("apply-auto-config", this.apply);
 		await this.previewActiveHour();
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		if (this.messageTimeout !== null) {
 			clearTimeout(this.messageTimeout);
 		}

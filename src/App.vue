@@ -71,7 +71,7 @@ export default {
 		});
 		this.$eventHub.on("go-back", this.goBack);
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.$eventHub.off("logout");
 		this.$eventHub.off("go-back", this.goBack);
 	},
@@ -112,6 +112,7 @@ export default {
 </script>
 <style lang="scss">
 @import "./styles/base";
+@import "~vue-toasted/dist/vue-toasted.min.css";
 
 main.container {
 	display: flex;

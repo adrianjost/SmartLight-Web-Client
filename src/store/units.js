@@ -53,12 +53,14 @@ const getters = {
 const actions = {
 	async setState(store, { id, data }) {
 		const unit = store.state.data[id];
-		if (typeof unit.state === "object") {
-			Object.keys(unit.state).forEach((key) => {
-				unit.state[key] = false;
-			});
+		unit.state = {
+			...unit.state,
+			...data,
+		};
+
+		if (unit.state.type !== "AUTO") {
+			unit.state.type = unit.state.color === "#000000" ? "OFF" : "MANUAL";
 		}
-		unit.state = { ...unit.state, ...data };
 		store.dispatch("set", unit);
 	},
 };

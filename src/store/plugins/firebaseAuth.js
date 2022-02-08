@@ -1,7 +1,7 @@
 import { FAuth } from "@/helpers/firebase";
-
+import { onAuthStateChanged } from "firebase/auth";
 export default (store) => {
-	FAuth.onAuthStateChanged((user) => {
+	onAuthStateChanged(FAuth, (user) => {
 		if (user) {
 			store.dispatch("auth/login", user);
 		} else {

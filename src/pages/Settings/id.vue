@@ -7,11 +7,14 @@
 
 <script>
 import * as clipboard from "clipboard-polyfill/text";
+import { reactive, defineAsyncComponent } from "vue";
 
-const EditLamp = () =>
-	import(/* webpackChunkName: "editLamp" */ "./components/editLamp");
-const EditGroup = () =>
-	import(/* webpackChunkName: "editGroup" */ "./components/editGroup");
+const EditLamp = defineAsyncComponent(() =>
+	import(/* webpackChunkName: "editLamp" */ "./components/editLamp")
+);
+const EditGroup = defineAsyncComponent(() =>
+	import(/* webpackChunkName: "editGroup" */ "./components/editGroup")
+);
 
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
 
@@ -21,21 +24,24 @@ const defaultUnit = {
 	tags: "",
 	state: {
 		color: "#2ab5a2",
+		type: "MANUAL",
 	},
 };
-const defaultLamp = {
-	...defaultUnit,
-	type: "LAMP",
-	ip: "",
-	hostname: "",
-	lamptype: "RGB",
-	channelMap: { r: 1, g: 2, b: 3 },
-};
-const defaultGroup = {
-	...defaultUnit,
-	type: "GROUP",
-	lamps: [],
-};
+const defaultLamp = () =>
+	reactive({
+		...defaultUnit,
+		type: "LAMP",
+		ip: "",
+		hostname: "",
+		lamptype: "RGB",
+		channelMap: { r: 1, g: 2, b: 3 },
+	});
+const defaultGroup = () =>
+	reactive({
+		...defaultUnit,
+		type: "GROUP",
+		lamps: [],
+	});
 
 export default {
 	name: "SettingsDetail",
@@ -112,10 +118,10 @@ export default {
 		if (!this.unit.type && this.$route.params.type) {
 			const type = this.$route.params.type.toUpperCase();
 			if (type === "LAMP") {
-				this.unit = JSON.parse(JSON.stringify(defaultLamp));
+				this.unit = defaultLamp();
 			}
 			if (type === "GROUP") {
-				this.unit = JSON.parse(JSON.stringify(defaultGroup));
+				this.unit = defaultGroup();
 			}
 		}
 		this.$store.commit("ui/set", {
@@ -141,7 +147,7 @@ export default {
 		this.$eventHub.on("share", this.share);
 		this.$eventHub.on("delete", this.delete);
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.$eventHub.off("apply", this.apply);
 		this.$eventHub.off("share", this.share);
 		this.$eventHub.off("delete", this.delete);

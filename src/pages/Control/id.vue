@@ -17,18 +17,23 @@
 </template>
 
 <script>
-const RGBChooseColor = () =>
+import { defineAsyncComponent } from "vue";
+
+const RGBChooseColor = defineAsyncComponent(() =>
 	import(
 		/* webpackChunkName: "rgbChooseColor" */ "./components/rgb/chooseColor"
-	);
-const WWCWChooseColor = () =>
+	)
+);
+const WWCWChooseColor = defineAsyncComponent(() =>
 	import(
 		/* webpackChunkName: "wwcwChooseColor" */ "./components/wwcw/chooseColor"
-	);
-const WWCWCAutoConfig = () =>
+	)
+);
+const WWCWCAutoConfig = defineAsyncComponent(() =>
 	import(
 		/* webpackChunkName: "wwcwChooseColor" */ "./components/wwcw/autoConfig"
-	);
+	)
+);
 
 import TabNav from "@/components/TabNav";
 import SkeletonTabNav from "@/components/skeleton/TabNav";
@@ -173,7 +178,7 @@ export default {
 		}
 		this.loading = false;
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.$eventHub.off("backAndReset", this.backAndReset);
 	},
 	methods: {

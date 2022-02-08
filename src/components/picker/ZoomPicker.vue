@@ -13,7 +13,7 @@
 <script>
 export default {
 	props: {
-		value: {
+		modelValue: {
 			type: Number,
 			required: true,
 		},
@@ -32,18 +32,18 @@ export default {
 	},
 	methods: {
 		increment() {
-			const nextVal = this.value + this.step;
+			const nextVal = this.modelValue + this.step;
 			if (nextVal > this.max) {
 				return this.$emit("error", "maxreached", nextVal);
 			}
-			this.$emit("input", nextVal);
+			this.$emit("update:modelValue", nextVal);
 		},
 		decrement() {
-			const nextVal = this.value - this.step;
+			const nextVal = this.modelValue - this.step;
 			if (nextVal < this.min) {
 				return this.$emit("error", "maxreached", nextVal);
 			}
-			this.$emit("input", nextVal);
+			this.$emit("update:modelValue", nextVal);
 		},
 	},
 };

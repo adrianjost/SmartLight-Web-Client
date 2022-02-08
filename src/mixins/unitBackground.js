@@ -35,7 +35,7 @@ export default {
 			if (lamp.state.color) {
 				background = getVisibleColor(lamp.lamptype, lamp.state.color);
 			}
-			this.$set(lamp, "background", background);
+			lamp.background = background;
 			return lamp;
 		},
 	},

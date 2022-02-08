@@ -8,7 +8,7 @@ import iro from "@jaames/iro";
 export default {
 	name: "IroColorPicker",
 	props: {
-		value: {
+		modelValue: {
 			type: String,
 			required: true,
 		},
@@ -26,7 +26,7 @@ export default {
 	colorPicker: undefined,
 	isMounted: false,
 	watch: {
-		value: function (to) {
+		modelValue: function (to) {
 			if (!to || to.length !== 7) {
 				return;
 			}
@@ -71,7 +71,7 @@ export default {
 			}
 		},
 		emitColor(color) {
-			this.$emit("input", color.hexString);
+			this.$emit("update:modelValue", color.hexString);
 		},
 	},
 };

@@ -1,9 +1,9 @@
 <template>
 	<form>
-		<h2>Edit Group "{{ value.name }}"</h2>
+		<h2>Edit Group "{{ modelValue.name }}"</h2>
 
 		<SLInput
-			v-model="value.name"
+			v-model="modelValue.name"
 			label="Name"
 			type="text"
 			placeholder="Kitchen"
@@ -22,16 +22,16 @@
 		</SLInput>
 
 		<SLSelect
-			v-model="value.lamptype"
+			v-model="modelValue.lamptype"
 			label="Color Picker Type"
 			placeholder="RGB"
 			:options="availableLampTypes"
 		/>
 
 		<b>Lamps:</b>
-		<LampPicker v-model="value.lamps" :lamps="lamps" />
+		<LampPicker v-model="modelValue.lamps" :lamps="lamps" />
 
-		<IconPicker v-model="value.icon" />
+		<IconPicker v-model="modelValue.icon" />
 	</form>
 </template>
 
@@ -50,7 +50,7 @@ export default {
 		IconPicker,
 	},
 	props: {
-		value: {
+		modelValue: {
 			type: Object,
 			required: true,
 		},
@@ -66,12 +66,12 @@ export default {
 		},
 		tagString: {
 			get() {
-				return Array.isArray(this.value.tags)
-					? this.value.tags.join(", ")
-					: this.value.tags;
+				return Array.isArray(this.modelValue.tags)
+					? this.modelValue.tags.join(", ")
+					: this.modelValue.tags;
 			},
 			set(to) {
-				this.value.tags = to
+				this.modelValue.tags = to
 					.split(",")
 					.map((item) => item.trim())
 					.filter((item) => item);

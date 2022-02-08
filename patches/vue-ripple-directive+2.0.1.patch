@@ -1,0 +1,11 @@
+diff --git a/node_modules/vue-ripple-directive/src/ripple.js b/node_modules/vue-ripple-directive/src/ripple.js
+index 55179c0..faf06db 100644
+--- a/node_modules/vue-ripple-directive/src/ripple.js
++++ b/node_modules/vue-ripple-directive/src/ripple.js
+@@ -1,5 +1,5 @@
+ var Ripple = {
+-    bind: function(el, binding){
++    beforeMount: function(el, binding){
+ 
+         // Default values.
+         var props = {

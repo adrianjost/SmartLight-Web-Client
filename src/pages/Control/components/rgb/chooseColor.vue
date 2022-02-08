@@ -75,7 +75,7 @@ export default {
 			this.currentColor = this.unit.state.color;
 		}
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.$eventHub.off("apply-color", this.apply);
 	},
 	methods: {

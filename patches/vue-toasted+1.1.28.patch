@@ -1,0 +1,30 @@
+diff --git a/node_modules/vue-toasted/dist/vue-toasted.js b/node_modules/vue-toasted/dist/vue-toasted.js
+index 28d2061..18d251e 100644
+--- a/node_modules/vue-toasted/dist/vue-toasted.js
++++ b/node_modules/vue-toasted/dist/vue-toasted.js
+@@ -665,8 +665,10 @@ var Toasted = {
+         }
+ 
+         var Toast = new __WEBPACK_IMPORTED_MODULE_0__js_toast__["a" /* Toasted */](options);
+-        Vue.component('toasted', __WEBPACK_IMPORTED_MODULE_1__toast_vue___default.a);
+-        Vue.toasted = Vue.prototype.$toasted = Toast;
++        return {
++            component: __WEBPACK_IMPORTED_MODULE_1__toast_vue___default.a,
++            global: Toast
++        };
+     }
+ };
+ 
+@@ -800,10 +802,10 @@ var parseOptions = function parseOptions(options) {
+ 	options.onComplete = options.onComplete || null;
+ 
+ 	// toast position
+-	options.position = options.position || "top-right";
++	options.position = options.position || "bottom-right";
+ 
+ 	// toast duration
+-	options.duration = options.duration || null;
++	options.duration = options.duration || 5000;
+ 
+ 	// keep toast open on mouse over
+ 	options.keepOnHover = options.keepOnHover || false;

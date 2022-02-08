@@ -90,10 +90,13 @@
 // import hub from "@/mixins/hub.js";
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
 import * as clipboard from "clipboard-polyfill/text";
-const AccountSettings = () =>
+import { defineAsyncComponent } from "vue";
+
+const AccountSettings = defineAsyncComponent(() =>
 	import(
 		/* webpackChunkName: "accountSettings" */ "./components/accountSettings"
-	);
+	)
+);
 
 export default {
 	components: { AccountSettings },

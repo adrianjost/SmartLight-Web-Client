@@ -7,7 +7,12 @@
 </template>
 
 <script>
-import { firebase, FAuth } from "@/helpers/firebase";
+import { FAuth } from "@/helpers/firebase";
+import {
+	GoogleAuthProvider,
+	EmailAuthProvider,
+	GithubAuthProvider,
+} from "firebase/auth";
 
 import * as firebaseui from "firebaseui";
 let loginUi;
@@ -33,9 +38,9 @@ export default {
 		const uiConfig = {
 			signInSuccessUrl: this.$route.query.redirect || "/",
 			signInOptions: [
-				firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-				firebase.auth.EmailAuthProvider.PROVIDER_ID,
-				firebase.auth.GithubAuthProvider.PROVIDER_ID,
+				GoogleAuthProvider.PROVIDER_ID,
+				EmailAuthProvider.PROVIDER_ID,
+				GithubAuthProvider.PROVIDER_ID,
 				firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID,
 			],
 		};

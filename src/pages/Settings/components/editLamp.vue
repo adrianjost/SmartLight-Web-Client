@@ -1,54 +1,57 @@
 <template>
 	<form>
-		<h2>Edit Lamp "{{ value.name }}"</h2>
+		<h2>Edit Lamp "{{ modelValue.name }}"</h2>
 
 		<SLInput
-			v-model="value.name"
+			v-model="modelValue.name"
 			label="Name"
 			type="text"
 			placeholder="Kitchen"
 		/>
 
 		<SLInput
-			v-model="value.hostname"
+			v-model="modelValue.hostname"
 			label="Hostname"
 			type="text"
 			placeholder="smartlight-kitchen"
 		/>
 
 		<SLInput
-			v-model="value.ip"
+			v-model="modelValue.ip"
 			label="IP"
 			type="url"
 			placeholder="192.168.2.123"
 		/>
 
 		<SLSelect
-			v-model="value.lamptype"
+			v-model="modelValue.lamptype"
 			label="LED Type"
 			placeholder="NeoPixel"
 			:options="availableLampTypes"
 		/>
 
 		<SLSelect
-			v-model="value.channelMap"
+			v-model="modelValue.channelMap"
 			label="Channel Mapping"
 			placeholder="RGB"
 			:options="availableChannelMappings"
 		/>
 
-		<fieldset v-if="value.lamptype === 'WWCW'" class="color-temp-input-group">
+		<fieldset
+			v-if="modelValue.lamptype === 'WWCW'"
+			class="color-temp-input-group"
+		>
 			<legend>Color Temperature</legend>
 			<div class="color-temp-input">
 				<SLInput
-					v-model.number="value.tempMin"
+					v-model.number="modelValue.tempMin"
 					label="Min (in Kelvin)"
 					type="number"
 					placeholder="2700"
 				/>
 
 				<SLInput
-					v-model.number="value.tempMax"
+					v-model.number="modelValue.tempMax"
 					label="Max (in Kelvin)"
 					type="number"
 					placeholder="6000"
@@ -68,7 +71,7 @@
 			</template>
 		</SLInput>
 
-		<IconPicker v-model="value.icon" />
+		<IconPicker v-model="modelValue.icon" />
 	</form>
 </template>
 
@@ -85,7 +88,7 @@ export default {
 		IconPicker,
 	},
 	props: {
-		value: {
+		modelValue: {
 			type: Object,
 			required: true,
 		},
@@ -126,7 +129,7 @@ export default {
 				Switch: Switch,
 			};
 			return (
-				lampTypes[this.value.lamptype] || [
+				lampTypes[this.modelValue.lamptype] || [
 					{
 						label: "Please Select the Type first",
 						disabled: true,
@@ -136,12 +139,12 @@ export default {
 		},
 		tagString: {
 			get() {
-				return Array.isArray(this.value.tags)
-					? this.value.tags.join(", ")
-					: this.value.tags;
+				return Array.isArray(this.modelValue.tags)
+					? this.modelValue.tags.join(", ")
+					: this.modelValue.tags;
 			},
 			set(to) {
-				this.value.tags = to
+				this.modelValue.tags = to
 					.split(",")
 					.map((item) => item.trim())
 					.filter((item) => item);

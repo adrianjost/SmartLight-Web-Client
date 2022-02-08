@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<div class="inputs">
-			<div class="icon current" @click="query = value">
+			<div class="icon current" @click="query = modelValue">
 				<i class="material-icons">
-					{{ value }}
+					{{ modelValue }}
 				</i>
 			</div>
 			<SLInput
@@ -11,7 +11,7 @@
 				class="search"
 				label="Search for Icon"
 				type="text"
-				:placeholder="value"
+				:placeholder="modelValue"
 			/>
 		</div>
 
@@ -19,7 +19,7 @@
 			<li
 				v-for="icon of filteredIcons"
 				:key="icon"
-				:class="{ icon: true, selected: value === icon }"
+				:class="{ icon: true, selected: modelValue === icon }"
 				@click="check(icon)"
 			>
 				<i class="material-icons">
@@ -41,7 +41,7 @@ export default {
 		SLInput: Input,
 	},
 	props: {
-		value: {
+		modelValue: {
 			type: String,
 			default: "",
 		},
@@ -63,7 +63,7 @@ export default {
 	},
 	methods: {
 		check(iconName) {
-			this.$emit("input", iconName);
+			this.$emit("update:modelValue", iconName);
 		},
 	},
 };

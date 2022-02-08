@@ -21,7 +21,7 @@
 
 <script>
 import SavedStatePicker from "@/components/picker/savedStatePicker";
-import WhiteTonePicker from "@adrianjost/two-channel-picker";
+import WhiteTonePicker from "@adrianjost/two-channel-picker/dist/vue/TwoChannelPicker.umd.min.js";
 
 import { undoableStateDelete } from "@/mixins/undoableStateDelete.js";
 import { hex2rgb, rgb2hex } from "@/mixins/colorConversion";
@@ -83,7 +83,7 @@ export default {
 			this.currentChannels = this.extractWhiteChannels(this.unit.state.color);
 		}
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.$eventHub.off("apply-color", this.apply);
 	},
 	methods: {
