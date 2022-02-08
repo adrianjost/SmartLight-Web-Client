@@ -45,5 +45,6 @@ module.exports = {
 			},
 		],
 		"vue/no-mutating-props": "off", // TODO: fix and enable no-mutating-props rule
+		"vue/multi-word-component-names": "off",
 	},
 };
