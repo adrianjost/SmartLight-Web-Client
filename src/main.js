@@ -13,22 +13,24 @@ app.use(router);
 app.use(store);
 
 import pkg from "../package.json";
-import * as Sentry from "@sentry/vue";
+import { init as initSentry } from "@sentry/vue";
 import { BrowserTracing } from "@sentry/tracing";
 
-Sentry.init({
-	app,
-	dsn: process.env.VUE_APP_SENTRY_DSN,
-	environment: process.env.NODE_ENV,
-	release: pkg.version,
-	integrations: [
-		new BrowserTracing({
-			routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-			tracingOrigins: ["app.smart-light.ga"],
-		}),
-	],
-	tracesSampleRate: 1.0,
-});
+if (process.env.VUE_APP_SENTRY_DSN) {
+	initSentry({
+		app,
+		dsn: process.env.VUE_APP_SENTRY_DSN,
+		environment: process.env.NODE_ENV,
+		release: pkg.version,
+		integrations: [
+			new BrowserTracing({
+				tracingOrigins: ["localhost", "app.smart-light.ga"],
+			}),
+		],
+		tracesSampleRate: 1.0,
+		logErrors: true,
+	});
+}
 
 import Toasted from "vue-toasted";
 const toastedInstance = Toasted.install({
