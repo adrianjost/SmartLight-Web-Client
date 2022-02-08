@@ -15,6 +15,7 @@ app.use(store);
 import pkg from "../package.json";
 import { init as initSentry } from "@sentry/vue";
 import { BrowserTracing } from "@sentry/tracing";
+import { CaptureConsole as CaptureConsoleIntegration } from "@sentry/integrations";
 
 if (process.env.VUE_APP_SENTRY_DSN) {
 	initSentry({
@@ -25,6 +26,9 @@ if (process.env.VUE_APP_SENTRY_DSN) {
 		integrations: [
 			new BrowserTracing({
 				tracingOrigins: ["localhost", "app.smart-light.ga"],
+			}),
+			new CaptureConsoleIntegration({
+				levels: ["warn", "error", "debug", "assert"],
 			}),
 		],
 		tracesSampleRate: 1.0,
