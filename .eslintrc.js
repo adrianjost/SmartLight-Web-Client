@@ -3,7 +3,9 @@ module.exports = {
 	env: {
 		node: true,
 	},
+	parser: "vue-eslint-parser",
 	parserOptions: {
+		parser: "@babel/eslint-parser",
 		sourceType: "module",
 	},
 	extends: [
@@ -43,8 +45,5 @@ module.exports = {
 			},
 		],
 		"vue/no-mutating-props": "off", // TODO: fix and enable no-mutating-props rule
-	},
-	parserOptions: {
-		parser: "babel-eslint",
 	},
 };

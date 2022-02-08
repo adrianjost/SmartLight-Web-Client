@@ -13,24 +13,23 @@ app.use(router);
 app.use(store);
 
 // TODO [#822]: update to Vue3
-// import pkg from "../package.json";
-// import * as Sentry from "@sentry/browser";
-// import * as Integrations from "@sentry/integrations";
-// if (process.env.VUE_APP_SENTRY_DSN) {
-// 	Sentry.init({
-// 		dsn: process.env.VUE_APP_SENTRY_DSN,
-// 		environment: process.env.NODE_ENV,
-// 		release: pkg.version,
-// 		integrations: [
-// 			new Integrations.Vue({ Vue, attachProps: true }),
-// 			/*
-// 			new Integrations.CaptureConsole({
-// 				levels: ["warn", "error", "debug", "assert"],
-// 			}),
-// 			*/
-// 		],
-// 	});
-// }
+import pkg from "../package.json";
+import * as Sentry from "@sentry/vue";
+import { BrowserTracing } from "@sentry/tracing";
+
+Sentry.init({
+	app,
+	dsn: process.env.VUE_APP_SENTRY_DSN,
+	environment: process.env.NODE_ENV,
+	release: pkg.version,
+	integrations: [
+		new BrowserTracing({
+			routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+			tracingOrigins: ["app.smart-light.ga"],
+		}),
+	],
+	tracesSampleRate: 1.0,
+});
 
 import Toasted from "vue-toasted";
 const toastedInstance = Toasted.install({
