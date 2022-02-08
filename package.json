@@ -22,7 +22,7 @@
 		"@sentry/browser": "^6.17.4",
 		"@sentry/integrations": "^6.17.5",
 		"clipboard-polyfill": "^3.0.3",
-		"firebase": "^8.10.1",
+		"firebase": "^9.6.6",
 		"firebaseui": "^5.0.0",
 		"mathjs": "^10.1.1",
 		"register-service-worker": "^1.7.2",
@@ -33,7 +33,7 @@
 		"vue-router": "^3.5.3",
 		"vue-toasted": "^1.1.28",
 		"vuex": "^3.6.2",
-		"vuex-easy-firestore": "^1.36.0",
+		"vuex-easy-firestore": "^1.37.0",
 		"vuex-persistedstate": "^4.1.0"
 	},
 	"devDependencies": {
