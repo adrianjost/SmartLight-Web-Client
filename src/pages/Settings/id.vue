@@ -158,7 +158,7 @@ export default {
 			this.$eventHub.emit("go-back");
 		},
 		async delete() {
-			this.$store.dispatch("units/delete", this.unit.id); // Do not await delete
+			this.$store.dispatch("units/deleteUnit", this.unit); // Do not await delete for fast UI response
 			this.$eventHub.emit("go-back");
 		},
 		async share() {

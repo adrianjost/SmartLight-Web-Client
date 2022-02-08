@@ -63,6 +63,19 @@ const actions = {
 		}
 		store.dispatch("set", unit);
 	},
+	async deleteUnit(store, unit) {
+		const updates = [store.dispatch("delete", unit.id)];
+		if (unit.type === "LAMP") {
+			const groupUpdates = store.getters["list-groups"]
+				.filter((group) => group.lamps.includes(unit.id))
+				.map((group) => {
+					group.lamps = group.lamps.filter((lamp) => lamp !== unit.id);
+					return store.dispatch("set", group);
+				});
+			updates.push(...groupUpdates);
+		}
+		await Promise.all(updates);
+	},
 };
 
 const where = [
