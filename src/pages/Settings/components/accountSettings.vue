@@ -48,7 +48,12 @@
 
 <script>
 import Input from "@/components/picker/input";
-import { firebase, FAuth } from "@/helpers/firebase";
+import { FAuth } from "@/helpers/firebase";
+import {
+	EmailAuthProvider,
+	GoogleAuthProvider,
+	GithubAuthProvider,
+} from "firebase/auth";
 
 export default {
 	components: {
@@ -74,10 +79,10 @@ export default {
 		currentSSOProvider() {
 			for (const providerID of this.currentAuthProviders) {
 				if (providerID === "google.com") {
-					return firebase.auth.GoogleAuthProvider;
+					return GoogleAuthProvider;
 				}
 				if (providerID === "github.com") {
-					return firebase.auth.GithubAuthProvider;
+					return GithubAuthProvider;
 				}
 			}
 			return null;
@@ -132,7 +137,7 @@ export default {
 			}
 		},
 		async createPassword() {
-			const passwordCredentials = firebase.auth.EmailAuthProvider.credential(
+			const passwordCredentials = EmailAuthProvider.credential(
 				this.user.email,
 				this.password
 			);

@@ -6,7 +6,7 @@
 			:title="lamp.name"
 			:class="{
 				lamp: true,
-				checked: value.includes(lamp.id),
+				checked: modelValue.includes(lamp.id),
 			}"
 			@click.prevent="toggleSelection(lamp.id)"
 		>
@@ -29,22 +29,22 @@ export default {
 				});
 			},
 		},
-		value: {
+		modelValue: {
 			type: Array,
 			required: true,
 		},
 	},
 	methods: {
 		toggleSelection(lampId) {
-			const index = this.value.indexOf(lampId);
+			const index = this.modelValue.indexOf(lampId);
 			if (index >= 0) {
 				// delete from list
-				let newValue = [...this.value];
+				let newValue = [...this.modelValue];
 				newValue.splice(index, 1);
-				this.$emit("input", newValue);
+				this.$emit("update:modelValue", newValue);
 			} else {
 				// add to list
-				this.$emit("input", [...this.value, lampId]);
+				this.$emit("update:modelValue", [...this.modelValue, lampId]);
 			}
 		},
 	},

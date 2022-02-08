@@ -21,7 +21,7 @@ export default {
 		SLInput: input,
 	},
 	props: {
-		value: {
+		modelValue: {
 			type: [String, Number, Object, Array],
 			default: undefined,
 		},
@@ -37,15 +37,15 @@ export default {
 		},
 	},
 	data() {
-		return { internalValue: this.value };
+		return { internalValue: this.modelValue };
 	},
 	watch: {
 		internalValue: function (to) {
-			if (to !== this.value) {
-				this.$emit("input", to);
+			if (to !== this.modelValue) {
+				this.$emit("update:modelValue", to);
 			}
 		},
-		value: function (to) {
+		modelValue: function (to) {
 			if (to !== this.internalValue) {
 				this.internalValue = to;
 			}

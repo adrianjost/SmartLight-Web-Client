@@ -1,25 +1,13 @@
 /* eslint-disable no-console */
 
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-import "firebase/performance";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, doc } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 import { config } from "./firebaseConfig";
 
-// initialize if not already done
-try {
-	firebase.initializeApp(config);
-} catch (error) {
-	console.warn("firebase already initialized", error);
-}
+export const firebaseApp = initializeApp(config);
+const db = getFirestore(firebaseApp);
 
-firebase.firestore().enablePersistence();
-
-export { firebase };
-export const FAuth = firebase.auth();
-export const FStore = firebase.firestore();
-export const FPerf =
-	process.env.NODE_ENV === "production"
-		? firebase.performance()
-		: firebase.performance;
+export const FAuth = getAuth(firebaseApp);
+export const FStore = db;

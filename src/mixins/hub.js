@@ -12,7 +12,7 @@ export default {
 			return this.$store.getters["units/list"];
 		},
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		Object.values(cache).forEach(({ connection }) => {
 			connection.close();
 		});

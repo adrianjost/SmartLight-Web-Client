@@ -1,6 +1,6 @@
 {
 	"name": "smartlight-web",
-	"version": "3.2.0-beta",
+	"version": "3.2.0-beta.1",
 	"private": false,
 	"license": "MIT",
 	"scripts": {
@@ -14,26 +14,28 @@
 		"lint:all:stylelint": "npm run lint:stylelint -- \"src/**/*.{vue,sass,scss,css}\"",
 		"lint:all:prettier": "npm run lint:prettier -- \"**/*.{js,json,css,scss,vue,html}\"",
 		"lint": "run-s lint:all:*",
-		"lint:ci": "run-s lint:all:*"
+		"lint:ci": "run-s lint:all:*",
+		"prepare": "patch-package"
 	},
 	"dependencies": {
-		"@adrianjost/two-channel-picker": "^0.3.6",
+		"@adrianjost/two-channel-picker": "^1.0.0-beta.2",
 		"@jaames/iro": "^5.5.2",
 		"@sentry/browser": "^6.17.4",
 		"@sentry/integrations": "^6.17.4",
+		"@vueuse/core": "^7.5.5",
 		"clipboard-polyfill": "^3.0.3",
-		"firebase": "^8.10.1",
-		"firebaseui": "^5.0.0",
+		"firebase": "^9.6.6",
+		"firebaseui": "^6.0.0",
 		"mathjs": "^10.1.1",
 		"register-service-worker": "^1.7.2",
 		"throttle-debounce": "^3.0.1",
 		"tiny-emitter": "^2.1.0",
-		"vue": "^2.6.14",
+		"vue": "^3.2.30",
 		"vue-ripple-directive": "^2.0.1",
-		"vue-router": "^3.5.3",
+		"vue-router": "^4.0.12",
 		"vue-toasted": "^1.1.28",
-		"vuex": "^3.6.2",
-		"vuex-easy-firestore": "^1.36.0",
+		"vuex": "^4.0.2",
+		"vuex-easy-firestore": "github:adrianjost/vuex-easy-firestore#sdk-9",
 		"vuex-persistedstate": "^4.1.0"
 	},
 	"devDependencies": {
@@ -43,6 +45,7 @@
 		"@vue/cli-plugin-pwa": "^4.5.15",
 		"@vue/cli-plugin-unit-mocha": "^4.5.15",
 		"@vue/cli-service": "^4.5.15",
+		"@vue/compiler-sfc": "^3.2.30",
 		"@vue/eslint-config-prettier": "^7.0.0",
 		"@vue/eslint-config-standard": "^6.1.0",
 		"babel-eslint": "^10.1.0",
@@ -57,6 +60,7 @@
 		"lint-staged": "^12.3.3",
 		"node-sass": "^6.0.1",
 		"npm-run-all": "^4.1.5",
+		"patch-package": "^6.4.7",
 		"prettier": "^2.5.1",
 		"sass-loader": "^10.2.1",
 		"stylelint": "^14.3.0",
@@ -74,7 +78,6 @@
 		"stylelint-selector-tag-no-without-class": "^2.0.5",
 		"stylelint-webpack-plugin": "^3.1.1",
 		"surge": "^0.23.1",
-		"vue-template-compiler": "^2.6.14",
 		"webpack": "^4.46.0"
 	},
 	"engines": {

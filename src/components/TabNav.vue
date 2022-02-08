@@ -5,9 +5,9 @@
 			:key="tab"
 			:class="{
 				tab: true,
-				active: value === tab,
+				active: modelValue === tab,
 			}"
-			@click.prevent="$emit('input', tab)"
+			@click.prevent="$emit('update:modelValue', tab)"
 		>
 			{{ tab }}
 		</div>
@@ -21,7 +21,7 @@ export default {
 			type: Array,
 			required: true,
 		},
-		value: {
+		modelValue: {
 			type: String,
 			required: true,
 		},

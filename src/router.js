@@ -1,16 +1,12 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-
+import { createRouter, createWebHistory } from "vue-router";
 import store from "./store";
-
-Vue.use(VueRouter);
 
 function loadView(path) {
 	return () => import(/* webpackChunkName: "view-[request]" */ `${path}`);
 }
 
-const router = new VueRouter({
-	mode: "history",
+const router = createRouter({
+	history: createWebHistory(),
 	base: process.env.BASE_URL,
 	routes: [
 		{
@@ -34,11 +30,19 @@ const router = new VueRouter({
 
 		{ path: "/settings/api", component: loadView("./pages/Settings/api.vue") },
 
-		{ path: "/*", redirect: "/control" },
+		{ path: "/:pathMatch(.*)*", redirect: "/control" },
 	],
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
+	// await new Promise((resolve) => { // TODO use vueuse/core `until` utility
+	// 	const interval = setInterval(() => {
+	// 		if(store.getters["auth/initialized"]){
+	// 			clearInterval(interval);
+	// 			resolve();
+	// 		}
+	// 	}, 100);
+	// })
 	const isAuthenticated = store.getters["auth/isAuthenticated"];
 	if (!isAuthenticated && to.matched.some((record) => !record.meta.isPublic)) {
 		return next({

@@ -4,9 +4,11 @@
 		<div class="control-units">
 			<ControlUnit
 				v-for="unit in groups"
+				:id="unit.id"
 				:key="unit.id"
 				class="control-unit"
-				v-bind="unit"
+				:icon="unit.icon"
+				:background="unit.background"
 				:size="zoom"
 			/>
 		</div>
@@ -14,9 +16,11 @@
 		<div class="control-units">
 			<ControlUnit
 				v-for="unit in lamps"
+				:id="unit.id"
 				:key="unit.id"
 				class="control-unit"
-				v-bind="unit"
+				:icon="unit.icon"
+				:background="unit.background"
 				:size="zoom"
 			/>
 			<RouterLink
