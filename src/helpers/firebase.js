@@ -9,8 +9,9 @@ import { config } from "./firebaseConfig";
 export const firebaseApp = initializeApp(config);
 const db = getFirestore(firebaseApp);
 
-import { getPerformance } from "firebase/performance";
-const perf = getPerformance(app);
+// TODO: enable performance monitoring
+// import { getPerformance } from "firebase/performance";
+// const perf = getPerformance(app);
 
 export const FAuth = getAuth(firebaseApp);
 export const FStore = db;
