@@ -34,6 +34,7 @@ export default {
 	display: flex;
 	max-width: 250px;
 	margin: 16px auto;
+	overflow: hidden;
 	font-size: 0;
 	user-select: none;
 	border: 1px solid var(--color-border);

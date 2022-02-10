@@ -31,9 +31,9 @@ export default {
 	height: 56px;
 	font-size: 14px;
 	line-height: 14px;
-	color: var(--color-background);
+	color: var(--color-text-active-i);
 	cursor: pointer;
-	background-color: #fff;
+	background-color: var(--color-overlay-i);
 	border-radius: 50%;
 	box-shadow: 0 6px 6px rgba(0, 0, 0, 0.24);
 

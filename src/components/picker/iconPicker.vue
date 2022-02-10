@@ -79,6 +79,7 @@ export default {
 }
 .icon.current {
 	margin-right: 16px;
+	color: var(--color-text-active-i);
 	background-color: var(--color-overlay-i);
 }
 .not-found {
@@ -101,7 +102,7 @@ export default {
 	padding: 16px;
 	margin: 4px;
 	font-size: 0;
-	color: var(--color-text-active-i);
+	color: var(--color-text);
 	list-style: none;
 	border: 1px solid var(--color-border);
 	border-radius: 50%;
@@ -137,6 +138,7 @@ export default {
 	}
 
 	&.selected {
+		color: var(--color-text-active-i);
 		background-color: var(--color-overlay-i);
 
 		&::before {

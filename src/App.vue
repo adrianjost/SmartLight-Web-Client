@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app" :class="theme">
 		<AppBarTop
 			v-if="appBarTopState.visible"
 			:back-action="appBarTopState.back_action"
@@ -43,6 +43,9 @@ export default {
 		};
 	},
 	computed: {
+		theme() {
+			return this.$store.getters["ui/get"]("theme");
+		},
 		appBarTopState() {
 			return this.$store.getters["ui/get"]("appBarTop");
 		},

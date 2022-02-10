@@ -19,6 +19,8 @@
 		<RouterLink v-ripple to="/settings/api" class="button button-primary">
 			API Info
 		</RouterLink>
+
+		<SLSelect v-model="theme" label="Theme" :options="availableThemes" />
 	</div>
 </template>
 
@@ -26,12 +28,23 @@
 import ControlUnitList from "@/components/controlUnitList.vue";
 import { UIStateDefault } from "@/helpers/ui-states.js";
 import unitBackground from "@/mixins/unitBackground.js";
+import Select from "@/components/picker/select";
 
 export default {
 	components: {
 		ControlUnitList,
+		SLSelect: Select,
 	},
 	mixins: [unitBackground],
+	data() {
+		return {
+			availableThemes: [
+				{ label: "System", value: "system" },
+				{ label: "Dark", value: "dark" },
+				{ label: "Light", value: "light" },
+			],
+		};
+	},
 	computed: {
 		user() {
 			return this.$store.getters["auth/get"];
@@ -45,6 +58,17 @@ export default {
 			return this.$store.getters["units/list-groups"].map((group) =>
 				this.addBackground(group)
 			);
+		},
+		theme: {
+			get() {
+				return this.$store.getters["ui/get"]("theme");
+			},
+			set(value) {
+				this.$store.commit("ui/set", {
+					component: "theme",
+					payload: value,
+				});
+			},
 		},
 	},
 	created() {

@@ -12,6 +12,21 @@ body,
 	background-color: var(--color-background);
 }
 
+#app {
+	&.dark {
+		@include theme-dark;
+	}
+	&.light {
+		@include theme-light;
+	}
+	&.system {
+		@include theme-dark;
+		@media (prefers-color-scheme: light) {
+			@include theme-light;
+		}
+	}
+}
+
 hr {
 	margin: 1em 0;
 	border: 0;

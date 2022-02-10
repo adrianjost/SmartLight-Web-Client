@@ -22,7 +22,7 @@ const easyFirestore = createEasyFirestore([user, units, savedStates], {
 export default createStore({
 	plugins: [
 		createPersistedState({
-			paths: ["auth.authState", "auth.userInfo", "ui.overviewZoom"],
+			paths: ["auth.authState", "auth.userInfo", "ui.theme", "ui.overviewZoom"],
 		}),
 		easyFirestore,
 		firebaseAuth,

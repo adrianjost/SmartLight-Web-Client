@@ -1,4 +1,5 @@
 const state = {
+	theme: "system",
 	appBarTop: {},
 	bottomNav: {},
 	overviewZoom: 96,
