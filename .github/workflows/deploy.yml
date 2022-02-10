@@ -20,7 +20,7 @@ jobs:
         env:
           VUE_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       - name: Deploy
-        run: npx surge --project ./dist/ --domain app.smart-light.ga
+        run: npx surge --project ./dist/ --domain app.smartlight.hackedit.de
         env:
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }}
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}

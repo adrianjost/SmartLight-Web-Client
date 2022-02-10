@@ -25,7 +25,7 @@ if (process.env.VUE_APP_SENTRY_DSN) {
 		release: pkg.version,
 		integrations: [
 			new BrowserTracing({
-				tracingOrigins: ["localhost", "app.smart-light.ga"],
+				tracingOrigins: ["localhost", "app.smartlight.hackedit.de"],
 			}),
 			new CaptureConsoleIntegration({
 				levels: ["warn", "error", "debug", "assert"],

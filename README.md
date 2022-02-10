@@ -1,4 +1,4 @@
-[<img src="./public/img/logo/SmartLight-512.png" width="150" align="right">](http://smartlight.ga)
+[<img src="./public/img/logo/SmartLight-512.png" width="150" align="right">](http://smartlight.hackedit.de)
 
 # SmartLight Web
 
