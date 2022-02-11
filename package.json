@@ -42,7 +42,7 @@
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.17.0",
 		"@vue/babel-preset-app": "^4.5.15",
-		"@vue/cli-plugin-eslint": "^5.0.0-rc.2",
+		"@vue/cli-plugin-eslint": "^5.0.0-rc.3",
 		"@vue/cli-plugin-pwa": "^5.0.0-rc.3",
 		"@vue/cli-service": "^5.0.0-rc.2",
 		"@vue/compiler-sfc": "^3.2.30",
