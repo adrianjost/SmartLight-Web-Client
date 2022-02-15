@@ -1,5 +1,8 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
+import {
+	getFirestore,
+	enableMultiTabIndexedDbPersistence,
+} from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { getPerformance } from "firebase/performance";
 
@@ -10,6 +13,6 @@ export const firebaseApp = initializeApp(config);
 const perf = getPerformance(firebaseApp);
 
 export const FStore = getFirestore(firebaseApp);
-enableIndexedDbPersistence(FStore);
+enableMultiTabIndexedDbPersistence(FStore);
 
 export const FAuth = getAuth(firebaseApp);
