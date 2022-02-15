@@ -115,6 +115,9 @@ export default {
 			// prevent saving the last color again
 			if (
 				this.savedWhites.find((white) => {
+					if (white.id === "STATE_AUTO") {
+						return false;
+					}
 					const accuracy = 2;
 					const saved = white.channels.map((a) => a.toFixed(accuracy));
 					const active = this.currentChannels.map((a) => a.toFixed(accuracy));
