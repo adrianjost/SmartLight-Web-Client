@@ -1,5 +1,5 @@
 <template>
-	<div id="app" :class="theme">
+	<div id="app-root">
 		<AppBarTop
 			v-if="appBarTopState.visible"
 			:back-action="appBarTopState.back_action"
@@ -54,6 +54,15 @@ export default {
 		},
 		isInitialized() {
 			return this.$store.getters["auth/isAuthenticated"] !== undefined;
+		},
+	},
+	watch: {
+		theme: {
+			handler(to, from) {
+				document.querySelector("body").classList.remove(from);
+				document.querySelector("body").classList.add(to);
+			},
+			immediate: true,
 		},
 	},
 	mounted() {

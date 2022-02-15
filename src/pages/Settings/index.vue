@@ -16,11 +16,12 @@
 			Import
 		</button>
 
-		<RouterLink v-ripple to="/settings/api" class="button button-primary">
-			API Info
-		</RouterLink>
-
+		<h2>App Settings:</h2>
 		<SLSelect v-model="theme" label="Theme" :options="availableThemes" />
+
+		<RouterLink v-ripple to="/settings/api" class="button button-primary">
+			API Setup →
+		</RouterLink>
 	</div>
 </template>
 
@@ -39,7 +40,7 @@ export default {
 	data() {
 		return {
 			availableThemes: [
-				{ label: "System", value: "system" },
+				{ label: "System Default", value: "system" },
 				{ label: "Dark", value: "dark" },
 				{ label: "Light", value: "light" },
 			],

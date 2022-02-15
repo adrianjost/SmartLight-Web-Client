@@ -37,13 +37,11 @@ if (process.env.VUE_APP_SENTRY_DSN) {
 }
 
 import Toasted from "vue-toasted";
-const toastedInstance = Toasted.install({
+Toasted.install(app, {
 	// options are set in patch-file
+	position: "bottom-right",
+	duration: 5000,
 });
-
-// eslint-disable-next-line vue/component-definition-name-casing
-app.component("toasted", toastedInstance.component);
-app.config.globalProperties.$toasted = toastedInstance.global;
 
 import Ripple from "vue-ripple-directive";
 app.directive("ripple", Ripple);

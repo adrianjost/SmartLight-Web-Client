@@ -77,3 +77,8 @@ code {
 		}
 	}
 }
+
+.toasted.toasted-primary {
+	background-color: var(--color-overlay) !important;
+	color: var(--color-text) !important;
+}
