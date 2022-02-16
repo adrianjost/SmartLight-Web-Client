@@ -23,7 +23,7 @@
 		"@jaames/iro": "^5.5.2",
 		"@sentry/integrations": "^6.17.8",
 		"@sentry/tracing": "^6.17.8",
-		"@sentry/vue": "^6.17.7",
+		"@sentry/vue": "^6.17.8",
 		"clipboard-polyfill": "^3.0.3",
 		"firebase": "^9.6.6",
 		"firebaseui": "^6.0.0",
