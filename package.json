@@ -56,7 +56,7 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"eslint-plugin-vue": "^8.5.0",
 		"imagemin-lint-staged": "^0.4.0",
-		"lint-staged": "^12.3.4",
+		"lint-staged": "^12.3.5",
 		"node-sass": "^7.0.1",
 		"npm-run-all": "^4.1.5",
 		"patch-package": "^6.4.7",
