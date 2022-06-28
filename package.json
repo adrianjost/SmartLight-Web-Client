@@ -27,7 +27,7 @@
 		"clipboard-polyfill": "^3.0.3",
 		"firebase": "^9.8.2",
 		"firebaseui": "^6.0.1",
-		"mathjs": "^10.6.1",
+		"mathjs": "^10.6.4",
 		"register-service-worker": "^1.7.2",
 		"throttle-debounce": "^5.0.0",
 		"tiny-emitter": "^2.1.0",
