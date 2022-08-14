@@ -38,7 +38,7 @@ export default {
 							}
 						}, 60 * 1000);
 						connection.onMessage(
-							throttle(5000, false, (message) => {
+							throttle(5000, (message) => {
 								if (message.action !== "GET /output") {
 									// irrelevant message
 									return;

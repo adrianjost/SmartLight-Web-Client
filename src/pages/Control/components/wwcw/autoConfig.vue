@@ -147,7 +147,7 @@ export default {
 			},
 			messageTimeout: null,
 			connection: null,
-			previewActiveHour: throttle(100, false, async () => {
+			previewActiveHour: throttle(100, async () => {
 				const id = Math.round(Math.random() * 1000000);
 				try {
 					this.connection.send(
