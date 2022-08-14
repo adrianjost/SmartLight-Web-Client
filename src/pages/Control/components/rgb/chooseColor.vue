@@ -10,19 +10,17 @@
 			@addColor="saveState"
 			@deleteState="deleteState"
 		/>
-		<slot name="colorPicker" :setColor="setColor" :color="currentColor">
-			<ColorPicker
-				v-model="currentColor"
-				class="color-picker"
-				:config="{
-					width: 250,
-					height: 300,
-					sliderMargin: 16,
-					markerRadius: 10,
-					color: (unit.state || {}).color,
-				}"
-			/>
-		</slot>
+		<ColorPicker
+			v-model="currentColor"
+			class="color-picker"
+			:config="{
+				width: 250,
+				height: 300,
+				sliderMargin: 16,
+				markerRadius: 10,
+				color: (unit.state || {}).color,
+			}"
+		/>
 	</section>
 </template>
 
