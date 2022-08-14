@@ -14,6 +14,7 @@
 							:class="{
 								active: hour === hourPicker,
 							}"
+							tabindex="0"
 							@click="
 								() => {
 									hourPicker = hour;
@@ -75,24 +76,64 @@
 
 		<label>
 			Brightness
-			<input
-				v-model.number="brightness"
-				type="range"
-				:min="0"
-				:max="brightnessMax"
-				:step="1"
-			/>
+			<div class="slider">
+				<button
+					@click="
+						() => {
+							brightness = Math.max(0, brightness - 1);
+						}
+					"
+				>
+					-
+				</button>
+				<input
+					v-model.number="brightness"
+					type="range"
+					:min="0"
+					:max="brightnessMax"
+					:step="1"
+				/>
+				<button
+					@click="
+						() => {
+							brightness = Math.min(brightness + 1, brightnessMax);
+						}
+					"
+				>
+					+
+				</button>
+			</div>
 		</label>
 
 		<label>
 			Temperature
-			<input
-				v-model.number="ratio"
-				type="range"
-				:min="0"
-				:max="tempMax"
-				:step="1"
-			/>
+			<div class="slider">
+				<button
+					@click="
+						() => {
+							ratio = Math.max(0, ratio - 1);
+						}
+					"
+				>
+					-
+				</button>
+				<input
+					v-model.number="ratio"
+					type="range"
+					:min="0"
+					:max="tempMax"
+					:step="1"
+				/>
+				<button
+					@click="
+						() => {
+							ratio = Math.min(ratio + 1, tempMax);
+						}
+					"
+				>
+					+
+				</button>
+			</div>
 		</label>
 
 		<SLInput
@@ -188,7 +229,7 @@ export default {
 			},
 			set(value) {
 				this.hapticStep();
-				this.$set(this.data.brightness, this.hourPicker, value);
+				this.data.brightness[this.hourPicker] = value;
 				this.previewActiveHour();
 			},
 		},
@@ -198,7 +239,7 @@ export default {
 			},
 			set(value) {
 				this.hapticStep();
-				this.$set(this.data.ratio, this.hourPicker, value);
+				this.data.ratio[this.hourPicker] = value;
 				this.previewActiveHour();
 			},
 		},
@@ -320,6 +361,28 @@ label {
 	display: block;
 	margin: 32px 0;
 	text-align: left;
+}
+
+.slider {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	width: 100%;
+	> button {
+		position: relative;
+		padding: 0.5em 1em;
+		color: var(--color-text);
+		border-radius: 20em;
+		$clickable-offset: -0.5em;
+		&::before {
+			position: absolute;
+			top: $clickable-offset;
+			right: $clickable-offset;
+			bottom: $clickable-offset;
+			left: $clickable-offset;
+			content: "";
+			border-radius: 20em;
+		}
+	}
 }
 
 .button-reset {
