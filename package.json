@@ -62,7 +62,7 @@
 		"patch-package": "^6.4.7",
 		"prettier": "^2.6.2",
 		"sass-loader": "^13.0.0",
-		"stylelint": "^14.9.0",
+		"stylelint": "^14.13.0",
 		"stylelint-8-point-grid": "^2.1.0",
 		"stylelint-a11y": "^1.2.3",
 		"stylelint-at-rule-no-children": "^0.3.1",
