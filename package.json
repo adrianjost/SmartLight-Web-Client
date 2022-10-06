@@ -25,7 +25,7 @@
 		"@sentry/tracing": "^7.1.1",
 		"@sentry/vue": "^7.1.1",
 		"clipboard-polyfill": "^3.0.3",
-		"firebase": "^9.8.2",
+		"firebase": "^9.11.0",
 		"firebaseui": "^6.0.1",
 		"mathjs": "^10.6.1",
 		"register-service-worker": "^1.7.2",
