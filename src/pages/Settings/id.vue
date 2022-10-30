@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import * as clipboard from "clipboard-polyfill/text";
 import { reactive, defineAsyncComponent } from "vue";
 
 const EditLamp = defineAsyncComponent(() =>
@@ -176,7 +175,7 @@ export default {
 				hostname: u.hostname,
 			});
 
-			await clipboard
+			await navigator.clipboard
 				.writeText(sharedData)
 				.then(() => {
 					this.toast(`Copied ${name} to clipboard.`, "check");
