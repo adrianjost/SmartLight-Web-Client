@@ -1,5 +1,5 @@
 @use "./reset";
-@use "variables";
+@use "./themes";
 
 @include reset.reset;
 
@@ -9,15 +9,24 @@
 
 body {
 	&.dark {
-		@include variables.theme-dark;
+		@include themes.dark;
 	}
 	&.light {
-		@include variables.theme-light;
+		@include themes.light;
+	}
+	&.dark-high-contrast {
+		@include themes.dark-high-contrast;
+	}
+	&.light-high-contrast {
+		@include themes.light-high-contrast;
+	}
+	&.black {
+		@include themes.black;
 	}
 	&.system {
-		@include variables.theme-dark;
+		@include themes.dark;
 		@media (prefers-color-scheme: light) {
-			@include variables.theme-light;
+			@include themes.light;
 		}
 	}
 }
