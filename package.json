@@ -39,7 +39,7 @@
 	},
 	"devDependencies": {
 		"@babel/eslint-parser": "^7.19.1",
-		"@vue/babel-preset-app": "^5.0.4",
+		"@vue/babel-preset-app": "^5.0.8",
 		"@vue/cli-plugin-eslint": "^5.0.8",
 		"@vue/cli-plugin-pwa": "^5.0.4",
 		"@vue/cli-service": "^5.0.8",
@@ -49,7 +49,7 @@
 		"cross-env": "^7.0.3",
 		"eslint": "^8.26.0",
 		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-prettier": "^4.2.1",
 		"eslint-plugin-vue": "^8.7.1",
 		"imagemin-lint-staged": "^0.5.1",
 		"lint-staged": "^13.0.0",
