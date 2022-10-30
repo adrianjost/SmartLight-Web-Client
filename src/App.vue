@@ -123,8 +123,8 @@ export default {
 };
 </script>
 <style lang="scss">
-@import "./styles/base";
-@import "~vue-toasted/dist/vue-toasted.min.css";
+@use "./styles/base";
+@use "node_modules/vue-toasted/dist/vue-toasted.min.css";
 
 main.container {
 	display: flex;

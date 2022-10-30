@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~firebaseui/dist/firebaseui.css";
+@use "node_modules/firebaseui/dist/firebaseui.css";
 
 .text-center {
 	text-align: center;
