@@ -30,6 +30,3 @@ updates:
     versions:
     - 8.2.4
     - 8.2.5
-  - dependency-name: mathjs
-    versions:
-    - 9.1.0
