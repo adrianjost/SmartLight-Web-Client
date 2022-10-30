@@ -104,7 +104,7 @@ export default {
 	user-select: none;
 	background-color: var(--color-overlay);
 	&.has-fab {
-		$circle-radius: (56px + 16px) / 2;
+		$circle-radius: calc((56px + 16px) / 2);
 		background-color: transparent;
 		background-image: radial-gradient(
 				circle at top right,
