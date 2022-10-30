@@ -41,7 +41,7 @@ import SkeletonStatePicker from "@/components/skeleton/StatePicker";
 import SkeletonSavedStatePicker from "@/components/skeleton/SavedStatePicker";
 
 import { UIStateNestedDefault } from "@/helpers/ui-states.js";
-import { scaleColor, hex2rgb, rgb2hex } from "@/mixins/colorConversion";
+import { rgb2hex } from "@/mixins/colorConversion";
 
 const picker = {
 	RGB: {
@@ -182,7 +182,6 @@ export default {
 		this.$eventHub.off("backAndReset", this.backAndReset);
 	},
 	methods: {
-		scaleColor,
 		setTopNav() {
 			this.$store.commit("ui/set", {
 				component: "appBarTop",

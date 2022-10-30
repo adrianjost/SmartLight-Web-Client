@@ -1,4 +1,4 @@
-import { hex2rgb, colorToChannel } from "@/mixins/colorConversion.js";
+import { hex2rgb } from "@/mixins/colorConversion.js";
 
 const PENDING_TIMEOUT = 5000;
 const ACTIVE_TIMEOUT = 60000;
