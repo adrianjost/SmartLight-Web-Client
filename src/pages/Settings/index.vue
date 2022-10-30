@@ -42,7 +42,10 @@ export default {
 			availableThemes: [
 				{ label: "System Default", value: "system" },
 				{ label: "Dark", value: "dark" },
+				{ label: "Dark (High Contrast)", value: "dark-high-contrast" },
+				{ label: "Black", value: "black" },
 				{ label: "Light", value: "light" },
+				{ label: "Light (High Contrast)", value: "light-high-contrast" },
 			],
 		};
 	},

@@ -1,0 +1,74 @@
+@mixin light {
+	--color-background: rgb(223, 232, 235);
+
+	--color-border: rgb(150, 150, 150);
+	--color-overlay: rgb(255, 255, 255);
+	--color-overlay-i: rgb(255, 255, 255);
+	--color-skeleton: rgb(0, 0, 0, 0.1);
+	--color-skeleton-border: rgba(0, 0, 0, 0.25);
+
+	--color-text: rgb(35, 38, 46);
+	--color-text-active: rgb(0, 0, 0);
+	--color-text-active-i: rgb(0, 0, 0);
+	--color-text-inactive: rgba(0, 0, 0, 0.5);
+}
+
+@mixin light-high-contrast {
+	--color-background: rgb(223, 232, 235);
+
+	--color-border: rgb(0, 0, 35);
+	--color-overlay: rgb(255, 255, 255, 1);
+	--color-overlay-i: rgba(0, 0, 0, 1);
+	--color-skeleton: rgb(0, 0, 0, 0.3);
+	--color-skeleton-border: rgba(0, 0, 0, 0.5);
+
+	--color-text: rgb(0, 0, 0);
+	--color-text-active: rgb(0, 0, 0);
+	--color-text-active-i: rgb(255, 255, 255);
+	--color-text-inactive: rgba(0, 0, 0, 0.8);
+}
+
+@mixin dark {
+	--color-background: #333;
+
+	--color-border: rgb(25, 25, 25);
+	--color-overlay: rgb(25, 25, 25);
+	--color-overlay-i: rgb(230, 230, 230);
+	--color-skeleton: rgba(0, 0, 0, 0.1);
+	--color-skeleton-border: rgba(0, 0, 0, 0.5);
+
+	--color-text: rgb(210, 210, 210);
+	--color-text-active: rgb(255, 255, 255);
+	--color-text-active-i: rgb(0, 0, 0);
+	--color-text-inactive: rgb(170, 170, 170);
+}
+
+@mixin dark-high-contrast {
+	--color-background: #333;
+
+	--color-border: rgba(255, 255, 255, 0.8);
+	--color-overlay: rgb(25, 25, 25);
+	--color-overlay-i: rgb(255, 255, 255);
+	--color-skeleton: rgba(0, 0, 0, 0.1);
+	--color-skeleton-border: rgba(0, 0, 0, 0.5);
+
+	--color-text: rgb(255, 255, 255);
+	--color-text-active: rgb(255, 255, 255);
+	--color-text-active-i: rgb(0, 0, 0);
+	--color-text-inactive: rgb(225, 225, 225);
+}
+
+@mixin black {
+	--color-background: #000;
+
+	--color-border: rgb(100, 100, 100);
+	--color-overlay: rgb(25, 25, 25);
+	--color-overlay-i: rgb(200, 200, 200);
+	--color-skeleton: rgba(0, 0, 0, 0.1);
+	--color-skeleton-border: rgba(0, 0, 0, 0.5);
+
+	--color-text: rgb(170, 170, 170);
+	--color-text-active: rgb(200, 200, 200);
+	--color-text-active-i: rgb(120, 120, 120);
+	--color-text-inactive: rgb(120, 120, 120);
+}
