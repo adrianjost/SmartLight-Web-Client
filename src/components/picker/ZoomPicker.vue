@@ -63,7 +63,7 @@ $border-width: 1px;
 		display: inline-flex;
 		align-items: center;
 		padding: 0.25em 0.5em;
-		color: var(--color-text-active-i);
+		color: var(--color-text-active);
 		> * {
 			font-size: 1.5em;
 		}
