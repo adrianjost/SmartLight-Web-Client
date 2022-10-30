@@ -1,17 +1,23 @@
-@import "./reset";
-@import "./variables";
+@use "./reset";
+@use "variables";
+
+@include reset.reset;
+
+:root {
+	color-scheme: light dark;
+}
 
 body {
 	&.dark {
-		@include theme-dark;
+		@include variables.theme-dark;
 	}
 	&.light {
-		@include theme-light;
+		@include variables.theme-light;
 	}
 	&.system {
-		@include theme-dark;
+		@include variables.theme-dark;
 		@media (prefers-color-scheme: light) {
-			@include theme-light;
+			@include variables.theme-light;
 		}
 	}
 }
