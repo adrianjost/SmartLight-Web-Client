@@ -6,27 +6,4 @@ updates:
     interval: daily
     time: "01:00"
     timezone: Europe/Berlin
-  open-pull-requests-limit: 99
-  ignore:
-  - dependency-name: eslint-config-prettier
-    versions:
-    - 8.0.0
-    - 8.1.0
-  - dependency-name: sass-loader
-    versions:
-    - 10.1.1
-    - 11.0.1
-  - dependency-name: "@sentry/integrations"
-    versions:
-    - 6.0.2
-    - 6.0.3
-    - 6.0.4
-  - dependency-name: "@sentry/browser"
-    versions:
-    - 6.0.2
-    - 6.0.3
-    - 6.0.4
-  - dependency-name: firebase
-    versions:
-    - 8.2.4
-    - 8.2.5
+  open-pull-requests-limit: 10
