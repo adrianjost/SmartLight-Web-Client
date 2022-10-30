@@ -48,7 +48,7 @@ module.exports = {
 			],
 		},
 
-		// FIX: ingores /* styleling-disable */
+		// FIX: ignores /* styleling-disable */
 		//"a11y/content-property-no-static-value": [true, { "severity": "warning" }],
 		//"a11y/font-size-is-readable": [true, { "severity": "warning" }],
 		//"a11y/media-prefers-reduced-motion": true, // autofix makes code unmaintainable and unreadable
