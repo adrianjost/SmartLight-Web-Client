@@ -49,7 +49,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use "node_modules/firebaseui/dist/firebaseui.css";
 
 .text-center {
