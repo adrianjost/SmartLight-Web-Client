@@ -21,7 +21,7 @@
 	"dependencies": {
 		"@adrianjost/two-channel-picker": "^1.0.0-beta.2",
 		"@jaames/iro": "^5.5.2",
-		"@sentry/integrations": "^7.35.0",
+		"@sentry/integrations": "^7.36.0",
 		"@sentry/tracing": "^7.35.0",
 		"@sentry/vue": "^7.36.0",
 		"firebase": "^9.16.0",
@@ -71,7 +71,7 @@
 		"stylelint-prettier": "^2.0.0",
 		"stylelint-selector-no-empty": "^1.0.8",
 		"stylelint-selector-tag-no-without-class": "^2.0.5",
-		"stylelint-webpack-plugin": "^3.3.0",
+		"stylelint-webpack-plugin": "^4.0.0",
 		"surge": "^0.23.1",
 		"webpack": "^5.75.0"
 	},
