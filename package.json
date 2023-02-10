@@ -63,7 +63,7 @@
 		"stylelint-a11y": "github:ronilaukkarinen/stylelint-a11y",
 		"stylelint-at-rule-no-children": "^0.3.1",
 		"stylelint-config-recess-order": "^3.1.0",
-		"stylelint-config-recommended": "^7.0.0",
+		"stylelint-config-recommended": "^8.0.0",
 		"stylelint-declaration-block-no-ignored-properties": "^2.6.0",
 		"stylelint-group-selectors": "^1.0.8",
 		"stylelint-high-performance-animation": "^1.7.0",
