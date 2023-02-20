@@ -23,7 +23,7 @@
 		"@jaames/iro": "^5.5.2",
 		"@sentry/integrations": "^7.37.2",
 		"@sentry/tracing": "^7.37.2",
-		"@sentry/vue": "^7.37.2",
+		"@sentry/vue": "^7.38.0",
 		"firebase": "^9.17.1",
 		"firebaseui": "^6.0.2",
 		"register-service-worker": "^1.7.2",
@@ -71,7 +71,7 @@
 		"stylelint-prettier": "^2.0.0",
 		"stylelint-selector-no-empty": "^1.0.8",
 		"stylelint-selector-tag-no-without-class": "^2.0.5",
-		"stylelint-webpack-plugin": "^4.0.0",
+		"stylelint-webpack-plugin": "^4.1.0",
 		"surge": "^0.23.1",
 		"webpack": "^5.75.0"
 	},
