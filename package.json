@@ -57,7 +57,7 @@
 		"patch-package": "^6.5.1",
 		"prettier": "^2.8.7",
 		"sass": "^1.60.0",
-		"sass-loader": "^13.2.1",
+		"sass-loader": "^13.2.2",
 		"stylelint": "^14.9.0",
 		"stylelint-8-point-grid": "^2.2.0",
 		"stylelint-a11y": "github:ronilaukkarinen/stylelint-a11y",
