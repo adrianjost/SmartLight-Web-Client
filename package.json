@@ -73,7 +73,7 @@
 		"stylelint-selector-tag-no-without-class": "^2.0.5",
 		"stylelint-webpack-plugin": "^4.1.0",
 		"surge": "^0.23.1",
-		"webpack": "^5.76.3"
+		"webpack": "^5.77.0"
 	},
 	"engines": {
 		"node": ">=16"
