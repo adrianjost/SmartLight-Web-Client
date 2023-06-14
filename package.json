@@ -23,7 +23,7 @@
 		"@jaames/iro": "^5.5.2",
 		"@sentry/integrations": "^7.55.2",
 		"@sentry/tracing": "^7.55.0",
-		"@sentry/vue": "^7.55.0",
+		"@sentry/vue": "^7.55.2",
 		"firebase": "^9.22.2",
 		"firebaseui": "^6.0.2",
 		"register-service-worker": "^1.7.2",
