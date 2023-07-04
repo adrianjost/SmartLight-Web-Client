@@ -38,7 +38,7 @@
 		"vuex-persistedstate": "^4.1.0"
 	},
 	"devDependencies": {
-		"@babel/eslint-parser": "^7.22.5",
+		"@babel/eslint-parser": "^7.22.6",
 		"@vue/babel-preset-app": "^5.0.8",
 		"@vue/cli-plugin-eslint": "^5.0.8",
 		"@vue/cli-plugin-pwa": "^5.0.8",
