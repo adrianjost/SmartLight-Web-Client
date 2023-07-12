@@ -58,7 +58,7 @@
 		"prettier": "^3.0.0",
 		"sass": "^1.63.6",
 		"sass-loader": "^13.3.2",
-		"stylelint": "^14.9.0",
+		"stylelint": "^15.10.1",
 		"stylelint-8-point-grid": "^2.2.0",
 		"stylelint-a11y": "github:ronilaukkarinen/stylelint-a11y",
 		"stylelint-at-rule-no-children": "^0.3.1",
