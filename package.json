@@ -22,7 +22,7 @@
 		"@adrianjost/two-channel-picker": "^1.0.0-beta.2",
 		"@jaames/iro": "^5.5.2",
 		"@sentry/integrations": "^7.58.1",
-		"@sentry/tracing": "^7.58.0",
+		"@sentry/tracing": "^7.58.1",
 		"@sentry/vue": "^7.58.1",
 		"firebase": "^9.23.0",
 		"firebaseui": "^6.0.2",
