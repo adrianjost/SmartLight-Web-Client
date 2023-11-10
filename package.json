@@ -21,7 +21,7 @@
 	"dependencies": {
 		"@adrianjost/two-channel-picker": "^1.0.0-beta.2",
 		"@jaames/iro": "^5.5.2",
-		"@sentry/integrations": "^7.79.0",
+		"@sentry/integrations": "^7.80.0",
 		"@sentry/tracing": "^7.79.0",
 		"@sentry/vue": "^7.80.0",
 		"firebase": "^9.23.0",
@@ -38,7 +38,7 @@
 		"vuex-persistedstate": "^4.1.0"
 	},
 	"devDependencies": {
-		"@babel/eslint-parser": "^7.22.15",
+		"@babel/eslint-parser": "^7.23.3",
 		"@vue/babel-preset-app": "^5.0.8",
 		"@vue/cli-plugin-eslint": "^5.0.8",
 		"@vue/cli-plugin-pwa": "^5.0.8",
