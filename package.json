@@ -29,7 +29,7 @@
 		"register-service-worker": "^1.7.2",
 		"throttle-debounce": "^5.0.0",
 		"tiny-emitter": "^2.1.0",
-		"vue": "^3.3.10",
+		"vue": "^3.3.11",
 		"vue-ripple-directive": "^2.0.1",
 		"vue-router": "^4.2.5",
 		"vue-toasted": "^1.1.28",
