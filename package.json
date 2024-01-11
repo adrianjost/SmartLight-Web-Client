@@ -21,7 +21,7 @@
 	"dependencies": {
 		"@adrianjost/two-channel-picker": "^1.0.0-beta.2",
 		"@jaames/iro": "^5.5.2",
-		"@sentry/integrations": "^7.92.0",
+		"@sentry/integrations": "^7.93.0",
 		"@sentry/tracing": "^7.92.0",
 		"@sentry/vue": "^7.92.0",
 		"firebase": "^9.23.0",
