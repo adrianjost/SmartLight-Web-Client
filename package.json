@@ -69,7 +69,7 @@
 		"stylelint-high-performance-animation": "^1.10.0",
 		"stylelint-no-unsupported-browser-features": "^7.0.0",
 		"stylelint-prettier": "^3.0.0",
-		"stylelint-selector-no-empty": "^1.0.8",
+		"stylelint-selector-no-empty": "^1.0.9",
 		"stylelint-selector-tag-no-without-class": "^2.0.6",
 		"stylelint-webpack-plugin": "^4.1.1",
 		"surge": "^0.23.1",
